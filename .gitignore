@@ -1,0 +1,31 @@
+# Local reference clone from protkjj/drobot. Keep it beside this repo, not inside it.
+drobot/
+
+# Browser/download leftovers
+*.crdownload
+
+# ROS / colcon outputs
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+**/__pycache__/
+*.pyc
+
+# Local environment
+.env
+.venv/
+venv/
+
+# Editor and OS noise
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+
+# Large generated bags/maps should be added intentionally.
+*.bag
+*.db3
+*.mcap
+*.pt
+*.onnx
+*.engine

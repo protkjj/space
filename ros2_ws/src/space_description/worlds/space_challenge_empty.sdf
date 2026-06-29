@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="space_challenge_empty">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <gravity>0 0 -9.80665</gravity>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 5 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.2 -1</direction>
+    </light>
+
+    <model name="rock_section">
+      <static>true</static>
+      <pose>-1.5 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>2.4 3.0 0.04</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>2.4 3.0 0.04</size></box></geometry>
+          <material><diffuse>0.34 0.35 0.36 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="sand_section">
+      <static>true</static>
+      <pose>1.2 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>3.0 3.0 0.035</size></box></geometry>
+          <surface>
+            <friction><ode><mu>0.65</mu><mu2>0.45</mu2></ode></friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>3.0 3.0 0.035</size></box></geometry>
+          <material><diffuse>0.70 0.62 0.46 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="starter_ramp">
+      <static>true</static>
+      <pose>1.1 0 0.095 0 0.20 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.9 1.4 0.08</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.9 1.4 0.08</size></box></geometry>
+          <material><diffuse>0.54 0.48 0.36 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
