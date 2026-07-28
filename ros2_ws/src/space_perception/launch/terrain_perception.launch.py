@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Launch sensor-derived terrain filtering and local elevation mapping."""
+"""Launch filtering, elevation mapping, and geometric terrain features."""
 
 import os
 
@@ -51,6 +51,20 @@ def generate_launch_description():
                 name='local_elevation_map_node',
                 output='screen',
                 parameters=[params_file, common_overrides],
+            ),
+            Node(
+                package='space_perception',
+                executable='terrain_feature_node',
+                name='terrain_feature_node',
+                output='screen',
+                parameters=[params_file, common_overrides],
+            ),
+            Node(
+                package='space_perception',
+                executable='terrain_traversability_node',
+                name='terrain_traversability_node',
+                output='screen',
+                parameters=[params_file, {'use_sim_time': use_sim_time}],
             ),
         ]
     )

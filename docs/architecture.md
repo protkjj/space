@@ -163,18 +163,28 @@ depth/PointCloud2 filtering, frame transformation, elevation representation,
 feature and uncertainty calculation, traversability scoring, costmap
 integration, and only then hazard or marker-location decisions.
 
-The first measured-data stage is now implemented inside `space_perception`:
+The measured-data and geometric-feature stages are implemented inside
+`space_perception`:
 
 ```text
 /camera/points
   → vectorized range/crop/voxel filtering in odom
   → rover-centred median elevation cells
   → elevation PointCloud2 and RViz MarkerArray
+  → local plane slope, robust roughness, plane-removed step height
+  → feature PointCloud2, compact markers, and quality diagnostics
+  → normalized penalties, continuous prototype traversability, and validity
 ```
 
-This stage publishes measurements and variance only. Traversability scoring,
-hazard identification, marker recommendation, and Nav2 terrain-cost
-integration remain unimplemented.
+These stages publish measurements, geometry, quality confidence, interpretable
+penalties, and a continuous prototype score. Guaranteed safe/unsafe
+classification, hazard decisions, marker recommendation, wheel-slip fusion,
+and Nav2 terrain-cost integration remain unimplemented.
+
+Simulation alone starts the 3D `robot_localization` EKF configuration required
+to retain Z, roll, and pitch for slope mapping. `hardware.launch.py` starts no
+EKF and remains an interface-only placeholder; a hardware EKF must wait for
+validated Pixhawk and VIO message definitions and topic ownership.
 
 ## Configuration ownership
 

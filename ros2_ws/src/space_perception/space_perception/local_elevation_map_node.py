@@ -23,7 +23,7 @@ from space_perception.terrain_processing import (
     cells_to_array,
     retain_local_fresh_cells,
 )
-from std_msgs.msg import Header
+from std_msgs.msg import ColorRGBA, Header
 from tf2_ros import Buffer, TransformException, TransformListener
 from visualization_msgs.msg import Marker, MarkerArray
 
@@ -90,6 +90,7 @@ class LocalElevationMapNode(Node):
         self._last_header = Header(frame_id=self._target)
         self._cells = {}
         self._duration_ms = 0.0
+        self._marker_duration_ms = 0.0
         self._processed = 0
         self._started_wall = time.monotonic()
         self._last_log_wall = time.monotonic()
@@ -169,9 +170,12 @@ class LocalElevationMapNode(Node):
         self._points_publisher.publish(
             create_elevation_cloud(self._last_header, rows)
         )
-        self._marker_publisher.publish(
-            self._create_markers(self._last_header, rows)
-        )
+        marker_started = time.perf_counter()
+        markers = self._create_markers(self._last_header, rows)
+        self._marker_duration_ms = (
+            time.perf_counter() - marker_started
+        ) * 1000.0
+        self._marker_publisher.publish(markers)
         self._duration_ms = (time.perf_counter() - started) * 1000.0
         self._publish_diagnostics(True)
         now = time.monotonic()
@@ -190,7 +194,14 @@ class LocalElevationMapNode(Node):
             id=0,
             action=Marker.DELETEALL,
         )
-        markers = [delete]
+        marker = Marker(
+            header=header,
+            ns='terrain_elevation',
+            id=1,
+            type=Marker.CUBE_LIST,
+            action=Marker.ADD,
+        )
+        marker.pose.orientation.w = 1.0
         minimum = float(self.get_parameter('min_visual_elevation').value)
         maximum = float(self.get_parameter('max_visual_elevation').value)
         span = max(maximum - minimum, 1e-9)
@@ -198,28 +209,21 @@ class LocalElevationMapNode(Node):
             self.get_parameter('marker_cell_thickness').value
         )
         alpha = float(self.get_parameter('marker_alpha').value)
-        for marker_id, row in enumerate(rows, start=1):
+        marker.scale.x = self._resolution
+        marker.scale.y = self._resolution
+        marker.scale.z = thickness
+        for row in rows:
             normalized = float(np.clip((row[2] - minimum) / span, 0.0, 1.0))
-            marker = Marker(
-                header=header,
-                ns='terrain_elevation',
-                id=marker_id,
-                type=Marker.CUBE,
-                action=Marker.ADD,
+            marker.points.append(
+                Point(x=float(row[0]), y=float(row[1]), z=float(row[2]))
             )
-            marker.pose.position = Point(
-                x=float(row[0]), y=float(row[1]), z=float(row[2])
-            )
-            marker.pose.orientation.w = 1.0
-            marker.scale.x = self._resolution
-            marker.scale.y = self._resolution
-            marker.scale.z = thickness
-            marker.color.r = normalized
-            marker.color.g = 1.0 - abs(2.0 * normalized - 1.0)
-            marker.color.b = 1.0 - normalized
-            marker.color.a = alpha
-            markers.append(marker)
-        return MarkerArray(markers=markers)
+            marker.colors.append(ColorRGBA(
+                r=normalized,
+                g=1.0 - abs(2.0 * normalized - 1.0),
+                b=1.0 - normalized,
+                a=alpha,
+            ))
+        return MarkerArray(markers=[delete, marker])
 
     def _publish_diagnostics(self, input_received):
         elapsed = max(time.monotonic() - self._started_wall, 1e-9)
@@ -240,6 +244,10 @@ class LocalElevationMapNode(Node):
                 KeyValue(
                     key='processing_rate_hz',
                     value=f'{self._processed / elapsed:.3f}',
+                ),
+                KeyValue(
+                    key='marker_construction_duration_ms',
+                    value=f'{self._marker_duration_ms:.3f}',
                 ),
             ],
         )

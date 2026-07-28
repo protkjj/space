@@ -33,6 +33,14 @@ setup(
                 'local_elevation_map_node = '
                 'space_perception.local_elevation_map_node:main'
             ),
+            (
+                'terrain_feature_node = '
+                'space_perception.terrain_feature_node:main'
+            ),
+            (
+                'terrain_traversability_node = '
+                'space_perception.terrain_traversability_node:main'
+            ),
         ],
     },
 )

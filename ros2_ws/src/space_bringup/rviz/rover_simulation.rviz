@@ -57,6 +57,7 @@ Visualization Manager:
       Size (Pixels): 3
       Style: Points
       Topic:
+        Reliability Policy: Best Effort
         Value: /terrain/filtered_points
     - Class: rviz_default_plugins/PointCloud2
       Name: Elevation Points
@@ -64,12 +65,49 @@ Visualization Manager:
       Size (Pixels): 5
       Style: Points
       Topic:
+        Reliability Policy: Best Effort
         Value: /terrain/elevation_points
     - Class: rviz_default_plugins/MarkerArray
       Name: Elevation Cells
       Enabled: true
       Topic:
         Value: /terrain/elevation_markers
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Terrain Features
+      Enabled: true
+      Size (Pixels): 5
+      Style: Points
+      Topic:
+        Reliability Policy: Best Effort
+        Value: /terrain/features
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Terrain Slope
+      Enabled: true
+      Topic:
+        Value: /terrain/slope_markers
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Terrain Roughness
+      Enabled: true
+      Topic:
+        Value: /terrain/roughness_markers
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Terrain Step Height
+      Enabled: true
+      Topic:
+        Value: /terrain/step_markers
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Terrain Traversability
+      Enabled: true
+      Size (Pixels): 5
+      Style: Points
+      Topic:
+        Reliability Policy: Best Effort
+        Value: /terrain/traversability
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Traversability Cells
+      Enabled: true
+      Topic:
+        Value: /terrain/traversability_markers
     - Class: rviz_default_plugins/LaserScan
       Name: Depth Scan
       Enabled: false
