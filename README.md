@@ -138,6 +138,7 @@ actuator consumer when the safety node is enabled without a backend.
 
 Neither Milestone A nor Milestone B is complete. Detailed acceptance criteria
 are in [`docs/simulation_milestones.md`](docs/simulation_milestones.md).
-Traversability and marker selection remain future sensor-driven work.
-Elevation mapping is implemented, but traversability scoring, hazard
-identification, marker recommendation, and Nav2 terrain costs are not.
+Traversability scoring and bounded local Nav2 soft costs are implemented; see
+[`docs/nav2_traversability_layer.md`](docs/nav2_traversability_layer.md).
+Lethal terrain classification, global terrain planning, guaranteed avoidance,
+hazard identification, and marker recommendation remain unimplemented.

@@ -108,6 +108,30 @@ Visualization Manager:
       Enabled: true
       Topic:
         Value: /terrain/traversability_markers
+    - Class: rviz_default_plugins/Map
+      Name: Nav2 Local Costmap
+      Enabled: true
+      Topic:
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        Value: /local_costmap/costmap
+    - Class: rviz_default_plugins/Map
+      Name: Terrain Layer Debug
+      Enabled: false
+      Topic:
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        Value: /terrain/nav2_costs
+    - Class: rviz_default_plugins/Path
+      Name: Local Plan
+      Enabled: true
+      Topic:
+        Value: /local_plan
+    - Class: rviz_default_plugins/Polygon
+      Name: Rover Footprint
+      Enabled: true
+      Topic:
+        Value: /local_costmap/published_footprint
     - Class: rviz_default_plugins/LaserScan
       Name: Depth Scan
       Enabled: false

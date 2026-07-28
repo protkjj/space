@@ -191,8 +191,10 @@ accumulate. Command safety reported fresh-command recovery and returned to
 STALE after its 0.5-second timeout. RViz stayed alive with compatible QoS;
 final colour appearance remains a human visual check.
 
-## Gate to later work
+## Local Nav2 use
 
-Nav2 terrain-cost integration remains blocked until these provisional
-parameters are physically justified and latency/score behavior is validated
-against broader simulated and real sensor datasets.
+The calibrated score now feeds a bounded, non-lethal local-costmap layer.
+This integration does not upgrade provisional simulation parameters into
+physical limits and does not imply safe/unsafe classification or guaranteed
+avoidance. See
+[`nav2_traversability_layer.md`](nav2_traversability_layer.md).

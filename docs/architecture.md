@@ -174,15 +174,15 @@ The measured-data and geometric-feature stages are implemented inside
   → local plane slope, robust roughness, plane-removed step height
   → feature PointCloud2, compact markers, and quality diagnostics
   → normalized penalties, continuous prototype traversability, and validity
+  → bounded soft costs in the rolling Nav2 local costmap
 ```
 
 These stages publish measurements, geometry, quality confidence, interpretable
 penalties, and a continuous prototype score. Guaranteed safe/unsafe
 classification, hazard decisions, marker recommendation, wheel-slip fusion,
-and Nav2 terrain-cost integration remain unimplemented.
-
-Nav2 terrain-cost integration is specifically gated on broader calibration and
-physical validation of the provisional traversability model.
+global terrain planning, and guaranteed terrain avoidance remain
+unimplemented. The local-only integration is described in
+[`nav2_traversability_layer.md`](nav2_traversability_layer.md).
 
 Simulation alone starts the 3D `robot_localization` EKF configuration required
 to retain Z, roll, and pitch for slope mapping. `hardware.launch.py` starts no

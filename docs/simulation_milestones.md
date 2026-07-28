@@ -78,6 +78,16 @@ ROS 2
 
 Milestone A does not require marker deployment.
 
+## Local terrain-cost integration
+
+The calibrated traversability cloud is integrated into the Nav2 rolling local
+costmap as bounded soft costs. Dynamic replacement and stale clearing are
+implemented without changing the global costmap. This is not lethal terrain
+classification, global terrain planning, guaranteed avoidance, hazard
+persistence, or marker logic. Validation and known navigation-baseline limits
+are recorded in
+[`nav2_traversability_layer.md`](nav2_traversability_layer.md).
+
 ## Milestone B: semantic marker simulation
 
 Milestone B begins after the Milestone A motion/state foundation is stable. It

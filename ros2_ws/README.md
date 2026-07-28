@@ -77,10 +77,11 @@ With `use_perception:=true`, the simulation also launches the sensor-derived
 cloud contains slope, roughness, plane-removed step height, coverage, and
 data-quality confidence. `/terrain/traversability` adds continuous normalized
 penalties, a prototype score, validity, and a dominant limiting-factor code.
-It is not a guaranteed safety classification and does not implement hazard
-decisions, marker recommendations, or Nav2 terrain costs.
-Nav2 terrain-cost integration remains gated on calibration and physical
-validation; current response and latency data are in
+It is not a guaranteed safety classification. The local Nav2 costmap can now
+consume the score as a bounded soft-cost layer; use
+`use_traversability_layer:=false` for the previous behavior. The global
+costmap, hazard decisions, and marker recommendations remain unchanged. See
+`../docs/nav2_traversability_layer.md` and
 `../docs/traversability_calibration.md`.
 
 ## Phase 1 hardware launch

@@ -10,6 +10,7 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
@@ -17,11 +18,24 @@ def generate_launch_description():
     use_rviz = LaunchConfiguration('use_rviz')
     use_navigation = LaunchConfiguration('use_navigation')
     use_perception = LaunchConfiguration('use_perception')
+    use_traversability_layer = LaunchConfiguration(
+        'use_traversability_layer'
+    )
     bringup_share = get_package_share_directory('space_bringup')
     gazebo_share = get_package_share_directory('space_gazebo')
     perception_share = get_package_share_directory('space_perception')
-    nav2_params = os.path.join(
+    nav2_params_file = os.path.join(
         bringup_share, 'config', 'navigation', 'nav2_params.yaml'
+    )
+    nav2_params = RewrittenYaml(
+        source_file=nav2_params_file,
+        param_rewrites={
+            (
+                'local_costmap.local_costmap.ros__parameters.'
+                'traversability_layer.enabled'
+            ): use_traversability_layer,
+        },
+        convert_types=True,
     )
 
     gazebo = IncludeLaunchDescription(
@@ -100,6 +114,27 @@ def generate_launch_description():
             parameters=[nav2_params, {'use_sim_time': use_sim_time}],
             condition=IfCondition(use_navigation),
         ),
+        Node(
+            package='nav2_lifecycle_manager',
+            executable='lifecycle_manager',
+            name='lifecycle_manager_navigation',
+            output='screen',
+            parameters=[
+                {
+                    'use_sim_time': use_sim_time,
+                    'autostart': True,
+                    'bond_timeout': 0.0,
+                    'node_names': [
+                        'slam_toolbox',
+                        'controller_server',
+                        'planner_server',
+                        'behavior_server',
+                        'bt_navigator',
+                    ],
+                }
+            ],
+            condition=IfCondition(use_navigation),
+        ),
     ]
 
     return LaunchDescription(
@@ -108,6 +143,13 @@ def generate_launch_description():
             DeclareLaunchArgument('use_rviz', default_value='true'),
             DeclareLaunchArgument('use_navigation', default_value='false'),
             DeclareLaunchArgument('use_perception', default_value='true'),
+            DeclareLaunchArgument(
+                'use_traversability_layer',
+                default_value='true',
+                description=(
+                    'Enable bounded terrain costs in the Nav2 local costmap.'
+                ),
+            ),
             DeclareLaunchArgument(
                 'world', default_value='arena_test_slope_v04.sdf'
             ),

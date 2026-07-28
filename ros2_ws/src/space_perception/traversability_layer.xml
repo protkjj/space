@@ -1,0 +1,11 @@
+<library path="traversability_layer">
+  <class
+    name="space_perception::TraversabilityLayer"
+    type="space_perception::TraversabilityLayer"
+    base_class_type="nav2_costmap_2d::Layer">
+    <description>
+      Adds current valid terrain traversability observations as bounded soft
+      costs in a Nav2 rolling local costmap.
+    </description>
+  </class>
+</library>
