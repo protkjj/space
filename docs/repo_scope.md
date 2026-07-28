@@ -1,24 +1,70 @@
-# 레포 범위
+# Repository scope
 
-## 원본 방향에서 가져온 것
+## Supported baseline
 
-- ROS 2 Jazzy 워크스페이스 구조
-- Gazebo Harmonic 기반 시뮬레이션 흐름
-- 스키드스티어 로버와 `/cmd_vel` 제어 방식
-- RGB-D 카메라 토픽을 이용한 영상/거리 정보
-- IMU + 오도메트리 EKF 설정
-- Nav2 launch/config 구조
-- Pixhawk 연동을 위한 PX4 bridge 개념
+- Ubuntu 24.04 and ROS 2 Jazzy
+- Gazebo Harmonic simulation assets
+- four-wheel skid-steer rover
+- RGB-D camera, IMU, odometry, EKF, SLAM, and Nav2 configuration
+- backend-neutral velocity safety boundary
+- Pixhawk 6X running ArduPilot Rover as the selected autopilot architecture
 
-## 새 레포에서 제거한 것
+Exact ArduPilot, Gazebo integration, and DDS component versions remain
+unpinned until they have been validated together. A successful repository
+build alone does not validate a firmware or hardware configuration.
 
-- 병원/창고/카페 등 대형 Gazebo 월드
-- 대형 모델 라이브러리와 STL 중심 환경 자산
-- 기존 YOLO 데이터셋과 학습된 모델 바이너리
-- 드론/VTOL 동작을 주 목표로 하는 코드
-- 변형 arm 펌웨어와 서보 시퀀싱
-- baseline의 물리 LiDAR 의존성
+## Phase 1 contents
 
-## 새 레포로 분리한 이유
+Phase 1 includes:
 
-원본 레포에서 파일을 삭제해도 Git 히스토리와 Git LFS 저장소에는 대형 자산이 남습니다. 그래서 원본은 참고용 clone으로 두고, 우주로버 챌린지에 필요한 코드만 선별해 새 repo를 시작합니다.
+- canonical physical URDF/Xacro in `space_description`
+- Gazebo-only plugins, friction, sensor configuration, bridge configuration,
+  and world assets in `space_gazebo`
+- simulation and hardware bringup separation
+- a command-safety node publishing the backend-neutral `/cmd_vel_safe` topic
+- a buildable, implementation-free `space_ardupilot_interface` scaffold
+- ArduPilot firmware documentation and a real-export policy
+
+The direct Gazebo DiffDrive plugin remains only as a temporary Phase 1 backend.
+It is not representative of the final Pixhawk/ArduPilot path and does not
+validate ArduPilot control.
+
+## Required dependency boundary
+
+The physical description is simulator-independent:
+
+```text
+space_gazebo → space_description
+space_description ↛ space_gazebo
+```
+
+Canonical links, joints, inertial values, physical sensor mounting transforms,
+and wheel geometry belong to `space_description`. Gazebo systems, simulated
+sensors, friction, any future noise properties, and other Gazebo tags belong
+to `space_gazebo`.
+
+## Explicitly outside Phase 1
+
+- operational ArduPilot DDS command/state adapter
+- ArduPilot Rover SITL and ArduPilot Gazebo plugin integration
+- validated Pixhawk or SITL parameter exports
+- Jetson-side RoboClaw packet-serial control
+- invented serial endpoints, IP addresses, frame IDs, DDS rates, or firmware
+  settings
+- marker mechanism, `DeployMarker` action, or marker hardware transport choice
+- mission-management and new custom-interface packages
+
+## Removed legacy scope
+
+- ROS 2 Jazzy as the project baseline
+- PX4/uORB bridge implementation and `px4_msgs`
+- large hospital, warehouse, and cafe simulation worlds
+- large model libraries and unrelated STL assets
+- legacy YOLO datasets and trained binaries
+- drone/VTOL-focused control code
+- transforming-arm firmware and servo sequencing
+- baseline dependence on a physical LiDAR
+
+The repository was separated from the original project so these large or
+unrelated assets and their Git/LFS history do not remain in the rover
+workspace.

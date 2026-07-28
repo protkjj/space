@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="space_rover" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!--
+    The physical model is canonical in space_description. This one-way
+    simulation wrapper adds Gazebo-only systems and sensor behavior.
+  -->
+  <xacro:include filename="$(find space_description)/urdf/space_rover.urdf.xacro"/>
+  <xacro:include filename="$(find space_gazebo)/urdf/gazebo_extensions.xacro"/>
+</robot>

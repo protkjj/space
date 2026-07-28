@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'space_px4_interface'
+package_name = 'space_ardupilot_interface'
 
 setup(
     name=package_name,
@@ -9,16 +9,14 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name, ['README.md']),
     ],
     install_requires=['setuptools'],
+    tests_require=['pytest'],
     zip_safe=True,
     maintainer='space team',
     maintainer_email='todo@example.com',
-    description='Optional PX4 uORB to ROS 2 topic bridge skeleton for the rover.',
+    description='Buildable scaffold for the future ArduPilot Rover ROS 2 adapter.',
     license='MIT',
-    entry_points={
-        'console_scripts': [
-            'px4_bridge = space_px4_interface.px4_bridge:main',
-        ],
-    },
+    entry_points={'console_scripts': []},
 )

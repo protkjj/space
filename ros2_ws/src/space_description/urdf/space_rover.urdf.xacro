@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 <robot name="space_rover" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:arg name="use_sim" default="true"/>
-
   <xacro:property name="base_length" value="0.32"/>
   <xacro:property name="base_width" value="0.26"/>
   <xacro:property name="base_height" value="0.10"/>
@@ -88,6 +86,14 @@
     <origin xyz="0.17 0 0.07" rpy="0 0 0"/>
   </joint>
 
+  <!-- REP-103 optical coordinates: Z forward, X right, Y down. -->
+  <link name="camera_optical_frame"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_optical_frame"/>
+    <origin xyz="0 0 0" rpy="-1.57079632679 0 -1.57079632679"/>
+  </joint>
+
   <link name="imu_link">
     <inertial>
       <mass value="0.01"/>
@@ -100,6 +106,4 @@
     <child link="imu_link"/>
     <origin xyz="0 0 0.03" rpy="0 0 0"/>
   </joint>
-
-  <xacro:include filename="$(find space_description)/urdf/gazebo.xacro"/>
 </robot>

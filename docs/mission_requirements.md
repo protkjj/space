@@ -1,43 +1,81 @@
-# 임무 기반 요구조건 초안
+# Mission-derived requirements draft
 
-원칙: 요구조건은 임의로 정하지 않고, 실제 임무와 설명회에서 확인된 고정 제약으로부터 역산합니다.
+Requirements must be traced to confirmed mission constraints or validated
+engineering evidence. Unknown electrical, mechanical, firmware, and interface
+values must not be filled with guessed defaults.
 
-## 고정 제약
+## Confirmed competition constraints
 
-| 항목 | 값 |
+| Item | Value |
 | --- | --- |
-| 본선 진출 | 8팀 |
-| 시간 구조 | 임무 20분 + 준비 3분 + 철수 3분 |
-| 본선 중량 | 3 kg 이하 |
-| 목표 중량 | 2.5 kg |
-| 수납 부피 | 300 x 300 x 200 mm 이내 |
-| 경기장 | 비평탄 암석 지형 2.4 m + 모래 입자 지형 3 m, 세로 3 m |
-| 코스 | 랜더 출발, 암석/장애물, 모래/경사, 경로주행, 목표점 도착 |
-| 조종 방식 | 카메라 화면 기반 원격 조종 |
-| 필수 기능 | 착륙선 출발, 이동, 영상 촬영, 팀 제안 임무 |
+| Finalists | 8 teams |
+| Time structure | 20-minute mission + 3-minute setup + 3-minute removal |
+| Final rover mass | 3 kg maximum |
+| Target rover mass | 2.5 kg |
+| Stowed volume | Within 300 × 300 × 200 mm |
+| Course | 2.4 m uneven rock section + 3 m granular section; 3 m width |
+| Route | Lander departure, rocks/obstacles, sand/slope, route following, target arrival |
+| Operator view | Camera-based remote operation |
+| Required capabilities | Lander departure, mobility, imaging, and a team-proposed mission |
 
-## 현재 설계 방향
+## Current architecture direction
 
-| 영역 | 방향 |
+| Area | Direction |
 | --- | --- |
-| 조향 | 스키드스티어 / 차동구동 |
-| 구동 | 엔코더 내장 브러시 DC 기어모터 |
-| 모터 드라이버 | RoboClaw 2채널 계열, 모터 계산 후 용량 확정 |
-| 비행 컨트롤러 | Pixhawk 유지, PX4 rover 우선, ArduRover 백업 |
-| 컴퓨터 | Jetson 계열 온보드 컴퓨터 |
-| 센서 | RGB-D 카메라 우선, baseline에서는 물리 LiDAR 제외 |
-| 자율주행 | A*/grid 글로벌 플래닝 + DWB/DWA 계열 로컬 제어 |
-| 위치 추정 | 휠 엔코더 + IMU 융합 |
-| 임무 | 가벼운 관측/매핑형 임무를 우선 후보로 검토 |
+| Steering | Four-wheel skid steer / differential drive |
+| Motors | Brushed DC gearmotors with encoders |
+| Motor control | RoboClaw two-channel family; capacity to be selected from validated load/current calculations |
+| Autopilot | Pixhawk 6X running ArduPilot Rover |
+| Compute | Jetson-class onboard computer running ROS 2 Jazzy |
+| Sensors | RGB-D camera first; no physical LiDAR in the baseline |
+| Navigation | Grid/global planning with a DWB-family local controller |
+| State estimation | Wheel/vehicle odometry and IMU fusion |
+| Mission payload | Lightweight observation or mapping concepts remain candidates |
 
-## 아직 닫아야 할 질문
+## Baseline drivetrain, pending bench validation
 
-| 결정 항목 | 필요한 정보 |
+```text
+Jetson ROS 2
+  → Pixhawk 6X / ArduPilot Rover
+  → left/right throttle outputs
+  → RoboClaw in RC/PWM mode
+  → left/right motor groups
+```
+
+This is an architectural baseline, not evidence that the electrical or control
+interface has passed bench testing. Phase 1 does not add a direct Jetson-to-
+RoboClaw packet-serial path.
+
+Before the drivetrain is treated as selected and validated, testing must cover:
+
+- electrical signal compatibility
+- shared-ground requirements
+- neutral calibration
+- direction reversal and correction
+- response to signal loss
+- controller and wiring current capacity
+- two-motors-per-channel loading
+
+No PWM range, neutral value, output channel, current rating, or failsafe
+behavior is specified until measured or confirmed from the exact hardware and
+firmware configuration.
+
+## Open decisions
+
+| Decision | Evidence required |
 | --- | --- |
-| 바퀴 직경 | 단차/장애물 높이 |
-| 모터 토크/RPM | 고/중/저 경사각, 단차 높이 |
-| 드라이버/배터리 용량 | 모터 전류 계산 결과 |
-| 바퀴 폭/트레드 | 모래 깊이, 입자 크기, 다짐 정도 |
-| 임무 탑재체 | 임무 평가 방식, 크기/무게 제약 |
-| RGB-D 신뢰성 | 모래/입자 표면의 광학 특성 |
-| 카메라 구성 | 팀 장착 카메라 사용 가능 여부, 대회 제공 영상 여부 |
+| Wheel diameter | Step and obstacle height |
+| Motor torque and speed | High/medium/low slope angles and step height |
+| Driver and battery capacity | Measured motor currents and transient loads |
+| Wheel width and track | Sand depth, grain size, compaction, and turning resistance |
+| Encoder feedback route | Confirmed Pixhawk/ArduPilot and Jetson integration design |
+| Mission payload | Scoring method and size/mass constraints |
+| RGB-D reliability | Tests on representative granular and low-texture surfaces |
+| Camera configuration | Team-camera rules and availability of competition video |
+| Localization/map strategy | Whether online mapping or a prior/static map is allowed |
+| Marker mechanism | Payload requirements, actuation, sensing, and verification |
+
+Marker transport is deliberately undecided. Future evaluation may compare
+MAVLink `MAV_CMD_DO_SET_SERVO`, ArduPilot Lua, and a custom ArduPilot DDS
+interface, but mission-level code must eventually use a semantic
+`DeployMarker` action rather than raw PWM.

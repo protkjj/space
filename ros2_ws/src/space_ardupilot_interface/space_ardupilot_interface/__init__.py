@@ -1,1 +1,1 @@
-"""space_px4_interface package."""
+"""Scaffold for the future ArduPilot Rover ROS 2 adapter."""
