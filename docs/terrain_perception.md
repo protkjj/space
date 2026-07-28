@@ -92,6 +92,11 @@ Feature definitions and current feature runtime measurements are documented in
 The configured ceiling is 5 Hz. Intermittent millisecond-scale TF
 extrapolation misses are skipped safely and reduce the measured rate.
 
+Feature and traversability stages now process each depth-1 latest sample on
+arrival. Elevation processes on arrival while retaining a timer for TF retry.
+This removed chained timer phase delay; see
+[`traversability_calibration.md`](traversability_calibration.md).
+
 ## Arena validation
 
 The rover followed the arena’s lower Y-side slope using conservative

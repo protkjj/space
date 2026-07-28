@@ -181,6 +181,9 @@ penalties, and a continuous prototype score. Guaranteed safe/unsafe
 classification, hazard decisions, marker recommendation, wheel-slip fusion,
 and Nav2 terrain-cost integration remain unimplemented.
 
+Nav2 terrain-cost integration is specifically gated on broader calibration and
+physical validation of the provisional traversability model.
+
 Simulation alone starts the 3D `robot_localization` EKF configuration required
 to retain Z, roll, and pitch for slope mapping. `hardware.launch.py` starts no
 EKF and remains an interface-only placeholder; a hardware EKF must wait for

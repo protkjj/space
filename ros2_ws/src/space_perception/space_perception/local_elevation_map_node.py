@@ -104,6 +104,7 @@ class LocalElevationMapNode(Node):
 
     def _cloud_callback(self, message):
         self._latest = message
+        self._update()
 
     def _rover_position(self, stamp):
         transform = self._tf_buffer.lookup_transform(
@@ -124,6 +125,8 @@ class LocalElevationMapNode(Node):
             return
         started = time.perf_counter()
         stamp_key = (message.header.stamp.sec, message.header.stamp.nanosec)
+        if stamp_key == self._last_stamp:
+            return
         stamp = Time.from_msg(message.header.stamp)
         try:
             center_x, center_y = self._rover_position(stamp)
@@ -137,22 +140,21 @@ class LocalElevationMapNode(Node):
             self._publish_diagnostics(True)
             return
 
-        if stamp_key != self._last_stamp:
-            measured = aggregate_elevation_cells(
-                cloud_xyz_numpy(message),
-                resolution=self._resolution,
-                min_points=int(
-                    self.get_parameter('min_points_per_cell').value
-                ),
-                statistic=self.get_parameter('elevation_statistic').value,
-                stamp_ns=stamp.nanoseconds,
-            )
-            self._cells.update(measured)
-            self._last_stamp = stamp_key
-            self._last_header = Header(
-                stamp=deepcopy(message.header.stamp), frame_id=self._target
-            )
-            self._processed += 1
+        measured = aggregate_elevation_cells(
+            cloud_xyz_numpy(message),
+            resolution=self._resolution,
+            min_points=int(
+                self.get_parameter('min_points_per_cell').value
+            ),
+            statistic=self.get_parameter('elevation_statistic').value,
+            stamp_ns=stamp.nanoseconds,
+        )
+        self._cells.update(measured)
+        self._last_stamp = stamp_key
+        self._last_header = Header(
+            stamp=deepcopy(message.header.stamp), frame_id=self._target
+        )
+        self._processed += 1
 
         timeout_ns = int(
             float(self.get_parameter('cell_timeout').value) * 1e9

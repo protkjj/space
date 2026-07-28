@@ -139,6 +139,11 @@ The low median residual features on the higher slope and localized maximum
 step at the transition match the intended qualitative behavior. These
 sensor-derived observations do not claim exact arena-angle accuracy.
 
+The feature node now processes depth-1 elevation samples on arrival, rejects
+duplicate stamps, and can drop stale inputs above a configured age. Controlled
+response curves and regional percentile analysis are documented in
+[`traversability_calibration.md`](traversability_calibration.md).
+
 ## Limitations
 
 - Local plane estimates depend on RGB-D density, elevation aggregation,

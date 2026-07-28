@@ -188,3 +188,8 @@ Colour appearance still requires human visual confirmation.
   autonomous hazard avoidance, marker-drop recommendation, dispenser control,
   wheel-slip integration, ArduPilot integration, or RoboClaw integration is
   implemented.
+
+Calibration curves, regional distributions, latency, and stability are
+documented in
+[`traversability_calibration.md`](traversability_calibration.md). Nav2
+integration remains blocked pending broader calibration and physical limits.

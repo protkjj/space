@@ -41,6 +41,10 @@ setup(
                 'terrain_traversability_node = '
                 'space_perception.terrain_traversability_node:main'
             ),
+            (
+                'traversability_calibration = '
+                'space_perception.traversability_calibration:main'
+            ),
         ],
     },
 )

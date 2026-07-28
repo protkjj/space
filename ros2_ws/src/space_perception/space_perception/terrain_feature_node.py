@@ -12,6 +12,7 @@ from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import PointCloud2
 
+from space_perception.latest_data import sample_disposition
 from space_perception.pointcloud_utils import (
     create_feature_cloud,
     elevation_cloud_numpy,
@@ -54,6 +55,9 @@ class TerrainFeatureNode(Node):
             'slope_visual_maximum': 0.6,
             'roughness_visual_maximum': 0.05,
             'step_visual_maximum': 0.10,
+            'maximum_input_age': 1.0,
+            'drop_stale_input': True,
+            'process_latest_only': True,
         }
         for name, value in defaults.items():
             self.declare_parameter(name, value)
@@ -106,10 +110,11 @@ class TerrainFeatureNode(Node):
             'slope': 0.0, 'roughness': 0.0, 'step_height': 0.0
         }
         self._processed = 0
+        self._duplicate_drops = 0
+        self._stale_drops = 0
         self._started_wall = time.monotonic()
         self._last_warning_wall = 0.0
         self._stats = FeatureStats(0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0)
-        self.create_timer(1.0 / rate, self._update)
         self.get_logger().info(
             f'Terrain features radius={self._config.feature_radius:.2f} m '
             f'at {rate:.1f} Hz'
@@ -118,6 +123,7 @@ class TerrainFeatureNode(Node):
     def _cloud_callback(self, message):
         self._latest = message
         self._input_received = True
+        self._update(message)
 
     def _warn_throttled(self, message):
         now = time.monotonic()
@@ -125,13 +131,32 @@ class TerrainFeatureNode(Node):
             self.get_logger().warning(message)
             self._last_warning_wall = now
 
-    def _update(self):
-        message = self._latest
+    def _update(self, message=None):
+        message = message if message is not None else self._latest
         if message is None:
             self._publish_diagnostics()
             return
         stamp_key = (message.header.stamp.sec, message.header.stamp.nanosec)
-        if stamp_key == self._last_stamp:
+        stamp_ns = message.header.stamp.sec * 1_000_000_000
+        stamp_ns += message.header.stamp.nanosec
+        last_ns = None
+        if self._last_stamp is not None:
+            last_ns = self._last_stamp[0] * 1_000_000_000
+            last_ns += self._last_stamp[1]
+        disposition = sample_disposition(
+            stamp_ns,
+            last_ns,
+            self.get_clock().now().nanoseconds,
+            float(self.get_parameter('maximum_input_age').value),
+            bool(self.get_parameter('drop_stale_input').value),
+        )
+        if disposition == 'duplicate':
+            self._duplicate_drops += 1
+            return
+        if disposition == 'stale':
+            self._stale_drops += 1
+            self._last_stamp = stamp_key
+            self._output_published = False
             self._publish_diagnostics()
             return
         if message.header.frame_id != self._target_frame:
@@ -256,6 +281,10 @@ class TerrainFeatureNode(Node):
                          value=f'{self._processed / elapsed:.3f}'),
                 KeyValue(key='output_cloud_published',
                          value=str(self._output_published)),
+                KeyValue(key='duplicate_input_drop_count',
+                         value=str(self._duplicate_drops)),
+                KeyValue(key='stale_input_drop_count',
+                         value=str(self._stale_drops)),
                 *[
                     KeyValue(
                         key=f'{name}_marker_duration_ms',
