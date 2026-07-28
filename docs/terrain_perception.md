@@ -11,6 +11,10 @@ The current prototype uses only the simulated RGB-D measurements:
   → local_elevation_map_node
   ├── /terrain/elevation_points (odom)
   └── /terrain/elevation_markers (odom)
+  → terrain_feature_node
+  └── /terrain/features and feature markers (odom)
+  → terrain_traversability_node
+  └── /terrain/traversability and compact markers (odom)
 ```
 
 The arena STL is not opened or read by either node. CAD dimensions are used
@@ -47,7 +51,8 @@ fewer than two measured points are rejected. Valid cells contain:
 
 Measurements are retained for two seconds and only while inside the moving
 local extent. Unknown cells are not filled or published. Each output update
-begins its MarkerArray with `DELETEALL`, preventing marker accumulation.
+uses one compact `CUBE_LIST` and begins its MarkerArray with `DELETEALL`,
+preventing marker accumulation.
 Marker color is a display-only mapping between configured visualization
 heights 0 and 0.55 m; it is not a terrain score.
 
@@ -68,7 +73,7 @@ Defaults are installed in
 records on `/terrain/diagnostics`, including input/TF state, point and cell
 counts, processing time, and effective rate.
 
-The initial stationary run measured:
+The initial stationary elevation-only run measured:
 
 - 307,200 raw points per cloud;
 - 133,431 finite in-range points;
@@ -78,6 +83,11 @@ The initial stationary run measured:
 - elevation processing commonly 24–105 ms including Marker construction;
 - sustained effective rates around 3–3.6 Hz under combined Gazebo, bridge,
   perception, and validation load.
+
+A synthetic 500-cell benchmark reduced elevation marker construction from
+15.35 ms to 3.11 ms by replacing one marker per cell with a `CUBE_LIST`.
+Feature definitions and current feature runtime measurements are documented in
+[`terrain_features.md`](terrain_features.md).
 
 The configured ceiling is 5 Hz. Intermittent millisecond-scale TF
 extrapolation misses are skipped safely and reduce the measured rate.
@@ -119,15 +129,14 @@ ros2 launch space_perception terrain_perception.launch.py
 
 ## Current limitations
 
-- Python Marker construction limits the effective combined rate.
 - Exact-time TF can occasionally lag a cloud by a few milliseconds; that cloud
   is skipped instead of being transformed with the wrong pose.
 - The local grid retains recent measured cells but performs no interpolation.
-- No traversability, slope risk, roughness risk, hazard classification,
-  marker recommendation, Nav2 terrain cost, ArduPilot, or RoboClaw behavior is
+- A provisional continuous traversability model is implemented downstream.
+  No guaranteed safety classification, hazard decision, marker
+  recommendation, Nav2 terrain cost, ArduPilot, or RoboClaw behavior is
   implemented.
 - Gazebo and RViz appearance still requires user visual confirmation.
 
-Future phases may consume elevation, variance, and point count as inputs to
-separately designed terrain features. Those algorithms and interfaces are not
-part of this prototype.
+The feature layer consumes elevation, variance, and point count without
+changing this measured-data contract.

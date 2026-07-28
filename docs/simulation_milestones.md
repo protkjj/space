@@ -21,6 +21,10 @@ Phase 1 acceptance covers:
   workflow; actual meshes remain gated on an available FreeCAD kernel
 - a sensor-derived filtered point cloud and local elevation-grid prototype,
   without terrain scoring or hazard semantics
+- sensor-derived slope, roughness, plane-removed step height, neighbourhood
+  coverage, and data-quality confidence, without safety classification
+- continuous normalized terrain penalties, prototype traversability, validity,
+  and limiting-factor output, without autonomous hazard decisions
 
 Phase 1 may move the rover directly through Gazebo's DiffDrive plugin:
 

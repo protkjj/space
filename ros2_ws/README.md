@@ -72,9 +72,13 @@ optional launch components. Navigation defaults off until its full graph is
 validated against the arena.
 
 With `use_perception:=true`, the simulation also launches the sensor-derived
-`/camera/points → /terrain/filtered_points → /terrain/elevation_points`
-pipeline and elevation markers. This does not implement traversability,
-hazards, marker recommendation, or Nav2 terrain costs.
+`/camera/points → /terrain/filtered_points → /terrain/elevation_points →
+/terrain/features` pipeline and compact elevation/feature markers. The feature
+cloud contains slope, roughness, plane-removed step height, coverage, and
+data-quality confidence. `/terrain/traversability` adds continuous normalized
+penalties, a prototype score, validity, and a dominant limiting-factor code.
+It is not a guaranteed safety classification and does not implement hazard
+decisions, marker recommendations, or Nav2 terrain costs.
 
 ## Phase 1 hardware launch
 

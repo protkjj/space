@@ -28,6 +28,11 @@ provides:
   FreeCAD; see [`docs/arena_simulation.md`](docs/arena_simulation.md))
 - a sensor-derived local elevation prototype using the simulated RGB-D point
   cloud; see [`docs/terrain_perception.md`](docs/terrain_perception.md)
+- sensor-derived slope, roughness, step-height, coverage, and data-quality
+  confidence; see [`docs/terrain_features.md`](docs/terrain_features.md)
+- a continuous, interpretable traversability prototype with validity and
+  limiting-factor output; see
+  [`docs/traversability.md`](docs/traversability.md)
 
 The Phase 1 Gazebo simulation still uses a temporary direct DiffDrive backend:
 
