@@ -184,12 +184,13 @@ Colour appearance still requires human visual confirmation.
 - Parameters are arena-oriented simulation tuning, not certified rover limits.
 - Confidence and uncertainty are quality heuristics, not probabilities.
 - Scores inherit RGB-D, TF, elevation-grid, and feature-estimation limitations.
-- No guaranteed safe/unsafe classification, Nav2 costmap integration,
-  autonomous hazard avoidance, marker-drop recommendation, dispenser control,
+- No guaranteed safe/unsafe classification, global terrain planning,
+  guaranteed terrain avoidance, marker-drop recommendation, dispenser control,
   wheel-slip integration, ArduPilot integration, or RoboClaw integration is
   implemented.
 
 Calibration curves, regional distributions, latency, and stability are
 documented in
-[`traversability_calibration.md`](traversability_calibration.md). Nav2
-integration remains blocked pending broader calibration and physical limits.
+[`traversability_calibration.md`](traversability_calibration.md). The
+provisional local Nav2 soft-cost integration is documented in
+[`nav2_traversability_layer.md`](nav2_traversability_layer.md).
