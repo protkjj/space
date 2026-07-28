@@ -145,6 +145,18 @@ def compose_traversability(penalties, config):
     return np.clip(1.0 - combined, 0.0, 1.0)
 
 
+def compose_geometry_penalty(penalties, config):
+    """Compose slope, roughness, and step separately from data quality."""
+    penalties = np.clip(np.asarray(penalties, dtype=np.float64), 0.0, 1.0)
+    if penalties.ndim != 2 or penalties.shape[1] != 3:
+        raise ValueError('geometry penalties must have shape (N, 3)')
+    if config.composition_mode == 'conservative_max':
+        return np.max(penalties, axis=1)
+    weights = normalized_weights(config)[:3]
+    weights /= np.sum(weights)
+    return np.clip(penalties @ weights, 0.0, 1.0)
+
+
 def select_limiting_factors(
     slope, roughness, step, variance, coverage, confidence, config
 ):

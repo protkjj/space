@@ -25,6 +25,8 @@ Phase 1 acceptance covers:
   coverage, and data-quality confidence, without safety classification
 - continuous normalized terrain penalties, prototype traversability, validity,
   and limiting-factor output, without autonomous hazard decisions
+- monotonic calibration sweeps and latest-data latency validation before any
+  Nav2 terrain-cost integration
 
 Phase 1 may move the rover directly through Gazebo's DiffDrive plugin:
 

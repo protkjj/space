@@ -5,6 +5,7 @@ from dataclasses import replace
 import numpy as np
 import pytest
 
+from space_perception.latest_data import sample_disposition
 from space_perception.pointcloud_utils import (
     create_feature_cloud,
     create_traversability_cloud,
@@ -12,6 +13,7 @@ from space_perception.pointcloud_utils import (
     TRAVERSABILITY_DTYPE,
 )
 from space_perception.traversability import (
+    compose_geometry_penalty,
     compose_traversability,
     compute_traversability,
     LIMIT_INVALID,
@@ -20,6 +22,7 @@ from space_perception.traversability import (
     smooth_penalty,
     TraversabilityConfig,
 )
+from space_perception.traversability_calibration import calibration_rows
 from std_msgs.msg import Header
 
 
@@ -213,3 +216,82 @@ def test_pointcloud_packing_and_feature_validation():
     assert [field.name for field in cloud.fields] == list(
         TRAVERSABILITY_DTYPE.names
     )
+
+
+@pytest.mark.parametrize(
+    ('column', 'values'),
+    [
+        (3, np.linspace(0.0, 0.7, 50)),
+        (4, np.linspace(0.0, 0.04, 50)),
+        (5, np.linspace(0.0, 0.1, 50)),
+        (6, np.linspace(0.0, 0.001, 50)),
+    ],
+)
+def test_increasing_input_never_increases_score(column, values):
+    rows = np.tile(feature_row(), (len(values), 1))
+    rows[:, column] = values
+    output, _ = compute_traversability(rows, CONFIG)
+    assert np.all(np.diff(output[:, 3]) <= 1e-12)
+
+
+@pytest.mark.parametrize('column', [9, 10])
+def test_decreasing_quality_never_increases_score(column):
+    rows = np.tile(feature_row(), (50, 1))
+    rows[:, column] = np.linspace(1.0, 0.51 if column == 9 else 0.11, 50)
+    output, _ = compute_traversability(rows, CONFIG)
+    assert np.all(np.diff(output[:, 3]) <= 1e-12)
+
+
+def test_smoothstep_reference_values_and_continuity():
+    epsilon = 1e-8
+    assert smooth_penalty([0.1, 0.5], 0.1, 0.5).tolist() == [0.0, 1.0]
+    near = smooth_penalty(
+        [0.1 - epsilon, 0.1 + epsilon, 0.5 - epsilon, 0.5 + epsilon],
+        0.1,
+        0.5,
+    )
+    assert abs(near[1] - near[0]) < 1e-10
+    assert abs(near[3] - near[2]) < 1e-10
+
+
+def test_geometry_composition_excludes_quality():
+    penalties = np.asarray([[0.2, 0.4, 0.6]])
+    geometry = compose_geometry_penalty(penalties, CONFIG)
+    changed_quality = replace(CONFIG, weight_uncertainty=100.0)
+    np.testing.assert_allclose(
+        geometry, compose_geometry_penalty(penalties, changed_quality)
+    )
+
+
+def test_low_confidence_semantics():
+    valid = score(feature_row(confidence=0.11))
+    invalid = score(feature_row(confidence=0.09))
+    assert valid[9] == 1
+    assert valid[10] != LIMIT_INVALID
+    assert invalid[9] == 0
+    assert invalid[10] == LIMIT_INVALID
+
+
+def test_latest_sample_disposition():
+    assert sample_disposition(10, 10, 20, 1.0, True) == 'duplicate'
+    assert sample_disposition(0, None, 2_000_000_000, 1.0, True) == 'stale'
+    assert sample_disposition(0, None, 2_000_000_000, 1.0, False) == 'process'
+    assert sample_disposition(2_000_000_000, None, 2_100_000_000, 1.0, True) == (
+        'process'
+    )
+
+
+def test_calibration_output_is_deterministic_and_complete():
+    first = calibration_rows(CONFIG)
+    second = calibration_rows(CONFIG)
+    for first_row, second_row in zip(first, second):
+        for key in first_row:
+            if isinstance(first_row[key], float) and np.isnan(first_row[key]):
+                assert np.isnan(second_row[key])
+            else:
+                assert first_row[key] == second_row[key]
+    assert len(first) == 44
+    assert {row['sweep'] for row in first} == {
+        'slope_rad', 'roughness_m', 'step_height_m',
+        'coverage', 'confidence', 'variance_m2',
+    }

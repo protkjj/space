@@ -79,6 +79,9 @@ data-quality confidence. `/terrain/traversability` adds continuous normalized
 penalties, a prototype score, validity, and a dominant limiting-factor code.
 It is not a guaranteed safety classification and does not implement hazard
 decisions, marker recommendations, or Nav2 terrain costs.
+Nav2 terrain-cost integration remains gated on calibration and physical
+validation; current response and latency data are in
+`../docs/traversability_calibration.md`.
 
 ## Phase 1 hardware launch
 

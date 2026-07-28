@@ -12,11 +12,13 @@ from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import PointCloud2
 
+from space_perception.latest_data import sample_disposition
 from space_perception.pointcloud_utils import (
     create_traversability_cloud,
     feature_cloud_numpy,
 )
 from space_perception.traversability import (
+    compose_geometry_penalty,
     compute_traversability,
     TraversabilityConfig,
     TraversabilityStats,
@@ -54,6 +56,9 @@ class TerrainTraversabilityNode(Node):
             'publish_rate': 5.0,
             'marker_alpha': 0.80,
             'grid_resolution': 0.05,
+            'maximum_input_age': 1.0,
+            'drop_stale_input': True,
+            'process_latest_only': True,
         }
         for name, value in defaults.items():
             self.declare_parameter(name, value)
@@ -97,13 +102,16 @@ class TerrainTraversabilityNode(Node):
         self._duration_ms = 0.0
         self._marker_duration_ms = 0.0
         self._processed = 0
+        self._duplicate_drops = 0
+        self._stale_drops = 0
         self._started_wall = time.monotonic()
         self._last_warning_wall = 0.0
         self._stats = TraversabilityStats(
             0, 0, 0, np.nan, np.nan, np.nan,
             np.nan, np.nan, np.nan, np.nan, tuple([0] * 7)
         )
-        self.create_timer(1.0 / rate, self._update)
+        self._median_geometry_penalty = np.nan
+        self._median_quality_penalty = np.nan
         self.get_logger().info(
             f'Traversability mode={self._config.composition_mode} '
             f'at up to {rate:.1f} Hz'
@@ -112,6 +120,7 @@ class TerrainTraversabilityNode(Node):
     def _cloud_callback(self, message):
         self._latest = message
         self._input_received = True
+        self._update(message)
 
     def _warn_throttled(self, message):
         now = time.monotonic()
@@ -119,13 +128,32 @@ class TerrainTraversabilityNode(Node):
             self.get_logger().warning(message)
             self._last_warning_wall = now
 
-    def _update(self):
-        message = self._latest
+    def _update(self, message=None):
+        message = message if message is not None else self._latest
         if message is None:
             self._publish_diagnostics()
             return
         stamp_key = (message.header.stamp.sec, message.header.stamp.nanosec)
-        if stamp_key == self._last_stamp:
+        stamp_ns = message.header.stamp.sec * 1_000_000_000
+        stamp_ns += message.header.stamp.nanosec
+        last_ns = None
+        if self._last_stamp is not None:
+            last_ns = self._last_stamp[0] * 1_000_000_000
+            last_ns += self._last_stamp[1]
+        disposition = sample_disposition(
+            stamp_ns,
+            last_ns,
+            self.get_clock().now().nanoseconds,
+            float(self.get_parameter('maximum_input_age').value),
+            bool(self.get_parameter('drop_stale_input').value),
+        )
+        if disposition == 'duplicate':
+            self._duplicate_drops += 1
+            return
+        if disposition == 'stale':
+            self._stale_drops += 1
+            self._last_stamp = stamp_key
+            self._output_published = False
             self._publish_diagnostics()
             return
         started = time.perf_counter()
@@ -147,6 +175,18 @@ class TerrainTraversabilityNode(Node):
         self._output_publisher.publish(
             create_traversability_cloud(header, output)
         )
+        valid_output = output[output[:, 9] == 1]
+        if len(valid_output):
+            geometry = compose_geometry_penalty(
+                valid_output[:, 4:7], self._config
+            )
+            self._median_geometry_penalty = float(np.median(geometry))
+            self._median_quality_penalty = float(
+                np.median(valid_output[:, 7])
+            )
+        else:
+            self._median_geometry_penalty = np.nan
+            self._median_quality_penalty = np.nan
         marker_started = time.perf_counter()
         markers = self._create_markers(header, output)
         self._marker_duration_ms = (
@@ -255,6 +295,21 @@ class TerrainTraversabilityNode(Node):
                      value=self._format_stat(
                          self._stats.median_uncertainty_penalty
                      )),
+            KeyValue(key='median_geometry_penalty',
+                     value=self._format_stat(
+                         self._median_geometry_penalty
+                     )),
+            KeyValue(key='median_quality_penalty',
+                     value=self._format_stat(
+                         self._median_quality_penalty
+                     )),
+            KeyValue(
+                key='valid_ratio',
+                value=(
+                    f'{self._stats.valid_cells / self._stats.input_cells:.6f}'
+                    if self._stats.input_cells else '0.000000'
+                ),
+            ),
             *[
                 KeyValue(
                     key=f'limiting_factor_{label}_count',
@@ -274,6 +329,10 @@ class TerrainTraversabilityNode(Node):
                      value=self._config.composition_mode),
             KeyValue(key='output_cloud_published',
                      value=str(self._output_published)),
+            KeyValue(key='duplicate_input_drop_count',
+                     value=str(self._duplicate_drops)),
+            KeyValue(key='stale_input_drop_count',
+                     value=str(self._stale_drops)),
         ]
         status = DiagnosticStatus(
             level=(

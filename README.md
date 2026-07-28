@@ -33,6 +33,8 @@ provides:
 - a continuous, interpretable traversability prototype with validity and
   limiting-factor output; see
   [`docs/traversability.md`](docs/traversability.md)
+- calibration and latest-data latency benchmarking; see
+  [`docs/traversability_calibration.md`](docs/traversability_calibration.md)
 
 The Phase 1 Gazebo simulation still uses a temporary direct DiffDrive backend:
 

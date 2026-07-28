@@ -66,6 +66,9 @@ terrain_feature_node:
     slope_visual_maximum: 0.60
     roughness_visual_maximum: 0.05
     step_visual_maximum: 0.10
+    maximum_input_age: 1.0
+    drop_stale_input: true
+    process_latest_only: true
 
 # Provisional simulation tuning only; these are not hardware safety limits.
 terrain_traversability_node:
@@ -93,3 +96,6 @@ terrain_traversability_node:
     publish_rate: 5.0
     marker_alpha: 0.80
     grid_resolution: 0.05
+    maximum_input_age: 1.0
+    drop_stale_input: true
+    process_latest_only: true
