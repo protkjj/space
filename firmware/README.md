@@ -1,11 +1,22 @@
-# 펌웨어
+# Firmware configuration
 
-첫 번째 clean repo에서는 펌웨어를 비워둡니다.
+The repository does not vendor the ArduPilot source tree or unrelated
+microcontroller firmware. Project-owned firmware documentation and validated
+configuration exports belong under [`ardupilot/`](ardupilot/).
 
-우선순위는 다음과 같습니다.
+Phase 1 creates the provenance structure only:
 
-- RoboClaw 설정값과 테스트 절차 정리
-- 엔코더 방향/해상도 sanity check
-- 실제 IO가 필요할 때만 마이크로컨트롤러 코드 추가
+```text
+firmware/
+└── ardupilot/
+    ├── README.md
+    ├── version.txt
+    ├── params/
+    │   └── README.md
+    └── scripts/
+        └── README.md
+```
 
-최종 임무 탑재체가 변형 arm이나 별도 액추에이터를 요구하지 않는다면, 원본의 transform-arm 펌웨어는 가져오지 않습니다.
+No `.param` file may be created from assumed defaults. Pixhawk and SITL
+parameter files will be added only after export from a real, validated
+configuration.

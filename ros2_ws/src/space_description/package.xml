@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>space_description</name>
   <version>0.1.0</version>
-  <description>Lightweight URDF and starter worlds for the space rover challenge robot.</description>
+  <description>Simulator-independent physical description of the space rover.</description>
   <maintainer email="todo@example.com">space team</maintainer>
   <license>MIT</license>
 
@@ -11,8 +10,6 @@
 
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>xacro</exec_depend>
-  <exec_depend>ros_gz_sim</exec_depend>
-  <exec_depend>ros_gz_bridge</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

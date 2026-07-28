@@ -11,14 +11,15 @@ setup(
         ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],
+    tests_require=['pytest'],
     zip_safe=True,
     maintainer='space team',
     maintainer_email='todo@example.com',
-    description='Rover command routing and low-level control helpers.',
+    description='Backend-neutral command clipping, mode gate, and watchdog.',
     license='MIT',
     entry_points={
         'console_scripts': [
-            'wheel_motor_driver_node = space_controller.wheel_motor_driver:main',
+            'command_safety_node = space_controller.command_safety:main',
         ],
     },
 )

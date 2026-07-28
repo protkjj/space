@@ -1,37 +1,97 @@
-# ROS 2 워크스페이스
+# ROS 2 workspace
 
-이 워크스페이스는 우주로버 챌린지용 소프트웨어를 작게 시작하기 위한 구조입니다.
+This ROS 2 Jazzy workspace contains the rover's physical description,
+simulation assets, bringup, command safety, perception, and the Phase 1
+ArduPilot interface scaffold.
 
-## 패키지
+The supported baseline is Ubuntu 24.04, ROS 2 Jazzy, and Gazebo Harmonic.
+Exactly the six packages listed below are active.
 
-| 패키지 | 역할 |
+## Packages
+
+| Package | Responsibility |
 | --- | --- |
-| `space_description` | 경량 로버 URDF, Gazebo 플러그인, 시작용 경기장 world |
-| `space_bringup` | 시뮬레이션, bridge, EKF, depth-to-scan, Nav2 launch |
-| `space_controller` | 로버 모드용 휠 명령 게이트 |
-| `space_perception` | 카메라 조종 보조용 depth overlay |
-| `space_px4_interface` | 선택적 PX4 uORB bridge 골격 |
+| `space_description` | Canonical physical links, joints, inertial properties, wheel geometry, and sensor mounting transforms |
+| `space_gazebo` | Gazebo-only wrapper, plugins, friction and sensor configuration, ROS–Gazebo bridge configuration, and worlds |
+| `space_bringup` | System-level simulation and hardware launch orchestration |
+| `space_controller` | Backend-neutral command clipping, mode gate, and stale-command watchdog |
+| `space_perception` | RGB-D operator overlay, measured cloud filtering, and local elevation mapping |
+| `space_ardupilot_interface` | Buildable Phase 1 scaffold for the future ArduPilot DDS adapter |
 
-## 핵심 패키지 빌드
+`space_description` must not depend on `space_gazebo`. Simulation composes the
+canonical physical model by including it from the Gazebo-side wrapper.
 
-PX4 메시지가 아직 준비되지 않았다면 아래처럼 핵심 로버 패키지만 먼저 빌드합니다.
+## Command boundary
 
-```bash
-colcon build --symlink-install \
-  --packages-select space_description space_bringup space_controller space_perception
+The stable Phase 1 command boundary is:
+
+```text
+/cmd_vel_in  geometry_msgs/msg/Twist
+    → command_safety_node
+/cmd_vel_safe geometry_msgs/msg/Twist
+    → selected backend
 ```
 
-PX4 연동 환경까지 준비되면 전체 빌드를 실행합니다.
+The Phase 1 simulator remaps/configures its temporary DiffDrive backend to
+consume `/cmd_vel_safe`. The future ArduPilot adapter will subscribe to
+`/cmd_vel_safe`, validate and stamp the command, and publish
+`geometry_msgs/msg/TwistStamped` on `/ap/cmd_vel`. That adapter is not
+implemented in Phase 1.
+
+## Build and test
 
 ```bash
+source /opt/ros/jazzy/setup.bash
+rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
+colcon test
+colcon test-result --all --verbose
+source install/setup.bash
 ```
 
-## 기본 실행
+The whole workspace should be built together. The old PX4 package and
+`px4_msgs` dependency have been removed; the ArduPilot scaffold does not yet
+require `ardupilot_msgs`.
+
+## Phase 1 simulation
 
 ```bash
 source install/setup.bash
-ros2 launch space_bringup navigation.launch.py
+ros2 launch space_bringup simulation.launch.py
 ```
 
-기본 실행은 primitive URDF 로버와 시작용 경기장 world를 사용합니다. 실제 CAD가 확정되기 전까지는 이 모델로 Nav2, depth camera, 조종 보조, 경로주행 구조를 먼저 검증합니다.
+The simulator still moves the rover through a direct Gazebo DiffDrive plugin.
+This temporary path preserves simulation capability during the refactor and
+does not demonstrate ArduPilot or Pixhawk control.
+
+The default world is `arena_test_slope_v04.sdf`; its generated STL assets must
+first be produced as documented in
+[`../docs/arena_simulation.md`](../docs/arena_simulation.md). Use
+`use_rviz:=false`, `use_perception:=false`, or `use_navigation:=true` to change
+optional launch components. Navigation defaults off until its full graph is
+validated against the arena.
+
+With `use_perception:=true`, the simulation also launches the sensor-derived
+`/camera/points → /terrain/filtered_points → /terrain/elevation_points`
+pipeline and elevation markers. This does not implement traversability,
+hazards, marker recommendation, or Nav2 terrain costs.
+
+## Phase 1 hardware launch
+
+```bash
+source install/setup.bash
+ros2 launch space_bringup hardware.launch.py
+```
+
+This launch is for description and interface inspection only. It must not open
+a serial connection, generate PWM, command RoboClaw directly, or control a
+marker actuator. Until an ArduPilot backend is implemented,
+`/cmd_vel_safe` intentionally has no actuator consumer.
+
+## Milestone boundary
+
+Phase 1 stops at the buildable scaffold and temporary simulation. Milestone A
+will introduce ArduPilot Rover SITL, the official ArduPilot Gazebo plugin, DDS
+state/control, and ArduPilot-authoritative movement. Milestone B will add a
+semantic simulated marker mechanism. See
+[`../docs/simulation_milestones.md`](../docs/simulation_milestones.md).

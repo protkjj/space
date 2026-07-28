@@ -1,0 +1,92 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 32; 36; 42
+    Fixed Frame: odom
+    Frame Rate: 30
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.5
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Frame Timeout: 15
+    - Class: rviz_default_plugins/RobotModel
+      Name: Rover
+      Enabled: true
+      Description Topic:
+        Value: /robot_description
+    - Class: rviz_default_plugins/Odometry
+      Name: Odometry
+      Enabled: true
+      Topic:
+        Value: /odom
+    - Class: rviz_default_plugins/Path
+      Name: Rover Path
+      Enabled: false
+      Topic:
+        Value: /plan
+    - Class: rviz_default_plugins/Marker
+      Name: Arena
+      Enabled: true
+      Topic:
+        Value: /arena/visualization_marker
+    - Class: rviz_default_plugins/Image
+      Name: RGB
+      Enabled: true
+      Topic:
+        Value: /camera/image_raw
+    - Class: rviz_default_plugins/Image
+      Name: Depth
+      Enabled: false
+      Topic:
+        Value: /camera/depth_image_raw
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Point Cloud
+      Enabled: true
+      Topic:
+        Value: /camera/points
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Filtered Terrain
+      Enabled: true
+      Size (Pixels): 3
+      Style: Points
+      Topic:
+        Value: /terrain/filtered_points
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Elevation Points
+      Enabled: true
+      Size (Pixels): 5
+      Style: Points
+      Topic:
+        Value: /terrain/elevation_points
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Elevation Cells
+      Enabled: true
+      Topic:
+        Value: /terrain/elevation_markers
+    - Class: rviz_default_plugins/LaserScan
+      Name: Depth Scan
+      Enabled: false
+      Topic:
+        Value: /scan
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 6
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+Window Geometry:
+  Width: 1280
+  Height: 800

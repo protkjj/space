@@ -1,57 +1,136 @@
 # space
 
-우주로버 챌린지용 경량 스키드스티어 로버 워크스페이스입니다.
+ROS 2 Jazzy workspace for a lightweight four-wheel skid-steer lunar-rover
+challenge prototype.
 
-이 레포는 원본 `protkjj/drobot`에서 필요한 방향만 선별해서 새로 정리한 버전입니다. 원본 레포의 대형 Gazebo 월드, 병원/창고 모델, YOLO 학습 데이터, 드론/변형 로봇 중심 코드는 제외하고, 대회 준비에 필요한 최소 구조만 남겼습니다.
+The current platform target is Ubuntu 24.04, ROS 2 Jazzy, and Gazebo Harmonic.
 
-현재 남긴 핵심 범위는 다음과 같습니다.
+The repository intentionally keeps the first implementation small: a canonical
+physical robot description, a Gazebo simulation, navigation and perception
+configuration, a backend-neutral command-safety boundary, and a buildable
+ArduPilot interface scaffold. Large environment assets, training datasets, and
+unrelated drone or transforming-robot code are outside this repository's scope.
 
-- 4륜 스키드스티어 로버 모델
-- RGB-D 카메라, IMU, 오도메트리 기반 시뮬레이션
-- 물리 LiDAR 없이 depth camera를 `/scan`으로 변환하는 Nav2 구조
-- Nav2 글로벌 플래너 + DWB 로컬 플래너
-- 로버 모드용 휠 명령 게이트
-- Pixhawk/PX4 연동을 위한 최소 bridge 골격
-- 임무 요구조건과 하드웨어 결정을 기록하는 문서
+## Current Phase 1 status
 
-원본 `drobot/` 폴더는 참고용 clone으로 같은 폴더 안에 남겨둘 수 있습니다. 새 repo에서는 `.gitignore`로 제외됩니다.
+Phase 1 is a repository refactor, not an ArduPilot control demonstration. It
+provides:
 
-## 폴더 구조
+- ROS 2 Jazzy package and documentation cleanup
+- a simulation-independent physical model in `space_description`
+- Gazebo-only assets and extensions in `space_gazebo`
+- separate simulation and hardware bringup entry points
+- command clipping, mode gating, and a stale-command watchdog in
+  `space_controller`
+- a buildable `space_ardupilot_interface` scaffold with no fabricated backend
+- ArduPilot firmware/version documentation without guessed parameter files
+- a CAD-backed arena pipeline and RViz workflow (mesh generation requires
+  FreeCAD; see [`docs/arena_simulation.md`](docs/arena_simulation.md))
+- a sensor-derived local elevation prototype using the simulated RGB-D point
+  cloud; see [`docs/terrain_perception.md`](docs/terrain_perception.md)
+
+The Phase 1 Gazebo simulation still uses a temporary direct DiffDrive backend:
+
+```text
+/cmd_vel_in → command_safety_node → /cmd_vel_safe → Gazebo DiffDrive
+```
+
+This path exists only to preserve a working simulation during the refactor. It
+does **not** represent or validate the final Pixhawk/ArduPilot control path.
+
+## Baseline real drivetrain
+
+The current baseline, pending bench validation, is:
+
+```text
+Jetson ROS 2
+  → Pixhawk 6X running ArduPilot Rover
+  → left/right throttle outputs
+  → RoboClaw motor controller in RC/PWM mode
+  → left/right motor groups
+```
+
+Phase 1 does not include a Jetson-side RoboClaw packet-serial driver, serial
+connection, PWM generation, or operational ArduPilot hardware adapter. See
+[`hardware/drivetrain/README.md`](hardware/drivetrain/README.md) for the required
+bench checks.
+
+## Repository layout
 
 ```text
 space/
-├── docs/                  # 요구조건, 레포 범위, 설계 결정 문서
-├── hardware/              # 구동계/전원 설계 메모
-├── firmware/              # 향후 실기 펌웨어 자리
+├── docs/                         # architecture, scope, requirements, milestones
+├── firmware/
+│   └── ardupilot/                # version and validated-export policy
+├── hardware/                     # drivetrain and power design notes
 └── ros2_ws/
     └── src/
-        ├── space_description/     # 로버 URDF, Gazebo 플러그인, 기본 경기장
-        ├── space_bringup/         # launch, bridge, EKF, SLAM, Nav2 설정
-        ├── space_controller/      # /cmd_vel 게이트 및 휠 제어 골격
-        ├── space_perception/      # depth 기반 조종 보조 overlay
-        └── space_px4_interface/   # PX4 연동 골격
+        ├── space_description/    # canonical physical URDF/Xacro
+        ├── space_gazebo/         # Gazebo-only wrapper, plugins, bridge, world
+        ├── space_bringup/        # simulation and hardware orchestration
+        ├── space_controller/     # backend-neutral command safety/watchdog
+        ├── space_perception/     # depth-based operator overlay
+        └── space_ardupilot_interface/ # Phase 1 buildable scaffold
 ```
 
-## 빌드
+The dependency direction is one-way:
+
+```text
+space_gazebo → space_description
+space_description ↛ space_gazebo
+```
+
+The canonical physical Xacro must therefore expand without `space_gazebo`
+installed or sourced.
+
+## Build and test
 
 ```bash
+source /opt/ros/jazzy/setup.bash
 cd ros2_ws
+rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
+colcon test
+colcon test-result --all --verbose
 source install/setup.bash
 ```
 
-`space_px4_interface`는 `px4_msgs`가 필요합니다. PX4 환경이 아직 없다면 우선 로버 핵심 패키지만 빌드합니다.
+No `px4_msgs` exclusion or optional PX4 build is required after Phase 1. The
+ArduPilot package is currently a scaffold and deliberately does not depend on
+`ardupilot_msgs` until implementation code actually uses it.
+
+## Launch
+
+Temporary Phase 1 simulation:
 
 ```bash
-colcon build --symlink-install \
-  --packages-select space_description space_bringup space_controller space_perception
+source ros2_ws/install/setup.bash
+ros2 launch space_bringup simulation.launch.py
 ```
 
-## 시뮬레이션 실행
+Hardware-interface inspection only:
 
 ```bash
-source install/setup.bash
-ros2 launch space_bringup navigation.launch.py
+source ros2_ws/install/setup.bash
+ros2 launch space_bringup hardware.launch.py
 ```
 
-현재 경기장 world는 2.4 m 암석 구간, 3 m 모래 구간, 경사 구간을 표현하기 위한 시작점입니다. 실제 단차 높이, 경사각, 입자 깊이/입도 정보가 확정되면 이 world를 대회 조건에 맞게 다시 모델링합니다.
+The hardware launch is not operational rover control in Phase 1. The ArduPilot
+hardware adapter is not implemented, and `/cmd_vel_safe` intentionally has no
+actuator consumer when the safety node is enabled without a backend.
+
+## Project milestones
+
+- **Phase 1:** repository cleanup, Gazebo asset separation, temporary direct
+  Gazebo movement, command watchdog, and a buildable ArduPilot scaffold.
+- **Milestone A:** ArduPilot Rover SITL, the ArduPilot Gazebo plugin, DDS state
+  and control, ArduPilot-authoritative movement, valid TF/odometry, IMU and
+  RGB-D streams, and verified stale-command stopping.
+- **Milestone B:** a semantic `DeployMarker` action, simulated marker mechanism,
+  status and verification, and a shared simulation/hardware semantic API.
+
+Neither Milestone A nor Milestone B is complete. Detailed acceptance criteria
+are in [`docs/simulation_milestones.md`](docs/simulation_milestones.md).
+Traversability and marker selection remain future sensor-driven work.
+Elevation mapping is implemented, but traversability scoring, hazard
+identification, marker recommendation, and Nav2 terrain costs are not.
