@@ -1,16 +1,77 @@
 #!/usr/bin/env python3
 """Launch the arena baseline and optional perception/navigation components."""
 
+import math
 import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, LogInfo
+from launch.actions import (
+    DeclareLaunchArgument,
+    IncludeLaunchDescription,
+    LogInfo,
+    OpaqueFunction,
+)
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from nav2_common.launch import RewrittenYaml
+
+
+# RViz cannot render the Gazebo world directly, so arena_marker_publisher draws
+# the ground-truth arena as a mesh marker. Each world needs the transform that
+# matches how its model.sdf places the mesh (STEP-derived slope is in mm and
+# rotated; the terrain STL is already in metres and axis-aligned).
+ARENA_MARKER_PRESETS = {
+    'arena_test_slope_v04': {
+        'mesh_resource': (
+            'package://space_gazebo/models/arena_test_slope_v04/'
+            'meshes/arena_visual.stl'
+        ),
+        'scale': [0.001, 0.001, 0.001],
+        'position': [-0.8, -2.0, 0.0],
+        'orientation_rpy': [math.pi / 2.0, 0.0, 0.0],
+    },
+    'arena_terrain_v04': {
+        'mesh_resource': (
+            'package://space_gazebo/models/arena_terrain_v04/'
+            'meshes/arena_visual.stl'
+        ),
+        'scale': [1.0, 1.0, 1.0],
+        'position': [0.0, 0.0, 0.0],
+        'orientation_rpy': [0.0, 0.0, 0.0],
+    },
+}
+
+
+def _arena_marker_node(context, *args, **kwargs):
+    """Pick the arena marker preset that matches the launched world."""
+    world = LaunchConfiguration('world').perform(context)
+    key = os.path.splitext(os.path.basename(world))[0]
+    preset = ARENA_MARKER_PRESETS.get(key)
+    if preset is None:
+        # Unknown world: assume a same-named model whose mesh is already in
+        # metres and axis-aligned (the convention new arenas should follow).
+        preset = {
+            'mesh_resource': (
+                f'package://space_gazebo/models/{key}/meshes/arena_visual.stl'
+            ),
+            'scale': [1.0, 1.0, 1.0],
+            'position': [0.0, 0.0, 0.0],
+            'orientation_rpy': [0.0, 0.0, 0.0],
+        }
+    return [
+        Node(
+            package='space_gazebo',
+            executable='arena_marker_publisher',
+            output='screen',
+            parameters=[
+                {'use_sim_time': LaunchConfiguration('use_sim_time')},
+                preset,
+            ],
+        )
+    ]
 
 
 def generate_launch_description():
@@ -184,12 +245,7 @@ def generate_launch_description():
                     {'use_sim_time': use_sim_time},
                 ],
             ),
-            Node(
-                package='space_gazebo',
-                executable='arena_marker_publisher',
-                output='screen',
-                parameters=[{'use_sim_time': use_sim_time}],
-            ),
+            OpaqueFunction(function=_arena_marker_node),
             Node(
                 package='depthimage_to_laserscan',
                 executable='depthimage_to_laserscan_node',

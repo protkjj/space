@@ -29,3 +29,7 @@ Desktop.ini
 *.pt
 *.onnx
 *.engine
+
+# Session artifacts not meant for the repo
+Screenshot*.png
+/arena_terrain_v04_resend_02.stl

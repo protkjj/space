@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="arena_terrain_v04">
+    <static>true</static>
+    <!-- Mesh is already in metres, Z-up and centred at the origin, so no
+         scale or rotation is required (unlike the STEP-derived slope). -->
+    <pose>0 0 0 0 0 0</pose>
+    <link name="terrain">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://arena_terrain_v04/meshes/arena_collision.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.9</mu><mu2>0.7</mu2></ode>
+          </friction>
+          <contact><ode><kp>1000000</kp><kd>100</kd></ode></contact>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://arena_terrain_v04/meshes/arena_visual.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.55 0.50 0.40 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
