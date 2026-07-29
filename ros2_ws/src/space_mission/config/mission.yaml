@@ -1,0 +1,8 @@
+mission_traversability_fusion:
+  ros__parameters:
+    use_sim_time: true
+    elevation_topic: /terrain/elevation_points
+    feature_topic: /terrain/features
+    visual_traversability_topic: /terrain/traversability
+    output_topic: /mission/traversability
+    diagnostics_topic: /mission/diagnostics

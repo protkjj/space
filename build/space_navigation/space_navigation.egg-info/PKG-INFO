@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: space-navigation
+Version: 0.1.0
+Summary: Point-and-click autonomous navigation for the space rover.
+Maintainer: space team
+Maintainer-email: todo@example.com
+License: MIT

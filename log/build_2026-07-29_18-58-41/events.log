@@ -1,0 +1,223 @@
+[0.000000] (-) TimerEvent: {}
+[0.000220] (-) JobUnselected: {'identifier': 'space_ardupilot_interface'}
+[0.000290] (-) JobUnselected: {'identifier': 'space_bringup'}
+[0.000554] (-) JobUnselected: {'identifier': 'space_controller'}
+[0.000852] (-) JobUnselected: {'identifier': 'space_description'}
+[0.000892] (-) JobUnselected: {'identifier': 'space_perception'}
+[0.000929] (space_gazebo) JobQueued: {'identifier': 'space_gazebo', 'dependencies': OrderedDict({'space_description': '/home/kms301111/Desktop/space/install/space_description'})}
+[0.000979] (space_gazebo) JobStarted: {'identifier': 'space_gazebo'}
+[0.019885] (space_gazebo) JobProgress: {'identifier': 'space_gazebo', 'progress': 'cmake'}
+[0.022627] (space_gazebo) JobProgress: {'identifier': 'space_gazebo', 'progress': 'build'}
+[0.022741] (space_gazebo) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/kms301111/Desktop/space/build/space_gazebo', '--', '-j12', '-l12'], 'cwd': '/home/kms301111/Desktop/space/build/space_gazebo', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'VSCODE_CWD': '/home/kms301111', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'CODEX_CI': '1', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'kms301111', 'CODEX_INTERNAL_ORIGINATOR_OVERRIDE': 'codex_vscode', 'VSCODE_NLS_CONFIG': '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'wayland', 'DEBUG': 'release', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '0', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/kms301111', 'CHROME_DESKTOP': 'code.desktop', 'DESKTOP_SESSION': 'ubuntu', 'NVM_BIN': '/home/kms301111/.nvm/versions/node/v24.13.1/bin', 'NVM_INC': '/home/kms301111/.nvm/versions/node/v24.13.1/include/node', 'VSCODE_IPC_HOOK': '/run/user/1000/vscode-90e2a958-1.10-main.sock', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1971', 'LC_CTYPE': 'C.UTF-8', 'SYSTEMD_EXEC_PID': '2232', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'NO_COLOR': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': '', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '2963', 'NVM_DIR': '/home/kms301111/.nvm', 'VSCODE_CRASH_REPORTER_PROCESS_TYPE': 'extensionHost', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'CODEX_PERMISSION_PROFILE': ':workspace', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'kms301111', 'JOURNAL_STREAM': '10:21911', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'RUST_LOG': 'warn', 'USERNAME': 'kms301111', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'PATH': '/home/kms301111/.local/bin:/home/kms301111/.local/bin:/home/kms301111/.codex/tmp/arg0/codex-arg0LgPDgp:/home/kms301111/.local/bin:/home/kms301111/.nvm/versions/node/v24.13.1/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/kms301111/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/xtensa-esp-elf/bin/:/home/kms301111/.vscode/extensions/openai.chatgpt-26.721.41059-linux-x64/bin/linux-x86_64', 'SESSION_MANAGER': 'local/humxn:@/tmp/.ICE-unix/2189,unix/humxn:/tmp/.ICE-unix/2189', 'INVOCATION_ID': 'da26f052a80a4d3b912ce3f0923b9bba', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'CODEX_SANDBOX_NETWORK_DISABLED': '1', 'LANG': 'C.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'GH_PAGER': 'cat', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.R7UYS3', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'ELECTRON_RUN_AS_NODE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CODEX_THREAD_ID': '019fad3c-11aa-7223-ae3d-8ed834540e75', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/kms301111/Desktop/space/build/space_gazebo', 'LC_ALL': 'C.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'VSCODE_CODE_CACHE_PATH': '/home/kms301111/.config/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'QTWEBENGINE_DICTIONARIES_PATH': '/usr/share/hunspell-bdic/', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy', 'VSCODE_PID': '2963'}), 'shell': False}
+[0.078905] (space_gazebo) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[0.099463] (-) TimerEvent: {}
+[0.199889] (-) TimerEvent: {}
+[0.300226] (-) TimerEvent: {}
+[0.400585] (-) TimerEvent: {}
+[0.501044] (-) TimerEvent: {}
+[0.577522] (space_gazebo) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.593337] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-gui8 -- found version 8.4.0\n'}
+[0.601223] (-) TimerEvent: {}
+[0.614029] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-gui8\n'}
+[0.688132] (space_gazebo) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[0.701527] (-) TimerEvent: {}
+[0.731406] (space_gazebo) StdoutLine: {'line': b'--   Found tinyxml2, version 10.0.0\n'}
+[0.801783] (-) TimerEvent: {}
+[0.824486] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[0.824996] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[0.827262] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[0.828095] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[0.828893] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[0.832378] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[0.833271] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[0.834089] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[0.834751] (space_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[0.835347] (space_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[0.853982] (space_gazebo) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[0.886368] (space_gazebo) StdoutLine: {'line': b'--   Found uuid, version 2.39.3\n'}
+[0.901967] (-) TimerEvent: {}
+[0.971223] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [profiler]\n'}
+[0.971892] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-profiler -- found version 5.7.1\n'}
+[0.972521] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-profiler\n'}
+[0.974488] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[0.975329] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[0.975626] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[0.976019] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[0.976452] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-utils2> component [cli]\n'}
+[0.976714] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2-cli -- found version 2.2.1\n'}
+[0.976946] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2-cli\n'}
+[0.978455] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [loader]\n'}
+[0.979677] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2-loader -- found version 2.0.4\n'}
+[0.980586] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-loader\n'}
+[0.981497] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [register]\n'}
+[0.982829] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2-register -- found version 2.0.4\n'}
+[0.983722] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-register\n'}
+[0.985815] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[0.986639] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13\n'}
+[1.002164] (-) TimerEvent: {}
+[1.075068] (space_gazebo) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[1.088063] (space_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[1.102391] (-) TimerEvent: {}
+[1.126414] (space_gazebo) StdoutLine: {'line': b'--   Found libzmq, version 4.3.5\n'}
+[1.202612] (-) TimerEvent: {}
+[1.251866] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[1.252785] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[1.253352] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-msgs10\n'}
+[1.295779] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[1.296392] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[1.302680] (-) TimerEvent: {}
+[1.310093] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.3\n'}
+[1.310513] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-rendering8\n'}
+[1.311224] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[1.311588] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[1.312023] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[1.312443] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-math7> component [eigen3]\n'}
+[1.313846] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7-eigen3 -- found version 7.5.2\n'}
+[1.314158] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7-eigen3\n'}
+[1.318917] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[1.319688] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[1.320377] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[1.321085] (space_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[1.321410] (space_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[1.342150] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[1.343121] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-graphics -- found version 5.7.1\n'}
+[1.343701] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-graphics\n'}
+[1.345142] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[1.352985] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[1.354061] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-events -- found version 5.7.1\n'}
+[1.354772] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-events\n'}
+[1.355545] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[1.357029] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-common5> component [geospatial]\n'}
+[1.358282] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5-geospatial -- found version 5.7.1\n'}
+[1.358935] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-geospatial\n'}
+[1.359576] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.2\n'}
+[1.360787] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.1\n'}
+[1.364423] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[1.367087] (space_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[1.367426] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[1.368278] (space_gazebo) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [all]\n'}
+[1.368432] (space_gazebo) StdoutLine: {'line': b'-- Looking for all libraries of gz-plugin2 -- found version 2.0.4\n'}
+[1.369562] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[1.373264] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[1.384695] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[1.402849] (-) TimerEvent: {}
+[1.428799] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[1.429413] (space_gazebo) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[1.432905] (space_gazebo) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.17.4 (/opt/ros/jazzy/share/ament_lint_auto/cmake)\n'}
+[1.503107] (-) TimerEvent: {}
+[1.569944] (space_gazebo) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[1.570345] (space_gazebo) StdoutLine: {'line': b'-- Configured cppcheck include dirs: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include\n'}
+[1.570567] (space_gazebo) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[1.572976] (space_gazebo) StdoutLine: {'line': b"-- Added test 'cpplint' to check C / C++ code against the Google style\n"}
+[1.573415] (space_gazebo) StdoutLine: {'line': b'-- Configured cpplint exclude dirs and/or files: \n'}
+[1.573952] (space_gazebo) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[1.574350] (space_gazebo) StdoutLine: {'line': b"-- Configured 'flake8' exclude dirs and/or files: \n"}
+[1.575132] (space_gazebo) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[1.576277] (space_gazebo) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[1.580504] (space_gazebo) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[1.581043] (space_gazebo) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[1.581440] (space_gazebo) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[1.583252] (space_gazebo) StdoutLine: {'line': b'-- Configuring done (1.5s)\n'}
+[1.603392] (-) TimerEvent: {}
+[1.609931] (space_gazebo) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[1.615971] (space_gazebo) StdoutLine: {'line': b'-- Build files have been written to: /home/kms301111/Desktop/space/build/space_gazebo\n'}
+[1.701873] (space_gazebo) StdoutLine: {'line': b'[  0%] Built target RoverKeyTeleop_autogen_timestamp_deps\n'}
+[1.703496] (-) TimerEvent: {}
+[1.755248] (space_gazebo) StdoutLine: {'line': b'[ 14%] Automatic MOC for target RoverKeyTeleop\n'}
+[1.803702] (-) TimerEvent: {}
+[1.904137] (-) TimerEvent: {}
+[2.004525] (-) TimerEvent: {}
+[2.104923] (-) TimerEvent: {}
+[2.205328] (-) TimerEvent: {}
+[2.305781] (-) TimerEvent: {}
+[2.315107] (space_gazebo) StdoutLine: {'line': b'[ 14%] Built target RoverKeyTeleop_autogen\n'}
+[2.384170] (space_gazebo) StdoutLine: {'line': b'[ 28%] Building CXX object CMakeFiles/RoverKeyTeleop.dir/RoverKeyTeleop_autogen/mocs_compilation.cpp.o\n'}
+[2.405958] (-) TimerEvent: {}
+[2.506248] (-) TimerEvent: {}
+[2.606660] (-) TimerEvent: {}
+[2.707069] (-) TimerEvent: {}
+[2.807459] (-) TimerEvent: {}
+[2.907756] (-) TimerEvent: {}
+[3.008077] (-) TimerEvent: {}
+[3.108385] (-) TimerEvent: {}
+[3.208794] (-) TimerEvent: {}
+[3.309071] (-) TimerEvent: {}
+[3.409386] (-) TimerEvent: {}
+[3.509692] (-) TimerEvent: {}
+[3.609968] (-) TimerEvent: {}
+[3.710307] (-) TimerEvent: {}
+[3.810651] (-) TimerEvent: {}
+[3.910928] (-) TimerEvent: {}
+[4.011201] (-) TimerEvent: {}
+[4.111540] (-) TimerEvent: {}
+[4.211840] (-) TimerEvent: {}
+[4.312125] (-) TimerEvent: {}
+[4.412474] (-) TimerEvent: {}
+[4.512771] (-) TimerEvent: {}
+[4.613054] (-) TimerEvent: {}
+[4.713371] (-) TimerEvent: {}
+[4.813799] (-) TimerEvent: {}
+[4.914097] (-) TimerEvent: {}
+[5.014397] (-) TimerEvent: {}
+[5.114781] (-) TimerEvent: {}
+[5.215072] (-) TimerEvent: {}
+[5.315387] (-) TimerEvent: {}
+[5.415726] (-) TimerEvent: {}
+[5.516029] (-) TimerEvent: {}
+[5.616342] (-) TimerEvent: {}
+[5.716797] (-) TimerEvent: {}
+[5.817097] (-) TimerEvent: {}
+[5.833791] (space_gazebo) StdoutLine: {'line': b'[ 42%] Linking CXX shared library libRoverKeyTeleop.so\n'}
+[5.917246] (-) TimerEvent: {}
+[6.017687] (-) TimerEvent: {}
+[6.117981] (-) TimerEvent: {}
+[6.178554] (space_gazebo) StdoutLine: {'line': b'[100%] Built target RoverKeyTeleop\n'}
+[6.203819] (space_gazebo) CommandEnded: {'returncode': 0}
+[6.205618] (space_gazebo) JobProgress: {'identifier': 'space_gazebo', 'progress': 'install'}
+[6.218170] (-) TimerEvent: {}
+[6.229261] (space_gazebo) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/kms301111/Desktop/space/build/space_gazebo'], 'cwd': '/home/kms301111/Desktop/space/build/space_gazebo', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'VSCODE_CWD': '/home/kms301111', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'CODEX_CI': '1', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'kms301111', 'CODEX_INTERNAL_ORIGINATOR_OVERRIDE': 'codex_vscode', 'VSCODE_NLS_CONFIG': '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'wayland', 'DEBUG': 'release', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '0', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/kms301111', 'CHROME_DESKTOP': 'code.desktop', 'DESKTOP_SESSION': 'ubuntu', 'NVM_BIN': '/home/kms301111/.nvm/versions/node/v24.13.1/bin', 'NVM_INC': '/home/kms301111/.nvm/versions/node/v24.13.1/include/node', 'VSCODE_IPC_HOOK': '/run/user/1000/vscode-90e2a958-1.10-main.sock', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1971', 'LC_CTYPE': 'C.UTF-8', 'SYSTEMD_EXEC_PID': '2232', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'NO_COLOR': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': '', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '2963', 'NVM_DIR': '/home/kms301111/.nvm', 'VSCODE_CRASH_REPORTER_PROCESS_TYPE': 'extensionHost', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'CODEX_PERMISSION_PROFILE': ':workspace', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'kms301111', 'JOURNAL_STREAM': '10:21911', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'RUST_LOG': 'warn', 'USERNAME': 'kms301111', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'PATH': '/home/kms301111/.local/bin:/home/kms301111/.local/bin:/home/kms301111/.codex/tmp/arg0/codex-arg0LgPDgp:/home/kms301111/.local/bin:/home/kms301111/.nvm/versions/node/v24.13.1/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/kms301111/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/xtensa-esp-elf/bin/:/home/kms301111/.vscode/extensions/openai.chatgpt-26.721.41059-linux-x64/bin/linux-x86_64', 'SESSION_MANAGER': 'local/humxn:@/tmp/.ICE-unix/2189,unix/humxn:/tmp/.ICE-unix/2189', 'INVOCATION_ID': 'da26f052a80a4d3b912ce3f0923b9bba', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'CODEX_SANDBOX_NETWORK_DISABLED': '1', 'LANG': 'C.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'GH_PAGER': 'cat', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.R7UYS3', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'ELECTRON_RUN_AS_NODE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CODEX_THREAD_ID': '019fad3c-11aa-7223-ae3d-8ed834540e75', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/kms301111/Desktop/space/build/space_gazebo', 'LC_ALL': 'C.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'VSCODE_CODE_CACHE_PATH': '/home/kms301111/.config/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'QTWEBENGINE_DICTIONARIES_PATH': '/usr/share/hunspell-bdic/', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy', 'VSCODE_PID': '2963'}), 'shell': False}
+[6.246830] (space_gazebo) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[6.247958] (space_gazebo) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[6.248911] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/assets/source_cad/arena_test_slope_v04.stp\n'}
+[6.249762] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/config/arena_test_slope_v04.yaml\n'}
+[6.250452] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/config/ros_gz_bridge.yaml\n'}
+[6.250771] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/config/rover_gui.config\n'}
+[6.251437] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/launch/__pycache__/gazebo.launch.cpython-312.pyc\n'}
+[6.251869] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/launch/gazebo.launch.py\n'}
+[6.252763] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_flat/meshes/arena_visual.stl\n'}
+[6.253940] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_terrain_v04/meshes/arena_collision.stl\n'}
+[6.254347] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_terrain_v04/meshes/arena_visual.stl\n'}
+[6.254706] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_terrain_v04/model.config\n'}
+[6.255008] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_terrain_v04/model.sdf\n'}
+[6.255284] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_test_slope_v04/meshes/arena_collision.stl\n'}
+[6.255584] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_test_slope_v04/meshes/arena_visual.stl\n'}
+[6.256003] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_test_slope_v04/model.config\n'}
+[6.256305] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/models/arena_test_slope_v04/model.sdf\n'}
+[6.258112] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/urdf/gazebo_extensions.xacro\n'}
+[6.259422] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/urdf/space_rover.gazebo.urdf.xacro\n'}
+[6.259738] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/worlds/arena_flat.sdf\n'}
+[6.259972] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/worlds/arena_terrain_v04.sdf\n'}
+[6.260180] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/worlds/arena_test_slope_v04.sdf\n'}
+[6.260468] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/worlds/space_challenge_empty.sdf\n'}
+[6.260746] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/lib/libRoverKeyTeleop.so\n'}
+[6.261245] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/tools/convert_arena_step.py\n'}
+[6.261870] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/ament_index/resource_index/package_run_dependencies/space_gazebo\n'}
+[6.262419] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/ament_index/resource_index/parent_prefix_path/space_gazebo\n'}
+[6.262946] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/environment/ament_prefix_path.sh\n'}
+[6.263446] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/environment/ament_prefix_path.dsv\n'}
+[6.264083] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/environment/path.sh\n'}
+[6.264552] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/environment/path.dsv\n'}
+[6.264735] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/local_setup.bash\n'}
+[6.265227] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/local_setup.sh\n'}
+[6.265719] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/local_setup.zsh\n'}
+[6.265879] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/local_setup.dsv\n'}
+[6.266033] (space_gazebo) StdoutLine: {'line': b'-- Symlinking: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/package.dsv\n'}
+[6.290899] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/ament_index/resource_index/packages/space_gazebo\n'}
+[6.291507] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/cmake/space_gazeboConfig.cmake\n'}
+[6.291700] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/cmake/space_gazeboConfig-version.cmake\n'}
+[6.292177] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date symlink: /home/kms301111/Desktop/space/install/space_gazebo/share/space_gazebo/package.xml\n'}
+[6.292640] (space_gazebo) StdoutLine: {'line': b'-- Up-to-date: /home/kms301111/Desktop/space/install/space_gazebo/lib/space_gazebo/arena_marker_publisher\n'}
+[6.297262] (space_gazebo) CommandEnded: {'returncode': 0}
+[6.321396] (-) TimerEvent: {}
+[6.342767] (space_gazebo) JobEnded: {'identifier': 'space_gazebo', 'rc': 0}
+[6.344139] (-) EventReactorShutdown: {}

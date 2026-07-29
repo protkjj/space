@@ -1,0 +1,8 @@
+-- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+ - /opt/ros/jazzy/bin/ament_cppcheck --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml --include_dirs /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include
+
+cppcheck 2.13.0 has known performance issues and therefore will not be used, set the AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS environment variable to override this.
+
+
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml'

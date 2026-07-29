@@ -1,0 +1,95 @@
+[0.329s] Invoking command in '/home/kms301111/Desktop/space/ros2_ws/src/space_navigation': AMENT_PREFIX_PATH=/home/kms301111/Desktop/space/install/space_navigation:/home/kms301111/Desktop/space/install/space_bringup:/home/kms301111/Desktop/space/install/space_controller:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_ardupilot_interface:/opt/ros/jazzy CMAKE_PREFIX_PATH=/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kms301111/Desktop/space/install/space_gazebo/lib:/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib PYTEST_ADDOPTS=--tb=short --junit-xml=/home/kms301111/Desktop/space/build/space_navigation/pytest.xml --junit-prefix=space_navigation -o cache_dir=/home/kms301111/Desktop/space/build/space_navigation/.pytest_cache PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 -m pytest
+[0.918s] ============================= test session starts ==============================
+[0.919s] platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[0.919s] cachedir: /home/kms301111/Desktop/space/build/space_navigation/.pytest_cache
+[0.919s] rootdir: /home/kms301111/Desktop/space/ros2_ws/src/space_navigation
+[0.919s] plugins: ament-lint-0.17.4, ament-pep257-0.17.4, ament-flake8-0.17.4, launch-testing-ros-0.26.11, ament-xmllint-0.17.4, launch-testing-3.4.10, ament-copyright-0.17.4, typeguard-4.1.5, colcon-core-0.20.1, cov-4.1.0
+[0.919s] collected 5 items
+[0.920s] 
+[1.182s] test/test_flake8.py F                                                    [ 20%]
+[1.186s] test/test_navigation_math.py ...                                         [ 80%]
+[1.246s] test/test_pep257.py .                                                    [100%]
+[1.247s] 
+[1.247s] =================================== FAILURES ===================================
+[1.247s] _________________________________ test_flake8 __________________________________
+[1.247s] test/test_flake8.py:12: in test_flake8
+[1.247s]     assert return_code == 0, (
+[1.247s] E   AssertionError: Found 10 code style errors / warnings:
+[1.247s] E     ./launch/navigation.launch.py:96:1: W391 blank line at end of file
+[1.247s] E     ./setup.py:46:1: W391 blank line at end of file
+[1.247s] E     ./space_navigation/__init__.py:2:1: W391 blank line at end of file
+[1.247s] E     ./space_navigation/goal_navigator.py:15:1: I100 Import statements are in the wrong order. 'from space_navigation.navigation_math import is_finite_pose' should be before 'from std_msgs.msg import String'
+[1.247s] E     ./space_navigation/goal_navigator.py:202:1: W391 blank line at end of file
+[1.247s] E     ./space_navigation/navigation_math.py:23:1: W391 blank line at end of file
+[1.247s] E     ./space_navigation/send_goal.py:70:1: W391 blank line at end of file
+[1.247s] E     ./test/test_flake8.py:16:1: W391 blank line at end of file
+[1.248s] E     ./test/test_navigation_math.py:30:1: W391 blank line at end of file
+[1.248s] E     ./test/test_pep257.py:12:1: W391 blank line at end of file
+[1.248s] E   assert 1 == 0
+[1.248s] ----------------------------- Captured stdout call -----------------------------
+[1.248s] 
+[1.248s] ./launch/navigation.launch.py:96:1: W391 blank line at end of file
+[1.248s] 
+[1.248s] ^
+[1.248s] 
+[1.248s] ./setup.py:46:1: W391 blank line at end of file
+[1.249s] 
+[1.249s] ^
+[1.249s] 
+[1.250s] ./space_navigation/__init__.py:2:1: W391 blank line at end of file
+[1.250s] 
+[1.250s] ^
+[1.251s] 
+[1.251s] ./space_navigation/goal_navigator.py:15:1: I100 Import statements are in the wrong order. 'from space_navigation.navigation_math import is_finite_pose' should be before 'from std_msgs.msg import String'
+[1.251s] from space_navigation.navigation_math import is_finite_pose
+[1.252s] ^
+[1.252s] 
+[1.252s] ./space_navigation/goal_navigator.py:202:1: W391 blank line at end of file
+[1.253s] 
+[1.253s] ^
+[1.253s] 
+[1.254s] ./space_navigation/navigation_math.py:23:1: W391 blank line at end of file
+[1.254s] 
+[1.254s] ^
+[1.255s] 
+[1.255s] ./space_navigation/send_goal.py:70:1: W391 blank line at end of file
+[1.255s] 
+[1.256s] ^
+[1.256s] 
+[1.256s] ./test/test_flake8.py:16:1: W391 blank line at end of file
+[1.257s] 
+[1.257s] ^
+[1.257s] 
+[1.258s] ./test/test_navigation_math.py:30:1: W391 blank line at end of file
+[1.258s] 
+[1.258s] ^
+[1.259s] 
+[1.259s] ./test/test_pep257.py:12:1: W391 blank line at end of file
+[1.259s] 
+[1.260s] ^
+[1.260s] 
+[1.260s] 1     I100 Import statements are in the wrong order. 'from space_navigation.navigation_math import is_finite_pose' should be before 'from std_msgs.msg import String'
+[1.261s] 9     W391 blank line at end of file
+[1.261s] 
+[1.261s] 9 files checked
+[1.262s] 10 errors
+[1.262s] 
+[1.262s] 'I'-type errors: 1
+[1.263s] 'W'-type errors: 9
+[1.263s] 
+[1.263s] Checked files:
+[1.264s] 
+[1.264s] * ./setup.py
+[1.264s] * ./space_navigation/__init__.py
+[1.264s] * ./space_navigation/navigation_math.py
+[1.265s] * ./space_navigation/send_goal.py
+[1.265s] * ./space_navigation/goal_navigator.py
+[1.265s] * ./test/test_pep257.py
+[1.266s] * ./test/test_flake8.py
+[1.266s] * ./test/test_navigation_math.py
+[1.267s] * ./launch/navigation.launch.py
+[1.267s] - generated xml file: /home/kms301111/Desktop/space/build/space_navigation/pytest.xml -
+[1.267s] =========================== short test summary info ============================
+[1.267s] FAILED test/test_flake8.py::test_flake8 - AssertionError: Found 10 code style...
+[1.268s] ========================= 1 failed, 4 passed in 0.42s ==========================
+[1.401s] Invoked command in '/home/kms301111/Desktop/space/ros2_ws/src/space_navigation' returned '1': AMENT_PREFIX_PATH=/home/kms301111/Desktop/space/install/space_navigation:/home/kms301111/Desktop/space/install/space_bringup:/home/kms301111/Desktop/space/install/space_controller:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_ardupilot_interface:/opt/ros/jazzy CMAKE_PREFIX_PATH=/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kms301111/Desktop/space/install/space_gazebo/lib:/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib PYTEST_ADDOPTS=--tb=short --junit-xml=/home/kms301111/Desktop/space/build/space_navigation/pytest.xml --junit-prefix=space_navigation -o cache_dir=/home/kms301111/Desktop/space/build/space_navigation/.pytest_cache PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 -m pytest

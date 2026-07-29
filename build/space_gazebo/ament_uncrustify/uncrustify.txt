@@ -1,0 +1,12 @@
+-- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+ - /opt/ros/jazzy/bin/ament_uncrustify --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml
+
+No code style divergence in file 'include/space_gazebo/rover_key_teleop.hpp'
+
+No code style divergence in file 'src/rover_key_teleop.cpp'
+
+No problems found
+
+
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml'

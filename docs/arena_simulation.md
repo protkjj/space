@@ -69,11 +69,13 @@ source install/setup.bash
 ros2 launch space_bringup simulation.launch.py
 ```
 
-The default world contains the CAD floor and therefore adds no ground plane.
-The spawn is `(-1.2, -1.6, 0.12, yaw 0)`. Mesh intersection measures the
-starting surface top at 0.10 m. The rover wheel bottom is −0.005 m relative to
-`base_footprint`, so this starts 0.015 m above contact and settles under
-physics.
+The CAD slope world can be selected explicitly with
+`world:=arena_test_slope_v04.sdf`; it contains the CAD floor and therefore adds
+no ground plane. When using that world, pass `spawn_z:=0.12`. Mesh intersection
+measures its starting surface top at 0.10 m. The rover wheel bottom is −0.005 m
+relative to `base_footprint`, so a 0.12 m spawn starts 0.015 m above contact and
+settles under physics. The simulation default is now `arena_terrain_v04.sdf`
+with `spawn_z:=0.23`.
 
 RViz starts by default with fixed frame `odom`. To run it separately:
 

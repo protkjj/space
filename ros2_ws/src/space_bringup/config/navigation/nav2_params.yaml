@@ -1,7 +1,9 @@
 bt_navigator:
   ros__parameters:
     use_sim_time: true
-    global_frame: map
+    # Gazebo odom is the absolute simulation frame. Keeping navigation in
+    # odom prevents an online SLAM map correction from moving an accepted goal.
+    global_frame: odom
     robot_base_frame: base_footprint
     odom_topic: /odom
     navigators: ["navigate_to_pose"]
@@ -103,7 +105,7 @@ local_costmap:
       traversability_layer:
         plugin: "space_perception::TraversabilityLayer"
         enabled: true
-        input_topic: /terrain/traversability
+        input_topic: /mission/traversability
         maximum_input_age: 1.0
         drop_stale_input: true
         cost_min: 1
@@ -125,7 +127,7 @@ global_costmap:
   global_costmap:
     ros__parameters:
       use_sim_time: true
-      global_frame: map
+      global_frame: odom
       robot_base_frame: base_footprint
       # Rolling window keeps the robot centred so it is never out of bounds.
       # 10x10 m fully contains the ~4x5 m arenas from any pose within them.
@@ -137,7 +139,7 @@ global_costmap:
       resolution: 0.05
       track_unknown_space: true
       footprint: "[[0.22, 0.20], [0.22, -0.20], [-0.22, -0.20], [-0.22, 0.20]]"
-      plugins: ["obstacle_layer", "inflation_layer"]
+      plugins: ["obstacle_layer", "traversability_layer", "inflation_layer"]
 
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
@@ -152,6 +154,25 @@ global_costmap:
           raytrace_min_range: 0.18
           obstacle_max_range: 3.5
           obstacle_min_range: 0.18
+
+      # Feed measured slope, roughness and step costs into the global planner.
+      # SmacPlanner2D can then prefer a slightly longer safe route over a
+      # geometrically short route across difficult terrain.
+      traversability_layer:
+        plugin: "space_perception::TraversabilityLayer"
+        enabled: true
+        input_topic: /mission/traversability
+        maximum_input_age: 1.0
+        drop_stale_input: true
+        cost_min: 1
+        cost_max: 252
+        cost_exponent: 0.65
+        minimum_traversability: 0.0
+        use_minimum_traversability_gate: false
+        combination_method: 1
+        transform_tolerance: 0.3
+        clear_on_stale: true
+        publish_debug_grid: false
 
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"

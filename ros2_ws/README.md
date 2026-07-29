@@ -60,16 +60,20 @@ source install/setup.bash
 ros2 launch space_bringup simulation.launch.py
 ```
 
+After Gazebo opens, click the 3D view so it has keyboard focus. Hold the arrow
+keys to drive: Up/Down move forward/backward and Left/Right turn in place.
+Press Space for an immediate stop. Releasing a direction key also stops the
+rover through the existing 0.5-second command watchdog.
+
 The simulator still moves the rover through a direct Gazebo DiffDrive plugin.
 This temporary path preserves simulation capability during the refactor and
 does not demonstrate ArduPilot or Pixhawk control.
 
-The default world is `arena_test_slope_v04.sdf`; its generated STL assets must
-first be produced as documented in
-[`../docs/arena_simulation.md`](../docs/arena_simulation.md). Use
-`use_rviz:=false`, `use_perception:=false`, or `use_navigation:=true` to change
-optional launch components. Navigation defaults off until its full graph is
-validated against the arena.
+The default world is `arena_terrain_v04.sdf`. Its default rover spawn is
+`(-1.2, -1.6, 0.23)` so the wheels begin above the terrain collision surface
+instead of intersecting it. Use `use_rviz:=false`, `use_perception:=false`, or
+`use_navigation:=true` to change optional launch components. Navigation
+defaults off until its full graph is validated against the arena.
 
 With `use_perception:=true`, the simulation also launches the sensor-derived
 `/camera/points → /terrain/filtered_points → /terrain/elevation_points →

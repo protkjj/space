@@ -1,0 +1,1 @@
+rclcpp;rclcpp_lifecycle;rclpy;std_msgs;sensor_msgs;sensor_msgs_py;cv_bridge;diagnostic_msgs;geometry_msgs;nav2_costmap_2d;nav_msgs;pluginlib;visualization_msgs;tf2;tf2_geometry_msgs;tf2_ros;ament_index_python;launch;launch_ros;python3-numpy;python3-opencv;ament_flake8;ament_pep257;ament_cmake_flake8;ament_cmake_pep257;ament_cmake_gtest;ament_cmake_pytest;python3-pytest

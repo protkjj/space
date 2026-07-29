@@ -1,0 +1,329 @@
+[0.000000] (-) TimerEvent: {}
+[0.000445] (space_gazebo) JobQueued: {'identifier': 'space_gazebo', 'dependencies': OrderedDict({'space_description': '/home/kms301111/Desktop/space/install/space_description', 'space_gazebo': '/home/kms301111/Desktop/space/install/space_gazebo'})}
+[0.000558] (space_gazebo) JobStarted: {'identifier': 'space_gazebo'}
+[0.072767] (space_gazebo) Command: {'cmd': ['/usr/bin/ctest', '-C', 'Release', '-D', 'ExperimentalTest', '--no-compress-output', '-V', '--force-new-ctest-process'], 'cwd': '/home/kms301111/Desktop/space/build/space_gazebo', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'VSCODE_CWD': '/home/kms301111', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'CODEX_CI': '1', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'kms301111', 'CODEX_INTERNAL_ORIGINATOR_OVERRIDE': 'codex_vscode', 'VSCODE_NLS_CONFIG': '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'wayland', 'DEBUG': 'release', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/kms301111/Desktop/space/install/space_gazebo/lib:/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/kms301111', 'CHROME_DESKTOP': 'code.desktop', 'DESKTOP_SESSION': 'ubuntu', 'NVM_BIN': '/home/kms301111/.nvm/versions/node/v24.13.1/bin', 'NVM_INC': '/home/kms301111/.nvm/versions/node/v24.13.1/include/node', 'VSCODE_IPC_HOOK': '/run/user/1000/vscode-90e2a958-1.10-main.sock', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1971', 'LC_CTYPE': 'C.UTF-8', 'SYSTEMD_EXEC_PID': '2232', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'NO_COLOR': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': '', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '2963', 'NVM_DIR': '/home/kms301111/.nvm', 'VSCODE_CRASH_REPORTER_PROCESS_TYPE': 'extensionHost', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/kms301111/Desktop/space/install', 'CODEX_PERMISSION_PROFILE': ':workspace', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'kms301111', 'JOURNAL_STREAM': '10:21911', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'RUST_LOG': 'warn', 'USERNAME': 'kms301111', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'PATH': '/home/kms301111/.local/bin:/home/kms301111/.local/bin:/home/kms301111/.codex/tmp/arg0/codex-arg0LgPDgp:/home/kms301111/.local/bin:/home/kms301111/.nvm/versions/node/v24.13.1/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/kms301111/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/xtensa-esp-elf/bin/:/home/kms301111/.vscode/extensions/openai.chatgpt-26.721.41059-linux-x64/bin/linux-x86_64', 'SESSION_MANAGER': 'local/humxn:@/tmp/.ICE-unix/2189,unix/humxn:/tmp/.ICE-unix/2189', 'INVOCATION_ID': 'da26f052a80a4d3b912ce3f0923b9bba', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'CODEX_SANDBOX_NETWORK_DISABLED': '1', 'LANG': 'C.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'GH_PAGER': 'cat', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.R7UYS3', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_bringup:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_controller:/home/kms301111/Desktop/space/install/space_ardupilot_interface:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'ELECTRON_RUN_AS_NODE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CODEX_THREAD_ID': '019fad3c-11aa-7223-ae3d-8ed834540e75', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/kms301111/Desktop/space/build/space_gazebo', 'LC_ALL': 'C.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'VSCODE_CODE_CACHE_PATH': '/home/kms301111/.config/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'QTWEBENGINE_DICTIONARIES_PATH': '/usr/share/hunspell-bdic/', 'PYTHONPATH': '/home/kms301111/Desktop/space/build/space_bringup:/home/kms301111/Desktop/space/install/space_bringup/lib/python3.12/site-packages:/home/kms301111/Desktop/space/install/space_perception/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_controller:/home/kms301111/Desktop/space/install/space_controller/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_ardupilot_interface:/home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_perception:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor', 'VSCODE_PID': '2963'}), 'shell': False}
+[0.091294] (space_gazebo) StdoutLine: {'line': b'UpdateCTestConfiguration  from :/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.092172] (space_gazebo) StdoutLine: {'line': b'Parse Config file:/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.092446] (space_gazebo) StdoutLine: {'line': b'   Site: humxn\n'}
+[0.092731] (space_gazebo) StdoutLine: {'line': b'   Build name: (empty)\n'}
+[0.093020] (space_gazebo) StdoutLine: {'line': b' Add coverage exclude regular expressions.\n'}
+[0.093960] (space_gazebo) StdoutLine: {'line': b'Create new tag: 20260729-0959 - Experimental\n'}
+[0.094317] (space_gazebo) StdoutLine: {'line': b'UpdateCTestConfiguration  from :/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.094634] (space_gazebo) StdoutLine: {'line': b'Parse Config file:/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.094925] (space_gazebo) StdoutLine: {'line': b'Test project /home/kms301111/Desktop/space/build/space_gazebo\n'}
+[0.095929] (space_gazebo) StdoutLine: {'line': b'Constructing a list of tests\n'}
+[0.096400] (space_gazebo) StdoutLine: {'line': b'Done constructing a list of tests\n'}
+[0.096597] (space_gazebo) StdoutLine: {'line': b'Updating test list for fixtures\n'}
+[0.096881] (space_gazebo) StdoutLine: {'line': b'Added 0 tests to meet fixture requirements\n'}
+[0.097484] (space_gazebo) StdoutLine: {'line': b'Checking test dependency graph...\n'}
+[0.098200] (space_gazebo) StdoutLine: {'line': b'Checking test dependency graph end\n'}
+[0.098573] (space_gazebo) StdoutLine: {'line': b'test 1\n'}
+[0.098909] (space_gazebo) StdoutLine: {'line': b'    Start 1: cppcheck\n'}
+[0.099261] (-) TimerEvent: {}
+[0.099332] (space_gazebo) StdoutLine: {'line': b'\n'}
+[0.099686] (space_gazebo) StdoutLine: {'line': b'1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_cppcheck/cppcheck.txt" "--command" "/opt/ros/jazzy/bin/ament_cppcheck" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml" "--include_dirs" "/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include"\n'}
+[0.100146] (space_gazebo) StdoutLine: {'line': b'1: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[0.100512] (space_gazebo) StdoutLine: {'line': b'1: Test timeout computed to be: 300\n'}
+[0.199419] (-) TimerEvent: {}
+[0.227025] (space_gazebo) StdoutLine: {'line': b"1: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[0.227427] (space_gazebo) StdoutLine: {'line': b'1:  - /opt/ros/jazzy/bin/ament_cppcheck --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml --include_dirs /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include\n'}
+[0.299638] (-) TimerEvent: {}
+[0.400032] (-) TimerEvent: {}
+[0.470651] (space_gazebo) StdoutLine: {'line': b'1: cppcheck 2.13.0 has known performance issues and therefore will not be used, set the AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS environment variable to override this.\n'}
+[0.500319] (-) TimerEvent: {}
+[0.519636] (space_gazebo) StdoutLine: {'line': b'1: -- run_test.py: return code 0\n'}
+[0.520592] (space_gazebo) StdoutLine: {'line': b"1: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml'\n"}
+[0.544535] (space_gazebo) StdoutLine: {'line': b'1/7 Test #1: cppcheck .........................   Passed    0.45 sec\n'}
+[0.545476] (space_gazebo) StdoutLine: {'line': b'test 2\n'}
+[0.545826] (space_gazebo) StdoutLine: {'line': b'    Start 2: cpplint\n'}
+[0.546023] (space_gazebo) StdoutLine: {'line': b'\n'}
+[0.546195] (space_gazebo) StdoutLine: {'line': b'2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_cpplint/cpplint.txt" "--command" "/opt/ros/jazzy/bin/ament_cpplint" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml"\n'}
+[0.546379] (space_gazebo) StdoutLine: {'line': b'2: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[0.546576] (space_gazebo) StdoutLine: {'line': b'2: Test timeout computed to be: 120\n'}
+[0.600484] (-) TimerEvent: {}
+[0.676443] (space_gazebo) StdoutLine: {'line': b"2: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[0.676660] (space_gazebo) StdoutLine: {'line': b'2:  - /opt/ros/jazzy/bin/ament_cpplint --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml\n'}
+[0.700610] (-) TimerEvent: {}
+[0.800909] (-) TimerEvent: {}
+[0.806037] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include/space_gazebo/rover_key_teleop.hpp:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]\n'}
+[0.837055] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]\n'}
+[0.842026] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:5:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]\n'}
+[0.842661] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:6:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]\n'}
+[0.843210] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:7:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]\n'}
+[0.843720] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:8:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]\n'}
+[0.844162] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:9:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]\n'}
+[0.844826] (space_gazebo) StdoutLine: {'line': b'2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:11:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]\n'}
+[0.870589] (space_gazebo) StdoutLine: {'line': b"2: Category 'build/include_order' errors found: 6\n"}
+[0.870935] (space_gazebo) StdoutLine: {'line': b"2: Category 'legal/copyright' errors found: 2\n"}
+[0.871135] (space_gazebo) StdoutLine: {'line': b'2: Total errors found: 8\n'}
+[0.871306] (space_gazebo) StdoutLine: {'line': b"2: Using '--root=/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include' argument\n"}
+[0.871479] (space_gazebo) StdoutLine: {'line': b'2: \n'}
+[0.871652] (space_gazebo) StdoutLine: {'line': b'2: Done processing /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include/space_gazebo/rover_key_teleop.hpp\n'}
+[0.871845] (space_gazebo) StdoutLine: {'line': b'2: \n'}
+[0.872059] (space_gazebo) StdoutLine: {'line': b"2: Using '--root=/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src' argument\n"}
+[0.872259] (space_gazebo) StdoutLine: {'line': b'2: \n'}
+[0.872489] (space_gazebo) StdoutLine: {'line': b'2: Done processing /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp\n'}
+[0.872707] (space_gazebo) StdoutLine: {'line': b'2: \n'}
+[0.891142] (space_gazebo) StdoutLine: {'line': b'2: -- run_test.py: return code 1\n'}
+[0.891521] (space_gazebo) StdoutLine: {'line': b"2: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml'\n"}
+[0.901097] (-) TimerEvent: {}
+[0.905214] (space_gazebo) StdoutLine: {'line': b'2/7 Test #2: cpplint ..........................***Failed    0.36 sec\n'}
+[0.905620] (space_gazebo) StdoutLine: {'line': b'test 3\n'}
+[0.905841] (space_gazebo) StdoutLine: {'line': b'    Start 3: flake8\n'}
+[0.906092] (space_gazebo) StdoutLine: {'line': b'\n'}
+[0.906290] (space_gazebo) StdoutLine: {'line': b'3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml"\n'}
+[0.906537] (space_gazebo) StdoutLine: {'line': b'3: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[0.906727] (space_gazebo) StdoutLine: {'line': b'3: Test timeout computed to be: 60\n'}
+[0.987648] (space_gazebo) StdoutLine: {'line': b"3: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[0.988105] (space_gazebo) StdoutLine: {'line': b'3:  - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml\n'}
+[1.001284] (-) TimerEvent: {}
+[1.101573] (-) TimerEvent: {}
+[1.201950] (-) TimerEvent: {}
+[1.302272] (-) TimerEvent: {}
+[1.402547] (-) TimerEvent: {}
+[1.418406] (space_gazebo) StdoutLine: {'line': b'3: from pathlib import Path\n'}
+[1.418868] (space_gazebo) StdoutLine: {'line': b'3: ^\n'}
+[1.419124] (space_gazebo) StdoutLine: {'line': b'3:     with path.open("rb") as fh:\n'}
+[1.419343] (space_gazebo) StdoutLine: {'line': b'3:                    ^\n'}
+[1.419558] (space_gazebo) StdoutLine: {'line': b'3:         (count,) = struct.unpack("<I", fh.read(4))\n'}
+[1.419775] (space_gazebo) StdoutLine: {'line': b'3:                                  ^\n'}
+[1.419996] (space_gazebo) StdoutLine: {'line': b'3:     floats = raw[:, :48].copy().view("<f4").reshape(count, 12)\n'}
+[1.420218] (space_gazebo) StdoutLine: {'line': b'3:                                      ^\n'}
+[1.420416] (space_gazebo) StdoutLine: {'line': b'3:     payload = np.zeros((count, 12), dtype="<f4")\n'}
+[1.420635] (space_gazebo) StdoutLine: {'line': b'3:                                           ^\n'}
+[1.420848] (space_gazebo) StdoutLine: {'line': b'3:     with path.open("wb") as fh:\n'}
+[1.421140] (space_gazebo) StdoutLine: {'line': b'3:                    ^\n'}
+[1.421384] (space_gazebo) StdoutLine: {'line': b'3:         fh.write(b"terrain collision heightfield".ljust(80, b"\\0"))\n'}
+[1.421605] (space_gazebo) StdoutLine: {'line': b'3:                  ^\n'}
+[1.421832] (space_gazebo) StdoutLine: {'line': b'3:         fh.write(b"terrain collision heightfield".ljust(80, b"\\0"))\n'}
+[1.422118] (space_gazebo) StdoutLine: {'line': b'3:                                                             ^\n'}
+[1.422371] (space_gazebo) StdoutLine: {'line': b'3:         fh.write(struct.pack("<I", count))\n'}
+[1.422624] (space_gazebo) StdoutLine: {'line': b'3:                              ^\n'}
+[1.422878] (space_gazebo) StdoutLine: {'line': b'3: def _build_heightfield(verts: np.ndarray, cell: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:\n'}
+[1.423187] (space_gazebo) StdoutLine: {'line': b'3:                                                                                                    ^\n'}
+[1.423458] (space_gazebo) StdoutLine: {'line': b'3:     return np.asarray(tris, dtype="<f4")\n'}
+[1.423718] (space_gazebo) StdoutLine: {'line': b'3:                                   ^\n'}
+[1.423995] (space_gazebo) StdoutLine: {'line': b'3:     return float(verts[m, 2].max()) if m.any() else float("nan")\n'}
+[1.424289] (space_gazebo) StdoutLine: {'line': b'3:                                                           ^\n'}
+[1.424540] (space_gazebo) StdoutLine: {'line': b'3:     ap.add_argument("--source", type=Path,\n'}
+[1.424777] (space_gazebo) StdoutLine: {'line': b'3:                     ^\n'}
+[1.425035] (space_gazebo) StdoutLine: {'line': b'3:                     default=pkg / "models/arena_terrain_v04/meshes/arena_visual.stl")\n'}
+[1.425338] (space_gazebo) StdoutLine: {'line': b'3:                                   ^\n'}
+[1.425617] (space_gazebo) StdoutLine: {'line': b'3:     ap.add_argument("--output", type=Path,\n'}
+[1.425885] (space_gazebo) StdoutLine: {'line': b'3:                     ^\n'}
+[1.426188] (space_gazebo) StdoutLine: {'line': b'3:                     default=pkg / "models/arena_terrain_v04/meshes/arena_collision.stl")\n'}
+[1.426461] (space_gazebo) StdoutLine: {'line': b'3:                                   ^\n'}
+[1.426735] (space_gazebo) StdoutLine: {'line': b'3:     ap.add_argument("--cell", type=float, default=0.10, help="grid cell size (m)")\n'}
+[1.427055] (space_gazebo) StdoutLine: {'line': b'3:                     ^\n'}
+[1.427311] (space_gazebo) StdoutLine: {'line': b'3:     ap.add_argument("--cell", type=float, default=0.10, help="grid cell size (m)")\n'}
+[1.427611] (space_gazebo) StdoutLine: {'line': b'3:                                                              ^\n'}
+[1.427892] (space_gazebo) StdoutLine: {'line': b'3:     print(f"source: {tris.shape[0]:,} triangles, {verts.shape[0]:,} vertices")\n'}
+[1.428179] (space_gazebo) StdoutLine: {'line': b'3:           ^\n'}
+[1.428444] (space_gazebo) StdoutLine: {'line': b'3:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "\n'}
+[1.428728] (space_gazebo) StdoutLine: {'line': b'3:           ^\n'}
+[1.429061] (space_gazebo) StdoutLine: {'line': b'3:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "\n'}
+[1.429403] (space_gazebo) StdoutLine: {'line': b'3:                              ^\n'}
+[1.429724] (space_gazebo) StdoutLine: {'line': b'3:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "\n'}
+[1.430062] (space_gazebo) StdoutLine: {'line': b'3:                                                     ^\n'}
+[1.430395] (space_gazebo) StdoutLine: {'line': b'3:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "\n'}
+[1.430720] (space_gazebo) StdoutLine: {'line': b'3:           ^\n'}
+[1.431116] (space_gazebo) StdoutLine: {'line': b'3:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "\n'}
+[1.431486] (space_gazebo) StdoutLine: {'line': b'3:                       ^\n'}
+[1.431829] (space_gazebo) StdoutLine: {'line': b'3:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "\n'}
+[1.432229] (space_gazebo) StdoutLine: {'line': b'3:                                              ^\n'}
+[1.432594] (space_gazebo) StdoutLine: {'line': b'3:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")\n'}
+[1.432958] (space_gazebo) StdoutLine: {'line': b'3:           ^\n'}
+[1.433346] (space_gazebo) StdoutLine: {'line': b'3:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")\n'}
+[1.433726] (space_gazebo) StdoutLine: {'line': b'3:                       ^\n'}
+[1.434134] (space_gazebo) StdoutLine: {'line': b'3:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")\n'}
+[1.434507] (space_gazebo) StdoutLine: {'line': b'3:                                              ^\n'}
+[1.434913] (space_gazebo) StdoutLine: {'line': b'3:     print(f"collision: {coll.shape[0]:,} triangles @ {args.cell} m cell -> {args.output.name}")\n'}
+[1.435313] (space_gazebo) StdoutLine: {'line': b'3:           ^\n'}
+[1.435632] (space_gazebo) StdoutLine: {'line': b'3:         print(f"terrain top Z near ({sx:+.1f},{sy:+.1f}) = {_sample_height(verts, sx, sy):.3f} m")\n'}
+[1.435939] (space_gazebo) StdoutLine: {'line': b'3:               ^\n'}
+[1.436291] (space_gazebo) StdoutLine: {'line': b'3: if __name__ == "__main__":\n'}
+[1.436616] (space_gazebo) StdoutLine: {'line': b'3:                ^\n'}
+[1.437057] (space_gazebo) StdoutLine: {'line': b"3: 6     E231 missing whitespace after ','\n"}
+[1.437411] (space_gazebo) StdoutLine: {'line': b'3: 1     E501 line too long (100 > 99 characters)\n'}
+[1.437753] (space_gazebo) StdoutLine: {'line': b"3: 1     I100 Import statements are in the wrong order. 'from pathlib import Path' should be before 'import struct'\n"}
+[1.438137] (space_gazebo) StdoutLine: {'line': b'3: 23    Q000 Double quotes found but single quotes preferred\n'}
+[1.438493] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.438827] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:18:1: I100 Import statements are in the wrong order. 'from pathlib import Path' should be before 'import struct'\n"}
+[1.439222] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.439587] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:26:20: Q000 Double quotes found but single quotes preferred\n'}
+[1.439883] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.440232] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:28:34: Q000 Double quotes found but single quotes preferred\n'}
+[1.440555] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.440847] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:32:38: Q000 Double quotes found but single quotes preferred\n'}
+[1.441186] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.441546] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:40:43: Q000 Double quotes found but single quotes preferred\n'}
+[1.441907] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.442273] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:43:20: Q000 Double quotes found but single quotes preferred\n'}
+[1.442629] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.443009] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:44:18: Q000 Double quotes found but single quotes preferred\n'}
+[1.443371] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.443719] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:44:61: Q000 Double quotes found but single quotes preferred\n'}
+[1.444043] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.444390] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:45:30: Q000 Double quotes found but single quotes preferred\n'}
+[1.444732] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.445632] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:49:100: E501 line too long (100 > 99 characters)\n'}
+[1.446250] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.446638] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:94:35: Q000 Double quotes found but single quotes preferred\n'}
+[1.447000] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.447361] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:99:59: Q000 Double quotes found but single quotes preferred\n'}
+[1.447672] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.448010] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:105:21: Q000 Double quotes found but single quotes preferred\n'}
+[1.448351] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.448726] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:106:35: Q000 Double quotes found but single quotes preferred\n'}
+[1.449128] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.449471] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:107:21: Q000 Double quotes found but single quotes preferred\n'}
+[1.449813] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.450207] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:108:35: Q000 Double quotes found but single quotes preferred\n'}
+[1.450567] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.450923] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:109:21: Q000 Double quotes found but single quotes preferred\n'}
+[1.451295] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.451669] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:109:62: Q000 Double quotes found but single quotes preferred\n'}
+[1.452074] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.452426] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:114:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.452775] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.453135] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:115:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.453484] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.453821] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:115:30: E231 missing whitespace after ','\n"}
+[1.454187] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.454548] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:115:53: E231 missing whitespace after ','\n"}
+[1.454898] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.455303] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:116:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.455675] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.456072] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:116:23: E231 missing whitespace after ','\n"}
+[1.456458] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.456799] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:116:46: E231 missing whitespace after ','\n"}
+[1.457782] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.458178] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:117:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.458508] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.458843] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:117:23: E231 missing whitespace after ','\n"}
+[1.459216] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.460138] (space_gazebo) StdoutLine: {'line': b"3: ./tools/make_terrain_collision.py:117:46: E231 missing whitespace after ','\n"}
+[1.460713] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.461084] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:123:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.461431] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.461752] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:126:15: Q000 Double quotes found but single quotes preferred\n'}
+[1.462141] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.462511] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:129:16: Q000 Double quotes found but single quotes preferred\n'}
+[1.462856] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.464032] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.464465] (space_gazebo) StdoutLine: {'line': b'3: 4 files checked\n'}
+[1.464825] (space_gazebo) StdoutLine: {'line': b'3: 31 errors\n'}
+[1.465183] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.465506] (space_gazebo) StdoutLine: {'line': b"3: 'E'-type errors: 7\n"}
+[1.465824] (space_gazebo) StdoutLine: {'line': b"3: 'I'-type errors: 1\n"}
+[1.466172] (space_gazebo) StdoutLine: {'line': b"3: 'Q'-type errors: 23\n"}
+[1.466501] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.466806] (space_gazebo) StdoutLine: {'line': b'3: Checked files:\n'}
+[1.467150] (space_gazebo) StdoutLine: {'line': b'3: \n'}
+[1.467464] (space_gazebo) StdoutLine: {'line': b'3: * ./scripts/arena_marker_publisher.py\n'}
+[1.467778] (space_gazebo) StdoutLine: {'line': b'3: * ./tools/convert_arena_step.py\n'}
+[1.468123] (space_gazebo) StdoutLine: {'line': b'3: * ./tools/make_terrain_collision.py\n'}
+[1.468428] (space_gazebo) StdoutLine: {'line': b'3: * ./launch/gazebo.launch.py\n'}
+[1.502730] (-) TimerEvent: {}
+[1.508088] (space_gazebo) StdoutLine: {'line': b'3: -- run_test.py: return code 1\n'}
+[1.508815] (space_gazebo) StdoutLine: {'line': b"3: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml'\n"}
+[1.524887] (space_gazebo) StdoutLine: {'line': b'3/7 Test #3: flake8 ...........................***Failed    0.62 sec\n'}
+[1.525331] (space_gazebo) StdoutLine: {'line': b'test 4\n'}
+[1.525539] (space_gazebo) StdoutLine: {'line': b'    Start 4: lint_cmake\n'}
+[1.525734] (space_gazebo) StdoutLine: {'line': b'\n'}
+[1.525955] (space_gazebo) StdoutLine: {'line': b'4: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_lint_cmake/lint_cmake.txt" "--command" "/opt/ros/jazzy/bin/ament_lint_cmake" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml"\n'}
+[1.526220] (space_gazebo) StdoutLine: {'line': b'4: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[1.526444] (space_gazebo) StdoutLine: {'line': b'4: Test timeout computed to be: 60\n'}
+[1.603002] (-) TimerEvent: {}
+[1.619275] (space_gazebo) StdoutLine: {'line': b"4: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[1.619666] (space_gazebo) StdoutLine: {'line': b'4:  - /opt/ros/jazzy/bin/ament_lint_cmake --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml\n'}
+[1.703228] (-) TimerEvent: {}
+[1.738270] (space_gazebo) StdoutLine: {'line': b'4: \n'}
+[1.738570] (space_gazebo) StdoutLine: {'line': b'4: No problems found\n'}
+[1.754981] (space_gazebo) StdoutLine: {'line': b'4: -- run_test.py: return code 0\n'}
+[1.755291] (space_gazebo) StdoutLine: {'line': b"4: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml'\n"}
+[1.769727] (space_gazebo) StdoutLine: {'line': b'4/7 Test #4: lint_cmake .......................   Passed    0.24 sec\n'}
+[1.770234] (space_gazebo) StdoutLine: {'line': b'test 5\n'}
+[1.770437] (space_gazebo) StdoutLine: {'line': b'    Start 5: pep257\n'}
+[1.770628] (space_gazebo) StdoutLine: {'line': b'\n'}
+[1.770812] (space_gazebo) StdoutLine: {'line': b'5: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml"\n'}
+[1.771026] (space_gazebo) StdoutLine: {'line': b'5: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[1.771233] (space_gazebo) StdoutLine: {'line': b'5: Test timeout computed to be: 60\n'}
+[1.803416] (-) TimerEvent: {}
+[1.866799] (space_gazebo) StdoutLine: {'line': b"5: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[1.867368] (space_gazebo) StdoutLine: {'line': b'5:  - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml\n'}
+[1.903650] (-) TimerEvent: {}
+[2.003992] (-) TimerEvent: {}
+[2.051013] (space_gazebo) StdoutLine: {'line': b'5: ./tools/make_terrain_collision.py:2 at module level: D213: Multi-line docstring summary should start at the second line\n'}
+[2.051934] (space_gazebo) StdoutLine: {'line': b'5: ./tools/make_terrain_collision.py:50 in private function `_build_heightfield`: D213: Multi-line docstring summary should start at the second line\n'}
+[2.052778] (space_gazebo) StdoutLine: {'line': b'5: 2 errors\n'}
+[2.052933] (space_gazebo) StdoutLine: {'line': b'5: checking ./launch/gazebo.launch.py\n'}
+[2.053034] (space_gazebo) StdoutLine: {'line': b'5: checking ./scripts/arena_marker_publisher.py\n'}
+[2.053106] (space_gazebo) StdoutLine: {'line': b'5: checking ./tools/convert_arena_step.py\n'}
+[2.053185] (space_gazebo) StdoutLine: {'line': b'5: checking ./tools/make_terrain_collision.py\n'}
+[2.088366] (space_gazebo) StdoutLine: {'line': b'5: -- run_test.py: return code 1\n'}
+[2.088740] (space_gazebo) StdoutLine: {'line': b"5: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml'\n"}
+[2.104264] (-) TimerEvent: {}
+[2.109041] (space_gazebo) StdoutLine: {'line': b'5/7 Test #5: pep257 ...........................***Failed    0.34 sec\n'}
+[2.109688] (space_gazebo) StdoutLine: {'line': b'test 6\n'}
+[2.109936] (space_gazebo) StdoutLine: {'line': b'    Start 6: uncrustify\n'}
+[2.110176] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.110379] (space_gazebo) StdoutLine: {'line': b'6: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_uncrustify/uncrustify.txt" "--command" "/opt/ros/jazzy/bin/ament_uncrustify" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml"\n'}
+[2.110661] (space_gazebo) StdoutLine: {'line': b'6: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[2.110879] (space_gazebo) StdoutLine: {'line': b'6: Test timeout computed to be: 60\n'}
+[2.204391] (-) TimerEvent: {}
+[2.218269] (space_gazebo) StdoutLine: {'line': b"6: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[2.218642] (space_gazebo) StdoutLine: {'line': b'6:  - /opt/ros/jazzy/bin/ament_uncrustify --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml\n'}
+[2.304536] (-) TimerEvent: {}
+[2.368638] (space_gazebo) StdoutLine: {'line': b"6: No code style divergence in file 'include/space_gazebo/rover_key_teleop.hpp'\n"}
+[2.369053] (space_gazebo) StdoutLine: {'line': b'6: \n'}
+[2.369265] (space_gazebo) StdoutLine: {'line': b"6: No code style divergence in file 'src/rover_key_teleop.cpp'\n"}
+[2.369452] (space_gazebo) StdoutLine: {'line': b'6: \n'}
+[2.369633] (space_gazebo) StdoutLine: {'line': b'6: No problems found\n'}
+[2.398218] (space_gazebo) StdoutLine: {'line': b'6: -- run_test.py: return code 0\n'}
+[2.398612] (space_gazebo) StdoutLine: {'line': b"6: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml'\n"}
+[2.404679] (-) TimerEvent: {}
+[2.417444] (space_gazebo) StdoutLine: {'line': b'6/7 Test #6: uncrustify .......................   Passed    0.31 sec\n'}
+[2.418129] (space_gazebo) StdoutLine: {'line': b'test 7\n'}
+[2.418286] (space_gazebo) StdoutLine: {'line': b'    Start 7: xmllint\n'}
+[2.418398] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.418503] (space_gazebo) StdoutLine: {'line': b'7: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_xmllint/xmllint.txt" "--command" "/opt/ros/jazzy/bin/ament_xmllint" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml"\n'}
+[2.418617] (space_gazebo) StdoutLine: {'line': b'7: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[2.418716] (space_gazebo) StdoutLine: {'line': b'7: Test timeout computed to be: 60\n'}
+[2.504934] (-) TimerEvent: {}
+[2.542167] (space_gazebo) StdoutLine: {'line': b"7: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[2.542570] (space_gazebo) StdoutLine: {'line': b'7:  - /opt/ros/jazzy/bin/ament_xmllint --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml\n'}
+[2.605155] (-) TimerEvent: {}
+[2.681454] (space_gazebo) StdoutLine: {'line': b"7: File 'package.xml' is valid\n"}
+[2.681955] (space_gazebo) StdoutLine: {'line': b'7: \n'}
+[2.682251] (space_gazebo) StdoutLine: {'line': b'7: No problems found\n'}
+[2.705269] (-) TimerEvent: {}
+[2.709589] (space_gazebo) StdoutLine: {'line': b'7: -- run_test.py: return code 0\n'}
+[2.710019] (space_gazebo) StdoutLine: {'line': b"7: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml'\n"}
+[2.731313] (space_gazebo) StdoutLine: {'line': b'7/7 Test #7: xmllint ..........................   Passed    0.31 sec\n'}
+[2.732296] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.732641] (space_gazebo) StdoutLine: {'line': b'57% tests passed, 3 tests failed out of 7\n'}
+[2.732872] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.733116] (space_gazebo) StdoutLine: {'line': b'Label Time Summary:\n'}
+[2.733326] (space_gazebo) StdoutLine: {'line': b'cppcheck      =   0.45 sec*proc (1 test)\n'}
+[2.733525] (space_gazebo) StdoutLine: {'line': b'cpplint       =   0.36 sec*proc (1 test)\n'}
+[2.733740] (space_gazebo) StdoutLine: {'line': b'flake8        =   0.62 sec*proc (1 test)\n'}
+[2.733947] (space_gazebo) StdoutLine: {'line': b'lint_cmake    =   0.24 sec*proc (1 test)\n'}
+[2.734203] (space_gazebo) StdoutLine: {'line': b'linter        =   2.63 sec*proc (7 tests)\n'}
+[2.734448] (space_gazebo) StdoutLine: {'line': b'pep257        =   0.34 sec*proc (1 test)\n'}
+[2.734694] (space_gazebo) StdoutLine: {'line': b'uncrustify    =   0.31 sec*proc (1 test)\n'}
+[2.734941] (space_gazebo) StdoutLine: {'line': b'xmllint       =   0.31 sec*proc (1 test)\n'}
+[2.735207] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.735445] (space_gazebo) StdoutLine: {'line': b'Total Test time (real) =   2.64 sec\n'}
+[2.735678] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.735898] (space_gazebo) StdoutLine: {'line': b'The following tests FAILED:\n'}
+[2.736130] (space_gazebo) StdoutLine: {'line': b'\t  2 - cpplint (Failed)\n'}
+[2.736341] (space_gazebo) StdoutLine: {'line': b'\t  3 - flake8 (Failed)\n'}
+[2.736576] (space_gazebo) StdoutLine: {'line': b'\t  5 - pep257 (Failed)\n'}
+[2.737664] (space_gazebo) StderrLine: {'line': b'Errors while running CTest\n'}
+[2.738156] (space_gazebo) StderrLine: {'line': b'Output from these tests are in: /home/kms301111/Desktop/space/build/space_gazebo/Testing/Temporary/LastTest.log\n'}
+[2.738469] (space_gazebo) StderrLine: {'line': b'Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.\n'}
+[2.742213] (space_gazebo) CommandEnded: {'returncode': 8}
+[2.743758] (space_gazebo) TestFailure: {'identifier': 'space_gazebo'}
+[2.744056] (space_gazebo) JobEnded: {'identifier': 'space_gazebo', 'rc': 0}
+[2.745398] (-) EventReactorShutdown: {}

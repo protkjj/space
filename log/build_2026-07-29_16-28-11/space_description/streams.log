@@ -1,0 +1,46 @@
+[0.029s] Invoking command in '/home/kms301111/Desktop/space/build/space_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/kms301111/Desktop/space/ros2_ws/src/space_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kms301111/Desktop/space/install/space_description
+[0.206s] -- The C compiler identification is GNU 13.3.0
+[0.275s] -- The CXX compiler identification is GNU 13.3.0
+[0.297s] -- Detecting C compiler ABI info
+[0.414s] -- Detecting C compiler ABI info - done
+[0.437s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.440s] -- Detecting C compile features
+[0.441s] -- Detecting C compile features - done
+[0.454s] -- Detecting CXX compiler ABI info
+[0.561s] -- Detecting CXX compiler ABI info - done
+[0.581s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.581s] -- Detecting CXX compile features
+[0.581s] -- Detecting CXX compile features - done
+[0.600s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.805s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.915s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.990s] -- Found ament_lint_auto: 0.17.4 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[1.149s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.151s] -- Added test 'lint_cmake' to check CMake code style
+[1.152s] -- Added test 'xmllint' to check XML markup files
+[1.154s] -- Configuring done (1.1s)
+[1.156s] -- Generating done (0.0s)
+[1.159s] -- Build files have been written to: /home/kms301111/Desktop/space/build/space_description
+[1.163s] Invoked command in '/home/kms301111/Desktop/space/build/space_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/kms301111/Desktop/space/ros2_ws/src/space_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kms301111/Desktop/space/install/space_description
+[1.165s] Invoking command in '/home/kms301111/Desktop/space/build/space_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/kms301111/Desktop/space/build/space_description -- -j12 -l12
+[1.209s] Invoked command in '/home/kms301111/Desktop/space/build/space_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/kms301111/Desktop/space/build/space_description -- -j12 -l12
+[1.217s] Invoking command in '/home/kms301111/Desktop/space/build/space_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/kms301111/Desktop/space/build/space_description
+[1.226s] -- Install configuration: ""
+[1.226s] -- Execute custom install script
+[1.227s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/urdf/space_rover.urdf.xacro
+[1.234s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/ament_index/resource_index/package_run_dependencies/space_description
+[1.245s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/ament_index/resource_index/parent_prefix_path/space_description
+[1.258s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/environment/ament_prefix_path.sh
+[1.270s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/environment/ament_prefix_path.dsv
+[1.277s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/environment/path.sh
+[1.288s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/environment/path.dsv
+[1.300s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/local_setup.bash
+[1.312s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/local_setup.sh
+[1.324s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/local_setup.zsh
+[1.337s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/local_setup.dsv
+[1.349s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/package.dsv
+[1.361s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/ament_index/resource_index/packages/space_description
+[1.372s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/cmake/space_descriptionConfig.cmake
+[1.383s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/cmake/space_descriptionConfig-version.cmake
+[1.393s] -- Symlinking: /home/kms301111/Desktop/space/install/space_description/share/space_description/package.xml
+[1.406s] Invoked command in '/home/kms301111/Desktop/space/build/space_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/kms301111/Desktop/space/build/space_description

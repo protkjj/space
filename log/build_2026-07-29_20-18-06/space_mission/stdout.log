@@ -1,0 +1,24 @@
+running develop
+running egg_info
+creating space_mission.egg-info
+writing space_mission.egg-info/PKG-INFO
+writing dependency_links to space_mission.egg-info/dependency_links.txt
+writing entry points to space_mission.egg-info/entry_points.txt
+writing requirements to space_mission.egg-info/requires.txt
+writing top-level names to space_mission.egg-info/top_level.txt
+writing manifest file 'space_mission.egg-info/SOURCES.txt'
+reading manifest file 'space_mission.egg-info/SOURCES.txt'
+writing manifest file 'space_mission.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/kms301111/Desktop/space/install/space_mission/lib/python3.12/site-packages/space-mission.egg-link (link to .)
+Installing traversability_fusion_node script to /home/kms301111/Desktop/space/install/space_mission/lib/space_mission
+
+Installed /home/kms301111/Desktop/space/build/space_mission
+running symlink_data
+creating /home/kms301111/Desktop/space/install/space_mission/share/ament_index
+creating /home/kms301111/Desktop/space/install/space_mission/share/ament_index/resource_index
+creating /home/kms301111/Desktop/space/install/space_mission/share/ament_index/resource_index/packages
+symbolically linking /home/kms301111/Desktop/space/build/space_mission/resource/space_mission -> /home/kms301111/Desktop/space/install/space_mission/share/ament_index/resource_index/packages
+symbolically linking /home/kms301111/Desktop/space/build/space_mission/package.xml -> /home/kms301111/Desktop/space/install/space_mission/share/space_mission
+creating /home/kms301111/Desktop/space/install/space_mission/share/space_mission/config
+symbolically linking /home/kms301111/Desktop/space/build/space_mission/config/mission.yaml -> /home/kms301111/Desktop/space/install/space_mission/share/space_mission/config

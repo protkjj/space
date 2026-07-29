@@ -1,0 +1,14 @@
+-- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+ - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml
+
+./tools/make_terrain_collision.py:2 at module level: D213: Multi-line docstring summary should start at the second line
+./tools/make_terrain_collision.py:50 in private function `_build_heightfield`: D213: Multi-line docstring summary should start at the second line
+2 errors
+checking ./launch/gazebo.launch.py
+checking ./scripts/arena_marker_publisher.py
+checking ./tools/convert_arena_step.py
+checking ./tools/make_terrain_collision.py
+
+
+-- run_test.py: return code 1
+-- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml'

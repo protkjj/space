@@ -1,0 +1,2 @@
+[console_scripts]
+command_safety_node = space_controller.command_safety:main

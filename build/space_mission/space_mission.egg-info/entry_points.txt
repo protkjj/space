@@ -1,0 +1,2 @@
+[console_scripts]
+traversability_fusion_node = space_mission.traversability_fusion_node:main

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite
+  name="space_gazebo.pep257"
+  tests="5"
+  errors="0"
+  failures="2"
+  time="0.042"
+>
+  <testcase
+    name="./launch/gazebo.launch.py"
+    classname="space_gazebo.pep257"/>
+  <testcase
+    name="./scripts/arena_marker_publisher.py"
+    classname="space_gazebo.pep257"/>
+  <testcase
+    name="./tools/convert_arena_step.py"
+    classname="space_gazebo.pep257"/>
+  <testcase
+    name="D213 (./tools/make_terrain_collision.py:2)"
+    classname="space_gazebo.pep257"
+  >
+      <failure message="D213: Multi-line docstring summary should start at the second line"/>
+  </testcase>
+  <testcase
+    name="D213 (./tools/make_terrain_collision.py:50)"
+    classname="space_gazebo.pep257"
+  >
+      <failure message="D213: Multi-line docstring summary should start at the second line"/>
+  </testcase>
+  <system-out>Checked files:
+* ./launch/gazebo.launch.py
+* ./scripts/arena_marker_publisher.py
+* ./tools/convert_arena_step.py
+* ./tools/make_terrain_collision.py</system-out>
+</testsuite>

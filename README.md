@@ -115,6 +115,14 @@ source ros2_ws/install/setup.bash
 ros2 launch space_bringup simulation.launch.py
 ```
 
+The default simulation world is `arena_terrain_v04.sdf`, with a terrain-safe
+default spawn height of `0.23 m`.
+
+In the Gazebo window, click the 3D view and hold the arrow keys to drive the
+rover. Up/Down command forward/reverse, Left/Right turn in place, and Space
+stops immediately. The command-safety watchdog stops the rover shortly after a
+direction key is released.
+
 Hardware-interface inspection only:
 
 ```bash

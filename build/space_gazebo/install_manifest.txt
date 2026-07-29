@@ -1,0 +1,1 @@
+/home/kms301111/Desktop/space/install/space_gazebo/lib/space_gazebo/arena_marker_publisher

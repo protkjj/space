@@ -1,0 +1,1 @@
+gz_gui_vendor;gz_msgs_vendor;gz_transport_vendor;ament_index_python;geometry_msgs;launch;launch_ros;nav_msgs;robot_state_publisher;ros_gz_bridge;ros_gz_sim;rosgraph_msgs;sensor_msgs;space_description;rclpy;visualization_msgs;xacro;ament_lint_auto;ament_lint_common

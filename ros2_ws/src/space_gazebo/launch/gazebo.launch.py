@@ -3,7 +3,10 @@
 
 import os
 
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import (
+    get_package_prefix,
+    get_package_share_directory,
+)
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
@@ -27,6 +30,7 @@ def _launch_setup(context):
 
     description_share = get_package_share_directory('space_description')
     gazebo_share = get_package_share_directory('space_gazebo')
+    gazebo_prefix = get_package_prefix('space_gazebo')
     ros_gz_sim_share = get_package_share_directory('ros_gz_sim')
 
     robot_xacro = os.path.join(
@@ -44,6 +48,9 @@ def _launch_setup(context):
     bridge_config = os.path.join(
         gazebo_share, 'config', 'ros_gz_bridge.yaml'
     )
+    gui_config = os.path.join(
+        gazebo_share, 'config', 'rover_gui.config'
+    )
     robot_description = ParameterValue(
         Command(['xacro ', robot_xacro]), value_type=str
     )
@@ -56,16 +63,25 @@ def _launch_setup(context):
     existing_resource_path = os.environ.get('GZ_SIM_RESOURCE_PATH')
     if existing_resource_path:
         resource_paths.append(existing_resource_path)
+    gui_plugin_paths = [os.path.join(gazebo_prefix, 'lib')]
+    existing_gui_plugin_path = os.environ.get('GZ_GUI_PLUGIN_PATH')
+    if existing_gui_plugin_path:
+        gui_plugin_paths.append(existing_gui_plugin_path)
 
     return [
         SetEnvironmentVariable(
             'GZ_SIM_RESOURCE_PATH', os.pathsep.join(resource_paths)
         ),
+        SetEnvironmentVariable(
+            'GZ_GUI_PLUGIN_PATH', os.pathsep.join(gui_plugin_paths)
+        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(ros_gz_sim_share, 'launch', 'gz_sim.launch.py')
             ),
-            launch_arguments={'gz_args': f'-r {world_file}'}.items(),
+            launch_arguments={
+                'gz_args': f'-r --gui-config {gui_config} {world_file}'
+            }.items(),
         ),
         Node(
             package='robot_state_publisher',
@@ -113,11 +129,18 @@ def generate_launch_description():
         [
             DeclareLaunchArgument('use_sim_time', default_value='true'),
             DeclareLaunchArgument(
-                'world', default_value='arena_test_slope_v04.sdf'
+                'world', default_value='arena_terrain_v04.sdf'
             ),
             DeclareLaunchArgument('spawn_x', default_value='-1.2'),
             DeclareLaunchArgument('spawn_y', default_value='-1.6'),
-            DeclareLaunchArgument('spawn_z', default_value='0.12'),
+            DeclareLaunchArgument(
+                'spawn_z',
+                default_value='0.23',
+                description=(
+                    'Terrain-world default height; override when selecting '
+                    'a world with a different surface elevation.'
+                ),
+            ),
             DeclareLaunchArgument('spawn_yaw', default_value='0.0'),
             OpaqueFunction(function=_launch_setup),
         ]

@@ -1,0 +1,296 @@
+[0.075s] Invoking command in '/home/kms301111/Desktop/space/build/space_gazebo': CMAKE_PREFIX_PATH=/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_perception:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kms301111/Desktop/space/install/space_gazebo/lib:/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process
+[0.091s] UpdateCTestConfiguration  from :/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini
+[0.092s] Parse Config file:/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini
+[0.092s]    Site: humxn
+[0.092s]    Build name: (empty)
+[0.093s]  Add coverage exclude regular expressions.
+[0.094s] Create new tag: 20260729-0959 - Experimental
+[0.094s] UpdateCTestConfiguration  from :/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini
+[0.094s] Parse Config file:/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini
+[0.095s] Test project /home/kms301111/Desktop/space/build/space_gazebo
+[0.096s] Constructing a list of tests
+[0.096s] Done constructing a list of tests
+[0.096s] Updating test list for fixtures
+[0.096s] Added 0 tests to meet fixture requirements
+[0.097s] Checking test dependency graph...
+[0.098s] Checking test dependency graph end
+[0.098s] test 1
+[0.099s]     Start 1: cppcheck
+[0.099s] 
+[0.099s] 1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_cppcheck/cppcheck.txt" "--command" "/opt/ros/jazzy/bin/ament_cppcheck" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml" "--include_dirs" "/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include"
+[0.100s] 1: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[0.100s] 1: Test timeout computed to be: 300
+[0.227s] 1: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[0.227s] 1:  - /opt/ros/jazzy/bin/ament_cppcheck --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml --include_dirs /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include
+[0.470s] 1: cppcheck 2.13.0 has known performance issues and therefore will not be used, set the AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS environment variable to override this.
+[0.520s] 1: -- run_test.py: return code 0
+[0.520s] 1: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cppcheck.xunit.xml'
+[0.545s] 1/7 Test #1: cppcheck .........................   Passed    0.45 sec
+[0.545s] test 2
+[0.545s]     Start 2: cpplint
+[0.546s] 
+[0.546s] 2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_cpplint/cpplint.txt" "--command" "/opt/ros/jazzy/bin/ament_cpplint" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml"
+[0.546s] 2: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[0.546s] 2: Test timeout computed to be: 120
+[0.676s] 2: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[0.676s] 2:  - /opt/ros/jazzy/bin/ament_cpplint --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml
+[0.806s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include/space_gazebo/rover_key_teleop.hpp:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
+[0.837s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
+[0.842s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:5:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]
+[0.842s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:6:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]
+[0.843s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:7:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]
+[0.843s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:8:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]
+[0.844s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:9:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]
+[0.845s] 2: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp:11:  Found C system header after C++ system header. Should be: rover_key_teleop.h, c system, c++ system, other.  [build/include_order] [4]
+[0.870s] 2: Category 'build/include_order' errors found: 6
+[0.871s] 2: Category 'legal/copyright' errors found: 2
+[0.871s] 2: Total errors found: 8
+[0.871s] 2: Using '--root=/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include' argument
+[0.871s] 2: 
+[0.871s] 2: Done processing /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/include/space_gazebo/rover_key_teleop.hpp
+[0.871s] 2: 
+[0.872s] 2: Using '--root=/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src' argument
+[0.872s] 2: 
+[0.872s] 2: Done processing /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/src/rover_key_teleop.cpp
+[0.872s] 2: 
+[0.891s] 2: -- run_test.py: return code 1
+[0.891s] 2: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/cpplint.xunit.xml'
+[0.905s] 2/7 Test #2: cpplint ..........................***Failed    0.36 sec
+[0.905s] test 3
+[0.905s]     Start 3: flake8
+[0.906s] 
+[0.906s] 3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml"
+[0.906s] 3: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[0.906s] 3: Test timeout computed to be: 60
+[0.987s] 3: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[0.988s] 3:  - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml
+[1.418s] 3: from pathlib import Path
+[1.418s] 3: ^
+[1.419s] 3:     with path.open("rb") as fh:
+[1.419s] 3:                    ^
+[1.419s] 3:         (count,) = struct.unpack("<I", fh.read(4))
+[1.419s] 3:                                  ^
+[1.420s] 3:     floats = raw[:, :48].copy().view("<f4").reshape(count, 12)
+[1.420s] 3:                                      ^
+[1.420s] 3:     payload = np.zeros((count, 12), dtype="<f4")
+[1.420s] 3:                                           ^
+[1.420s] 3:     with path.open("wb") as fh:
+[1.421s] 3:                    ^
+[1.421s] 3:         fh.write(b"terrain collision heightfield".ljust(80, b"\0"))
+[1.421s] 3:                  ^
+[1.421s] 3:         fh.write(b"terrain collision heightfield".ljust(80, b"\0"))
+[1.422s] 3:                                                             ^
+[1.422s] 3:         fh.write(struct.pack("<I", count))
+[1.422s] 3:                              ^
+[1.423s] 3: def _build_heightfield(verts: np.ndarray, cell: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+[1.423s] 3:                                                                                                    ^
+[1.423s] 3:     return np.asarray(tris, dtype="<f4")
+[1.423s] 3:                                   ^
+[1.424s] 3:     return float(verts[m, 2].max()) if m.any() else float("nan")
+[1.424s] 3:                                                           ^
+[1.424s] 3:     ap.add_argument("--source", type=Path,
+[1.424s] 3:                     ^
+[1.425s] 3:                     default=pkg / "models/arena_terrain_v04/meshes/arena_visual.stl")
+[1.425s] 3:                                   ^
+[1.425s] 3:     ap.add_argument("--output", type=Path,
+[1.426s] 3:                     ^
+[1.426s] 3:                     default=pkg / "models/arena_terrain_v04/meshes/arena_collision.stl")
+[1.426s] 3:                                   ^
+[1.426s] 3:     ap.add_argument("--cell", type=float, default=0.10, help="grid cell size (m)")
+[1.427s] 3:                     ^
+[1.427s] 3:     ap.add_argument("--cell", type=float, default=0.10, help="grid cell size (m)")
+[1.427s] 3:                                                              ^
+[1.428s] 3:     print(f"source: {tris.shape[0]:,} triangles, {verts.shape[0]:,} vertices")
+[1.428s] 3:           ^
+[1.428s] 3:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "
+[1.428s] 3:           ^
+[1.429s] 3:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "
+[1.429s] 3:                              ^
+[1.429s] 3:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "
+[1.430s] 3:                                                     ^
+[1.430s] 3:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "
+[1.430s] 3:           ^
+[1.431s] 3:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "
+[1.431s] 3:                       ^
+[1.432s] 3:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "
+[1.432s] 3:                                              ^
+[1.432s] 3:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")
+[1.433s] 3:           ^
+[1.433s] 3:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")
+[1.433s] 3:                       ^
+[1.434s] 3:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")
+[1.434s] 3:                                              ^
+[1.435s] 3:     print(f"collision: {coll.shape[0]:,} triangles @ {args.cell} m cell -> {args.output.name}")
+[1.435s] 3:           ^
+[1.435s] 3:         print(f"terrain top Z near ({sx:+.1f},{sy:+.1f}) = {_sample_height(verts, sx, sy):.3f} m")
+[1.436s] 3:               ^
+[1.436s] 3: if __name__ == "__main__":
+[1.436s] 3:                ^
+[1.437s] 3: 6     E231 missing whitespace after ','
+[1.437s] 3: 1     E501 line too long (100 > 99 characters)
+[1.437s] 3: 1     I100 Import statements are in the wrong order. 'from pathlib import Path' should be before 'import struct'
+[1.438s] 3: 23    Q000 Double quotes found but single quotes preferred
+[1.438s] 3: 
+[1.439s] 3: ./tools/make_terrain_collision.py:18:1: I100 Import statements are in the wrong order. 'from pathlib import Path' should be before 'import struct'
+[1.439s] 3: 
+[1.439s] 3: ./tools/make_terrain_collision.py:26:20: Q000 Double quotes found but single quotes preferred
+[1.440s] 3: 
+[1.440s] 3: ./tools/make_terrain_collision.py:28:34: Q000 Double quotes found but single quotes preferred
+[1.440s] 3: 
+[1.441s] 3: ./tools/make_terrain_collision.py:32:38: Q000 Double quotes found but single quotes preferred
+[1.441s] 3: 
+[1.441s] 3: ./tools/make_terrain_collision.py:40:43: Q000 Double quotes found but single quotes preferred
+[1.442s] 3: 
+[1.442s] 3: ./tools/make_terrain_collision.py:43:20: Q000 Double quotes found but single quotes preferred
+[1.442s] 3: 
+[1.443s] 3: ./tools/make_terrain_collision.py:44:18: Q000 Double quotes found but single quotes preferred
+[1.443s] 3: 
+[1.443s] 3: ./tools/make_terrain_collision.py:44:61: Q000 Double quotes found but single quotes preferred
+[1.444s] 3: 
+[1.444s] 3: ./tools/make_terrain_collision.py:45:30: Q000 Double quotes found but single quotes preferred
+[1.444s] 3: 
+[1.446s] 3: ./tools/make_terrain_collision.py:49:100: E501 line too long (100 > 99 characters)
+[1.446s] 3: 
+[1.446s] 3: ./tools/make_terrain_collision.py:94:35: Q000 Double quotes found but single quotes preferred
+[1.447s] 3: 
+[1.447s] 3: ./tools/make_terrain_collision.py:99:59: Q000 Double quotes found but single quotes preferred
+[1.447s] 3: 
+[1.448s] 3: ./tools/make_terrain_collision.py:105:21: Q000 Double quotes found but single quotes preferred
+[1.448s] 3: 
+[1.448s] 3: ./tools/make_terrain_collision.py:106:35: Q000 Double quotes found but single quotes preferred
+[1.449s] 3: 
+[1.449s] 3: ./tools/make_terrain_collision.py:107:21: Q000 Double quotes found but single quotes preferred
+[1.450s] 3: 
+[1.450s] 3: ./tools/make_terrain_collision.py:108:35: Q000 Double quotes found but single quotes preferred
+[1.450s] 3: 
+[1.451s] 3: ./tools/make_terrain_collision.py:109:21: Q000 Double quotes found but single quotes preferred
+[1.451s] 3: 
+[1.451s] 3: ./tools/make_terrain_collision.py:109:62: Q000 Double quotes found but single quotes preferred
+[1.452s] 3: 
+[1.452s] 3: ./tools/make_terrain_collision.py:114:11: Q000 Double quotes found but single quotes preferred
+[1.452s] 3: 
+[1.453s] 3: ./tools/make_terrain_collision.py:115:11: Q000 Double quotes found but single quotes preferred
+[1.453s] 3: 
+[1.454s] 3: ./tools/make_terrain_collision.py:115:30: E231 missing whitespace after ','
+[1.454s] 3: 
+[1.454s] 3: ./tools/make_terrain_collision.py:115:53: E231 missing whitespace after ','
+[1.455s] 3: 
+[1.455s] 3: ./tools/make_terrain_collision.py:116:11: Q000 Double quotes found but single quotes preferred
+[1.455s] 3: 
+[1.456s] 3: ./tools/make_terrain_collision.py:116:23: E231 missing whitespace after ','
+[1.456s] 3: 
+[1.457s] 3: ./tools/make_terrain_collision.py:116:46: E231 missing whitespace after ','
+[1.457s] 3: 
+[1.458s] 3: ./tools/make_terrain_collision.py:117:11: Q000 Double quotes found but single quotes preferred
+[1.458s] 3: 
+[1.459s] 3: ./tools/make_terrain_collision.py:117:23: E231 missing whitespace after ','
+[1.459s] 3: 
+[1.460s] 3: ./tools/make_terrain_collision.py:117:46: E231 missing whitespace after ','
+[1.460s] 3: 
+[1.461s] 3: ./tools/make_terrain_collision.py:123:11: Q000 Double quotes found but single quotes preferred
+[1.461s] 3: 
+[1.461s] 3: ./tools/make_terrain_collision.py:126:15: Q000 Double quotes found but single quotes preferred
+[1.462s] 3: 
+[1.462s] 3: ./tools/make_terrain_collision.py:129:16: Q000 Double quotes found but single quotes preferred
+[1.463s] 3: 
+[1.464s] 3: 
+[1.464s] 3: 4 files checked
+[1.465s] 3: 31 errors
+[1.465s] 3: 
+[1.465s] 3: 'E'-type errors: 7
+[1.466s] 3: 'I'-type errors: 1
+[1.466s] 3: 'Q'-type errors: 23
+[1.466s] 3: 
+[1.466s] 3: Checked files:
+[1.467s] 3: 
+[1.467s] 3: * ./scripts/arena_marker_publisher.py
+[1.467s] 3: * ./tools/convert_arena_step.py
+[1.468s] 3: * ./tools/make_terrain_collision.py
+[1.468s] 3: * ./launch/gazebo.launch.py
+[1.508s] 3: -- run_test.py: return code 1
+[1.508s] 3: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml'
+[1.525s] 3/7 Test #3: flake8 ...........................***Failed    0.62 sec
+[1.525s] test 4
+[1.525s]     Start 4: lint_cmake
+[1.525s] 
+[1.526s] 4: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_lint_cmake/lint_cmake.txt" "--command" "/opt/ros/jazzy/bin/ament_lint_cmake" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml"
+[1.526s] 4: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[1.526s] 4: Test timeout computed to be: 60
+[1.619s] 4: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[1.619s] 4:  - /opt/ros/jazzy/bin/ament_lint_cmake --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml
+[1.738s] 4: 
+[1.738s] 4: No problems found
+[1.755s] 4: -- run_test.py: return code 0
+[1.755s] 4: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml'
+[1.770s] 4/7 Test #4: lint_cmake .......................   Passed    0.24 sec
+[1.770s] test 5
+[1.770s]     Start 5: pep257
+[1.770s] 
+[1.770s] 5: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml"
+[1.771s] 5: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[1.771s] 5: Test timeout computed to be: 60
+[1.867s] 5: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[1.867s] 5:  - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml
+[2.051s] 5: ./tools/make_terrain_collision.py:2 at module level: D213: Multi-line docstring summary should start at the second line
+[2.051s] 5: ./tools/make_terrain_collision.py:50 in private function `_build_heightfield`: D213: Multi-line docstring summary should start at the second line
+[2.052s] 5: 2 errors
+[2.052s] 5: checking ./launch/gazebo.launch.py
+[2.053s] 5: checking ./scripts/arena_marker_publisher.py
+[2.053s] 5: checking ./tools/convert_arena_step.py
+[2.053s] 5: checking ./tools/make_terrain_collision.py
+[2.088s] 5: -- run_test.py: return code 1
+[2.088s] 5: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml'
+[2.109s] 5/7 Test #5: pep257 ...........................***Failed    0.34 sec
+[2.109s] test 6
+[2.110s]     Start 6: uncrustify
+[2.110s] 
+[2.110s] 6: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_uncrustify/uncrustify.txt" "--command" "/opt/ros/jazzy/bin/ament_uncrustify" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml"
+[2.110s] 6: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[2.110s] 6: Test timeout computed to be: 60
+[2.218s] 6: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[2.218s] 6:  - /opt/ros/jazzy/bin/ament_uncrustify --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml
+[2.368s] 6: No code style divergence in file 'include/space_gazebo/rover_key_teleop.hpp'
+[2.369s] 6: 
+[2.369s] 6: No code style divergence in file 'src/rover_key_teleop.cpp'
+[2.369s] 6: 
+[2.369s] 6: No problems found
+[2.398s] 6: -- run_test.py: return code 0
+[2.398s] 6: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/uncrustify.xunit.xml'
+[2.417s] 6/7 Test #6: uncrustify .......................   Passed    0.31 sec
+[2.418s] test 7
+[2.418s]     Start 7: xmllint
+[2.418s] 
+[2.418s] 7: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_xmllint/xmllint.txt" "--command" "/opt/ros/jazzy/bin/ament_xmllint" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml"
+[2.418s] 7: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo
+[2.418s] 7: Test timeout computed to be: 60
+[2.542s] 7: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':
+[2.542s] 7:  - /opt/ros/jazzy/bin/ament_xmllint --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml
+[2.681s] 7: File 'package.xml' is valid
+[2.682s] 7: 
+[2.682s] 7: No problems found
+[2.709s] 7: -- run_test.py: return code 0
+[2.710s] 7: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml'
+[2.731s] 7/7 Test #7: xmllint ..........................   Passed    0.31 sec
+[2.732s] 
+[2.732s] 57% tests passed, 3 tests failed out of 7
+[2.732s] 
+[2.733s] Label Time Summary:
+[2.733s] cppcheck      =   0.45 sec*proc (1 test)
+[2.733s] cpplint       =   0.36 sec*proc (1 test)
+[2.733s] flake8        =   0.62 sec*proc (1 test)
+[2.734s] lint_cmake    =   0.24 sec*proc (1 test)
+[2.734s] linter        =   2.63 sec*proc (7 tests)
+[2.734s] pep257        =   0.34 sec*proc (1 test)
+[2.734s] uncrustify    =   0.31 sec*proc (1 test)
+[2.735s] xmllint       =   0.31 sec*proc (1 test)
+[2.735s] 
+[2.735s] Total Test time (real) =   2.64 sec
+[2.735s] 
+[2.735s] The following tests FAILED:
+[2.736s] 	  2 - cpplint (Failed)
+[2.736s] 	  3 - flake8 (Failed)
+[2.736s] 	  5 - pep257 (Failed)
+[2.737s] Errors while running CTest
+[2.738s] Output from these tests are in: /home/kms301111/Desktop/space/build/space_gazebo/Testing/Temporary/LastTest.log
+[2.738s] Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.
+[2.742s] Invoked command in '/home/kms301111/Desktop/space/build/space_gazebo' returned '8': CMAKE_PREFIX_PATH=/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_perception:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kms301111/Desktop/space/install/space_gazebo/lib:/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process

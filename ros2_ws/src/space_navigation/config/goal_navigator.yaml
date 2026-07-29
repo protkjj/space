@@ -1,0 +1,9 @@
+space_goal_navigator:
+  ros__parameters:
+    use_sim_time: true
+    goal_topic: /goal_pose
+    clicked_point_topic: /clicked_point
+    action_name: navigate_to_pose
+    default_goal_frame: odom
+    accept_clicked_point: true
+    server_retry_period: 0.5

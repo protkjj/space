@@ -1,0 +1,32 @@
+running develop
+running egg_info
+creating space_bringup.egg-info
+writing space_bringup.egg-info/PKG-INFO
+writing dependency_links to space_bringup.egg-info/dependency_links.txt
+writing requirements to space_bringup.egg-info/requires.txt
+writing top-level names to space_bringup.egg-info/top_level.txt
+writing manifest file 'space_bringup.egg-info/SOURCES.txt'
+reading manifest file 'space_bringup.egg-info/SOURCES.txt'
+writing manifest file 'space_bringup.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/kms301111/Desktop/space/install/space_bringup/lib/python3.12/site-packages/space-bringup.egg-link (link to .)
+
+Installed /home/kms301111/Desktop/space/build/space_bringup
+running symlink_data
+creating /home/kms301111/Desktop/space/install/space_bringup/share/ament_index
+creating /home/kms301111/Desktop/space/install/space_bringup/share/ament_index/resource_index
+creating /home/kms301111/Desktop/space/install/space_bringup/share/ament_index/resource_index/packages
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/resource/space_bringup -> /home/kms301111/Desktop/space/install/space_bringup/share/ament_index/resource_index/packages
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/package.xml -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup
+creating /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/launch
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/launch/simulation.launch.py -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/launch
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/launch/perception.launch.py -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/launch
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/launch/hardware.launch.py -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/launch
+creating /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/config
+creating /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/config/common
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/config/common/ekf.yaml -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/config/common
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/config/common/slam_params.yaml -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/config/common
+creating /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/config/navigation
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/config/navigation/nav2_params.yaml -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/config/navigation
+creating /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/rviz
+symbolically linking /home/kms301111/Desktop/space/build/space_bringup/rviz/rover_simulation.rviz -> /home/kms301111/Desktop/space/install/space_bringup/share/space_bringup/rviz

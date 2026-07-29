@@ -1,0 +1,12 @@
+README.md
+package.xml
+setup.cfg
+setup.py
+resource/space_ardupilot_interface
+space_ardupilot_interface/__init__.py
+space_ardupilot_interface.egg-info/PKG-INFO
+space_ardupilot_interface.egg-info/SOURCES.txt
+space_ardupilot_interface.egg-info/dependency_links.txt
+space_ardupilot_interface.egg-info/requires.txt
+space_ardupilot_interface.egg-info/top_level.txt
+space_ardupilot_interface.egg-info/zip-safe

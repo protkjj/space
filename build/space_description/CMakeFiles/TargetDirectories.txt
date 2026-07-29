@@ -1,0 +1,9 @@
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/uninstall.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/space_description_uninstall.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/test.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/edit_cache.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/rebuild_cache.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/list_install_components.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/install.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/install/local.dir
+/home/kms301111/Desktop/space/build/space_description/CMakeFiles/install/strip.dir

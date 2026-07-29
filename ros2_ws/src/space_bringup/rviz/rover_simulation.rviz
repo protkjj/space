@@ -5,6 +5,9 @@ Visualization Manager:
   Class: ""
   Global Options:
     Background Color: 32; 36; 42
+    # Gazebo's odom frame is the absolute simulation-world frame. Keeping
+    # RViz fixed here prevents SLAM map->odom corrections from moving or
+    # tilting the physical arena visualization with the rover.
     Fixed Frame: odom
     Frame Rate: 30
   Displays:
@@ -14,7 +17,7 @@ Visualization Manager:
       Cell Size: 0.5
     - Class: rviz_default_plugins/TF
       Name: TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
     - Class: rviz_default_plugins/RobotModel
       Name: Rover
@@ -27,10 +30,24 @@ Visualization Manager:
       Topic:
         Value: /odom
     - Class: rviz_default_plugins/Path
-      Name: Rover Path
-      Enabled: false
+      Name: Shortest Global Plan
+      Enabled: true
       Topic:
         Value: /plan
+    - Class: rviz_default_plugins/Map
+      Name: SLAM Map
+      Enabled: false
+      Topic:
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        Value: /map
+    - Class: rviz_default_plugins/Map
+      Name: Nav2 Global Costmap
+      Enabled: false
+      Topic:
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        Value: /global_costmap/costmap
     - Class: rviz_default_plugins/Marker
       Name: Arena
       Enabled: true
@@ -43,7 +60,11 @@ Visualization Manager:
         Value: /camera/image_raw
     - Class: rviz_default_plugins/Image
       Name: Depth
-      Enabled: false
+      Enabled: true
+      Max Value: 8
+      Median window: 5
+      Min Value: 0.1
+      Normalize Range: false
       Topic:
         Value: /camera/depth_image_raw
     - Class: rviz_default_plugins/PointCloud2
@@ -95,22 +116,32 @@ Visualization Manager:
       Enabled: true
       Topic:
         Value: /terrain/step_markers
-    - Class: rviz_default_plugins/PointCloud2
-      Name: Terrain Traversability
+    - Alpha: 0.8
+      Autocompute Intensity Bounds: false
+      Channel Name: traversability
+      Class: rviz_default_plugins/PointCloud2
+      Color Transformer: Intensity
       Enabled: true
-      Size (Pixels): 5
-      Style: Points
+      Max Color: 0; 255; 0
+      Max Intensity: 1
+      Min Color: 255; 0; 0
+      Min Intensity: 0
+      Name: Mission Traversability
+      Position Transformer: XYZ
+      Size (m): 0.12
+      Style: Flat Squares
       Topic:
         Reliability Policy: Best Effort
-        Value: /terrain/traversability
+        Value: /mission/traversability
+      Use rainbow: false
     - Class: rviz_default_plugins/MarkerArray
-      Name: Traversability Cells
-      Enabled: true
+      Name: Perception Traversability Cells
+      Enabled: false
       Topic:
         Value: /terrain/traversability_markers
     - Class: rviz_default_plugins/Map
       Name: Nav2 Local Costmap
-      Enabled: true
+      Enabled: false
       Topic:
         Durability Policy: Transient Local
         Reliability Policy: Reliable
@@ -141,10 +172,15 @@ Visualization Manager:
     - Class: rviz_default_plugins/Interact
     - Class: rviz_default_plugins/MoveCamera
     - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/SetGoal
+      Topic: /goal_pose
+    - Class: rviz_default_plugins/PublishPoint
+      Topic: /clicked_point
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
       Distance: 6
+      Target Frame: odom
       Focal Point:
         X: 0
         Y: 0

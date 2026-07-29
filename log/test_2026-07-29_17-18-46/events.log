@@ -1,0 +1,316 @@
+[0.000000] (-) TimerEvent: {}
+[0.000152] (space_controller) JobQueued: {'identifier': 'space_controller', 'dependencies': OrderedDict({'space_controller': '/home/kms301111/Desktop/space/install/space_controller'})}
+[0.000238] (space_gazebo) JobQueued: {'identifier': 'space_gazebo', 'dependencies': OrderedDict({'space_description': '/home/kms301111/Desktop/space/install/space_description', 'space_gazebo': '/home/kms301111/Desktop/space/install/space_gazebo'})}
+[0.000303] (space_bringup) JobQueued: {'identifier': 'space_bringup', 'dependencies': OrderedDict({'space_controller': '/home/kms301111/Desktop/space/install/space_controller', 'space_description': '/home/kms301111/Desktop/space/install/space_description', 'space_perception': '/home/kms301111/Desktop/space/install/space_perception', 'space_gazebo': '/home/kms301111/Desktop/space/install/space_gazebo', 'space_bringup': '/home/kms301111/Desktop/space/install/space_bringup'})}
+[0.000374] (space_controller) JobStarted: {'identifier': 'space_controller'}
+[0.018180] (space_gazebo) JobStarted: {'identifier': 'space_gazebo'}
+[0.098819] (-) TimerEvent: {}
+[0.199198] (-) TimerEvent: {}
+[0.299458] (-) TimerEvent: {}
+[0.355764] (space_controller) Command: {'cmd': ['/usr/bin/python3', '-m', 'pytest'], 'cwd': '/home/kms301111/Desktop/space/ros2_ws/src/space_controller', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'VSCODE_CWD': '/home/kms301111', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'CODEX_CI': '1', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'kms301111', 'CODEX_INTERNAL_ORIGINATOR_OVERRIDE': 'codex_vscode', 'VSCODE_NLS_CONFIG': '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'wayland', 'DEBUG': 'release', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/kms301111', 'CHROME_DESKTOP': 'code.desktop', 'DESKTOP_SESSION': 'ubuntu', 'NVM_BIN': '/home/kms301111/.nvm/versions/node/v24.13.1/bin', 'NVM_INC': '/home/kms301111/.nvm/versions/node/v24.13.1/include/node', 'VSCODE_IPC_HOOK': '/run/user/1000/vscode-90e2a958-1.10-main.sock', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1968', 'LC_CTYPE': 'C.UTF-8', 'SYSTEMD_EXEC_PID': '2264', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'NO_COLOR': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': '', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '3706', 'NVM_DIR': '/home/kms301111/.nvm', 'VSCODE_CRASH_REPORTER_PROCESS_TYPE': 'extensionHost', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/kms301111/Desktop/space/install', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'kms301111', 'JOURNAL_STREAM': '10:21154', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'RUST_LOG': 'warn', 'USERNAME': 'kms301111', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'PATH': '/home/kms301111/.local/bin:/home/kms301111/.codex/tmp/arg0/codex-arg0i2b0bN:/home/kms301111/.local/bin:/home/kms301111/.nvm/versions/node/v24.13.1/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/kms301111/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/xtensa-esp-elf/bin/:/home/kms301111/.vscode/extensions/openai.chatgpt-26.721.41059-linux-x64/bin/linux-x86_64', 'SESSION_MANAGER': 'local/humxn:@/tmp/.ICE-unix/2228,unix/humxn:/tmp/.ICE-unix/2228', 'INVOCATION_ID': 'f410d59697474f7bb91c262df5862518', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'CODEX_SANDBOX_NETWORK_DISABLED': '1', 'LANG': 'C.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'GH_PAGER': 'cat', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.G50AT3', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_controller:/home/kms301111/Desktop/space/install/space_bringup:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_ardupilot_interface:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'ELECTRON_RUN_AS_NODE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CODEX_THREAD_ID': '019facf1-3c19-7143-a044-7d2d9773d5e3', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/kms301111/Desktop/space/build/space_controller', 'LC_ALL': 'C.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'VSCODE_CODE_CACHE_PATH': '/home/kms301111/.config/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'QTWEBENGINE_DICTIONARIES_PATH': '/usr/share/hunspell-bdic/', 'PYTHONPATH': '/home/kms301111/Desktop/space/build/space_controller:/home/kms301111/Desktop/space/install/space_controller/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_bringup:/home/kms301111/Desktop/space/install/space_bringup/lib/python3.12/site-packages:/home/kms301111/Desktop/space/install/space_perception/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_ardupilot_interface:/home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor', 'VSCODE_PID': '3706', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTEST_ADDOPTS': '--tb=short --junit-xml=/home/kms301111/Desktop/space/build/space_controller/pytest.xml --junit-prefix=space_controller -o cache_dir=/home/kms301111/Desktop/space/build/space_controller/.pytest_cache'}, 'shell': False}
+[0.399610] (-) TimerEvent: {}
+[0.411757] (space_gazebo) Command: {'cmd': ['/usr/bin/ctest', '-C', 'Release', '-D', 'ExperimentalTest', '--no-compress-output', '-V', '--force-new-ctest-process'], 'cwd': '/home/kms301111/Desktop/space/build/space_gazebo', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'VSCODE_CWD': '/home/kms301111', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'CODEX_CI': '1', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'kms301111', 'CODEX_INTERNAL_ORIGINATOR_OVERRIDE': 'codex_vscode', 'VSCODE_NLS_CONFIG': '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'wayland', 'DEBUG': 'release', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/kms301111', 'CHROME_DESKTOP': 'code.desktop', 'DESKTOP_SESSION': 'ubuntu', 'NVM_BIN': '/home/kms301111/.nvm/versions/node/v24.13.1/bin', 'NVM_INC': '/home/kms301111/.nvm/versions/node/v24.13.1/include/node', 'VSCODE_IPC_HOOK': '/run/user/1000/vscode-90e2a958-1.10-main.sock', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1968', 'LC_CTYPE': 'C.UTF-8', 'SYSTEMD_EXEC_PID': '2264', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'NO_COLOR': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': '', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '3706', 'NVM_DIR': '/home/kms301111/.nvm', 'VSCODE_CRASH_REPORTER_PROCESS_TYPE': 'extensionHost', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/kms301111/Desktop/space/install', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'kms301111', 'JOURNAL_STREAM': '10:21154', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'RUST_LOG': 'warn', 'USERNAME': 'kms301111', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'PATH': '/home/kms301111/.local/bin:/home/kms301111/.codex/tmp/arg0/codex-arg0i2b0bN:/home/kms301111/.local/bin:/home/kms301111/.nvm/versions/node/v24.13.1/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/kms301111/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/xtensa-esp-elf/bin/:/home/kms301111/.vscode/extensions/openai.chatgpt-26.721.41059-linux-x64/bin/linux-x86_64', 'SESSION_MANAGER': 'local/humxn:@/tmp/.ICE-unix/2228,unix/humxn:/tmp/.ICE-unix/2228', 'INVOCATION_ID': 'f410d59697474f7bb91c262df5862518', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'CODEX_SANDBOX_NETWORK_DISABLED': '1', 'LANG': 'C.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'GH_PAGER': 'cat', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.G50AT3', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_bringup:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_controller:/home/kms301111/Desktop/space/install/space_ardupilot_interface:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'ELECTRON_RUN_AS_NODE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CODEX_THREAD_ID': '019facf1-3c19-7143-a044-7d2d9773d5e3', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/kms301111/Desktop/space/build/space_gazebo', 'LC_ALL': 'C.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'VSCODE_CODE_CACHE_PATH': '/home/kms301111/.config/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'QTWEBENGINE_DICTIONARIES_PATH': '/usr/share/hunspell-bdic/', 'PYTHONPATH': '/home/kms301111/Desktop/space/build/space_bringup:/home/kms301111/Desktop/space/install/space_bringup/lib/python3.12/site-packages:/home/kms301111/Desktop/space/install/space_perception/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_controller:/home/kms301111/Desktop/space/install/space_controller/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_ardupilot_interface:/home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_perception:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor', 'VSCODE_PID': '3706'}), 'shell': False}
+[0.428692] (space_gazebo) StdoutLine: {'line': b'UpdateCTestConfiguration  from :/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.429437] (space_gazebo) StdoutLine: {'line': b'Parse Config file:/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.429664] (space_gazebo) StdoutLine: {'line': b'   Site: humxn\n'}
+[0.429863] (space_gazebo) StdoutLine: {'line': b'   Build name: (empty)\n'}
+[0.430015] (space_gazebo) StdoutLine: {'line': b' Add coverage exclude regular expressions.\n'}
+[0.430455] (space_gazebo) StdoutLine: {'line': b'Create new tag: 20260729-0818 - Experimental\n'}
+[0.430646] (space_gazebo) StdoutLine: {'line': b'UpdateCTestConfiguration  from :/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.430909] (space_gazebo) StdoutLine: {'line': b'Parse Config file:/home/kms301111/Desktop/space/build/space_gazebo/CTestConfiguration.ini\n'}
+[0.431057] (space_gazebo) StdoutLine: {'line': b'Test project /home/kms301111/Desktop/space/build/space_gazebo\n'}
+[0.431189] (space_gazebo) StdoutLine: {'line': b'Constructing a list of tests\n'}
+[0.431326] (space_gazebo) StdoutLine: {'line': b'Done constructing a list of tests\n'}
+[0.431465] (space_gazebo) StdoutLine: {'line': b'Updating test list for fixtures\n'}
+[0.431609] (space_gazebo) StdoutLine: {'line': b'Added 0 tests to meet fixture requirements\n'}
+[0.431738] (space_gazebo) StdoutLine: {'line': b'Checking test dependency graph...\n'}
+[0.431867] (space_gazebo) StdoutLine: {'line': b'Checking test dependency graph end\n'}
+[0.432001] (space_gazebo) StdoutLine: {'line': b'test 1\n'}
+[0.434241] (space_gazebo) StdoutLine: {'line': b'    Start 1: flake8\n'}
+[0.434431] (space_gazebo) StdoutLine: {'line': b'\n'}
+[0.434512] (space_gazebo) StdoutLine: {'line': b'1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml"\n'}
+[0.434749] (space_gazebo) StdoutLine: {'line': b'1: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[0.434828] (space_gazebo) StdoutLine: {'line': b'1: Test timeout computed to be: 60\n'}
+[0.499785] (-) TimerEvent: {}
+[0.529468] (space_gazebo) StdoutLine: {'line': b"1: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[0.529876] (space_gazebo) StdoutLine: {'line': b'1:  - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml\n'}
+[0.599938] (-) TimerEvent: {}
+[0.700212] (-) TimerEvent: {}
+[0.800472] (-) TimerEvent: {}
+[0.900762] (-) TimerEvent: {}
+[1.001081] (-) TimerEvent: {}
+[1.037463] (space_gazebo) StdoutLine: {'line': b'1: from pathlib import Path\n'}
+[1.038101] (space_gazebo) StdoutLine: {'line': b'1: ^\n'}
+[1.038324] (space_gazebo) StdoutLine: {'line': b'1:     with path.open("rb") as fh:\n'}
+[1.038521] (space_gazebo) StdoutLine: {'line': b'1:                    ^\n'}
+[1.038715] (space_gazebo) StdoutLine: {'line': b'1:         (count,) = struct.unpack("<I", fh.read(4))\n'}
+[1.038911] (space_gazebo) StdoutLine: {'line': b'1:                                  ^\n'}
+[1.039118] (space_gazebo) StdoutLine: {'line': b'1:     floats = raw[:, :48].copy().view("<f4").reshape(count, 12)\n'}
+[1.039319] (space_gazebo) StdoutLine: {'line': b'1:                                      ^\n'}
+[1.039615] (space_gazebo) StdoutLine: {'line': b'1:     payload = np.zeros((count, 12), dtype="<f4")\n'}
+[1.039926] (space_gazebo) StdoutLine: {'line': b'1:                                           ^\n'}
+[1.040256] (space_gazebo) StdoutLine: {'line': b'1:     with path.open("wb") as fh:\n'}
+[1.040544] (space_gazebo) StdoutLine: {'line': b'1:                    ^\n'}
+[1.040829] (space_gazebo) StdoutLine: {'line': b'1:         fh.write(b"terrain collision heightfield".ljust(80, b"\\0"))\n'}
+[1.041303] (space_gazebo) StdoutLine: {'line': b'1:                  ^\n'}
+[1.041594] (space_gazebo) StdoutLine: {'line': b'1:         fh.write(b"terrain collision heightfield".ljust(80, b"\\0"))\n'}
+[1.041897] (space_gazebo) StdoutLine: {'line': b'1:                                                             ^\n'}
+[1.042245] (space_gazebo) StdoutLine: {'line': b'1:         fh.write(struct.pack("<I", count))\n'}
+[1.042543] (space_gazebo) StdoutLine: {'line': b'1:                              ^\n'}
+[1.042824] (space_gazebo) StdoutLine: {'line': b'1: def _build_heightfield(verts: np.ndarray, cell: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:\n'}
+[1.043143] (space_gazebo) StdoutLine: {'line': b'1:                                                                                                    ^\n'}
+[1.043450] (space_gazebo) StdoutLine: {'line': b'1:     return np.asarray(tris, dtype="<f4")\n'}
+[1.043745] (space_gazebo) StdoutLine: {'line': b'1:                                   ^\n'}
+[1.044120] (space_gazebo) StdoutLine: {'line': b'1:     return float(verts[m, 2].max()) if m.any() else float("nan")\n'}
+[1.044463] (space_gazebo) StdoutLine: {'line': b'1:                                                           ^\n'}
+[1.044779] (space_gazebo) StdoutLine: {'line': b'1:     ap.add_argument("--source", type=Path,\n'}
+[1.045753] (space_gazebo) StdoutLine: {'line': b'1:                     ^\n'}
+[1.046148] (space_gazebo) StdoutLine: {'line': b'1:                     default=pkg / "models/arena_terrain_v04/meshes/arena_visual.stl")\n'}
+[1.046461] (space_gazebo) StdoutLine: {'line': b'1:                                   ^\n'}
+[1.046752] (space_gazebo) StdoutLine: {'line': b'1:     ap.add_argument("--output", type=Path,\n'}
+[1.047059] (space_gazebo) StdoutLine: {'line': b'1:                     ^\n'}
+[1.047335] (space_gazebo) StdoutLine: {'line': b'1:                     default=pkg / "models/arena_terrain_v04/meshes/arena_collision.stl")\n'}
+[1.047626] (space_gazebo) StdoutLine: {'line': b'1:                                   ^\n'}
+[1.047909] (space_gazebo) StdoutLine: {'line': b'1:     ap.add_argument("--cell", type=float, default=0.10, help="grid cell size (m)")\n'}
+[1.048208] (space_gazebo) StdoutLine: {'line': b'1:                     ^\n'}
+[1.048477] (space_gazebo) StdoutLine: {'line': b'1:     ap.add_argument("--cell", type=float, default=0.10, help="grid cell size (m)")\n'}
+[1.048746] (space_gazebo) StdoutLine: {'line': b'1:                                                              ^\n'}
+[1.049045] (space_gazebo) StdoutLine: {'line': b'1:     print(f"source: {tris.shape[0]:,} triangles, {verts.shape[0]:,} vertices")\n'}
+[1.049332] (space_gazebo) StdoutLine: {'line': b'1:           ^\n'}
+[1.049619] (space_gazebo) StdoutLine: {'line': b'1:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "\n'}
+[1.049886] (space_gazebo) StdoutLine: {'line': b'1:           ^\n'}
+[1.050179] (space_gazebo) StdoutLine: {'line': b'1:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "\n'}
+[1.050470] (space_gazebo) StdoutLine: {'line': b'1:                              ^\n'}
+[1.050742] (space_gazebo) StdoutLine: {'line': b'1:     print(f"bounds X[{verts[:,0].min():.2f},{verts[:,0].max():.2f}] "\n'}
+[1.051039] (space_gazebo) StdoutLine: {'line': b'1:                                                     ^\n'}
+[1.051308] (space_gazebo) StdoutLine: {'line': b'1:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "\n'}
+[1.051581] (space_gazebo) StdoutLine: {'line': b'1:           ^\n'}
+[1.051849] (space_gazebo) StdoutLine: {'line': b'1:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "\n'}
+[1.052148] (space_gazebo) StdoutLine: {'line': b'1:                       ^\n'}
+[1.052427] (space_gazebo) StdoutLine: {'line': b'1:           f"Y[{verts[:,1].min():.2f},{verts[:,1].max():.2f}] "\n'}
+[1.052763] (space_gazebo) StdoutLine: {'line': b'1:                                              ^\n'}
+[1.053056] (space_gazebo) StdoutLine: {'line': b'1:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")\n'}
+[1.053337] (space_gazebo) StdoutLine: {'line': b'1:           ^\n'}
+[1.053630] (space_gazebo) StdoutLine: {'line': b'1:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")\n'}
+[1.053893] (space_gazebo) StdoutLine: {'line': b'1:                       ^\n'}
+[1.054184] (space_gazebo) StdoutLine: {'line': b'1:           f"Z[{verts[:,2].min():.2f},{verts[:,2].max():.2f}]")\n'}
+[1.054444] (space_gazebo) StdoutLine: {'line': b'1:                                              ^\n'}
+[1.054720] (space_gazebo) StdoutLine: {'line': b'1:     print(f"collision: {coll.shape[0]:,} triangles @ {args.cell} m cell -> {args.output.name}")\n'}
+[1.055009] (space_gazebo) StdoutLine: {'line': b'1:           ^\n'}
+[1.055287] (space_gazebo) StdoutLine: {'line': b'1:         print(f"terrain top Z near ({sx:+.1f},{sy:+.1f}) = {_sample_height(verts, sx, sy):.3f} m")\n'}
+[1.055561] (space_gazebo) StdoutLine: {'line': b'1:               ^\n'}
+[1.055825] (space_gazebo) StdoutLine: {'line': b'1: if __name__ == "__main__":\n'}
+[1.056122] (space_gazebo) StdoutLine: {'line': b'1:                ^\n'}
+[1.056391] (space_gazebo) StdoutLine: {'line': b"1: 6     E231 missing whitespace after ','\n"}
+[1.056652] (space_gazebo) StdoutLine: {'line': b'1: 1     E501 line too long (100 > 99 characters)\n'}
+[1.056927] (space_gazebo) StdoutLine: {'line': b"1: 1     I100 Import statements are in the wrong order. 'from pathlib import Path' should be before 'import struct'\n"}
+[1.057229] (space_gazebo) StdoutLine: {'line': b'1: 23    Q000 Double quotes found but single quotes preferred\n'}
+[1.057530] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.057804] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:18:1: I100 Import statements are in the wrong order. 'from pathlib import Path' should be before 'import struct'\n"}
+[1.058099] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.058382] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:26:20: Q000 Double quotes found but single quotes preferred\n'}
+[1.058657] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.059002] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:28:34: Q000 Double quotes found but single quotes preferred\n'}
+[1.059285] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.059551] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:32:38: Q000 Double quotes found but single quotes preferred\n'}
+[1.059831] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.060113] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:40:43: Q000 Double quotes found but single quotes preferred\n'}
+[1.060415] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.060712] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:43:20: Q000 Double quotes found but single quotes preferred\n'}
+[1.061019] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.061335] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:44:18: Q000 Double quotes found but single quotes preferred\n'}
+[1.061658] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.061973] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:44:61: Q000 Double quotes found but single quotes preferred\n'}
+[1.062305] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.062611] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:45:30: Q000 Double quotes found but single quotes preferred\n'}
+[1.062913] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.063233] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:49:100: E501 line too long (100 > 99 characters)\n'}
+[1.063536] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.063836] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:94:35: Q000 Double quotes found but single quotes preferred\n'}
+[1.064180] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.064479] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:99:59: Q000 Double quotes found but single quotes preferred\n'}
+[1.064745] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.065166] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:105:21: Q000 Double quotes found but single quotes preferred\n'}
+[1.065480] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.065749] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:106:35: Q000 Double quotes found but single quotes preferred\n'}
+[1.066040] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.066306] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:107:21: Q000 Double quotes found but single quotes preferred\n'}
+[1.066585] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.066853] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:108:35: Q000 Double quotes found but single quotes preferred\n'}
+[1.067150] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.067421] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:109:21: Q000 Double quotes found but single quotes preferred\n'}
+[1.067689] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.067965] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:109:62: Q000 Double quotes found but single quotes preferred\n'}
+[1.068251] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.068531] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:114:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.068799] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.069079] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:115:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.069363] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.069638] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:115:30: E231 missing whitespace after ','\n"}
+[1.069901] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.070209] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:115:53: E231 missing whitespace after ','\n"}
+[1.070487] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.070769] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:116:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.071069] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.071342] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:116:23: E231 missing whitespace after ','\n"}
+[1.071625] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.071897] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:116:46: E231 missing whitespace after ','\n"}
+[1.072211] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.072488] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:117:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.072760] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.073047] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:117:23: E231 missing whitespace after ','\n"}
+[1.073346] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.073626] (space_gazebo) StdoutLine: {'line': b"1: ./tools/make_terrain_collision.py:117:46: E231 missing whitespace after ','\n"}
+[1.074316] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.074698] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:123:11: Q000 Double quotes found but single quotes preferred\n'}
+[1.075073] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.075366] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:126:15: Q000 Double quotes found but single quotes preferred\n'}
+[1.076034] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.076374] (space_gazebo) StdoutLine: {'line': b'1: ./tools/make_terrain_collision.py:129:16: Q000 Double quotes found but single quotes preferred\n'}
+[1.076712] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.077007] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.077279] (space_gazebo) StdoutLine: {'line': b'1: 4 files checked\n'}
+[1.077559] (space_gazebo) StdoutLine: {'line': b'1: 31 errors\n'}
+[1.077827] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.078126] (space_gazebo) StdoutLine: {'line': b"1: 'E'-type errors: 7\n"}
+[1.078440] (space_gazebo) StdoutLine: {'line': b"1: 'I'-type errors: 1\n"}
+[1.079140] (space_gazebo) StdoutLine: {'line': b"1: 'Q'-type errors: 23\n"}
+[1.079541] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.079903] (space_gazebo) StdoutLine: {'line': b'1: Checked files:\n'}
+[1.080237] (space_gazebo) StdoutLine: {'line': b'1: \n'}
+[1.080543] (space_gazebo) StdoutLine: {'line': b'1: * ./scripts/arena_marker_publisher.py\n'}
+[1.081247] (space_gazebo) StdoutLine: {'line': b'1: * ./tools/convert_arena_step.py\n'}
+[1.081617] (space_gazebo) StdoutLine: {'line': b'1: * ./tools/make_terrain_collision.py\n'}
+[1.081954] (space_gazebo) StdoutLine: {'line': b'1: * ./launch/gazebo.launch.py\n'}
+[1.101283] (-) TimerEvent: {}
+[1.144300] (space_gazebo) StdoutLine: {'line': b'1: -- run_test.py: return code 1\n'}
+[1.144737] (space_gazebo) StdoutLine: {'line': b"1: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/flake8.xunit.xml'\n"}
+[1.168810] (space_gazebo) StdoutLine: {'line': b'1/4 Test #1: flake8 ...........................***Failed    0.73 sec\n'}
+[1.169493] (space_gazebo) StdoutLine: {'line': b'test 2\n'}
+[1.169732] (space_gazebo) StdoutLine: {'line': b'    Start 2: lint_cmake\n'}
+[1.169966] (space_gazebo) StdoutLine: {'line': b'\n'}
+[1.170362] (space_gazebo) StdoutLine: {'line': b'2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_lint_cmake/lint_cmake.txt" "--command" "/opt/ros/jazzy/bin/ament_lint_cmake" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml"\n'}
+[1.170650] (space_gazebo) StdoutLine: {'line': b'2: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[1.170919] (space_gazebo) StdoutLine: {'line': b'2: Test timeout computed to be: 60\n'}
+[1.201408] (-) TimerEvent: {}
+[1.289640] (space_gazebo) StdoutLine: {'line': b"2: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[1.290012] (space_gazebo) StdoutLine: {'line': b'2:  - /opt/ros/jazzy/bin/ament_lint_cmake --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml\n'}
+[1.301536] (-) TimerEvent: {}
+[1.401876] (-) TimerEvent: {}
+[1.413267] (space_gazebo) StdoutLine: {'line': b'2: \n'}
+[1.413651] (space_gazebo) StdoutLine: {'line': b'2: No problems found\n'}
+[1.429182] (space_gazebo) StdoutLine: {'line': b'2: -- run_test.py: return code 0\n'}
+[1.429570] (space_gazebo) StdoutLine: {'line': b"2: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/lint_cmake.xunit.xml'\n"}
+[1.442348] (space_gazebo) StdoutLine: {'line': b'2/4 Test #2: lint_cmake .......................   Passed    0.27 sec\n'}
+[1.442739] (space_gazebo) StdoutLine: {'line': b'test 3\n'}
+[1.442956] (space_gazebo) StdoutLine: {'line': b'    Start 3: pep257\n'}
+[1.443169] (space_gazebo) StdoutLine: {'line': b'\n'}
+[1.443368] (space_gazebo) StdoutLine: {'line': b'3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml"\n'}
+[1.443577] (space_gazebo) StdoutLine: {'line': b'3: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[1.443781] (space_gazebo) StdoutLine: {'line': b'3: Test timeout computed to be: 60\n'}
+[1.502125] (-) TimerEvent: {}
+[1.504117] (space_controller) StdoutLine: {'line': b'============================= test session starts ==============================\n'}
+[1.504657] (space_controller) StdoutLine: {'line': b'platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0\n'}
+[1.504904] (space_controller) StdoutLine: {'line': b'cachedir: /home/kms301111/Desktop/space/build/space_controller/.pytest_cache\n'}
+[1.505158] (space_controller) StdoutLine: {'line': b'rootdir: /home/kms301111/Desktop/space/ros2_ws/src/space_controller\n'}
+[1.505400] (space_controller) StdoutLine: {'line': b'plugins: ament-lint-0.17.4, ament-pep257-0.17.4, ament-flake8-0.17.4, launch-testing-ros-0.26.11, ament-xmllint-0.17.4, launch-testing-3.4.10, ament-copyright-0.17.4, typeguard-4.1.5, colcon-core-0.20.1, cov-4.1.0\n'}
+[1.505648] (space_controller) StdoutLine: {'line': b'collected 43 items\n'}
+[1.506257] (space_controller) StdoutLine: {'line': b'\n'}
+[1.539335] (space_gazebo) StdoutLine: {'line': b"3: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[1.539687] (space_gazebo) StdoutLine: {'line': b'3:  - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml\n'}
+[1.550022] (space_controller) StdoutLine: {'line': b'test/test_command_safety.py .........................................    [ 95%]\n'}
+[1.602261] (-) TimerEvent: {}
+[1.703104] (-) TimerEvent: {}
+[1.803413] (-) TimerEvent: {}
+[1.849483] (space_controller) StdoutLine: {'line': b'test/test_flake8.py .                                                    [ 97%]\n'}
+[1.849871] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:2 at module level: D213: Multi-line docstring summary should start at the second line\n'}
+[1.850763] (space_gazebo) StdoutLine: {'line': b'3: ./tools/make_terrain_collision.py:50 in private function `_build_heightfield`: D213: Multi-line docstring summary should start at the second line\n'}
+[1.851395] (space_gazebo) StdoutLine: {'line': b'3: 2 errors\n'}
+[1.851877] (space_gazebo) StdoutLine: {'line': b'3: checking ./launch/gazebo.launch.py\n'}
+[1.852142] (space_gazebo) StdoutLine: {'line': b'3: checking ./scripts/arena_marker_publisher.py\n'}
+[1.852428] (space_gazebo) StdoutLine: {'line': b'3: checking ./tools/convert_arena_step.py\n'}
+[1.852716] (space_gazebo) StdoutLine: {'line': b'3: checking ./tools/make_terrain_collision.py\n'}
+[1.878255] (space_gazebo) StdoutLine: {'line': b'3: -- run_test.py: return code 1\n'}
+[1.878681] (space_gazebo) StdoutLine: {'line': b"3: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/pep257.xunit.xml'\n"}
+[1.898325] (space_controller) StderrLine: {'line': b'\n'}
+[1.899007] (space_controller) StderrLine: {'line': b'=============================== warnings summary ===============================\n'}
+[1.899264] (space_controller) StderrLine: {'line': b'test/test_flake8.py: 12 warnings\n'}
+[1.899475] (space_controller) StderrLine: {'line': b'  Warning: This process (pid=34) is multi-threaded, use of fork() may lead to deadlocks in the child.\n'}
+[1.899751] (space_controller) StderrLine: {'line': b'\n'}
+[1.899974] (space_controller) StderrLine: {'line': b'-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n'}
+[1.901034] (space_controller) StdoutLine: {'line': b'test/test_pep257.py .                                                    [100%]\n'}
+[1.901483] (space_controller) StdoutLine: {'line': b'- generated xml file: /home/kms301111/Desktop/space/build/space_controller/pytest.xml -\n'}
+[1.901742] (space_controller) StdoutLine: {'line': b'======================= 43 passed, 12 warnings in 0.96s ========================\n'}
+[1.902039] (space_gazebo) StdoutLine: {'line': b'3/4 Test #3: pep257 ...........................***Failed    0.46 sec\n'}
+[1.902341] (space_gazebo) StdoutLine: {'line': b'test 4\n'}
+[1.902611] (space_gazebo) StdoutLine: {'line': b'    Start 4: xmllint\n'}
+[1.902865] (space_gazebo) StdoutLine: {'line': b'\n'}
+[1.903167] (space_gazebo) StdoutLine: {'line': b'4: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml" "--package-name" "space_gazebo" "--output-file" "/home/kms301111/Desktop/space/build/space_gazebo/ament_xmllint/xmllint.txt" "--command" "/opt/ros/jazzy/bin/ament_xmllint" "--xunit-file" "/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml"\n'}
+[1.903458] (-) TimerEvent: {}
+[1.903510] (space_gazebo) StdoutLine: {'line': b'4: Working Directory: /home/kms301111/Desktop/space/ros2_ws/src/space_gazebo\n'}
+[1.903784] (space_gazebo) StdoutLine: {'line': b'4: Test timeout computed to be: 60\n'}
+[2.003668] (-) TimerEvent: {}
+[2.006708] (space_gazebo) StdoutLine: {'line': b"4: -- run_test.py: invoking following command in '/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo':\n"}
+[2.007233] (space_gazebo) StdoutLine: {'line': b'4:  - /opt/ros/jazzy/bin/ament_xmllint --xunit-file /home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml\n'}
+[2.103819] (-) TimerEvent: {}
+[2.151656] (space_controller) CommandEnded: {'returncode': 0}
+[2.152496] (space_controller) JobEnded: {'identifier': 'space_controller', 'rc': 0}
+[2.203994] (-) TimerEvent: {}
+[2.216554] (space_gazebo) StdoutLine: {'line': b"4: File 'package.xml' is valid\n"}
+[2.217029] (space_gazebo) StdoutLine: {'line': b'4: \n'}
+[2.217281] (space_gazebo) StdoutLine: {'line': b'4: No problems found\n'}
+[2.249945] (space_gazebo) StdoutLine: {'line': b'4: -- run_test.py: return code 0\n'}
+[2.250715] (space_gazebo) StdoutLine: {'line': b"4: -- run_test.py: verify result file '/home/kms301111/Desktop/space/build/space_gazebo/test_results/space_gazebo/xmllint.xunit.xml'\n"}
+[2.276280] (space_gazebo) StdoutLine: {'line': b'4/4 Test #4: xmllint ..........................   Passed    0.38 sec\n'}
+[2.276900] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.277066] (space_gazebo) StdoutLine: {'line': b'50% tests passed, 2 tests failed out of 4\n'}
+[2.277174] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.277274] (space_gazebo) StdoutLine: {'line': b'Label Time Summary:\n'}
+[2.277393] (space_gazebo) StdoutLine: {'line': b'flake8        =   0.73 sec*proc (1 test)\n'}
+[2.277544] (space_gazebo) StdoutLine: {'line': b'lint_cmake    =   0.27 sec*proc (1 test)\n'}
+[2.277677] (space_gazebo) StdoutLine: {'line': b'linter        =   1.84 sec*proc (4 tests)\n'}
+[2.277804] (space_gazebo) StdoutLine: {'line': b'pep257        =   0.46 sec*proc (1 test)\n'}
+[2.277948] (space_gazebo) StdoutLine: {'line': b'xmllint       =   0.38 sec*proc (1 test)\n'}
+[2.278104] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.278235] (space_gazebo) StdoutLine: {'line': b'Total Test time (real) =   1.85 sec\n'}
+[2.278358] (space_gazebo) StdoutLine: {'line': b'\n'}
+[2.278508] (space_gazebo) StdoutLine: {'line': b'The following tests FAILED:\n'}
+[2.278683] (space_gazebo) StdoutLine: {'line': b'\t  1 - flake8 (Failed)\n'}
+[2.278870] (space_gazebo) StdoutLine: {'line': b'\t  3 - pep257 (Failed)\n'}
+[2.282479] (space_gazebo) StderrLine: {'line': b'Errors while running CTest\n'}
+[2.283161] (space_gazebo) StderrLine: {'line': b'Output from these tests are in: /home/kms301111/Desktop/space/build/space_gazebo/Testing/Temporary/LastTest.log\n'}
+[2.283503] (space_gazebo) StderrLine: {'line': b'Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.\n'}
+[2.286481] (space_gazebo) CommandEnded: {'returncode': 8}
+[2.288790] (space_gazebo) TestFailure: {'identifier': 'space_gazebo'}
+[2.288936] (space_gazebo) JobEnded: {'identifier': 'space_gazebo', 'rc': 0}
+[2.290943] (space_bringup) JobStarted: {'identifier': 'space_bringup'}
+[2.304098] (-) TimerEvent: {}
+[2.404467] (-) TimerEvent: {}
+[2.504756] (-) TimerEvent: {}
+[2.605223] (-) TimerEvent: {}
+[2.705486] (-) TimerEvent: {}
+[2.737699] (space_bringup) Command: {'cmd': ['/usr/bin/python3', '-m', 'pytest'], 'cwd': '/home/kms301111/Desktop/space/ros2_ws/src/space_bringup', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'VSCODE_CWD': '/home/kms301111', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'CODEX_CI': '1', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'kms301111', 'CODEX_INTERNAL_ORIGINATOR_OVERRIDE': 'codex_vscode', 'VSCODE_NLS_CONFIG': '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'wayland', 'DEBUG': 'release', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/kms301111/Desktop/space/install/space_perception/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/kms301111', 'CHROME_DESKTOP': 'code.desktop', 'DESKTOP_SESSION': 'ubuntu', 'NVM_BIN': '/home/kms301111/.nvm/versions/node/v24.13.1/bin', 'NVM_INC': '/home/kms301111/.nvm/versions/node/v24.13.1/include/node', 'VSCODE_IPC_HOOK': '/run/user/1000/vscode-90e2a958-1.10-main.sock', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'PAGER': 'cat', 'MANAGERPID': '1968', 'LC_CTYPE': 'C.UTF-8', 'SYSTEMD_EXEC_PID': '2264', 'IM_CONFIG_CHECK_ENV': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'NO_COLOR': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': '', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '3706', 'NVM_DIR': '/home/kms301111/.nvm', 'VSCODE_CRASH_REPORTER_PROCESS_TYPE': 'extensionHost', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/kms301111/Desktop/space/install', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'kms301111', 'JOURNAL_STREAM': '10:21154', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'RUST_LOG': 'warn', 'USERNAME': 'kms301111', 'TERM': 'dumb', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'FC_FONTATIONS': '1', 'PATH': '/home/kms301111/.local/bin:/home/kms301111/.codex/tmp/arg0/codex-arg0i2b0bN:/home/kms301111/.local/bin:/home/kms301111/.nvm/versions/node/v24.13.1/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/kms301111/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/xtensa-esp-elf/bin/:/home/kms301111/.vscode/extensions/openai.chatgpt-26.721.41059-linux-x64/bin/linux-x86_64', 'SESSION_MANAGER': 'local/humxn:@/tmp/.ICE-unix/2228,unix/humxn:/tmp/.ICE-unix/2228', 'INVOCATION_ID': 'f410d59697474f7bb91c262df5862518', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'wayland', 'DISPLAY': ':0', 'CODEX_SANDBOX_NETWORK_DISABLED': '1', 'LANG': 'C.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'GH_PAGER': 'cat', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.G50AT3', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_bringup:/home/kms301111/Desktop/space/install/space_controller:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_description:/home/kms301111/Desktop/space/install/space_ardupilot_interface:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'ELECTRON_RUN_AS_NODE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CODEX_THREAD_ID': '019facf1-3c19-7143-a044-7d2d9773d5e3', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'GIT_PAGER': 'cat', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/kms301111/Desktop/space/build/space_bringup', 'LC_ALL': 'C.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'VSCODE_CODE_CACHE_PATH': '/home/kms301111/.config/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'QTWEBENGINE_DICTIONARIES_PATH': '/usr/share/hunspell-bdic/', 'PYTHONPATH': '/home/kms301111/Desktop/space/build/space_bringup:/home/kms301111/Desktop/space/install/space_bringup/lib/python3.12/site-packages:/home/kms301111/Desktop/space/install/space_perception/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_controller:/home/kms301111/Desktop/space/install/space_controller/lib/python3.12/site-packages:/home/kms301111/Desktop/space/build/space_ardupilot_interface:/home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/home/kms301111/Desktop/space/install/space_gazebo:/home/kms301111/Desktop/space/install/space_perception:/home/kms301111/Desktop/space/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor', 'VSCODE_PID': '3706', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTEST_ADDOPTS': '--tb=short --junit-xml=/home/kms301111/Desktop/space/build/space_bringup/pytest.xml --junit-prefix=space_bringup -o cache_dir=/home/kms301111/Desktop/space/build/space_bringup/.pytest_cache'}, 'shell': False}
+[2.805634] (-) TimerEvent: {}
+[2.905981] (-) TimerEvent: {}
+[3.006231] (-) TimerEvent: {}
+[3.106470] (-) TimerEvent: {}
+[3.206825] (-) TimerEvent: {}
+[3.296225] (space_bringup) StdoutLine: {'line': b'============================= test session starts ==============================\n'}
+[3.296635] (space_bringup) StdoutLine: {'line': b'platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0\n'}
+[3.296834] (space_bringup) StdoutLine: {'line': b'cachedir: /home/kms301111/Desktop/space/build/space_bringup/.pytest_cache\n'}
+[3.297033] (space_bringup) StdoutLine: {'line': b'rootdir: /home/kms301111/Desktop/space/ros2_ws/src/space_bringup\n'}
+[3.297232] (space_bringup) StdoutLine: {'line': b'plugins: ament-lint-0.17.4, ament-pep257-0.17.4, ament-flake8-0.17.4, launch-testing-ros-0.26.11, ament-xmllint-0.17.4, launch-testing-3.4.10, ament-copyright-0.17.4, typeguard-4.1.5, colcon-core-0.20.1, cov-4.1.0\n'}
+[3.297427] (space_bringup) StdoutLine: {'line': b'collected 2 items\n'}
+[3.297602] (space_bringup) StdoutLine: {'line': b'\n'}
+[3.306980] (-) TimerEvent: {}
+[3.407330] (-) TimerEvent: {}
+[3.507581] (-) TimerEvent: {}
+[3.522158] (space_bringup) StdoutLine: {'line': b'test/test_flake8.py .                                                    [ 50%]\n'}
+[3.560246] (space_bringup) StdoutLine: {'line': b'test/test_pep257.py .                                                    [100%]\n'}
+[3.560590] (space_bringup) StdoutLine: {'line': b'\n'}
+[3.560784] (space_bringup) StdoutLine: {'line': b'- generated xml file: /home/kms301111/Desktop/space/build/space_bringup/pytest.xml -\n'}
+[3.561001] (space_bringup) StdoutLine: {'line': b'============================== 2 passed in 0.36s ===============================\n'}
+[3.607786] (-) TimerEvent: {}
+[3.690606] (space_bringup) CommandEnded: {'returncode': 0}
+[3.692173] (space_bringup) JobEnded: {'identifier': 'space_bringup', 'rc': 0}
+[3.692795] (-) EventReactorShutdown: {}

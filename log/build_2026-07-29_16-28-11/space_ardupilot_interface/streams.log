@@ -1,0 +1,23 @@
+[1.213s] Invoking command in '/home/kms301111/Desktop/space/build/space_ardupilot_interface': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kms301111/Desktop/space/build/space_ardupilot_interface/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kms301111/Desktop/space/build/space_ardupilot_interface/build --no-deps symlink_data
+[1.465s] running develop
+[1.606s] running egg_info
+[1.606s] creating space_ardupilot_interface.egg-info
+[1.620s] writing space_ardupilot_interface.egg-info/PKG-INFO
+[1.620s] writing dependency_links to space_ardupilot_interface.egg-info/dependency_links.txt
+[1.621s] writing requirements to space_ardupilot_interface.egg-info/requires.txt
+[1.621s] writing top-level names to space_ardupilot_interface.egg-info/top_level.txt
+[1.621s] writing manifest file 'space_ardupilot_interface.egg-info/SOURCES.txt'
+[1.649s] reading manifest file 'space_ardupilot_interface.egg-info/SOURCES.txt'
+[1.649s] writing manifest file 'space_ardupilot_interface.egg-info/SOURCES.txt'
+[1.664s] running build_ext
+[1.664s] Creating /home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages/space-ardupilot-interface.egg-link (link to .)
+[1.664s] 
+[1.664s] Installed /home/kms301111/Desktop/space/build/space_ardupilot_interface
+[1.664s] running symlink_data
+[1.665s] creating /home/kms301111/Desktop/space/install/space_ardupilot_interface/share/ament_index
+[1.665s] creating /home/kms301111/Desktop/space/install/space_ardupilot_interface/share/ament_index/resource_index
+[1.665s] creating /home/kms301111/Desktop/space/install/space_ardupilot_interface/share/ament_index/resource_index/packages
+[1.665s] symbolically linking /home/kms301111/Desktop/space/build/space_ardupilot_interface/resource/space_ardupilot_interface -> /home/kms301111/Desktop/space/install/space_ardupilot_interface/share/ament_index/resource_index/packages
+[1.665s] symbolically linking /home/kms301111/Desktop/space/build/space_ardupilot_interface/package.xml -> /home/kms301111/Desktop/space/install/space_ardupilot_interface/share/space_ardupilot_interface
+[1.665s] symbolically linking /home/kms301111/Desktop/space/build/space_ardupilot_interface/README.md -> /home/kms301111/Desktop/space/install/space_ardupilot_interface/share/space_ardupilot_interface
+[1.691s] Invoked command in '/home/kms301111/Desktop/space/build/space_ardupilot_interface' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kms301111/Desktop/space/build/space_ardupilot_interface/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kms301111/Desktop/space/install/space_ardupilot_interface/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kms301111/Desktop/space/build/space_ardupilot_interface/build --no-deps symlink_data

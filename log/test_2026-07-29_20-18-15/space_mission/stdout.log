@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/kms301111/Desktop/space/build/space_mission/.pytest_cache
+rootdir: /home/kms301111/Desktop/space/ros2_ws/src/space_mission
+plugins: ament-lint-0.17.4, ament-pep257-0.17.4, ament-flake8-0.17.4, launch-testing-ros-0.26.11, ament-xmllint-0.17.4, launch-testing-3.4.10, ament-copyright-0.17.4, typeguard-4.1.5, colcon-core-0.20.1, cov-4.1.0
+collected 2 items
+
+test/test_flake8.py .                                                    [ 50%]
+test/test_pep257.py F                                                    [100%]
+
+=================================== FAILURES ===================================
+_________________________________ test_pep257 __________________________________
+test/test_pep257.py:11: in test_pep257
+    assert main(argv=['.', 'test']) == 0
+E   AssertionError: assert 1 == 0
+E    +  where 1 = main(argv=['.', 'test'])
+----------------------------- Captured stdout call -----------------------------
+checking ./setup.py
+checking ./space_mission/__init__.py
+checking ./space_mission/traversability_fusion_node.py
+checking ./test/test_flake8.py
+checking ./test/test_pep257.py
+checking test/test_flake8.py
+checking test/test_pep257.py
+----------------------------- Captured stderr call -----------------------------
+./space_mission/traversability_fusion_node.py:13 in public class `TraversabilityFusionNode`: D213: Multi-line docstring summary should start at the second line
+1 errors
+- generated xml file: /home/kms301111/Desktop/space/build/space_mission/pytest.xml -
+=========================== short test summary info ============================
+FAILED test/test_pep257.py::test_pep257 - AssertionError: assert 1 == 0
+========================= 1 failed, 1 passed in 0.18s ==========================

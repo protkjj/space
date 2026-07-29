@@ -84,6 +84,8 @@ def generate_launch_description():
     )
     bringup_share = get_package_share_directory('space_bringup')
     gazebo_share = get_package_share_directory('space_gazebo')
+    mission_share = get_package_share_directory('space_mission')
+    navigation_share = get_package_share_directory('space_navigation')
     perception_share = get_package_share_directory('space_perception')
     nav2_params_file = os.path.join(
         bringup_share, 'config', 'navigation', 'nav2_params.yaml'
@@ -93,6 +95,10 @@ def generate_launch_description():
         param_rewrites={
             (
                 'local_costmap.local_costmap.ros__parameters.'
+                'traversability_layer.enabled'
+            ): use_traversability_layer,
+            (
+                'global_costmap.global_costmap.ros__parameters.'
                 'traversability_layer.enabled'
             ): use_traversability_layer,
         },
@@ -129,19 +135,6 @@ def generate_launch_description():
     )
     navigation_nodes = [
         Node(
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
-            output='screen',
-            parameters=[
-                os.path.join(
-                    bringup_share, 'config', 'common', 'slam_params.yaml'
-                ),
-                {'use_sim_time': use_sim_time},
-            ],
-            condition=IfCondition(use_navigation),
-        ),
-        Node(
             package='nav2_controller',
             executable='controller_server',
             name='controller_server',
@@ -176,6 +169,21 @@ def generate_launch_description():
             condition=IfCondition(use_navigation),
         ),
         Node(
+            package='space_navigation',
+            executable='goal_navigator',
+            name='space_goal_navigator',
+            output='screen',
+            parameters=[
+                os.path.join(
+                    navigation_share,
+                    'config',
+                    'goal_navigator.yaml',
+                ),
+                {'use_sim_time': use_sim_time},
+            ],
+            condition=IfCondition(use_navigation),
+        ),
+        Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',
             name='lifecycle_manager_navigation',
@@ -186,7 +194,6 @@ def generate_launch_description():
                     'autostart': True,
                     'bond_timeout': 0.0,
                     'node_names': [
-                        'slam_toolbox',
                         'controller_server',
                         'planner_server',
                         'behavior_server',
@@ -202,21 +209,39 @@ def generate_launch_description():
         [
             DeclareLaunchArgument('use_sim_time', default_value='true'),
             DeclareLaunchArgument('use_rviz', default_value='true'),
-            DeclareLaunchArgument('use_navigation', default_value='false'),
+            DeclareLaunchArgument(
+                'use_navigation',
+                default_value='true',
+                description=(
+                    'Start odom-anchored Nav2 and point-and-click goals.'
+                ),
+            ),
             DeclareLaunchArgument('use_perception', default_value='true'),
             DeclareLaunchArgument(
                 'use_traversability_layer',
                 default_value='true',
                 description=(
-                    'Enable bounded terrain costs in the Nav2 local costmap.'
+                    'Enable terrain costs in both Nav2 costmaps.'
                 ),
             ),
             DeclareLaunchArgument(
-                'world', default_value='arena_test_slope_v04.sdf'
+                'world',
+                default_value='arena_terrain_v04.sdf',
+                description=(
+                    'Gazebo world file. The default is the non-flat '
+                    'competition terrain.'
+                ),
             ),
             DeclareLaunchArgument('spawn_x', default_value='-1.2'),
             DeclareLaunchArgument('spawn_y', default_value='-1.6'),
-            DeclareLaunchArgument('spawn_z', default_value='0.12'),
+            DeclareLaunchArgument(
+                'spawn_z',
+                default_value='0.23',
+                description=(
+                    'Terrain-world default height; override when selecting '
+                    'a world with a different surface elevation.'
+                ),
+            ),
             DeclareLaunchArgument('spawn_yaw', default_value='0.0'),
             LogInfo(
                 msg=(
@@ -224,8 +249,31 @@ def generate_launch_description():
                     'backend; ArduPilot is intentionally not started.'
                 )
             ),
+            LogInfo(
+                msg=['Gazebo world selected: ', LaunchConfiguration('world')]
+            ),
+            LogInfo(
+                msg=(
+                    'Keyboard control: focus the Gazebo 3D view, then hold '
+                    'the arrow keys to drive. Press Space to stop.'
+                )
+            ),
             gazebo,
             terrain_perception,
+            Node(
+                package='space_mission',
+                executable='traversability_fusion_node',
+                name='mission_traversability_fusion',
+                output='screen',
+                parameters=[
+                    os.path.join(
+                        mission_share,
+                        'config',
+                        'mission.yaml',
+                    ),
+                    {'use_sim_time': use_sim_time},
+                ],
+            ),
             Node(
                 package='space_controller',
                 executable='command_safety_node',
