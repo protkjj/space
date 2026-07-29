@@ -1,7 +1,0 @@
-Metadata-Version: 2.1
-Name: space-controller
-Version: 0.1.0
-Summary: Backend-neutral command clipping, mode gate, and watchdog.
-Maintainer: space team
-Maintainer-email: todo@example.com
-License: MIT

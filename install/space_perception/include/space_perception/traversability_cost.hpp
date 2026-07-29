@@ -1,1 +1,0 @@
-/home/kms301111/Desktop/space/ros2_ws/src/space_perception/include/space_perception/traversability_cost.hpp
