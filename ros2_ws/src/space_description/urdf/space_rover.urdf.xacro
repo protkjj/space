@@ -1,5 +1,22 @@
 <?xml version="1.0"?>
 <robot name="space_rover" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!--
+    Complete CAD visual controls. The STL is exported in millimetres and uses
+    -X as forward, so the default transform scales, centers, and rotates it
+    into the base_link REP-103 frame. Override these xacro arguments when
+    refining alignment without editing individual link visuals.
+  -->
+  <xacro:arg name="use_rover_stl_visual" default="true"/>
+  <xacro:arg name="rover_mesh_scale" default="0.001 0.001 0.001"/>
+  <xacro:arg name="rover_mesh_xyz" default="0.00875 0 -0.09269867"/>
+  <xacro:arg name="rover_mesh_rpy" default="0 0 3.14159265359"/>
+  <xacro:property
+    name="use_rover_stl_visual"
+    value="$(arg use_rover_stl_visual)"/>
+  <xacro:property name="rover_mesh_scale" value="$(arg rover_mesh_scale)"/>
+  <xacro:property name="rover_mesh_xyz" value="$(arg rover_mesh_xyz)"/>
+  <xacro:property name="rover_mesh_rpy" value="$(arg rover_mesh_rpy)"/>
+
   <xacro:property name="base_length" value="0.32"/>
   <xacro:property name="base_width" value="0.26"/>
   <xacro:property name="base_height" value="0.10"/>
@@ -22,10 +39,23 @@
   </joint>
 
   <link name="base_link">
-    <visual>
-      <geometry><box size="${base_length} ${base_width} ${base_height}"/></geometry>
-      <material name="chassis_dark"/>
-    </visual>
+    <xacro:if value="${use_rover_stl_visual}">
+      <visual name="rover_complete_stl_visual">
+        <origin xyz="${rover_mesh_xyz}" rpy="${rover_mesh_rpy}"/>
+        <geometry>
+          <mesh
+            filename="package://space_description/meshes/rover/rover_prototype.stl"
+            scale="${rover_mesh_scale}"/>
+        </geometry>
+        <material name="chassis_dark"/>
+      </visual>
+    </xacro:if>
+    <xacro:unless value="${use_rover_stl_visual}">
+      <visual name="primitive_chassis_visual">
+        <geometry><box size="${base_length} ${base_width} ${base_height}"/></geometry>
+        <material name="chassis_dark"/>
+      </visual>
+    </xacro:unless>
     <collision>
       <geometry><box size="${base_length} ${base_width} ${base_height}"/></geometry>
     </collision>
@@ -38,11 +68,13 @@
 
   <xacro:macro name="wheel" params="prefix x y">
     <link name="${prefix}_wheel">
-      <visual>
-        <origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
-        <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
-        <material name="wheel_gray"/>
-      </visual>
+      <xacro:unless value="${use_rover_stl_visual}">
+        <visual name="${prefix}_primitive_wheel_visual">
+          <origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+          <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
+          <material name="wheel_gray"/>
+        </visual>
+      </xacro:unless>
       <collision>
         <origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
         <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
