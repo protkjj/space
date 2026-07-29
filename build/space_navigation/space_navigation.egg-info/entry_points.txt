@@ -1,3 +1,0 @@
-[console_scripts]
-goal_navigator = space_navigation.goal_navigator:main
-send_goal = space_navigation.send_goal:main

@@ -1,1 +1,0 @@
-/home/kms301111/Desktop/space/ros2_ws/src/space_gazebo/tools/convert_arena_step.py
