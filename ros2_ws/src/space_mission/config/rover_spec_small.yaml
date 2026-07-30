@@ -1,0 +1,85 @@
+# Our own rover. Values traced to CAD or to CLAUDE.md, not tuned.
+#
+# Loaded alongside rover_spec_medium.yaml; kept in a separate file so the two
+# rovers' parameters cannot be edited into each other by accident (CLAUDE.md,
+# dual-rover transform layer, reason 2).
+#
+# Nested keys flatten to rover_specs.small.<field> as ROS parameters.
+
+traversability_transform:
+  ros__parameters:
+    rover_specs:
+      small:
+        rover_id: small
+        provenance: measured
+
+        # 3 kg per CLAUDE.md 0. Includes payload; re-weigh once the marker
+        # dispenser is mounted.
+        mass_kg: 3.0
+
+        # Measured from meshes/rover/left_front_wheel.stl: 140.000 mm across,
+        # 40.000 mm wide. Matches space_rover.urdf.xacro exactly. max_step_
+        # height is DERIVED from this radius in rover_spec.py -- do not add a
+        # step threshold here, that is the mistake step_max made.
+        wheel_radius_m: 0.070
+        wheel_width_m: 0.040
+
+        # NOT measured. Static estimate assuming 5 mm sinkage on loose sand:
+        #   contact length = 2*sqrt(2*R*z) = 2*sqrt(2*0.070*0.005) = 0.0529 m
+        #   patch area     = 0.0529 * 0.040 * 4 wheels = 0.00847 m^2
+        #   pressure       = 3.0 kg * 9.81 / 0.00847 = 3.47 kPa
+        # The sinkage figure is a guess, so this one field is weaker than the
+        # rest of the block. Re-derive from a real footprint on arena sand.
+        ground_pressure_kpa: 3.47
+
+        # MECHANICAL limit only, and UNCONFIRMED -- needs a ramp test.
+        # This name used to cover three different quantities; they are now
+        # separated and none is derived from another:
+        #   here                                       mechanical capability
+        #   verdict.VerdictThresholds.hazard_slope_rad CLAUDE.md 1.4, 20 deg
+        #   ScoringConfig.slope_penalty_saturation_rad curve shape, 30 deg
+        # 0.349 rad (20 deg) is a CONSERVATIVE PLACEHOLDER, not a measurement:
+        # under-claiming capability cannot make the rover attempt a slope it
+        # can't hold. When the ramp test lands, replace this with the measured
+        # value -- and note that "what fraction of it should the hazard
+        # boundary be" is then a separate decision, not an automatic copy.
+        max_climb_angle_rad: 0.349
+
+        # Rover width = 2 * (wheel_y + wheel_width/2)
+        #             = 2 * (0.11650 + 0.020) = 0.273 m, from the CAD xacro.
+        # Plus ~27 mm of steering margin for a skid-steer that yaws while
+        # translating.
+        min_passable_width_m: 0.300
+
+        # base_footprint -> base_link is wheel_radius - wheel_z = 0.134 m; the
+        # chassis box is 0.10 m tall centred on base_link, so its underside
+        # sits 0.084 m above ground.
+        ground_clearance_m: 0.084
+
+        # UNCONFIRMED. The CAD wheels read as smooth in the STL; confirm
+        # against the physical Pololu 37D wheel before trusting any
+        # slip-vs-soil interpretation that depends on tread.
+        has_grousers: false
+
+        # provenance is 'measured' for the block as a whole, but three fields
+        # are weaker than that. They are enumerated by name below rather than
+        # described loosely, so a reader can tell exactly which numbers to
+        # distrust without re-deriving them.
+        provenance_note: >-
+          MEASURED (5 fields): wheel_radius_m and wheel_width_m from
+          meshes/rover/left_front_wheel.stl, 140.000 x 40.000 mm, matching
+          space_rover.urdf.xacro after the 51b34ac CAD import;
+          min_passable_width_m and ground_clearance_m computed from that same
+          xacro; mass_kg from CLAUDE.md section 0.
+          .
+          NOT CONFIRMED (3 fields, distrust these):
+          (1) max_climb_angle_rad -- conservative placeholder, no ramp test has
+          been run, so the rover's real climbing limit is unknown;
+          (2) has_grousers -- set false because the CAD wheel STL reads as
+          smooth, never checked against the physical Pololu 37D wheel, and any
+          slip-to-soil interpretation that depends on tread is affected;
+          (3) ground_pressure_kpa -- derived, not measured, and it assumes 5 mm
+          sinkage on loose sand, which is itself a guess.
+          .
+          mass_kg additionally excludes the marker dispenser, which is not yet
+          mounted; re-weigh once it is.

@@ -1,0 +1,61 @@
+# The follow-on medium rover. EVERY VALUE HERE IS A GUESS.
+#
+# We do not have this vehicle and no specification has been supplied, so this
+# file is a placeholder that exists to make the assumption explicit rather than
+# to be accurate. provenance: assumed propagates into every
+# space_msgs/TraversabilityScore computed from it, which is how a consumer
+# learns that a medium map is provisional and which maps to recompute when real
+# numbers arrive (CLAUDE.md, dual-rover transform layer, note 2).
+#
+# DO NOT tune these to make S_medium look reasonable. A plausible-looking map
+# built on invented specs is worse than an obviously provisional one: it stops
+# anyone from asking for the real numbers. Marker placement depends on this
+# block, and a marker dropped in a gap only our small rover fits through is
+# worthless to its only consumer.
+
+traversability_transform:
+  ros__parameters:
+    rover_specs:
+      medium:
+        rover_id: medium
+        provenance: assumed
+
+        # GUESS. Order-of-magnitude placeholder for a rover roughly 15x ours.
+        mass_kg: 50.0
+
+        # GUESS. Chosen so wheel radius stays a plausible multiple of body
+        # scale; drives the derived step limit, so it matters more than it
+        # looks.
+        wheel_radius_m: 0.200
+        wheel_width_m: 0.100
+
+        # GUESS. Not derived from the mass and wheels above -- deliberately
+        # left as an independent placeholder so nobody mistakes an internally
+        # consistent guess for a measurement.
+        ground_pressure_kpa: 8.0
+
+        # GUESS. 25 deg. MECHANICAL capability only -- the mission's 20 deg
+        # hazard boundary (CLAUDE.md 1.4) lives in VerdictThresholds and is not
+        # derived from this. A heavier rover with grousers may well exceed our
+        # own climb limit, so this is NOT our value scaled either.
+        max_climb_angle_rad: 0.436
+
+        # GUESS. This is the field that decides whether a gap is a route for
+        # the medium rover or only for us, so it is the single most important
+        # number to replace with a real one.
+        min_passable_width_m: 0.800
+
+        # GUESS.
+        ground_clearance_m: 0.250
+
+        # GUESS. Assumed present: a medium rover on regolith would normally
+        # have them, and this materially changes how our measured slip should
+        # be reinterpreted for it.
+        has_grousers: true
+
+        provenance_note: >-
+          NO SOURCE. Every field is an invented placeholder; no medium-rover
+          specification has been provided. Replace wholesale once real numbers
+          exist, then recompute every TraversabilityScore whose rover_spec
+          carries PROVENANCE_ASSUMED. min_passable_width_m and wheel_radius_m
+          have the largest effect on marker-site selection.
