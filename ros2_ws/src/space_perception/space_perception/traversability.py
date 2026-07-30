@@ -25,7 +25,17 @@ class TraversabilityConfig:
     roughness_free: float = 0.002
     roughness_max: float = 0.025
     step_free: float = 0.005
-    step_max: float = 0.056
+
+    #: Half the wheel radius, so a rover property rather than a tuning knob.
+    #: This module stays ROS-free and import-free, so it cannot read
+    #: space_description/config/rover_geometry.yaml itself -- the authority is
+    #: that file, and callers get the derived value
+    #: (terrain_traversability_node does). This default exists only for direct
+    #: construction in tests. test_step_max_matches_rover_geometry fails if it
+    #: ever drifts from the source, which is what went wrong before: it read
+    #: 0.056, half the old 0.112 m wheel, and nothing recomputed it when the CAD
+    #: import made the wheel 0.070 m.
+    step_max: float = 0.035
     variance_free: float = 0.000025
     variance_max: float = 0.0004
     coverage_min: float = 0.60

@@ -83,7 +83,14 @@ terrain_traversability_node:
     roughness_free: 0.002
     roughness_max: 0.025
     step_free: 0.005
-    step_max: 0.056
+    # step_max is intentionally ABSENT. It is half the wheel radius
+    # (docs/traversability.md), i.e. a rover property rather than a tuning knob,
+    # so the node derives it from
+    # space_description/config/rover_geometry.yaml. Setting it here would
+    # override that derivation and reintroduce the copy that went stale: this
+    # line held 0.056 -- half the old 0.112 m wheel -- for the whole life of the
+    # 0.070 m CAD wheel, scoring steps against a rover 1.6x more capable than
+    # ours. Change the wheel in that YAML and this follows automatically.
     variance_free: 0.000025
     variance_max: 0.0004
     coverage_min: 0.60

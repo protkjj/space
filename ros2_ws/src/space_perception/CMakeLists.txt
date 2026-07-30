@@ -85,6 +85,9 @@ if(BUILD_TESTING)
     test_traversability_plugin nav2_costmap_2d pluginlib rclcpp
   )
 
+  ament_add_pytest_test(
+    test_rover_derived_thresholds test/test_rover_derived_thresholds.py
+  )
   ament_add_pytest_test(test_terrain_features test/test_terrain_features.py)
   ament_add_pytest_test(test_terrain_processing test/test_terrain_processing.py)
   ament_add_pytest_test(test_traversability test/test_traversability.py)

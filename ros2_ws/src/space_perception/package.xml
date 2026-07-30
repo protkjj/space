@@ -26,6 +26,10 @@
   <depend>tf2</depend>
   <depend>tf2_geometry_msgs</depend>
   <depend>tf2_ros</depend>
+  <!-- terrain_traversability_node derives its step limit from
+       space_description/config/rover_geometry.yaml rather than holding a copy of
+       the wheel radius, which is what went stale across the last CAD import. -->
+  <exec_depend>space_description</exec_depend>
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>

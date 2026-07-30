@@ -6,17 +6,33 @@ from pathlib import Path
 
 import numpy as np
 
+from space_description.rover_geometry import load_geometry, max_step_height
 from space_perception.traversability import (
     compute_traversability,
     TraversabilityConfig,
 )
 
 
+# The step sweep's upper anchors are DERIVED, not typed. They used to read
+# 56, 80, 112 mm -- the old step limit, a point past it, and the old 0.112 m
+# wheel radius. After the CAD import made the wheel 0.070 m those three sampled
+# a rover that no longer exists, so every regenerated calibration artifact kept
+# certifying that the step penalty saturates at 56 mm. Deriving them means the
+# published response curve always brackets the real limit.
+_GEOMETRY = load_geometry()
+_STEP_LIMIT = max_step_height(_GEOMETRY)
+_WHEEL_RADIUS = _GEOMETRY['wheel_radius']
+
 SWEEPS = {
     'slope_rad': np.deg2rad([0, 2.5, 5, 10, 15, 20, 25, 30, 35]),
     'roughness_m': np.asarray([0, 1, 2, 5, 10, 15, 25, 40]) / 1000.0,
-    'step_height_m': np.asarray([0, 2, 5, 10, 20, 30, 56, 80, 112])
-    / 1000.0,
+    # Nine points, the last three being the step limit, the midpoint between it
+    # and the wheel radius, and the wheel radius itself. The count matters:
+    # test_traversability.py asserts the sweep produces exactly 44 rows.
+    'step_height_m': np.asarray([
+        0.0, 0.002, 0.005, 0.010, 0.020, 0.030,
+        _STEP_LIMIT, (_STEP_LIMIT + _WHEEL_RADIUS) / 2.0, _WHEEL_RADIUS,
+    ]),
     'coverage': np.asarray([0.2, 0.4, 0.6, 0.8, 1.0]),
     'confidence': np.asarray([0, 0.1, 0.25, 0.5, 0.75, 1.0]),
     'variance_m2': np.asarray([

@@ -12,6 +12,7 @@ from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import PointCloud2
 
+from space_description.rover_geometry import load_geometry, max_step_height
 from space_perception.latest_data import sample_disposition
 from space_perception.pointcloud_utils import (
     create_traversability_cloud,
@@ -43,7 +44,16 @@ class TerrainTraversabilityNode(Node):
             'roughness_free': 0.002,
             'roughness_max': 0.025,
             'step_free': 0.005,
-            'step_max': 0.056,
+            # DERIVED from space_description/config/rover_geometry.yaml, never
+            # written here. It is half the wheel radius
+            # (docs/traversability.md), so it is a rover property wearing a
+            # threshold's clothes: this literal read 0.056 -- half of the old
+            # 0.112 m wheel -- and stayed 0.056 after the CAD import made the
+            # wheel 0.070 m, scoring steps against a rover 1.6x more capable
+            # than ours. Nothing caught it because the arithmetic still worked.
+            # terrain_perception.yaml deliberately does NOT set step_max, so
+            # this derivation is the only source.
+            'step_max': float(max_step_height(load_geometry())),
             'variance_free': 0.000025,
             'variance_max': 0.0004,
             'coverage_min': 0.60,

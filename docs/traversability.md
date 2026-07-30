@@ -111,17 +111,30 @@ limits:
 | `roughness_free` | 0.002 m | measured smooth-surface residuals |
 | `roughness_max` | 0.025 m | simulation discrimination range |
 | `step_free` | 0.005 m | small residual allowance |
-| `step_max` | 0.056 m | half the current 0.112 m wheel radius |
+| `step_max` | 0.035 m | half the wheel radius, **derived at runtime** |
 | `variance_free` | 0.000025 m² | 5 mm standard-deviation equivalent |
 | `variance_max` | 0.0004 m² | 20 mm standard-deviation equivalent |
 | `coverage_min` | 0.60 | local-neighbour support |
 | `confidence_min` | 0.10 | existing feature-quality distribution |
 | `minimum_neighbors` | 8 | plane-neighbour support |
 
-The wheel radius is defined in
-`space_description/urdf/space_rover.urdf.xacro`. Hardware limits must later be
-derived from verified mass, centre of gravity, traction, suspension,
-clearances, drivetrain capability, operating environment, and test evidence.
+The wheel radius lives in `space_description/config/rover_geometry.yaml`, the
+single source of truth, which `space_rover.urdf.xacro` also reads.
+`step_max` is **not configured** — `terrain_traversability_node` computes it as
+half that radius on startup, and `terrain_perception.yaml` deliberately omits it
+so nothing can override the derivation.
+
+That indirection is the fix for a real defect. This table used to read
+`step_max = 0.056 m`, "half the current 0.112 m wheel radius". The CAD import in
+`51b34ac` made the wheel 0.070 m and nothing recomputed the threshold, so for the
+whole life of the current wheel, traversability scored steps against a rover 1.6×
+more capable than the one we own — silently, because the arithmetic still
+succeeded and the scores still looked reasonable. Every number in the Arena
+validation section below was produced under that wrong limit; see the note there.
+
+Hardware limits must later be derived from verified mass, centre of gravity,
+traction, suspension, clearances, drivetrain capability, operating environment,
+and test evidence.
 
 The weighted-mode defaults are slope 0.35, roughness 0.20, step 0.30, and
 uncertainty 0.15. This keeps the deliberately conservative feature-confidence
@@ -149,9 +162,27 @@ commands. Values are sensor-derived and load-dependent:
 
 | Region | Rover XYZ / pitch | Feature / valid cells | Median / minimum score | Median slope / roughness / step / uncertainty penalties | Maximum slope / roughness / step / uncertainty penalties | Processing / marker time |
 | --- | --- | --- | --- | --- | --- | --- |
-| Lower section | −1.200, −1.600, 0.105 m / 0.000 rad | 483 / 194 | 0.865 / 0.716 | 0 / 0 / 0 / 0.898 | 0.248 / 0.212 / 0.015 / 1.000 | 4–11 / 4–6 ms |
-| Slope transition | −0.818, −1.600, 0.111 m / −0.039 rad | 462 / 166 | 0.864 / 0.508 | 0 / 0 / 0 / 0.902 | 0.569 / 0.590 / 0.614 / 1.000 | 4.4 / 1.1 ms |
-| Higher smooth slope | −0.325, −1.600, 0.147 m / −0.087 rad | 480 / 232 | 0.865 / 0.493 | 0 / 0 / 0 / 0.901 | 0.255 / 0.195 / 0.780 / 1.000 | 6.0 / 4.2 ms |
+| Lower section | −1.200, −1.600, 0.105 m / 0.000 rad | 483 / 194 | 0.865 / 0.716 | 0 / 0 / 0 / 0.898 | 0.248 / 0.212 / 0.015 → **0.042** / 1.000 | 4–11 / 4–6 ms |
+| Slope transition | −0.818, −1.600, 0.111 m / −0.039 rad | 462 / 166 | 0.864 / 0.508 | 0 / 0 / 0 / 0.902 | 0.569 / 0.590 / 0.614 → **0.999** / 1.000 | 4.4 / 1.1 ms |
+| Higher smooth slope | −0.325, −1.600, 0.147 m / −0.087 rad | 480 / 232 | 0.865 / 0.493 | 0 / 0 / 0 / 0.901 | 0.255 / 0.195 / 0.780 → **1.000** / 1.000 | 6.0 / 4.2 ms |
+
+> **These rows were sampled under `step_max = 0.056 m`, which was wrong.** The
+> maximum step penalties are shown as `logged → corrected`. The corrected values
+> are exact, not estimates: the penalty is a monotonic smoothstep, so the logged
+> value inverts to the step height that produced it (8.70 mm, 34.41 mm,
+> 40.54 mm), which is then re-evaluated at the real 0.035 m limit. The
+> inversion cross-checks against the worked example in
+> `docs/traversability_calibration.md`, whose transition-region cell is recorded
+> independently at 0.03526 m.
+>
+> Consequence: two of the three regions **saturate** on step height under the
+> correct wheel, where the log shows 0.61 and 0.78. The score and
+> limiting-factor columns therefore understate step severity too, but those are
+> per-cell aggregates that cannot be recovered by inversion — they need a re-run
+> of the arena sampling to be restated honestly, so they are left as logged
+> rather than partially patched. Median penalties are unaffected: the median step
+> heights (0.00076–0.00112 m, `docs/terrain_features.md`) sit below
+> `step_free = 0.005 m`, so they were zero under either limit.
 
 The configured slope-free reference exceeds the median observed local slope,
 so median slope penalty remained zero even on the higher section. Local cells

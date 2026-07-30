@@ -26,31 +26,57 @@ default weighted-sum composition are:
 | --- | --- | --- | --- |
 | Slope | 0–5°: score 1.000 | 15°: 0.877; 25°: 0.686 | ≥30°: 0.650 |
 | Roughness | 0–2 mm: 1.000 | 10 mm: 0.944; 15 mm: 0.881 | ≥25 mm: 0.800 |
-| Step height | 0–5 mm: 1.000 | 20 mm: 0.938; 30 mm: 0.847 | ≥56 mm: 0.700 |
+| Step height | 0–5 mm: 1.000 | 20 mm: 0.850; 30 mm: 0.722 | ≥35 mm: 0.700 |
 
 Coverage, confidence, and variance affect only `uncertainty_penalty`. Coverage
 below 0.60 and confidence below 0.10 also make the row invalid, producing a
 NaN score rather than favourable unknown terrain. Tests verify smoothstep
 continuity at both references and monotonic score response for all six inputs.
 
-No scoring parameter changed in this phase. The old and current values remain:
+`step_max` changed. Everything else is unchanged:
 
 | Parameter | Old | Current |
 | --- | ---: | ---: |
 | slope free / max | 0.0873 / 0.5236 rad | unchanged |
 | roughness free / max | 0.002 / 0.025 m | unchanged |
-| step free / max | 0.005 / 0.056 m | unchanged |
+| step free / max | 0.005 / 0.056 m | **0.005 / 0.035 m**, derived as half the 0.070 m wheel |
 | variance free / max | 0.000025 / 0.0004 m² | unchanged |
 | coverage / confidence minimum | 0.60 / 0.10 | unchanged |
 | slope / roughness / step / quality weights | .35 / .20 / .30 / .15 | unchanged |
 
+This table previously reported `step_max` as `unchanged`, which is how the drift
+survived: the one table whose job is to record scoring-parameter change told
+anyone auditing the CAD import that nothing needed doing. `step_max` is no longer
+a configured value at all — `terrain_traversability_node` derives it from
+`space_description/config/rover_geometry.yaml`, so it cannot be reported as
+unchanged while the wheel changes underneath it.
+
 Future hardware-derived limits remain unresolved. They require verified mass,
 centre of gravity, traction, drivetrain, clearances, terrain mechanics, and
-physical testing; the 0.112 m simulated wheel radius alone is insufficient.
+physical testing; the 0.070 m simulated wheel radius alone is insufficient.
 
 ## Arena distributions
 
 Percentile columns are P10 / P25 / P50 / P75 / P90 / P95 / maximum.
+
+> **Logged under `step_max = 0.056 m`, which was wrong** — it was half the
+> pre-CAD 0.112 m wheel and was never recomputed when the wheel became 0.070 m.
+> Maximum step penalties are shown as `logged → corrected`.
+>
+> The corrected values are exact rather than estimates. The penalty is a
+> monotonic smoothstep, so a logged penalty inverts uniquely to the step height
+> that produced it — 8.75 mm, 35.26 mm, and 20.07 mm for the three regions —
+> which is then re-evaluated at the real 0.035 m limit. The middle inversion is
+> independently confirmed: 35.26 mm is exactly the step height recorded for the
+> transition region's step-dominant cell in the worked example below.
+>
+> The transition region therefore **saturates** on step height, where the log
+> shows 0.638. Its `traversability` row and the limiting counts understate step
+> severity for the same reason, but those are per-cell aggregates that inversion
+> cannot recover — restating them honestly needs a re-run of the arena sampling,
+> so they are left as logged rather than partially patched. Percentiles below the
+> maximum are all zero and unaffected: those step heights sit under
+> `step_free = 0.005 m`, so they scored zero under either limit.
 
 ### Lower section
 
@@ -65,7 +91,7 @@ Valid/invalid cells: 194 / 289.
 | coverage | 0.507 / 0.607 / 0.857 / 0.893 / 0.929 / 0.929 / 1.0 |
 | slope penalty | 0 / 0 / 0 / 0 / 0.0000002 / 0.0000088 / 0.24760 |
 | roughness penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.21226 |
-| step penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.01539 |
+| step penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.01539 → **0.042874** |
 | quality penalty | 0.8723 / 0.8947 / 0.8979 / 0.9347 / 0.9680 / 0.9952 / 0.9999 |
 | traversability | 0.8548 / 0.8598 / 0.8653 / 0.8658 / 0.8692 / 0.8909 / 0.9274 |
 
@@ -84,7 +110,7 @@ Valid/invalid cells: 161 / 303.
 | coverage | 0.500 / 0.607 / 0.786 / 0.893 / 0.929 / 0.929 / 1.0 |
 | slope penalty | 0 / 0 / 0 / 0 / 0.000034 / 0.000653 / 0.59338 |
 | roughness penalty | 0 / 0 / 0 / 0 / 0 / 0.000061 / 0.57809 |
-| step penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.63834 |
+| step penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.63834 → **1.000000** (saturated) |
 | quality penalty | 0.8246 / 0.8967 / 0.9034 / 0.9414 / 0.9913 / 0.9961 / 0.9992 |
 | traversability | 0.8511 / 0.8588 / 0.8640 / 0.8655 / 0.8763 / 0.9266 / 0.9273 |
 
@@ -104,7 +130,7 @@ Valid/invalid cells: 201 / 244.
 | coverage | 0.536 / 0.679 / 0.857 / 0.893 / 0.929 / 0.929 / 0.964 |
 | slope penalty | 0 / 0 / 0 / 0 / 0.000016 / 0.000112 / 0.008336 |
 | roughness penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.001416 |
-| step penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.21032 |
+| step penalty | 0 / 0 / 0 / 0 / 0 / 0 / 0.21032 → **0.503455** |
 | quality penalty | 0.8863 / 0.8898 / 0.9004 / 0.9322 / 0.9945 / 0.9990 / 1.0000 |
 | traversability | 0.8506 / 0.8596 / 0.8649 / 0.8665 / 0.8671 / 0.8797 / 0.9245 |
 
@@ -142,8 +168,21 @@ A valid step-dominant cell at `(0.875, -1.075)` measured:
 - slope 0.2065 rad, roughness 0.00823 m, step height 0.03526 m;
 - confidence 0.1260, coverage 0.75, 21 neighbours;
 - slope/roughness/step/quality penalties
-  0.1832 / 0.1802 / 0.6383 / 0.9975;
-- score 0.5587, valid 1, limiting factor STEP_HEIGHT.
+  0.1832 / 0.1802 / **1.0000** / 0.9975 (step penalty logged as 0.6383);
+- score **0.4502**, valid 1, limiting factor STEP_HEIGHT (score logged as
+  0.5587).
+
+This cell is the clearest case for why the stale `step_max` mattered. Its
+0.03526 m step is 0.7 mm **above** what the 0.070 m wheel can climb, so the
+correct penalty is fully saturated, not 0.64. Recomputed exactly from the four
+penalties above and the published weights (.35/.20/.30/.15):
+`1 − (0.35·0.1832 + 0.20·0.1802 + 0.30·1.0 + 0.15·0.9975) = 0.450215`. The same
+arithmetic reproduces the logged 0.5587 from the logged 0.6383, confirming the
+weights and formula rather than assuming them.
+
+The 0.109 difference is not cosmetic. This is the worked example a reader uses to
+validate the scorer, and it published a cell the rover cannot traverse as
+mid-range rather than impassable.
 
 By contrast, the largest transition step (0.09143 m) had confidence 0.0211,
 coverage 0.607, and saturated geometric/quality penalties. It was invalid,
