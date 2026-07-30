@@ -125,7 +125,7 @@ def generate_launch_description():
             name: LaunchConfiguration(name)
             for name in (
                 'use_sim_time', 'world', 'spawn_x', 'spawn_y',
-                'spawn_z', 'spawn_yaw'
+                'spawn_z', 'spawn_yaw', 'headless'
             )
         }.items(),
     )
@@ -221,6 +221,13 @@ def generate_launch_description():
         [
             DeclareLaunchArgument('use_sim_time', default_value='true'),
             DeclareLaunchArgument('use_rviz', default_value='true'),
+            DeclareLaunchArgument(
+                'headless', default_value='false',
+                description=(
+                    'Run Gazebo without its GUI. Pair with use_rviz:=false '
+                    'where no GL context exists.'
+                ),
+            ),
             DeclareLaunchArgument(
                 'use_navigation',
                 default_value='true',

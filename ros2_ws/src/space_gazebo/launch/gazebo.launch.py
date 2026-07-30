@@ -27,6 +27,9 @@ def _launch_setup(context):
     spawn_y = LaunchConfiguration('spawn_y')
     spawn_z = LaunchConfiguration('spawn_z')
     spawn_yaw = LaunchConfiguration('spawn_yaw')
+    headless = LaunchConfiguration('headless').perform(context).lower() in (
+        'true', '1', 'yes'
+    )
 
     description_share = get_package_share_directory('space_description')
     gazebo_share = get_package_share_directory('space_gazebo')
@@ -80,7 +83,17 @@ def _launch_setup(context):
                 os.path.join(ros_gz_sim_share, 'launch', 'gz_sim.launch.py')
             ),
             launch_arguments={
-                'gz_args': f'-r --gui-config {gui_config} {world_file}'
+                # `-s` runs the server without the GUI. Needed wherever no GL
+                # context exists -- a CI runner, an ssh session, or an agent
+                # shell -- because the combined `gz sim` process aborts when the
+                # GUI cannot create one, taking the server down with it and
+                # leaving `create` looping on "Requesting list of world names".
+                # Rendering sensors still work through --headless-rendering.
+                'gz_args': (
+                    f'-s -r --headless-rendering {world_file}'
+                    if headless
+                    else f'-r --gui-config {gui_config} {world_file}'
+                )
             }.items(),
         ),
         Node(
@@ -142,6 +155,13 @@ def generate_launch_description():
                 ),
             ),
             DeclareLaunchArgument('spawn_yaw', default_value='0.0'),
+            DeclareLaunchArgument(
+                'headless', default_value='false',
+                description=(
+                    'Run Gazebo without its GUI. Use where no GL context '
+                    'exists (CI, ssh); rendering sensors still work.'
+                ),
+            ),
             OpaqueFunction(function=_launch_setup),
         ]
     )
