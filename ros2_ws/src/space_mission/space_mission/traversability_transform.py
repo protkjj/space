@@ -39,6 +39,8 @@ here can be derived from the rover, it is in the wrong place.
 
 from dataclasses import dataclass
 
+import numpy as np
+
 
 #: Bumped on any change to score arithmetic; stamped into TraversabilityScore
 #: alongside the soil model version, since weights and the soil proxy change
@@ -78,6 +80,17 @@ class ScoringConfig:
     weight_roughness: float = 0.15
     weight_step: float = 0.25
     weight_soil: float = 0.30
+
+    #: Below these, the term contributes nothing. Observation allowances, not
+    #: rover limits: sensor noise should not read as terrain.
+    slope_free_rad: float = 0.0872665
+    roughness_free_m: float = 0.002
+    step_free_m: float = 0.005
+
+    #: Roughness at which the penalty saturates. A discrimination range for the
+    #: arena, not a rover property -- unlike the step limit, which comes from
+    #: the spec.
+    roughness_saturation_m: float = 0.025
 
     #: Slope at which the slope penalty saturates -- a pure curve-shape knob,
     #: NOT a rover limit and NOT a hazard boundary. Inherits the 30 deg that
@@ -123,6 +136,38 @@ class ScoreGrid:
     limiting_factor: object
 
 
+#: Values written into ``ScoreGrid.limiting_factor``. Mirror the ``LIMIT_*``
+#: constants in ``space_msgs/TraversabilityScore`` so the node can copy them
+#: through without a translation table.
+LIMIT_NONE = 0
+LIMIT_SLOPE = 1
+LIMIT_ROUGHNESS = 2
+LIMIT_STEP = 3
+LIMIT_SOIL = 4
+LIMIT_CLEARANCE = 5
+LIMIT_WIDTH = 6
+LIMIT_NO_DATA = 7
+
+
+def smooth_penalty(values, free, saturation):
+    """
+    Return a smoothstep penalty in ``[0, 1]`` for each value.
+
+    Zero at or below ``free``, one at or above ``saturation``, and
+    ``3t^2 - 2t^3`` between. The same curve ``space_perception`` uses, so the
+    two layers stay comparable. NaN propagates.
+    """
+    values = np.asarray(values, dtype=float)
+    span = float(saturation) - float(free)
+    if span <= 0.0:
+        # A degenerate range would divide by zero; treat anything above `free`
+        # as saturated rather than silently emitting inf.
+        return np.where(np.isnan(values), np.nan,
+                        np.where(values > free, 1.0, 0.0))
+    t = np.clip((values - float(free)) / span, 0.0, 1.0)
+    return t * t * (3.0 - 2.0 * t)
+
+
 def evaluate(terrain, spec, config=ScoringConfig(), gate=ObservationGate()):
     """
     Score ``terrain`` for the rover described by ``spec``.
@@ -135,13 +180,111 @@ def evaluate(terrain, spec, config=ScoringConfig(), gate=ObservationGate()):
     inputs are NaN, come back as NaN with ``LIMIT_NO_DATA`` -- never as zero,
     which a planner would read as "traversable but bad" rather than "unknown".
 
-    Hard limits from ``spec`` (``max_climb_angle_rad``, ``max_step_height_m``,
-    ``ground_clearance_m``, ``min_passable_width_m``) veto a cell outright
-    rather than contributing a weighted penalty: a step taller than the wheel
-    can climb is not "somewhat worse", it is impassable, and no weighting of
-    other terms should be able to outvote that.
+    Hard limits from ``spec`` (``max_climb_angle_rad``, ``max_step_height_m``)
+    veto a cell outright rather than contributing a weighted penalty: a step
+    taller than the wheel can climb is not "somewhat worse", it is impassable,
+    and no weighting of other terms should be able to outvote that.
+    ``ground_clearance_m`` and ``min_passable_width_m`` have no corresponding
+    terrain layer yet -- obstacle height and gap width are not measured -- so
+    they are accepted in the signature but unused, rather than faked from step
+    height.
     """
-    raise NotImplementedError
+    spec.validate()
+
+    slope = np.asarray(terrain.slope_rad, dtype=float)
+    roughness = np.asarray(terrain.roughness_m, dtype=float)
+    step = np.asarray(terrain.step_height_m, dtype=float)
+    soil = np.asarray(terrain.soil_difficulty, dtype=float)
+    soil_confidence = np.asarray(terrain.soil_confidence, dtype=float)
+
+    penalties = {
+        LIMIT_SLOPE: (
+            config.weight_slope,
+            smooth_penalty(
+                np.abs(slope),
+                config.slope_free_rad,
+                config.slope_penalty_saturation_rad,
+            ),
+        ),
+        LIMIT_ROUGHNESS: (
+            config.weight_roughness,
+            smooth_penalty(
+                roughness, config.roughness_free_m, config.roughness_saturation_m
+            ),
+        ),
+        # Saturates at the ROVER's step limit, not at a configured threshold.
+        LIMIT_STEP: (
+            config.weight_step,
+            smooth_penalty(step, config.step_free_m, spec.max_step_height_m),
+        ),
+        LIMIT_SOIL: (config.weight_soil, np.clip(soil, 0.0, 1.0)),
+    }
+
+    total_weight = sum(weight for weight, _ in penalties.values())
+    if total_weight <= 0.0:
+        raise ValueError('scoring weights must sum to a positive value')
+
+    # Normalise so adding a term later cannot silently rescale existing maps.
+    weighted = {
+        key: (weight / total_weight) * values
+        for key, (weight, values) in penalties.items()
+    }
+
+    score = 1.0 - sum(weighted.values())
+
+    keys = list(weighted)
+    stacked = np.stack([weighted[key] for key in keys], axis=0)
+    with np.errstate(invalid='ignore'):
+        dominant = np.nanargmax(
+            np.where(np.isnan(stacked), -np.inf, stacked), axis=0
+        )
+    limiting = np.asarray(
+        np.take(np.asarray(keys), dominant), dtype=np.uint8
+    )
+    limiting = np.where(
+        np.nanmax(np.where(np.isnan(stacked), 0.0, stacked), axis=0) <= 0.0,
+        LIMIT_NONE, limiting,
+    ).astype(np.uint8)
+
+    # --- Hard vetoes: impassable is not "worse", it is out ------------------
+    impassable_slope = np.abs(slope) >= spec.max_climb_angle_rad
+    impassable_step = step > spec.max_step_height_m
+    score = np.where(impassable_slope | impassable_step, 0.0, score)
+    limiting = np.where(impassable_step, LIMIT_STEP, limiting).astype(np.uint8)
+    limiting = np.where(
+        impassable_slope & ~impassable_step, LIMIT_SLOPE, limiting
+    ).astype(np.uint8)
+
+    # --- No data beats every other verdict --------------------------------
+    unknown = (
+        np.isnan(slope) | np.isnan(roughness) | np.isnan(step) | np.isnan(soil)
+    )
+    if gate.min_soil_confidence > 0.0:
+        unknown = unknown | (
+            np.isnan(soil_confidence)
+            | (soil_confidence < gate.min_soil_confidence)
+        )
+    score = np.where(unknown, np.nan, np.clip(score, 0.0, 1.0))
+    limiting = np.where(unknown, LIMIT_NO_DATA, limiting).astype(np.uint8)
+
+    return ScoreGrid(score=score, limiting_factor=limiting)
+
+
+def evaluate_both(terrain, small_spec, medium_spec, config=ScoringConfig(),
+                  gate=ObservationGate()):
+    """
+    Return ``(S_small, S_medium)`` from one terrain record.
+
+    The point of the whole layer, in one call: the same terrain, the same
+    ``evaluate``, two specs. Never a scaling of one result into the other --
+    lambda is a terrain x rover interaction, so the sand that slips our 2.7 kg
+    rover behaves differently under a medium rover's contact pressure, wheel
+    diameter, mass, and grousers.
+    """
+    return (
+        evaluate(terrain, small_spec, config, gate),
+        evaluate(terrain, medium_spec, config, gate),
+    )
 
 
 def exploration_objective(score, frontier_proximity, weight_information):

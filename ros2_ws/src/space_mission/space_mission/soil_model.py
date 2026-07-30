@@ -28,10 +28,18 @@ S_small and S_medium derive from that layer, one bad input breaks both maps at
 once. Gating at the score stage would be too late.
 """
 
+import math
+
+
 #: Stamped into TerrainEstimate. Bump the version on any change to the
 #: arithmetic below; change the id when the model is genuinely replaced.
 SOIL_MODEL_ID = 'relative_difficulty_placeholder'
 SOIL_MODEL_VERSION = '0.1.0'
+
+#: Sample count at which the count factor reaches 0.5. A PLACEHOLDER: the real
+#: value depends on how repeatable slip measurements turn out to be on arena
+#: sand, which needs field data (docs/pending.md).
+CONFIDENCE_HALF_SAMPLES = 2.0
 
 
 def accepts_sample(slip_quality, min_slip_quality):
@@ -41,7 +49,9 @@ def accepts_sample(slip_quality, min_slip_quality):
     Applied before :func:`estimate_soil_difficulty`, per the module note: a
     rejected sample must not reach the soil proxy at all.
     """
-    raise NotImplementedError
+    if slip_quality is None or not math.isfinite(slip_quality):
+        return False
+    return slip_quality >= min_slip_quality
 
 
 def estimate_soil_difficulty(slip_small, slope_rad, spec):
@@ -62,8 +72,28 @@ def estimate_soil_difficulty(slip_small, slope_rad, spec):
     evaluated. lambda is a terrain x rover interaction, so removing our own
     rover's contribution is precisely what makes the residue reusable for
     scoring a different rover.
+
+    The arithmetic: the share of the rover's climbing capability the slope
+    consumes is ``sin(theta) / sin(max_climb_angle)``, and the slip left over
+    after removing that share is attributed to the soil. This is ORDINAL only.
+    It is not a bearing strength, not a cohesion, and not comparable across
+    missions -- a rank, and only against cells measured by the same rover.
     """
-    raise NotImplementedError
+    if slip_small is None or slope_rad is None:
+        return None
+    if not (math.isfinite(slip_small) and math.isfinite(slope_rad)):
+        return None
+
+    limit = math.sin(spec.max_climb_angle_rad)
+    if limit <= 0.0:
+        return None
+    slope_share = min(1.0, max(0.0, math.sin(abs(slope_rad)) / limit))
+
+    # Negative slip means the chassis outran the wheels (downhill rolling);
+    # that says nothing about soil resistance, so clamp at zero rather than
+    # reporting easy soil.
+    residual = max(0.0, slip_small) - slope_share
+    return min(1.0, max(0.0, residual))
 
 
 def estimate_soil_confidence(sample_count, mean_slip_quality):
@@ -78,5 +108,15 @@ def estimate_soil_confidence(sample_count, mean_slip_quality):
 
     ``mean_slip_quality`` folds in how good those samples were, so three poor
     crossings do not outrank one clean one.
+
+    Saturating rather than linear: ``n / (n + k)``. Confidence should approach
+    but never reach 1, because no number of passes turns a placeholder soil
+    model into a measurement.
     """
-    raise NotImplementedError
+    if sample_count is None or sample_count <= 0:
+        return 0.0
+    if mean_slip_quality is None or not math.isfinite(mean_slip_quality):
+        return 0.0
+    count_factor = sample_count / (sample_count + CONFIDENCE_HALF_SAMPLES)
+    quality = min(1.0, max(0.0, mean_slip_quality))
+    return count_factor * quality

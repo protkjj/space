@@ -19,6 +19,7 @@ rover is a property here, so it cannot go stale independently of its source.
 """
 
 from dataclasses import dataclass
+import math
 
 
 #: Fraction of wheel radius a wheel can climb over unaided. Retains the
@@ -74,7 +75,7 @@ class RoverSpec:
         Replaces ``TraversabilityConfig.step_max``. Derived rather than
         configured precisely so a wheel change cannot leave it behind.
         """
-        raise NotImplementedError
+        return self.wheel_radius_m * STEP_LIMIT_PER_WHEEL_RADIUS
 
     def validate(self):
         """
@@ -85,7 +86,48 @@ class RoverSpec:
         (0, pi/2), a passable width narrower than the rover itself, or a
         negative clearance.
         """
-        raise NotImplementedError
+        if self.mass_kg <= 0.0:
+            raise ValueError(f'{self.rover_id}: mass_kg must be positive')
+        if self.wheel_radius_m <= 0.0 or self.wheel_width_m <= 0.0:
+            raise ValueError(f'{self.rover_id}: wheel dimensions must be positive')
+        if not 0.0 < self.max_climb_angle_rad < math.pi / 2.0:
+            raise ValueError(
+                f'{self.rover_id}: max_climb_angle_rad must lie in (0, pi/2)'
+            )
+        if self.min_passable_width_m <= 0.0:
+            raise ValueError(
+                f'{self.rover_id}: min_passable_width_m must be positive'
+            )
+        if self.ground_clearance_m < 0.0:
+            raise ValueError(
+                f'{self.rover_id}: ground_clearance_m cannot be negative'
+            )
+        if self.ground_pressure_kpa <= 0.0:
+            raise ValueError(
+                f'{self.rover_id}: ground_pressure_kpa must be positive'
+            )
+        if self.provenance not in (
+            PROVENANCE_UNKNOWN, PROVENANCE_MEASURED, PROVENANCE_ASSUMED
+        ):
+            raise ValueError(
+                f'{self.rover_id}: unknown provenance {self.provenance!r}'
+            )
+        return self
+
+
+#: Fields a spec mapping must supply. ``provenance``/``provenance_note`` are
+#: optional because they annotate rather than define the rover.
+REQUIRED_FIELDS = (
+    'rover_id',
+    'mass_kg',
+    'wheel_radius_m',
+    'wheel_width_m',
+    'ground_pressure_kpa',
+    'max_climb_angle_rad',
+    'min_passable_width_m',
+    'ground_clearance_m',
+    'has_grousers',
+)
 
 
 def load_rover_spec(params):
@@ -100,7 +142,23 @@ def load_rover_spec(params):
     Missing keys raise rather than defaulting: a silently defaulted rover
     limit is the exact failure mode this module exists to prevent.
     """
-    raise NotImplementedError
+    missing = [name for name in REQUIRED_FIELDS if name not in params]
+    if missing:
+        raise KeyError(f'rover spec is missing fields: {sorted(missing)}')
+    spec = RoverSpec(
+        rover_id=str(params['rover_id']),
+        mass_kg=float(params['mass_kg']),
+        wheel_radius_m=float(params['wheel_radius_m']),
+        wheel_width_m=float(params['wheel_width_m']),
+        ground_pressure_kpa=float(params['ground_pressure_kpa']),
+        max_climb_angle_rad=float(params['max_climb_angle_rad']),
+        min_passable_width_m=float(params['min_passable_width_m']),
+        ground_clearance_m=float(params['ground_clearance_m']),
+        has_grousers=bool(params['has_grousers']),
+        provenance=str(params.get('provenance', PROVENANCE_UNKNOWN)),
+        provenance_note=str(params.get('provenance_note', '')),
+    )
+    return spec.validate()
 
 
 def spec_to_msg(spec):
