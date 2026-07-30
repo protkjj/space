@@ -26,7 +26,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.colors import LightSource
+from matplotlib.colors import LightSource, TwoSlopeNorm
 
 
 def accumulate(rows, truth, statistic='mean'):
@@ -164,6 +164,14 @@ def main(argv=None):
         help='colour-scale floor; default is the 2nd percentile of the data',
     )
     parser.add_argument('--vmax', type=float, default=None)
+    parser.add_argument(
+        '--threshold', type=float, default=None,
+        help=('score treated as the neutral point: the colour ramp is centred '
+              'here so below reads red and above reads green, and the boundary '
+              'is drawn as a contour. Presentation only -- it does not change '
+              'any score, and it is NOT the CLAUDE.md 1.4 verdict boundary, '
+              'which depends on measurements still pending (docs/pending.md).'),
+    )
     args = parser.parse_args(argv)
 
     truth = np.load(args.truth)
@@ -237,9 +245,27 @@ def main(argv=None):
     )
     ax.imshow(hill, cmap='gray', origin='lower', extent=extent,
               vmin=-0.1, vmax=1.5, interpolation='bilinear')
-    img = ax.imshow(np.ma.masked_invalid(shown), cmap='RdYlGn', origin='lower',
-                    extent=extent, vmin=vmin, vmax=vmax,
-                    interpolation='nearest')
+    if args.threshold is not None:
+        centre = float(args.threshold)
+        # TwoSlopeNorm needs the centre strictly inside the range.
+        lo = min(vmin, centre - 1e-3)
+        hi = max(vmax, centre + 1e-3)
+        norm = TwoSlopeNorm(vcenter=centre, vmin=lo, vmax=hi)
+        img = ax.imshow(np.ma.masked_invalid(shown), cmap='RdYlGn',
+                        origin='lower', extent=extent, norm=norm,
+                        interpolation='nearest')
+        below = float((finite < centre).mean())
+        print(f'threshold {centre:.2f}: below {100 * below:.1f}%, '
+              f'above {100 * (1 - below):.1f}%')
+        # Draw the boundary itself so it is legible, not just implied by hue.
+        ys = np.linspace(extent[2] + res / 2, extent[3] - res / 2, ny)
+        xs = np.linspace(extent[0] + res / 2, extent[1] - res / 2, nx)
+        ax.contour(xs, ys, np.nan_to_num(shown, nan=centre),
+                   levels=[centre], colors='#111', linewidths=0.9, alpha=0.75)
+    else:
+        img = ax.imshow(np.ma.masked_invalid(shown), cmap='RdYlGn',
+                        origin='lower', extent=extent, vmin=vmin, vmax=vmax,
+                        interpolation='nearest')
 
     if len(path) and args.mode == 'driven':
         ax.plot(path[:, 0], path[:, 1], '-', color='#0b2fb5', lw=2.0,
@@ -256,6 +282,8 @@ def main(argv=None):
            else 'survey poses -- rover PLACED, not driven')
     smoothing = (f'{2 * args.smooth + 1}x{2 * args.smooth + 1} smoothed'
                  if args.smooth >= 1 else 'unsmoothed')
+    if args.threshold is not None:
+        smoothing += f'; ramp centred on {args.threshold:.2f} (contour)'
     ax.set_title(
         f'Rover-measured traversability ({how})\n'
         f'{measured.sum()} of {measured.size} cells = '

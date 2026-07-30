@@ -34,6 +34,14 @@ visible.
 
 Two presentation choices, both constrained so they cannot overstate the result:
 
+**The ramp is centred on 0.60**, so scores below it read red and above it read
+green, and the boundary is drawn as a contour. This is a **presentation** choice:
+it changes no score, and it is *not* the CLAUDE.md §1.4 verdict boundary — that
+one depends on σ₀ and the ramp test, both still pending (`docs/pending.md`).
+Centred this way the survey splits 47.4% below / 52.6% above, so the eye sees the
+spread instead of a wall of red. Pass `--threshold` to move it or omit it for a
+plain linear ramp.
+
 **Colour scale follows the data.** The first version of these figures fixed the
 ramp at 0.60–1.00, which clipped **47.4% of cells to the bottom red** and left
 the top tenth of the ramp for 0.7% of cells — the map looked uniformly hostile
