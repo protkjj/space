@@ -26,16 +26,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.colors import LightSource, LinearSegmentedColormap, TwoSlopeNorm
-
-
-#: Regolith tone for the "as it is" arena render. Deliberately not a
-#: scientific colour ramp: the left panel answers "what does the arena look
-#: like", so a data-product palette would invite reading values off it.
-REGOLITH = LinearSegmentedColormap.from_list(
-    'regolith',
-    ['#2b2620', '#4a4238', '#6f6455', '#968875', '#bdb09b', '#ded5c4'],
-)
+from matplotlib.colors import LightSource, TwoSlopeNorm
 
 
 def accumulate(rows, truth, statistic='mean'):
@@ -144,39 +135,57 @@ def truncate_to_coverage(rows, truth, target):
     return rows
 
 
-def draw_truth(ax, truth, extent, layer):
-    """Draw the CAD arena as a shaded relief map, and return the image."""
+def draw_relief(ax, truth, extent):
+    """
+    Draw the arena's grey hillshade as a panel background.
+
+    Used under BOTH panels, identically. That is the whole point of putting them
+    side by side: if the backgrounds differ the eye has to translate between two
+    renderings before it can compare anything. An earlier version tinted the left
+    panel with a regolith ramp and left the right one grey, which made the same
+    terrain read as two different places.
+
+    Computed from the measurement grid, not a finer one. A finer rasterisation of
+    the mesh leaves cells with no vertex in them, and shading those holes drew a
+    lattice of dark seams across both panels -- a rasterisation artefact rendered
+    as if it were terrain.
+    """
     res = float(truth['resolution'])
     elevation = truth['elevation']
-    filled = np.nan_to_num(elevation, nan=float(np.nanmin(elevation)))
+    shade = LightSource(azdeg=315, altdeg=45).hillshade(
+        np.nan_to_num(elevation, nan=float(np.nanmin(elevation))),
+        vert_exag=3.0, dx=res, dy=res,
+    )
+    ax.imshow(shade, cmap='gray', origin='lower', extent=extent,
+              vmin=0.0, vmax=1.4, interpolation='bilinear')
+
+
+def draw_truth(ax, truth, extent, layer):
+    """Draw the CAD arena, either as terrain or as a labelled data product."""
+    res = float(truth['resolution'])
+    elevation = truth['elevation']
     light = LightSource(azdeg=315, altdeg=45)
+
+    if layer == 'arena':
+        draw_relief(ax, truth, extent)
+        return None, None, elevation
 
     if layer == 'slope':
         values = np.degrees(truth['slope'])
         cmap, label = 'magma', 'CAD ground-truth slope [deg]'
-    elif layer == 'elevation':
+    else:
         values = elevation
         # Not 'terrain': its blue low end reads as water, which is misleading
         # for a regolith arena. cividis is perceptually uniform and
         # colour-vision-safe.
         cmap, label = 'cividis', 'CAD ground-truth elevation [m]'
-    else:
-        # 'arena': the surface as it looks, not as a measurement. No colour bar,
-        # because there is no value to read off it -- that is the point. Strong
-        # vertical exaggeration and low sun bring out the crater rims, which is
-        # what the reader is being asked to compare against.
-        values = elevation
-        cmap, label = REGOLITH, None
 
     rgb = light.shade(
         np.nan_to_num(values, nan=float(np.nanmin(values))),
-        cmap=(cmap if not isinstance(cmap, str) else plt.get_cmap(cmap)),
-        blend_mode='overlay' if label is None else 'soft',
-        vert_exag=6.0 if label is None else 3.0, dx=res, dy=res,
+        cmap=plt.get_cmap(cmap), blend_mode='soft',
+        vert_exag=3.0, dx=res, dy=res,
     )
-    ax.imshow(rgb, origin='lower', extent=extent, interpolation='bilinear')
-    if label is None:
-        return None, None, values
+    ax.imshow(rgb, origin='lower', extent=extent, interpolation='bicubic')
     # A separate mappable carries the colour bar, since shade() returns RGB.
     mappable = ax.imshow(
         np.ma.masked_invalid(values), cmap=cmap, origin='lower',
@@ -218,6 +227,7 @@ def main(argv=None):
         help='colour-scale floor; default is the 2nd percentile of the data',
     )
     parser.add_argument('--vmax', type=float, default=None)
+    parser.add_argument('--dpi', type=int, default=200)
     parser.add_argument(
         '--coverage-target', type=float, default=None,
         help=('stop consuming captured frames once this coverage fraction is '
@@ -281,7 +291,7 @@ def main(argv=None):
 
     panels = 1 if args.left == 'none' else 2
     fig, axes = plt.subplots(
-        1, panels, figsize=(8.4 if panels == 1 else 15.0, 9.0), dpi=140,
+        1, panels, figsize=(8.4 if panels == 1 else 15.0, 9.0), dpi=args.dpi,
         sharex=True, sharey=True, squeeze=False,
     )
     axes = axes[0]
@@ -297,7 +307,7 @@ def main(argv=None):
         else:
             # Keep the panels the same width even without a colour bar.
             cbl = fig.colorbar(
-                plt.cm.ScalarMappable(cmap=REGOLITH), ax=left,
+                plt.cm.ScalarMappable(cmap='gray'), ax=left,
                 fraction=0.046, pad=0.03,
             )
             cbl.outline.set_visible(False)
@@ -305,22 +315,16 @@ def main(argv=None):
             cbl.ax.set_visible(False)
         left.set_title(
             'The arena itself\n'
-            'shaded relief of the CAD surface -- no measurement involved',
+            'CAD surface, no measurement -- identical background to the right',
             fontsize=10,
         )
         left.set_xlabel('x [m]')
         left.set_ylabel('y [m]')
         left.set_aspect('equal')
 
-    # Hillshade under the measurement panel too, so unmeasured ground still
-    # reads as terrain rather than as a blank.
-    elevation = truth['elevation']
-    hill = LightSource(azdeg=315, altdeg=45).hillshade(
-        np.nan_to_num(elevation, nan=float(np.nanmin(elevation))),
-        vert_exag=3.0, dx=res, dy=res,
-    )
-    ax.imshow(hill, cmap='gray', origin='lower', extent=extent,
-              vmin=-0.1, vmax=1.5, interpolation='bilinear')
+    # The SAME relief as the left panel, so unmeasured ground reads as the same
+    # terrain rather than as a differently-toned blank.
+    draw_relief(ax, truth, extent)
     if args.threshold is not None:
         centre = float(args.threshold)
         # TwoSlopeNorm needs the centre strictly inside the range.
@@ -333,11 +337,15 @@ def main(argv=None):
         below = float((finite < centre).mean())
         print(f'threshold {centre:.2f}: below {100 * below:.1f}%, '
               f'above {100 * (1 - below):.1f}%')
-        # Draw the boundary itself so it is legible, not just implied by hue.
+        # Draw the boundary itself, heavily. It is the outline of the region
+        # scoring at or above the threshold -- effectively "where the rover can
+        # go" -- so it carries more meaning than the hue gradient and should not
+        # be a hairline. Unmeasured cells are filled with the threshold value
+        # only so the contour does not close around every gap in coverage.
         ys = np.linspace(extent[2] + res / 2, extent[3] - res / 2, ny)
         xs = np.linspace(extent[0] + res / 2, extent[1] - res / 2, nx)
         ax.contour(xs, ys, np.nan_to_num(shown, nan=centre),
-                   levels=[centre], colors='#111', linewidths=0.9, alpha=0.75)
+                   levels=[centre], colors='black', linewidths=2.0, alpha=1.0)
     else:
         img = ax.imshow(np.ma.masked_invalid(shown), cmap='RdYlGn',
                         origin='lower', extent=extent, vmin=vmin, vmax=vmax,

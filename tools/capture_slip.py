@@ -50,7 +50,7 @@ if ok.any():
     good = lam[ok & np.isfinite(lam)]
     print(f'slip: min {good.min():+.4f}  median {np.median(good):+.4f}  max {good.max():+.4f}')
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6.5), dpi=140, sharex=True)
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6.5), dpi=200, sharex=True)
 
 ax1.plot(t[ok], vw[ok], lw=1.6, color='#c0392b',
          label='V_wheel  (encoder, slip-contaminated)')

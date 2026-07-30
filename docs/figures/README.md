@@ -29,15 +29,21 @@ tools/compare_to_cad.py --truth arena_truth.npz --measured measured_cells.npz \
 Each map figure is two panels: **the arena itself on the left** and
 **rover-measured traversability on the right**.
 
-The left panel is shaded relief of the CAD surface in a regolith tone,
-deliberately NOT a scientific colour ramp — it answers "what does this terrain
-look like", so a data palette would invite reading values off it. Use
+Both panels use the **identical** grey hillshade background, which is the point
+of putting them side by side: if the backgrounds differ the eye has to translate
+between two renderings before it can compare anything. The right panel simply
+paints measured traversability on top of it. Use
 `--left slope` for the variant that draws CAD slope as a labelled data product;
 that one makes the validation starkest, because every bright crater rim on the
 left has a red arc against it on the right, which is the +0.707 correlation made
 visible.
 
 Two presentation choices, both constrained so they cannot overstate the result:
+
+**The heavy black line is the 0.60 contour** — the outline of the region scoring
+at or above the threshold, i.e. effectively where the rover can go. It carries
+more meaning than the hue gradient, so it is drawn thick rather than as a
+hairline.
 
 **The ramp is centred on 0.60**, so scores below it read red and above it read
 green, and the boundary is drawn as a contour. This is a **presentation** choice:

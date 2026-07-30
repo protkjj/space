@@ -99,7 +99,7 @@ def main(argv=None):
     if len(err) > 2:
         print(f'correlation {np.corrcoef(md, td)[0, 1]:+.3f}')
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.4), dpi=140)
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.4), dpi=200)
 
     ax1.hexbin(td, md, gridsize=45, cmap='viridis', mincnt=1, bins='log')
     lims = [min(td.min(), md.min()), max(td.max(), md.max())]
