@@ -19,17 +19,22 @@ tools/capture_slip.py 24 slip_trace.png
 
 # 3. Render
 tools/render_arena_map.py --truth arena_truth.npz --measured measured_cells.npz \
-  --out arena_map_accumulated.png
+  --out arena_map_driven.png
 tools/compare_to_cad.py --truth arena_truth.npz --measured measured_cells.npz \
   --out slope_validation_vs_cad.png
 ```
 
 ## Reading the map figures
 
-Each map figure is two panels: **CAD ground truth on the left** (what the arena
-IS, known before driving) and **rover-measured traversability on the right**.
-Comparing them is the point — every bright crater rim in the CAD slope panel has
-a red arc against it in the measured panel, which is the +0.707 correlation made
+Each map figure is two panels: **the arena itself on the left** and
+**rover-measured traversability on the right**.
+
+The left panel is shaded relief of the CAD surface in a regolith tone,
+deliberately NOT a scientific colour ramp — it answers "what does this terrain
+look like", so a data palette would invite reading values off it. Use
+`--left slope` for the variant that draws CAD slope as a labelled data product;
+that one makes the validation starkest, because every bright crater rim on the
+left has a red arc against it on the right, which is the +0.707 correlation made
 visible.
 
 Two presentation choices, both constrained so they cannot overstate the result:
@@ -57,8 +62,12 @@ inflate the one number these figures exist to report.
 
 ## What each one shows
 
-**`arena_map_full_survey.png`** — the whole arena at **75.0% coverage**
-(6000 of 8000 cells, 1144 frames, median 29 visits per cell). Crater floors read
+**`arena_map_survey_60pct.png`** — the arena at **60.0% coverage**
+(4800 of 8000 cells, median 27 visits per cell). The survey captured enough for
+75%, and `--coverage-target 0.60` stops consuming frames once 60% is reached.
+That is "the survey ended earlier", not a filtered subset: frames are consumed in
+arrival order, so the choice is WHEN to stop, never WHICH cells to keep — the
+latter could flatter the map, the former cannot. Crater floors read
 green and the rims read dark red, which is the structure the hillshade shows
 independently.
 
@@ -72,9 +81,9 @@ beyond 25 deg, which is reported rather than hidden.
 Perception is fully exercised — every cell comes from a real rendered depth image
 through the unchanged pipeline. Only locomotion is skipped, and the figure title
 says so. Use this figure for "what the map looks like with coverage" and
-`arena_map_accumulated.png` for "how far the rover actually gets".
+`arena_map_driven.png` for "how far the rover actually gets".
 
-**`arena_map_accumulated.png`** — traversability accumulated onto the arena's
+**`arena_map_driven.png`** — traversability accumulated onto the arena's
 fixed grid. 693 of 8000 cells measured (8.7% coverage) over 219 frames, median
 15 visits per measured cell. Grey is *not yet visited*, which is a different
 statement from *measured and bad* — the distinction the raw pipeline output
@@ -108,7 +117,7 @@ saturate at 100%. Nothing about the geometry changed at that instant; only the
 rover's ability to move did.
 
 **`traversability_map_arena_terrain_v04.png`** — the earlier scatter of measured
-cells without the arena canvas. Superseded by `arena_map_accumulated.png`; kept
+cells without the arena canvas. Superseded by `arena_map_driven.png`; kept
 because it shows what the pipeline emits before the canvas is applied.
 
 ## Caveat

@@ -26,7 +26,16 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.colors import LightSource, TwoSlopeNorm
+from matplotlib.colors import LightSource, LinearSegmentedColormap, TwoSlopeNorm
+
+
+#: Regolith tone for the "as it is" arena render. Deliberately not a
+#: scientific colour ramp: the left panel answers "what does the arena look
+#: like", so a data-product palette would invite reading values off it.
+REGOLITH = LinearSegmentedColormap.from_list(
+    'regolith',
+    ['#2b2620', '#4a4238', '#6f6455', '#968875', '#bdb09b', '#ded5c4'],
+)
 
 
 def accumulate(rows, truth, statistic='mean'):
@@ -104,6 +113,37 @@ def smooth_measured(grid, radius, iterations=1):
     return out
 
 
+def truncate_to_coverage(rows, truth, target):
+    """
+    Keep the earliest rows that reach ``target`` coverage, and drop the rest.
+
+    Rows are stored in arrival order, so this is exactly "the survey stopped
+    earlier" rather than a cherry-picked subset -- which matters, because
+    choosing WHICH cells to keep could flatter the map, while choosing WHEN to
+    stop cannot.
+    """
+    nx, ny = int(truth['nx']), int(truth['ny'])
+    res = float(truth['resolution'])
+    min_x, min_y = float(truth['min_x']), float(truth['min_y'])
+    wanted = int(round(target * nx * ny))
+
+    seen = set()
+    for index, row in enumerate(rows):
+        if row[9] <= 0.5:
+            continue
+        ix = int((row[0] - min_x) / res)
+        iy = int((row[1] - min_y) / res)
+        if 0 <= ix < nx and 0 <= iy < ny:
+            seen.add(iy * nx + ix)
+            if len(seen) >= wanted:
+                print(f'coverage target {target:.0%}: stopped after '
+                      f'{index + 1} of {len(rows)} captured cells')
+                return rows[:index + 1]
+    print(f'coverage target {target:.0%} not reachable; using all '
+          f'{len(rows)} cells ({len(seen)} distinct)')
+    return rows
+
+
 def draw_truth(ax, truth, extent, layer):
     """Draw the CAD arena as a shaded relief map, and return the image."""
     res = float(truth['resolution'])
@@ -114,19 +154,29 @@ def draw_truth(ax, truth, extent, layer):
     if layer == 'slope':
         values = np.degrees(truth['slope'])
         cmap, label = 'magma', 'CAD ground-truth slope [deg]'
-    else:
+    elif layer == 'elevation':
         values = elevation
         # Not 'terrain': its blue low end reads as water, which is misleading
         # for a regolith arena. cividis is perceptually uniform and
         # colour-vision-safe.
         cmap, label = 'cividis', 'CAD ground-truth elevation [m]'
+    else:
+        # 'arena': the surface as it looks, not as a measurement. No colour bar,
+        # because there is no value to read off it -- that is the point. Strong
+        # vertical exaggeration and low sun bring out the crater rims, which is
+        # what the reader is being asked to compare against.
+        values = elevation
+        cmap, label = REGOLITH, None
 
     rgb = light.shade(
         np.nan_to_num(values, nan=float(np.nanmin(values))),
-        cmap=plt.get_cmap(cmap), blend_mode='soft',
-        vert_exag=3.0, dx=res, dy=res,
+        cmap=(cmap if not isinstance(cmap, str) else plt.get_cmap(cmap)),
+        blend_mode='overlay' if label is None else 'soft',
+        vert_exag=6.0 if label is None else 3.0, dx=res, dy=res,
     )
     ax.imshow(rgb, origin='lower', extent=extent, interpolation='bilinear')
+    if label is None:
+        return None, None, values
     # A separate mappable carries the colour bar, since shade() returns RGB.
     mappable = ax.imshow(
         np.ma.masked_invalid(values), cmap=cmap, origin='lower',
@@ -156,14 +206,25 @@ def main(argv=None):
     )
     parser.add_argument('--smooth-iterations', type=int, default=1)
     parser.add_argument(
-        '--left', default='elevation', choices=('elevation', 'slope', 'none'),
-        help='CAD layer drawn in the comparison panel',
+        '--left', default='arena',
+        choices=('arena', 'elevation', 'slope', 'none'),
+        help=('comparison panel: "arena" renders the CAD surface as it LOOKS '
+              '(shaded relief, no colour bar) so the reader compares terrain '
+              'against measurement rather than one heat map against another; '
+              '"elevation"/"slope" draw it as a labelled data product'),
     )
     parser.add_argument(
         '--vmin', type=float, default=None,
         help='colour-scale floor; default is the 2nd percentile of the data',
     )
     parser.add_argument('--vmax', type=float, default=None)
+    parser.add_argument(
+        '--coverage-target', type=float, default=None,
+        help=('stop consuming captured frames once this coverage fraction is '
+              'reached. Equivalent to ending the survey earlier, since frames '
+              'are consumed in the order they arrived -- it is a shorter '
+              'survey, not a filtered one.'),
+    )
     parser.add_argument(
         '--threshold', type=float, default=None,
         help=('score treated as the neutral point: the colour ramp is centred '
@@ -177,6 +238,9 @@ def main(argv=None):
     truth = np.load(args.truth)
     data = np.load(args.measured)
     rows, path = data['rows'], data['path']
+
+    if args.coverage_target is not None:
+        rows = truncate_to_coverage(rows, truth, args.coverage_target)
 
     score, count, used, invalid = accumulate(rows, truth, args.statistic)
     ny, nx = score.shape
@@ -217,7 +281,7 @@ def main(argv=None):
 
     panels = 1 if args.left == 'none' else 2
     fig, axes = plt.subplots(
-        1, panels, figsize=(8.4 if panels == 1 else 15.0, 8.4), dpi=140,
+        1, panels, figsize=(8.4 if panels == 1 else 15.0, 9.0), dpi=140,
         sharex=True, sharey=True, squeeze=False,
     )
     axes = axes[0]
@@ -226,12 +290,24 @@ def main(argv=None):
     if panels == 2:
         left = axes[0]
         mappable, label, _ = draw_truth(left, truth, extent, args.left)
-        cbl = fig.colorbar(mappable, ax=left, fraction=0.046, pad=0.03)
-        cbl.set_label(label)
-        cbl.solids.set_alpha(1.0)
-        left.set_title('CAD ground truth\n'
-                       'what the arena IS -- known before driving',
-                       fontsize=10)
+        if mappable is not None:
+            cbl = fig.colorbar(mappable, ax=left, fraction=0.046, pad=0.03)
+            cbl.set_label(label)
+            cbl.solids.set_alpha(1.0)
+        else:
+            # Keep the panels the same width even without a colour bar.
+            cbl = fig.colorbar(
+                plt.cm.ScalarMappable(cmap=REGOLITH), ax=left,
+                fraction=0.046, pad=0.03,
+            )
+            cbl.outline.set_visible(False)
+            cbl.set_ticks([])
+            cbl.ax.set_visible(False)
+        left.set_title(
+            'The arena itself\n'
+            'shaded relief of the CAD surface -- no measurement involved',
+            fontsize=10,
+        )
         left.set_xlabel('x [m]')
         left.set_ylabel('y [m]')
         left.set_aspect('equal')
@@ -292,8 +368,10 @@ def main(argv=None):
         fontsize=10,
     )
     ax.set_aspect('equal')
-    fig.tight_layout()
-    fig.savefig(args.out)
+    # Three-line titles need headroom, and bbox_inches='tight' then guarantees
+    # nothing is trimmed -- reserving space by hand clipped the axis labels.
+    fig.tight_layout(rect=(0.0, 0.0, 1.0, 0.95))
+    fig.savefig(args.out, bbox_inches='tight')
     print(f'wrote {args.out}')
     return 0
 
