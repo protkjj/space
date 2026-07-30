@@ -35,4 +35,7 @@ Desktop.ini
 
 # Session artifacts not meant for the repo
 Screenshot*.png
-/arena_terrain_v04_resend_02.stl
+
+# Raw CAD dumps belong under a package's meshes/, never at the repo root.
+# Root-anchored, so ros2_ws/**/meshes/*.stl is unaffected.
+/*.stl
