@@ -6,7 +6,13 @@ slip_estimator:
     # Hardware: point this at the OAK-D VIO (/vio/odom). Must NOT be a wheel-
     # fusing estimate, or the slip ratio becomes circular (mission doc 1.3).
     actual_odom_topic: /odom
-    output_topic: /slip/estimate
+    # Declares WHICH producer v_actual came from, so a consumer can
+    # enforce non-circularity. 'ekf' would be circular: robot_localization
+    # fuses wheel encoders. Change to 'vio' on hardware.
+    actual_source: sim_ground_truth
+    quality_variance_scale: 0.01
+    # Contract topic name (docs/dual_rover_traversability.md).
+    output_topic: /slip
     diagnostics_topic: /slip/diagnostics
     # Must track space_rover.urdf.xacro's wheel_radius. CAD wheel STL measures
     # 140 mm diameter, so 0.070 m (was 0.112 placeholder before the CAD import).
