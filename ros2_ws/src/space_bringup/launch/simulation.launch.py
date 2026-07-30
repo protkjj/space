@@ -17,6 +17,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from nav2_common.launch import RewrittenYaml
+from space_description.rover_geometry import footprint_string, load_geometry
 
 
 # RViz cannot render the Gazebo world directly, so arena_marker_publisher draws
@@ -90,6 +91,11 @@ def generate_launch_description():
     nav2_params_file = os.path.join(
         bringup_share, 'config', 'navigation', 'nav2_params.yaml'
     )
+    # Footprint comes from the CAD, not from nav2_params.yaml. Both costmaps
+    # carried footprints sized to the pre-51b34ac chassis -- oversized by up to
+    # 60 mm -- which silently discards gaps the rover can actually pass, and
+    # judging passable gaps is part of the mission.
+    rover_footprint = footprint_string(load_geometry())
     nav2_params = RewrittenYaml(
         source_file=nav2_params_file,
         param_rewrites={
@@ -101,6 +107,12 @@ def generate_launch_description():
                 'global_costmap.global_costmap.ros__parameters.'
                 'traversability_layer.enabled'
             ): use_traversability_layer,
+            'local_costmap.local_costmap.ros__parameters.footprint': (
+                rover_footprint
+            ),
+            'global_costmap.global_costmap.ros__parameters.footprint': (
+                rover_footprint
+            ),
         },
         convert_types=True,
     )
