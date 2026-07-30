@@ -24,6 +24,29 @@ tools/compare_to_cad.py --truth arena_truth.npz --measured measured_cells.npz \
   --out slope_validation_vs_cad.png
 ```
 
+## Reading the map figures
+
+Each map figure is two panels: **CAD ground truth on the left** (what the arena
+IS, known before driving) and **rover-measured traversability on the right**.
+Comparing them is the point — every bright crater rim in the CAD slope panel has
+a red arc against it in the measured panel, which is the +0.707 correlation made
+visible.
+
+Two presentation choices, both constrained so they cannot overstate the result:
+
+**Colour scale follows the data.** The first version of these figures fixed the
+ramp at 0.60–1.00, which clipped **47.4% of cells to the bottom red** and left
+the top tenth of the ramp for 0.7% of cells — the map looked uniformly hostile
+while the data actually spread from 0.03 to 0.94 with a median of 0.62. The scale
+now runs from the 2nd to the 98th percentile (`--vmin`/`--vmax` to override).
+
+**3×3 neighbour smoothing**, because adjacent 5 cm cells are not independent
+samples — they are the same surface seen through sensor noise. It is masked back
+to the originally measured cells on every iteration, so it can never bleed colour
+into ground the rover has not observed, and the scripts assert the coverage count
+is unchanged (`coverage change +0 cells`). A blur that widened coverage would
+inflate the one number these figures exist to report.
+
 ## What each one shows
 
 **`arena_map_full_survey.png`** — the whole arena at **75.0% coverage**
