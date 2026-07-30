@@ -34,6 +34,10 @@ setup(
                 'traversability_fusion_node = '
                 'space_mission.traversability_fusion_node:main'
             ),
+            (
+                'slip_estimator = '
+                'space_mission.slip_estimator_node:main'
+            ),
         ],
     },
 )

@@ -274,6 +274,22 @@ def generate_launch_description():
                     {'use_sim_time': use_sim_time},
                 ],
             ),
+            # Signature measurement: encoder(/joint_states) vs wheel-independent
+            # actual velocity (sim: ground-truth /odom) -> /slip/estimate.
+            Node(
+                package='space_mission',
+                executable='slip_estimator',
+                name='slip_estimator',
+                output='screen',
+                parameters=[
+                    os.path.join(
+                        mission_share,
+                        'config',
+                        'slip.yaml',
+                    ),
+                    {'use_sim_time': use_sim_time},
+                ],
+            ),
             Node(
                 package='space_controller',
                 executable='command_safety_node',
