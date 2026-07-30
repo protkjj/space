@@ -72,9 +72,19 @@ ros2 launch space_bringup simulation.launch.py
 The CAD slope world can be selected explicitly with
 `world:=arena_test_slope_v04.sdf`; it contains the CAD floor and therefore adds
 no ground plane. When using that world, pass `spawn_z:=0.12`. Mesh intersection
-measures its starting surface top at 0.10 m. The rover wheel bottom is −0.005 m
-relative to `base_footprint`, so a 0.12 m spawn starts 0.015 m above contact and
-settles under physics. The simulation default is now `arena_terrain_v04.sdf`
+measures its starting surface top at 0.10 m. The rover wheel bottom is **0.000 m**
+relative to `base_footprint`, so a 0.12 m spawn starts **0.020 m** above contact
+and settles under physics.
+
+The offset is exactly zero by construction, for any wheel size: `base_link` sits
+`wheel_radius − wheel_z` above `base_footprint` and each wheel centre sits
+`wheel_z` below `base_link`, so the contact point cancels to zero.
+`space_description`'s `test_wheel_contact_lands_exactly_on_base_footprint`
+asserts it. This text previously said −0.005 m, which was the pre-`51b34ac`
+value — the old chain gave `0.137 − 0.03 − 0.112 = −0.005` exactly. Deriving a
+new world's spawn height from the old rule subtracts an offset that no longer
+exists and starts the wheels below the surface, producing an interpenetration
+kick instead of a clean settle. The simulation default is now `arena_terrain_v04.sdf`
 with `spawn_z:=0.23`.
 
 RViz starts by default with fixed frame `odom`. To run it separately:

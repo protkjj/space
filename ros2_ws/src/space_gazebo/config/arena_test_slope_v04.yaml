@@ -47,6 +47,14 @@ simulation:
   runtime_bounding_box_m:
     min: [-1.6, -2.0, 0.0]
     max: [1.6, 2.0, 0.55]
-  # Terrain top is 0.10 m here. The rover's lowest wheel point is -0.005 m
-  # relative to base_footprint, so z=0.12 starts with 0.015 m clearance.
+  # Terrain top is 0.10 m here. The rover's lowest wheel point is 0.000 m
+  # relative to base_footprint, so z=0.12 starts with 0.020 m clearance.
+  #
+  # That offset is exactly zero by construction for any wheel size: base_link
+  # sits wheel_radius - wheel_z above base_footprint and each wheel centre sits
+  # wheel_z below base_link, so the contact point cancels. This comment said
+  # -0.005 m, the pre-51b34ac value (0.137 - 0.03 - 0.112). The recorded 0.12
+  # here is still safe -- it now over-clears by 5 mm -- but deriving a NEW
+  # world's spawn height from the old rule would start the wheels below the
+  # surface and kick on contact.
   initial_rover_pose: [-1.2, -1.6, 0.12, 0.0]
