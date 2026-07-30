@@ -26,6 +26,23 @@ tools/compare_to_cad.py --truth arena_truth.npz --measured measured_cells.npz \
 
 ## What each one shows
 
+**`arena_map_full_survey.png`** — the whole arena at **75.0% coverage**
+(6000 of 8000 cells, 1144 frames, median 29 visits per cell). Crater floors read
+green and the rims read dark red, which is the structure the hillshade shows
+independently.
+
+Produced by `survey_arena.py`, which PLACES the rover at 96 poses (4x6 grid, 4
+yaws each) rather than driving it, because this rover cannot traverse the whole
+arena: it high-centres on the rims, and a driven run reaches 1.1 m and 8.7%
+coverage. Placement heights come from the CAD grid so the rover settles onto the
+surface instead of being dropped inside it; 21 of 96 poses still ended tilted
+beyond 25 deg, which is reported rather than hidden.
+
+Perception is fully exercised — every cell comes from a real rendered depth image
+through the unchanged pipeline. Only locomotion is skipped, and the figure title
+says so. Use this figure for "what the map looks like with coverage" and
+`arena_map_accumulated.png` for "how far the rover actually gets".
+
 **`arena_map_accumulated.png`** — traversability accumulated onto the arena's
 fixed grid. 693 of 8000 cells measured (8.7% coverage) over 219 frames, median
 15 visits per measured cell. Grey is *not yet visited*, which is a different
@@ -38,8 +55,14 @@ and the mission's claim (CLAUDE.md §1.1) is that a rover on the terrain learns
 what geometry cannot tell you.
 
 **`slope_validation_vs_cad.png`** — the rover's measured slope against the
-arena's true slope, 9189 cells. Correlation **+0.766**, error sd 6.28°,
-|error| P90 9.25°, median **−2.42°**.
+arena's true slope over the full survey, **157,378 cells**. Correlation
+**+0.707**, error sd 6.78°, |error| P90 11.08°, median **−2.76°**.
+
+Cells whose slope penalty saturates carry no slope information, so they are
+excluded and counted rather than folded in at the boundary: 26,475 below 5° and
+21,819 above 30°. The earlier short traverse gave +0.766 / −2.42° over 9189
+cells — the full survey covers harder terrain, so the correlation is slightly
+lower and the bias slightly larger.
 
 The bias sign matters. The pipeline *under*-reports slope, because the 5 cm
 elevation grid median-filters the surface and flattens it. Under-reporting is the

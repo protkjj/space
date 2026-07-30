@@ -83,16 +83,18 @@ local_costmap:
       height: 4
       resolution: 0.05
       # DERIVED from space_description/config/rover_geometry.yaml -- the union of
-      # the chassis collision box (0.32 x 0.26) and the four wheel cylinders
-      # (outer faces at +/-0.1365). Kept literal because nav2 needs a footprint
-      # to exist here, but simulation.launch.py overwrites it from the CAD at
-      # launch and test_nav2_footprint.py fails if this copy drifts.
+      # the chassis collision box (0.30521 x 0.27300), the four wheel cylinders
+      # (outer faces at +/-0.13650) AND the camera mount, which reaches 0.19750 m
+      # forward and is the binding extent in x. Kept literal because nav2 needs a
+      # footprint to exist here, but simulation.launch.py overwrites it from the
+      # CAD at launch and test_footprint_covers_every_collision (which walks the
+      # generated URDF rather than repeating that list) fails if it drifts.
       #
       # It read [[0.20, 0.18], ...] before: sized to the pre-CAD chassis and
       # OVERSIZED by 40 mm laterally. That is not "safely conservative" -- the
       # mission includes judging whether gaps are passable, so an inflated
       # footprint discards routes the rover can physically take.
-      footprint: "[[0.15375, 0.13650], [0.15375, -0.13650], [-0.15375, -0.13650], [-0.15375, 0.13650]]"
+      footprint: "[[0.19750, 0.13650], [0.19750, -0.13650], [-0.19750, -0.13650], [-0.19750, 0.13650]]"
       # Rolling odom-frame local costmap: no static_layer (that consumes the
       # map-frame SLAM /map and was rejected as malformed, stalling updates).
       plugins: ["obstacle_layer", "traversability_layer", "inflation_layer"]
@@ -151,7 +153,7 @@ global_costmap:
       # Same derived envelope as local_costmap; see the note there. This read
       # [[0.22, 0.20], ...], oversized by 60 mm longitudinally and 64 mm
       # laterally against the actual rover.
-      footprint: "[[0.15375, 0.13650], [0.15375, -0.13650], [-0.15375, -0.13650], [-0.15375, 0.13650]]"
+      footprint: "[[0.19750, 0.13650], [0.19750, -0.13650], [-0.19750, -0.13650], [-0.19750, 0.13650]]"
       plugins: ["obstacle_layer", "traversability_layer", "inflation_layer"]
 
       obstacle_layer:

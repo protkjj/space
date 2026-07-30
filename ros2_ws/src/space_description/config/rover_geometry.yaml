@@ -78,6 +78,18 @@ chassis_top_z: 0.19405
 # one that neither under-covers laterally nor clips the ground.
 chassis_ground_clearance: 0.030
 
+# --- Sensor mount, from the URDF camera_joint and its collision box --------
+# The camera sticks out FURTHER FORWARD than any part of the chassis or wheels,
+# so anything that must not intersect the rover has to include it. Leaving it
+# out made the derived nav2 footprint 43.8 mm shorter than what Gazebo actually
+# collides with -- the dangerous direction, since the planner would then route
+# the rover into contact. Worse, the guard test missed it because it checked the
+# same two shapes the derivation did; test_footprint_covers_every_collision now
+# parses the generated URDF instead of trusting that list.
+camera_mount_x: 0.17
+camera_collision_length: 0.055
+camera_collision_width: 0.025
+
 # --- Mass ------------------------------------------------------------------
 # Three different numbers were in play, which is why this block is explicit
 # about which is which:

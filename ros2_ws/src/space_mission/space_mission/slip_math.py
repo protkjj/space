@@ -18,14 +18,15 @@ def wheel_linear_speed(left_speeds, right_speeds, wheel_radius):
     whether or not the chassis moved, so slip inflates it exactly as it would
     inflate a real RoboClaw encoder reading.
     """
-    sides = []
-    for group in (left_speeds, right_speeds):
-        if group:
-            sides.append(sum(group) / len(group))
-    if not sides:
-        return 0.0
-    mean_omega = sum(sides) / len(sides)
-    return mean_omega * wheel_radius
+    if not left_speeds or not right_speeds:
+        # Returning a one-sided average here would be worse than returning
+        # nothing: skid-steer forward speed is the mean of the two sides, so a
+        # single side is the speed of a rover that is turning, reported as if it
+        # were driving straight. The caller must treat this as "no reading".
+        return None
+    left = sum(left_speeds) / len(left_speeds)
+    right = sum(right_speeds) / len(right_speeds)
+    return (left + right) / 2.0 * wheel_radius
 
 
 def compute_slip(v_wheel, v_actual, min_wheel_speed):

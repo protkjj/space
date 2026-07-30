@@ -74,8 +74,14 @@ class RoverSpec:
 
         Replaces ``TraversabilityConfig.step_max``. Derived rather than
         configured precisely so a wheel change cannot leave it behind.
+
+        Capped by ``ground_clearance_m``: the wheel-derived limit for our rover
+        is 0.035 m while the measured chassis clearance is 0.030 m, so a step it
+        is "allowed" to climb would ground the chassis first. Whichever limit
+        binds is the real one, and for this rover it is the chassis.
         """
-        return self.wheel_radius_m * STEP_LIMIT_PER_WHEEL_RADIUS
+        wheel_limit = self.wheel_radius_m * STEP_LIMIT_PER_WHEEL_RADIUS
+        return min(wheel_limit, self.ground_clearance_m)
 
     def validate(self):
         """

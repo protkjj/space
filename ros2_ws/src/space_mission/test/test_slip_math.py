@@ -8,8 +8,19 @@ def test_wheel_linear_speed_averages_sides():
     assert wheel_linear_speed([10.0, 10.0], [10.0, 10.0], 0.1) == 1.0
 
 
-def test_wheel_linear_speed_handles_missing_side():
-    assert wheel_linear_speed([10.0], [], 0.1) == 1.0
+def test_wheel_linear_speed_requires_both_sides():
+    """
+    One side alone must yield None, not a plausible speed.
+
+    This test previously asserted the opposite -- that a missing side returns a
+    one-sided average -- which froze a defect into the contract. Skid-steer
+    forward speed is the mean of the two sides, so a one-sided figure is the
+    speed of a rover that is turning, reported as straight-line travel, and it
+    would flow into the slip ratio as a valid reading.
+    """
+    assert wheel_linear_speed([10.0], [], 0.1) is None
+    assert wheel_linear_speed([], [10.0], 0.1) is None
+    assert wheel_linear_speed([], [], 0.1) is None
 
 
 def test_no_slip_when_actual_matches_wheel():

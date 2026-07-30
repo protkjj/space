@@ -48,6 +48,9 @@ REQUIRED_KEYS = (
     'chassis_half_y',
     'chassis_top_z',
     'chassis_ground_clearance',
+    'camera_mount_x',
+    'camera_collision_length',
+    'camera_collision_width',
     'mass_total',
     'mass_limit',
     'mass_wheel',
@@ -172,20 +175,32 @@ def footprint_half_extents(geom):
     """
     Return ``(half_x, half_y)`` of the rover's collision envelope, in metres.
 
-    The union of the chassis box and the four wheel cylinders, not either alone:
-    the chassis is wider at mid-length than the wheels sit, while the front
-    wheel reaches further forward than the chassis, so either taken alone
-    understates the envelope on one axis. nav2 plans against this, and a
-    footprint smaller than what Gazebo collides with would let the planner route
-    the rover into contact.
+    The union of EVERY collision shape, not just the obvious ones. Each of the
+    three contributes the maximum on some axis: the chassis is wider at
+    mid-length than the wheels sit, the front wheel reaches further forward than
+    the chassis, and the camera mount reaches further forward than either.
+    Omitting the camera left this 43.8 mm short of what Gazebo actually collides
+    with -- the dangerous direction, because nav2 would then plan the rover into
+    contact.
+
+    ``test_footprint_covers_every_collision`` re-derives this by parsing the
+    generated URDF rather than by repeating the list below, so a link added
+    later fails the test even though this function was not touched. That is the
+    point: the previous guard test checked the same two shapes the derivation
+    did, so it shared the blind spot instead of catching it.
     """
     half_x = max(
         geom['chassis_max_x'],
         -geom['chassis_min_x'],
         geom['front_wheel_x'] + geom['wheel_radius'],
         -geom['rear_wheel_x'] + geom['wheel_radius'],
+        geom['camera_mount_x'] + geom['camera_collision_length'] / 2.0,
     )
-    half_y = max(geom['chassis_half_y'], track_width(geom) / 2.0)
+    half_y = max(
+        geom['chassis_half_y'],
+        track_width(geom) / 2.0,
+        geom['camera_collision_width'] / 2.0,
+    )
     return half_x, half_y
 
 

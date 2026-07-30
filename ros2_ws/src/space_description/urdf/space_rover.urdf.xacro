@@ -64,6 +64,9 @@
     chassis.
   -->
   <xacro:property name="mass_wheel" value="${geom['mass_wheel']}"/>
+  <xacro:property name="camera_mount_x" value="${geom['camera_mount_x']}"/>
+  <xacro:property name="camera_box_l" value="${geom['camera_collision_length']}"/>
+  <xacro:property name="camera_box_w" value="${geom['camera_collision_width']}"/>
   <xacro:property name="mass_camera" value="${geom['mass_camera']}"/>
   <xacro:property name="mass_imu" value="${geom['mass_imu']}"/>
   <xacro:property name="mass_base"
@@ -186,11 +189,11 @@
 
   <link name="camera_link">
     <visual>
-      <geometry><box size="0.055 0.025 0.025"/></geometry>
+      <geometry><box size="${camera_box_l} ${camera_box_w} 0.025"/></geometry>
       <material name="camera_blue"/>
     </visual>
     <collision>
-      <geometry><box size="0.055 0.025 0.025"/></geometry>
+      <geometry><box size="${camera_box_l} ${camera_box_w} 0.025"/></geometry>
     </collision>
     <inertial>
       <mass value="${mass_camera}"/>
@@ -201,7 +204,7 @@
   <joint name="camera_joint" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <origin xyz="0.17 0 0.07" rpy="0 0 0"/>
+    <origin xyz="${camera_mount_x} 0 0.07" rpy="0 0 0"/>
   </joint>
 
   <!-- REP-103 optical coordinates: Z forward, X right, Y down. -->

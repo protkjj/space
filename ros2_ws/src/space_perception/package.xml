@@ -29,7 +29,9 @@
   <!-- terrain_traversability_node derives its step limit from
        space_description/config/rover_geometry.yaml rather than holding a copy of
        the wheel radius, which is what went stale across the last CAD import. -->
-  <exec_depend>space_description</exec_depend>
+  <!-- Not exec_depend: traversability_calibration imports rover_geometry at
+       MODULE level, so it is needed at build and test time too. -->
+  <depend>space_description</depend>
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>

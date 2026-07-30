@@ -27,6 +27,7 @@ from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import JointState
+from space_description.rover_geometry import load_geometry
 from space_mission.slip_math import compute_slip, wheel_linear_speed
 from space_msgs.msg import SlipEstimate
 from std_msgs.msg import Header
@@ -52,8 +53,11 @@ class SlipEstimatorNode(Node):
             # PLACEHOLDER until a real VIO reports its covariance scale
             # (docs/pending.md).
             'quality_variance_scale': 0.01,
-            # Keep in sync with space_rover.urdf.xacro (CAD: 140 mm diameter).
-            'wheel_radius': 0.070,
+            # DERIVED from space_description/config/rover_geometry.yaml. Not a
+            # copy: this default read 0.112 for the whole life of the 0.070 m
+            # CAD wheel and inflated every slip ratio by 1.6x. slip.yaml
+            # deliberately does not set it either, so there is one source.
+            'wheel_radius': float(load_geometry()['wheel_radius']),
             'left_wheel_joints': [
                 'left_front_wheel_joint', 'left_rear_wheel_joint',
             ],
@@ -120,6 +124,7 @@ class SlipEstimatorNode(Node):
         self._v_actual_time = None
         self._v_actual_quality = 0.0
         self._slip_ema = None
+        self._warned_one_sided = False
         self.create_timer(1.0 / publish_rate, self._update)
         self.get_logger().info(
             'Slip estimator ready: encoder(/joint_states) vs '
@@ -157,9 +162,19 @@ class SlipEstimatorNode(Node):
         speeds = dict(zip(message.name, message.velocity))
         left = [speeds[j] for j in self._left if j in speeds]
         right = [speeds[j] for j in self._right if j in speeds]
-        if not left and not right:
+        speed = wheel_linear_speed(left, right, self._wheel_radius)
+        if speed is None:
+            # One side missing. Warn once rather than publishing a one-sided
+            # reading that looks like a valid straight-line speed.
+            if not self._warned_one_sided:
+                self._warned_one_sided = True
+                self.get_logger().warn(
+                    f'joint_states carries {len(left)} left and {len(right)} '
+                    'right wheel velocities; both sides are required, so no '
+                    'V_wheel is produced'
+                )
             return
-        self._v_wheel = wheel_linear_speed(left, right, self._wheel_radius)
+        self._v_wheel = speed
         self._v_wheel_time = self.get_clock().now()
 
     def _on_actual_odom(self, message: Odometry) -> None:
@@ -183,7 +198,15 @@ class SlipEstimatorNode(Node):
         and this is the single place that would need to change.
         """
         variance = float(message.twist.covariance[0])
-        if not math.isfinite(variance) or variance <= 0.0:
+        if not math.isfinite(variance):
+            # NaN means the producer is not reporting a covariance. That is
+            # "unknown", which must not be rewarded with full trust.
+            return 0.0
+        if variance < 0.0:
+            # ROS convention: a negative leading term means unknown.
+            return 0.0
+        if variance == 0.0:
+            # Exactly zero is Gazebo ground truth saying the pose IS exact.
             return 1.0
         return float(
             max(0.0, min(1.0, 1.0 - variance / self._quality_scale))
@@ -201,6 +224,10 @@ class SlipEstimatorNode(Node):
         )
         if not fresh:
             state = 'waiting' if self._v_wheel is None else 'stale_inputs'
+            # Drop the smoothed value. Carrying it across a dropout would blend
+            # pre-outage slip into the first readings after recovery, which is
+            # exactly when the terrain has most likely changed.
+            self._slip_ema = None
             self._publish_invalid()
             self._publish_diagnostics(state, None)
             return
@@ -209,6 +236,7 @@ class SlipEstimatorNode(Node):
             self._v_wheel, self._v_actual, self._min_wheel_speed
         )
         if lam is None:
+            self._slip_ema = None
             # A stationary rover has no defined slip. Say so explicitly rather
             # than going silent: a consumer cannot distinguish silence from a
             # dead node, but valid=false is unambiguous.

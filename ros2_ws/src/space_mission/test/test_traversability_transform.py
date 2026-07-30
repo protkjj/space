@@ -255,3 +255,71 @@ def test_evaluate_rejects_an_incoherent_spec():
     )
     with pytest.raises(ValueError):
         evaluate(_grid([0.0], [0.0], [0.0], [0.0]), broken)
+
+
+def test_rover_spec_matches_the_single_geometry_source():
+    """
+    The spec YAML must not disagree with rover_geometry.yaml.
+
+    ``rover_spec_small.yaml`` re-types wheel_radius_m, wheel_width_m,
+    ground_clearance_m, and mass_kg, which ``space_description`` already owns.
+    Two independent copies of one physical limit is the exact failure this branch
+    exists to remove: ``RoverSpec.max_step_height_m`` derives the step limit from
+    the spec copy while ``space_perception`` derives it from the geometry source,
+    so a drift between them would give two different answers for one rover.
+
+    Deleting the copies would mean the mission layer could not read a spec
+    without a sourced workspace, so they stay -- bound by this test instead.
+    """
+    import os
+
+    import yaml
+    from ament_index_python.packages import get_package_share_directory
+    from space_description.rover_geometry import load_geometry
+
+    geom = load_geometry()
+    path = os.path.join(
+        get_package_share_directory('space_mission'),
+        'config', 'rover_spec_small.yaml',
+    )
+    with open(path, 'r', encoding='utf-8') as handle:
+        params = yaml.safe_load(handle)
+    small = params['traversability_transform']['ros__parameters'][
+        'rover_specs']['small']
+
+    assert small['wheel_radius_m'] == pytest.approx(geom['wheel_radius'])
+    assert small['wheel_width_m'] == pytest.approx(geom['wheel_width'])
+    assert small['ground_clearance_m'] == pytest.approx(
+        geom['chassis_ground_clearance'])
+    assert small['mass_kg'] == pytest.approx(geom['mass_total'])
+
+
+def test_step_limit_never_exceeds_ground_clearance():
+    """
+    A step the wheel can climb but the chassis cannot clear is not passable.
+
+    For our rover the wheel-derived limit is 0.035 m and the measured clearance
+    is 0.030 m, so the chassis binds. Without the cap, traversability would call
+    a 0.033 m step climbable and the rover would ground on it.
+    """
+    assert SMALL.max_step_height_m <= SMALL.ground_clearance_m + 1e-12
+    assert SMALL.max_step_height_m == pytest.approx(0.030)
+    # The medium rover's wheel is small relative to its clearance, so there the
+    # wheel binds instead -- the cap must not always pick clearance.
+    assert MEDIUM.max_step_height_m == pytest.approx(0.100)
+
+
+def test_one_sided_wheel_data_yields_no_speed():
+    """
+    A single side must produce None, not a plausible straight-line speed.
+
+    Skid-steer forward speed is the mean of both sides, so a one-sided average is
+    the speed of a turning rover reported as if it were driving straight -- and
+    it would flow into the slip ratio as a valid reading.
+    """
+    from space_mission.slip_math import wheel_linear_speed
+
+    assert wheel_linear_speed([1.0, 1.0], [], 0.07) is None
+    assert wheel_linear_speed([], [1.0, 1.0], 0.07) is None
+    assert wheel_linear_speed([], [], 0.07) is None
+    assert wheel_linear_speed([1.0], [1.0], 0.07) == pytest.approx(0.07)

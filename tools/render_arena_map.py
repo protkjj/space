@@ -72,6 +72,13 @@ def main(argv=None):
     parser.add_argument('--measured', required=True)
     parser.add_argument('--out', default='arena_map.png')
     parser.add_argument('--statistic', default='mean', choices=('mean', 'min'))
+    parser.add_argument(
+        '--mode', default='driven', choices=('driven', 'survey'),
+        help=('driven: overlay the odom path. survey: hide it, because in a '
+              'survey the rover is PLACED at each pose, so the odom trace is a '
+              'sequence of teleports and drawing it as a path would imply the '
+              'rover drove a route it cannot actually traverse.'),
+    )
     args = parser.parse_args(argv)
 
     truth = np.load(args.truth)
@@ -111,20 +118,22 @@ def main(argv=None):
     img = ax.imshow(np.ma.masked_invalid(score), cmap='RdYlGn', origin='lower',
                     extent=extent, vmin=0.6, vmax=1.0, interpolation='nearest')
 
-    if len(path):
+    if len(path) and args.mode == 'driven':
         ax.plot(path[:, 0], path[:, 1], '-', color='#0b2fb5', lw=2.0,
                 label='rover path')
         ax.plot(path[0, 0], path[0, 1], 'o', color='#0b2fb5', ms=8,
                 label='start')
         ax.plot(path[-1, 0], path[-1, 1], '*', color='#000', ms=16, label='end')
-    ax.legend(loc='lower left', fontsize=9, framealpha=0.92)
+        ax.legend(loc='lower left', fontsize=9, framealpha=0.92)
 
     cb = fig.colorbar(img, ax=ax, fraction=0.046, pad=0.03)
     cb.set_label('measured traversability (higher = easier)')
     ax.set_xlabel('x [m]')
     ax.set_ylabel('y [m]')
+    how = ('driven traverse' if args.mode == 'driven'
+           else 'survey poses -- rover PLACED, not driven')
     ax.set_title(
-        'Traversability accumulated on the arena grid\n'
+        f'Traversability accumulated on the arena grid ({how})\n'
         f'{measured.sum()} of {measured.size} cells measured '
         f'({100.0 * measured.mean():.1f}% coverage); grey = not yet visited\n'
         'shading is CAD ground truth for context only -- all colour is measured',

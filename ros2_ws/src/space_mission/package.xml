@@ -9,8 +9,14 @@
   <license>MIT</license>
 
   <exec_depend>diagnostic_msgs</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
+  <!-- slip_estimator_node imports space_msgs.msg.SlipEstimate; rover_spec and
+       traversability_transform import space_description.rover_geometry and
+       numpy. Undeclared dependencies happen to work in a warm workspace and
+       fail in a clean one. -->
+  <depend>space_msgs</depend>
+  <exec_depend>space_description</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>

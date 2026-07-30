@@ -119,6 +119,99 @@ def test_footprint_covers_both_chassis_box_and_wheels():
     assert half_y >= geom['wheel_y'] + geom['wheel_width'] / 2.0
 
 
+def _urdf_root():
+    """Return the parsed generated URDF, or skip if xacro cannot run."""
+    import subprocess
+    import xml.etree.ElementTree as ElementTree
+
+    path = os.path.join(
+        os.path.dirname(os.path.dirname(rg.geometry_path())),
+        'urdf', 'space_rover.urdf.xacro',
+    )
+    assert os.path.isfile(path), f'xacro not installed at {path}'
+    result = subprocess.run(
+        ['xacro', path], capture_output=True, text=True, check=True
+    )
+    return ElementTree.fromstring(result.stdout)
+
+
+def _link_offsets(root):
+    """Return {link name: (x, y)} in base_link, following fixed joints."""
+    offsets = {'base_link': (0.0, 0.0)}
+    pending = list(root.findall('joint'))
+    for _ in range(len(pending) + 1):
+        for joint in list(pending):
+            parent = joint.find('parent').get('link')
+            child = joint.find('child').get('link')
+            if parent not in offsets:
+                continue
+            origin = joint.find('origin')
+            xyz = (origin.get('xyz', '0 0 0').split() if origin is not None
+                   else ['0', '0', '0'])
+            px, py = offsets[parent]
+            offsets[child] = (px + float(xyz[0]), py + float(xyz[1]))
+            pending.remove(joint)
+    return offsets
+
+
+def test_footprint_covers_every_collision():
+    """
+    Re-derive the envelope from the URDF, not from the derivation's own list.
+
+    This replaces a test that checked the same two shapes
+    ``footprint_half_extents`` checked, and therefore shared its blind spot: the
+    camera mount reaches 0.1975 m forward, 43.8 mm beyond a footprint built from
+    the chassis and wheels alone. A footprint smaller than what Gazebo collides
+    with lets nav2 plan the rover into contact.
+
+    Walking the URDF means a link added later fails here even if nobody
+    remembers to update the derivation.
+    """
+    geom = _source()
+    root = _urdf_root()
+    offsets = _link_offsets(root)
+    half_x, half_y = rg.footprint_half_extents(geom)
+
+    checked = 0
+    for link in root.findall('link'):
+        name = link.get('name')
+        base = offsets.get(name)
+        if base is None:
+            continue
+        for collision in link.findall('collision'):
+            origin = collision.find('origin')
+            xyz = (origin.get('xyz', '0 0 0').split() if origin is not None
+                   else ['0', '0', '0'])
+            cx = base[0] + float(xyz[0])
+            cy = base[1] + float(xyz[1])
+
+            box = collision.find('geometry/box')
+            cylinder = collision.find('geometry/cylinder')
+            if box is not None:
+                sx, sy, _ = (float(v) for v in box.get('size').split())
+                reach_x, reach_y = sx / 2.0, sy / 2.0
+            elif cylinder is not None:
+                # Wheels are rotated onto y, so the radius spans x/z and the
+                # length spans y.
+                radius = float(cylinder.get('radius'))
+                reach_x = radius
+                reach_y = float(cylinder.get('length')) / 2.0
+            else:
+                continue
+
+            checked += 1
+            assert abs(cx) + reach_x <= half_x + 1e-9, (
+                f'{name} reaches {abs(cx) + reach_x:.5f} m in x, beyond the '
+                f'{half_x:.5f} m footprint'
+            )
+            assert abs(cy) + reach_y <= half_y + 1e-9, (
+                f'{name} reaches {abs(cy) + reach_y:.5f} m in y, beyond the '
+                f'{half_y:.5f} m footprint'
+            )
+
+    assert checked >= 6, f'only found {checked} collision shapes, expected 6+'
+
+
 def test_collision_box_is_not_narrower_than_the_chassis():
     """
     The collision box must cover the chassis laterally.

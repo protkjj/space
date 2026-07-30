@@ -14,9 +14,11 @@ slip_estimator:
     # Contract topic name (docs/dual_rover_traversability.md).
     output_topic: /slip
     diagnostics_topic: /slip/diagnostics
-    # Must track space_rover.urdf.xacro's wheel_radius. CAD wheel STL measures
-    # 140 mm diameter, so 0.070 m (was 0.112 placeholder before the CAD import).
-    wheel_radius: 0.070
+    # wheel_radius is intentionally ABSENT. The node derives it from
+    # space_description/config/rover_geometry.yaml, the single source. Setting it
+    # here would override that and reintroduce the copy that went stale: this
+    # line held 0.112 for the whole life of the 0.070 m CAD wheel, inflating
+    # every slip ratio by 1.6x while the arithmetic still succeeded.
     left_wheel_joints: [left_front_wheel_joint, left_rear_wheel_joint]
     right_wheel_joints: [right_front_wheel_joint, right_rear_wheel_joint]
     min_wheel_speed: 0.03
