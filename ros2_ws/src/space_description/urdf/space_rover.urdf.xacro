@@ -27,17 +27,54 @@
   <xacro:property
     name="geom"
     value="${xacro.load_yaml('$(find space_description)/config/rover_geometry.yaml')}"/>
-  <xacro:property name="base_length" value="${geom['base_length']}"/>
-  <xacro:property name="base_width" value="${geom['base_width']}"/>
-  <xacro:property name="base_height" value="${geom['base_height']}"/>
   <xacro:property name="wheel_radius" value="${geom['wheel_radius']}"/>
   <xacro:property name="wheel_width" value="${geom['wheel_width']}"/>
   <xacro:property name="front_wheel_x" value="${geom['front_wheel_x']}"/>
   <xacro:property name="rear_wheel_x" value="${geom['rear_wheel_x']}"/>
   <xacro:property name="wheel_y" value="${geom['wheel_y']}"/>
   <xacro:property name="wheel_z" value="${geom['wheel_z']}"/>
-  <xacro:property name="mass_base" value="${geom['mass_base']}"/>
+
+  <!--
+    Chassis collision box, derived from the measured mesh extents. It replaces a
+    0.32 x 0.26 x 0.10 box that was 15 mm too long and 13 mm too NARROW.
+    Over-size is merely conservative; under-size lets Gazebo pass the rover
+    through gaps it would physically hit. Vertically it spans the measured
+    ground clearance to the chassis top rather than the full mesh bbox, because
+    the mesh dips 8 mm below the contact plane at the wheel hubs and a box that
+    deep would rest the rover on its chassis instead of its wheels.
+  -->
+  <xacro:property name="chassis_box_length"
+    value="${geom['chassis_max_x'] - geom['chassis_min_x']}"/>
+  <xacro:property name="chassis_box_width"
+    value="${2 * geom['chassis_half_y']}"/>
+  <xacro:property name="chassis_box_height"
+    value="${geom['chassis_top_z'] - geom['chassis_ground_clearance']}"/>
+  <xacro:property name="chassis_box_x"
+    value="${(geom['chassis_min_x'] + geom['chassis_max_x']) / 2}"/>
+  <!-- base_link sits wheel_radius - wheel_z above the contact plane. -->
+  <xacro:property name="chassis_box_z"
+    value="${(geom['chassis_ground_clearance'] + geom['chassis_top_z']) / 2
+             - (geom['wheel_radius'] - geom['wheel_z'])}"/>
+
+  <!--
+    mass_base is the REMAINDER of mass_total after the wheels, camera, and IMU,
+    so the parts can never drift from the total the way they did before: the URDF
+    summed to 2.450 kg against a 2.725 kg design estimate. Inertia scales with
+    that derived mass instead of being a fixed triple describing the old 1.8 kg
+    chassis.
+  -->
   <xacro:property name="mass_wheel" value="${geom['mass_wheel']}"/>
+  <xacro:property name="mass_camera" value="${geom['mass_camera']}"/>
+  <xacro:property name="mass_imu" value="${geom['mass_imu']}"/>
+  <xacro:property name="mass_base"
+    value="${geom['mass_total'] - 4 * geom['mass_wheel']
+             - geom['mass_camera'] - geom['mass_imu']}"/>
+  <xacro:property name="base_ixx"
+    value="${geom['base_inertia_per_kg']['ixx'] * mass_base}"/>
+  <xacro:property name="base_iyy"
+    value="${geom['base_inertia_per_kg']['iyy'] * mass_base}"/>
+  <xacro:property name="base_izz"
+    value="${geom['base_inertia_per_kg']['izz'] * mass_base}"/>
 
   <material name="chassis_dark"><color rgba="0.10 0.12 0.14 1.0"/></material>
   <material name="wheel_gray"><color rgba="0.35 0.38 0.40 1.0"/></material>
@@ -65,17 +102,24 @@
     </xacro:if>
     <xacro:unless value="${use_rover_stl_visual}">
       <visual name="primitive_chassis_visual">
-        <geometry><box size="${base_length} ${base_width} ${base_height}"/></geometry>
+        <origin xyz="${chassis_box_x} 0 ${chassis_box_z}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${chassis_box_length} ${chassis_box_width} ${chassis_box_height}"/>
+        </geometry>
         <material name="chassis_dark"/>
       </visual>
     </xacro:unless>
     <collision>
-      <geometry><box size="${base_length} ${base_width} ${base_height}"/></geometry>
+      <origin xyz="${chassis_box_x} 0 ${chassis_box_z}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${chassis_box_length} ${chassis_box_width} ${chassis_box_height}"/>
+      </geometry>
     </collision>
     <inertial>
       <mass value="${mass_base}"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.018" ixy="0" ixz="0" iyy="0.022" iyz="0" izz="0.030"/>
+      <inertia ixx="${base_ixx}" ixy="0" ixz="0" iyy="${base_iyy}" iyz="0"
+        izz="${base_izz}"/>
     </inertial>
   </link>
 
@@ -149,7 +193,7 @@
       <geometry><box size="0.055 0.025 0.025"/></geometry>
     </collision>
     <inertial>
-      <mass value="0.08"/>
+      <mass value="${mass_camera}"/>
       <inertia ixx="0.00002" ixy="0" ixz="0" iyy="0.00002" iyz="0" izz="0.00002"/>
     </inertial>
   </link>
@@ -170,7 +214,7 @@
 
   <link name="imu_link">
     <inertial>
-      <mass value="0.01"/>
+      <mass value="${mass_imu}"/>
       <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
     </inertial>
   </link>

@@ -100,22 +100,56 @@ def test_wheel_contact_lands_exactly_on_base_footprint():
 
 def test_footprint_covers_both_chassis_box_and_wheels():
     """
-    The footprint envelope must contain the collision box AND the wheels.
+    The footprint envelope must contain the chassis AND the wheels.
 
-    The box is longer than the wheels reach but narrower than they sit, so
-    taking either alone understates the envelope on one axis. A footprint
-    smaller than what Gazebo collides with lets nav2 plan the rover into
-    contact.
+    The chassis is wider at mid-length than the wheels sit, while the front
+    wheel reaches further forward than the chassis, so taking either alone
+    understates the envelope on one axis. A footprint smaller than what Gazebo
+    collides with lets nav2 plan the rover into contact.
     """
     geom = _source()
     half_x, half_y = rg.footprint_half_extents(geom)
 
-    assert half_x >= geom['base_length'] / 2.0
+    assert half_x >= geom['chassis_max_x']
+    assert half_x >= -geom['chassis_min_x']
     assert half_x >= geom['front_wheel_x'] + geom['wheel_radius']
     assert half_x >= -geom['rear_wheel_x'] + geom['wheel_radius']
 
-    assert half_y >= geom['base_width'] / 2.0
+    assert half_y >= geom['chassis_half_y']
     assert half_y >= geom['wheel_y'] + geom['wheel_width'] / 2.0
+
+
+def test_collision_box_is_not_narrower_than_the_chassis():
+    """
+    The collision box must cover the chassis laterally.
+
+    The box it replaces was 13 mm too narrow. Over-size is merely conservative;
+    under-size lets Gazebo pass the rover through gaps it would physically hit,
+    and judging passable gaps is part of the mission -- so this is the assertion
+    that matters most about the box.
+    """
+    geom = _source()
+    _, width, _ = rg.chassis_box_size(geom)
+    assert width >= 2.0 * geom['chassis_half_y'] - 1e-12
+
+
+def test_collision_box_does_not_clip_the_ground():
+    """
+    The box underside must sit at or above the contact plane.
+
+    A box reaching the mesh minimum would dip 8 mm below it and the rover would
+    rest on its chassis instead of its wheels, which changes every contact
+    result in the simulation.
+    """
+    geom = _source()
+    _, _, height = rg.chassis_box_size(geom)
+    _, _, origin_z = rg.chassis_box_origin(geom)
+    underside_ground = (
+        rg.base_link_height(geom) + origin_z - height / 2.0
+    )
+    assert underside_ground >= 0.0
+    # And it should sit exactly at the measured clearance, not above it.
+    assert underside_ground == pytest.approx(geom['chassis_ground_clearance'])
 
 
 def test_footprint_string_parses_to_the_derived_extents():
@@ -139,18 +173,119 @@ def test_min_passable_width_exceeds_the_rover_width():
     assert rg.min_passable_width(geom) > rg.track_width(geom)
 
 
-def test_ground_clearance_is_below_the_collision_box_underside():
+def test_ground_clearance_stays_well_under_the_axle_height():
     """
-    Clearance must come from the mesh, not the collision primitive.
+    Clearance must come from the mesh, and stay physically plausible.
 
-    The box implies 0.084 m; the real chassis has 0.030 m. Asserting the
-    measured value stays under the box-derived one keeps anyone from "tidying"
-    it back to the primitive, which would claim 2.76x the clearance the vehicle
-    has -- and clearance decides whether it straddles a rock or bellies out.
+    The old collision box implied 0.084 m against a real 0.030 m -- 2.76x too
+    optimistic, and clearance decides whether the rover straddles a rock or
+    bellies out. Bounding it by the axle height catches anyone "tidying" it back
+    to a primitive-derived figure: a chassis cannot hang higher than the axles it
+    is mounted on.
     """
     geom = _source()
-    box_underside = rg.base_link_height(geom) - geom['base_height'] / 2.0
-    assert geom['chassis_ground_clearance'] < box_underside
+    axle_height = rg.base_link_height(geom) + geom['wheel_z']
+    assert 0.0 < geom['chassis_ground_clearance'] < axle_height
+
+
+def test_masses_sum_to_the_recorded_total():
+    """
+    The parts must add up to ``mass_total``, by construction.
+
+    They did not before: the URDF summed to 2.450 kg against a 2.725 kg design
+    estimate, so the simulated rover was 10.1% light. For a mission whose
+    signature measurement is slip, a light rover slips less, climbs better, and
+    finds more traction than the real one -- a validation run on it validates
+    nothing.
+    """
+    geom = _source()
+    parts = (
+        rg.mass_base(geom)
+        + rg.WHEEL_COUNT * geom['mass_wheel']
+        + geom['mass_camera']
+        + geom['mass_imu']
+    )
+    assert parts == pytest.approx(geom['mass_total'])
+
+
+def test_design_mass_stays_under_the_competition_limit():
+    """
+    ``mass_total`` is a design estimate; ``mass_limit`` is a hard ceiling.
+
+    They were previously conflated -- the 3.0 kg limit was being used as the
+    design figure. If a future estimate exceeds the ceiling, that is a
+    disqualification, so it fails here rather than being discovered later.
+    """
+    geom = _source()
+    assert geom['mass_total'] <= geom['mass_limit']
+    assert rg.mass_base(geom) > 0.0, 'components already exceed the total'
+
+
+def test_base_inertia_scales_with_the_derived_mass():
+    """
+    Inertia is linear in mass for a fixed shape, so it must track ``mass_base``.
+
+    A fixed triple would keep describing the old 1.8 kg chassis while the mass
+    around it changed.
+    """
+    geom = _source()
+    ixx, iyy, izz = rg.base_inertia(geom)
+    mass = rg.mass_base(geom)
+    per_kg = geom['base_inertia_per_kg']
+
+    assert ixx == pytest.approx(per_kg['ixx'] * mass)
+    assert iyy == pytest.approx(per_kg['iyy'] * mass)
+    assert izz == pytest.approx(per_kg['izz'] * mass)
+    # izz > iyy > ixx for a body longer than it is wide and wider than tall.
+    assert izz > iyy > ixx
+
+
+def test_ground_pressure_tracks_the_design_mass():
+    """
+    Ground pressure must be derived, not typed.
+
+    It was hand-written as 3.47 kPa, computed from the 3.0 kg competition
+    ceiling rather than the design estimate, so it overstated the load the soil
+    actually sees.
+    """
+    geom = _source()
+    expected = (
+        geom['mass_total'] * rg.GRAVITY
+        / rg.contact_patch_area(geom) / 1000.0
+    )
+    assert rg.ground_pressure_kpa(geom) == pytest.approx(expected)
+    assert 1.0 < rg.ground_pressure_kpa(geom) < 20.0, 'implausible for 2.7 kg'
+
+
+def test_generated_urdf_total_mass_equals_the_source():
+    """
+    Sum the masses out of the generated URDF, not out of the derivation.
+
+    Checking the derivation against itself would pass even if the xacro forgot
+    to consume it. This runs xacro and adds up what the simulator will actually
+    load, which is the only number that affects physics.
+    """
+    import subprocess
+    import xml.etree.ElementTree as ElementTree
+
+    geom = _source()
+    urdf_path = os.path.join(
+        os.path.dirname(os.path.dirname(rg.geometry_path())),
+        'urdf', 'space_rover.urdf.xacro',
+    )
+    assert os.path.isfile(urdf_path), f'xacro not installed at {urdf_path}'
+
+    result = subprocess.run(
+        ['xacro', urdf_path], capture_output=True, text=True, check=True
+    )
+    root = ElementTree.fromstring(result.stdout)
+    total = sum(
+        float(mass.get('value'))
+        for mass in root.findall('link/inertial/mass')
+    )
+
+    assert total == pytest.approx(geom['mass_total'])
+    assert total <= geom['mass_limit']
 
 
 def test_derived_mapping_matches_the_individual_functions():

@@ -13,9 +13,14 @@ traversability_transform:
         rover_id: small
         provenance: measured
 
-        # 3 kg per CLAUDE.md 0. Includes payload; re-weigh once the marker
-        # dispenser is mounted.
-        mass_kg: 3.0
+        # Design estimate from the master document. NOT 3.0 kg -- that is the
+        # competition CEILING (mission_requirements.md: "3 kg maximum"), and
+        # using it as the design value made every load-dependent number
+        # pessimistic while the sim model was simultaneously 10.1% light at
+        # 2.450 kg. Matches space_description/config/rover_geometry.yaml
+        # mass_total, which the URDF now sums to exactly.
+        # Excludes the marker dispenser; re-weigh after assembly.
+        mass_kg: 2.725
 
         # Measured from meshes/rover/left_front_wheel.stl: 140.000 mm across,
         # 40.000 mm wide. Matches space_rover.urdf.xacro exactly. max_step_
@@ -25,12 +30,14 @@ traversability_transform:
         wheel_width_m: 0.040
 
         # NOT measured. Static estimate assuming 5 mm sinkage on loose sand:
-        #   contact length = 2*sqrt(2*R*z) = 2*sqrt(2*0.070*0.005) = 0.0529 m
-        #   patch area     = 0.0529 * 0.040 * 4 wheels = 0.00847 m^2
-        #   pressure       = 3.0 kg * 9.81 / 0.00847 = 3.47 kPa
-        # The sinkage figure is a guess, so this one field is weaker than the
-        # rest of the block. Re-derive from a real footprint on arena sand.
-        ground_pressure_kpa: 3.47
+        #   contact length = 2*sqrt(2*R*z) = 2*sqrt(2*0.070*0.005) = 0.052915 m
+        #   patch area     = 0.052915 * 0.040 * 4 wheels = 0.0084664 m^2
+        #   pressure       = 2.725 kg * 9.81 / 0.0084664 = 3.157 kPa
+        # Was 3.47 kPa, computed from the 3.0 kg competition ceiling instead of
+        # the design estimate. rover_geometry.ground_pressure_kpa() derives this
+        # so it tracks the mass; the sinkage figure remains a guess, which makes
+        # this the weakest field in the block.
+        ground_pressure_kpa: 3.157
 
         # MECHANICAL limit only, and UNCONFIRMED -- needs a ramp test.
         # This name used to cover three different quantities; they are now
@@ -86,7 +93,8 @@ traversability_transform:
           meshes/rover/rover_prototype.stl, lowest chassis point 0.03045 m
           (NOT the 0.084 m the collision box implies);
           min_passable_width_m computed from the xacro wheel positions;
-          mass_kg from CLAUDE.md section 0.
+          mass_kg is the master document design estimate, matching
+          rover_geometry.yaml mass_total.
           .
           NOT CONFIRMED (3 fields, distrust these):
           (1) max_climb_angle_rad -- conservative placeholder, no ramp test has
@@ -98,4 +106,5 @@ traversability_transform:
           sinkage on loose sand, which is itself a guess.
           .
           mass_kg additionally excludes the marker dispenser, which is not yet
-          mounted; re-weigh once it is.
+          mounted; re-weigh once it is. ground_pressure_kpa is listed as
+          NOT CONFIRMED above because its sinkage assumption is a guess.

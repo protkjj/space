@@ -25,6 +25,7 @@ rover's physical description and depends on nothing. Any consumer can import it
 without inverting the dependency graph.
 """
 
+import math
 import os
 
 import yaml
@@ -42,16 +43,26 @@ REQUIRED_KEYS = (
     'rear_wheel_x',
     'wheel_y',
     'wheel_z',
-    'base_length',
-    'base_width',
-    'base_height',
+    'chassis_min_x',
+    'chassis_max_x',
+    'chassis_half_y',
+    'chassis_top_z',
     'chassis_ground_clearance',
     'mass_total',
-    'mass_base',
+    'mass_limit',
     'mass_wheel',
+    'mass_camera',
+    'mass_imu',
+    'base_inertia_per_kg',
+    'assumed_sinkage',
     'step_limit_per_wheel_radius',
     'passable_width_margin',
 )
+
+#: Wheels on the rover. Named rather than hard-coded as 4 at each use site.
+WHEEL_COUNT = 4
+
+GRAVITY = 9.81
 
 
 def geometry_path():
@@ -125,23 +136,113 @@ def base_link_height(geom):
     return geom['wheel_radius'] - geom['wheel_z']
 
 
+def chassis_box_size(geom):
+    """
+    Return the collision box ``(length, width, height)`` for ``base_link``.
+
+    Spans the measured chassis extents laterally and longitudinally, and
+    vertically from the ground clearance to the chassis top. It stops at the
+    clearance rather than the mesh minimum because a box reaching the mesh
+    minimum dips 8 mm below the ground plane, which would rest the rover on its
+    chassis instead of its wheels.
+    """
+    return (
+        geom['chassis_max_x'] - geom['chassis_min_x'],
+        2.0 * geom['chassis_half_y'],
+        geom['chassis_top_z'] - geom['chassis_ground_clearance'],
+    )
+
+
+def chassis_box_origin(geom):
+    """
+    Return the collision box centre ``(x, y, z)`` expressed in ``base_link``.
+
+    The chassis is not centred on ``base_link``: the axles sit forward of the
+    body centre, so the box needs an explicit offset. The old box was centred
+    implicitly, which is part of why it misrepresented the envelope.
+    """
+    centre_x = (geom['chassis_min_x'] + geom['chassis_max_x']) / 2.0
+    centre_ground_z = (
+        geom['chassis_ground_clearance'] + geom['chassis_top_z']
+    ) / 2.0
+    return centre_x, 0.0, centre_ground_z - base_link_height(geom)
+
+
 def footprint_half_extents(geom):
     """
     Return ``(half_x, half_y)`` of the rover's collision envelope, in metres.
 
-    The union of the chassis collision box and the four wheel cylinders, not
-    either alone: the box is longer than the wheels reach but narrower than they
-    sit, so taking one of them alone understates the envelope on one axis. nav2
-    plans against this, and a footprint smaller than what Gazebo collides with
-    would let the planner route the rover into contact.
+    The union of the chassis box and the four wheel cylinders, not either alone:
+    the chassis is wider at mid-length than the wheels sit, while the front
+    wheel reaches further forward than the chassis, so either taken alone
+    understates the envelope on one axis. nav2 plans against this, and a
+    footprint smaller than what Gazebo collides with would let the planner route
+    the rover into contact.
     """
     half_x = max(
-        geom['base_length'] / 2.0,
+        geom['chassis_max_x'],
+        -geom['chassis_min_x'],
         geom['front_wheel_x'] + geom['wheel_radius'],
         -geom['rear_wheel_x'] + geom['wheel_radius'],
     )
-    half_y = max(geom['base_width'] / 2.0, track_width(geom) / 2.0)
+    half_y = max(geom['chassis_half_y'], track_width(geom) / 2.0)
     return half_x, half_y
+
+
+def mass_base(geom):
+    """
+    Return the ``base_link`` mass, as the remainder of the total.
+
+    Derived rather than configured. ``mass_total`` is the constrained quantity
+    and the chassis is the least-known component, so the chassis absorbs the
+    balance. Letting the parts define the total is exactly how the URDF came to
+    sum to 2.450 kg against a 2.725 kg design estimate.
+    """
+    return (
+        geom['mass_total']
+        - WHEEL_COUNT * geom['mass_wheel']
+        - geom['mass_camera']
+        - geom['mass_imu']
+    )
+
+
+def base_inertia(geom):
+    """
+    Return ``base_link``'s inertia as ``(ixx, iyy, izz)``, scaled to its mass.
+
+    Inertia is linear in mass for a fixed shape, so the per-kilogram triple in
+    the source times the derived mass keeps the two consistent. A fixed triple
+    would silently keep describing the old 1.8 kg chassis.
+    """
+    per_kg = geom['base_inertia_per_kg']
+    mass = mass_base(geom)
+    return tuple(per_kg[axis] * mass for axis in ('ixx', 'iyy', 'izz'))
+
+
+def contact_patch_area(geom):
+    """
+    Return the total tyre-ground contact area, in square metres.
+
+    Rigid-wheel-on-soft-soil approximation: a wheel sunk by ``assumed_sinkage``
+    contacts over a chord of ``2*sqrt(2*R*z)``. The sinkage is a guess, which
+    makes this the weakest quantity derived here.
+    """
+    chord = 2.0 * math.sqrt(
+        2.0 * geom['wheel_radius'] * geom['assumed_sinkage']
+    )
+    return chord * geom['wheel_width'] * WHEEL_COUNT
+
+
+def ground_pressure_kpa(geom):
+    """
+    Return static ground pressure in kPa, from the total mass and contact patch.
+
+    Derived so it tracks the mass. It was hand-written as 3.47 kPa, computed
+    from the 3.0 kg competition ceiling rather than the 2.725 kg design
+    estimate.
+    """
+    force = geom['mass_total'] * GRAVITY
+    return force / contact_patch_area(geom) / 1000.0
 
 
 def footprint_string(geom):
@@ -177,6 +278,9 @@ def derived(geom):
     from the CAD has exactly one definition.
     """
     half_x, half_y = footprint_half_extents(geom)
+    box_x, box_y, box_z = chassis_box_size(geom)
+    origin_x, origin_y, origin_z = chassis_box_origin(geom)
+    ixx, iyy, izz = base_inertia(geom)
     return {
         'max_step_height': max_step_height(geom),
         'wheel_separation': wheel_separation(geom),
@@ -187,4 +291,16 @@ def derived(geom):
         'footprint_half_y': half_y,
         'footprint_string': footprint_string(geom),
         'min_passable_width': min_passable_width(geom),
+        'chassis_box_length': box_x,
+        'chassis_box_width': box_y,
+        'chassis_box_height': box_z,
+        'chassis_box_origin_x': origin_x,
+        'chassis_box_origin_y': origin_y,
+        'chassis_box_origin_z': origin_z,
+        'mass_base': mass_base(geom),
+        'base_inertia_ixx': ixx,
+        'base_inertia_iyy': iyy,
+        'base_inertia_izz': izz,
+        'contact_patch_area': contact_patch_area(geom),
+        'ground_pressure_kpa': ground_pressure_kpa(geom),
     }

@@ -92,7 +92,7 @@ local_costmap:
       # OVERSIZED by 40 mm laterally. That is not "safely conservative" -- the
       # mission includes judging whether gaps are passable, so an inflated
       # footprint discards routes the rover can physically take.
-      footprint: "[[0.16000, 0.13650], [0.16000, -0.13650], [-0.16000, -0.13650], [-0.16000, 0.13650]]"
+      footprint: "[[0.15375, 0.13650], [0.15375, -0.13650], [-0.15375, -0.13650], [-0.15375, 0.13650]]"
       # Rolling odom-frame local costmap: no static_layer (that consumes the
       # map-frame SLAM /map and was rejected as malformed, stalling updates).
       plugins: ["obstacle_layer", "traversability_layer", "inflation_layer"]
@@ -151,7 +151,7 @@ global_costmap:
       # Same derived envelope as local_costmap; see the note there. This read
       # [[0.22, 0.20], ...], oversized by 60 mm longitudinally and 64 mm
       # laterally against the actual rover.
-      footprint: "[[0.16000, 0.13650], [0.16000, -0.13650], [-0.16000, -0.13650], [-0.16000, 0.13650]]"
+      footprint: "[[0.15375, 0.13650], [0.15375, -0.13650], [-0.15375, -0.13650], [-0.15375, 0.13650]]"
       plugins: ["obstacle_layer", "traversability_layer", "inflation_layer"]
 
       obstacle_layer:

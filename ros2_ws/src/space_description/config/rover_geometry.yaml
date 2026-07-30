@@ -43,39 +43,81 @@ rear_wheel_x: -0.06625
 wheel_y: 0.11650
 wheel_z: -0.06400
 
-# --- Chassis collision primitive ------------------------------------------
-# NOT the CAD outline. A vertex sweep of rover_prototype.stl gives the real
-# body as x -0.15375..+0.15146, y +/-0.13650, z -0.14200..+0.06005 in
-# base_link. This box is 15 mm longer and 13 mm narrower than that. It is kept
-# as-is because it is what Gazebo actually collides with, and changing collision
-# geometry changes sim physics -- a separate decision from this wiring. Anything
-# that must not intersect the rover (nav2 footprint) has to cover the box AND
-# the wheels, so the derivation takes the union rather than either alone.
-base_length: 0.32
-base_width: 0.26
-base_height: 0.10
+# --- Chassis envelope, measured from meshes/rover/rover_prototype.stl ------
+# A full vertex sweep of the mesh (982786 triangles), transformed into the
+# ground frame by the same scale/rotation/offset the URDF visual applies.
+#
+# These replace the old base_length/base_width/base_height box of
+# 0.32 x 0.26 x 0.10. That box was wrong in BOTH directions: 15 mm longer than
+# the real chassis, and 13 mm NARROWER. Over-size is merely conservative;
+# under-size is the dangerous direction, because Gazebo then lets the rover
+# through gaps it would physically hit, and judging passable gaps is part of the
+# mission. The collision box and the nav2 footprint are now derived from these
+# extents instead.
+chassis_min_x: -0.15375
+chassis_max_x: 0.15146
+chassis_half_y: 0.13650
 
-# --- Chassis clearance, measured from the mesh -----------------------------
-# Lowest chassis point is 0.03045 m above the contact plane, at
-# (x=+0.000, y=+0.132). The collision box would imply 0.084 m -- 2.76x too
-# optimistic, and clearance is what decides whether the rover straddles a rock
-# or bellies out on it. Not derivable from the primitives above, so measured.
+# Highest chassis point above the contact plane.
+chassis_top_z: 0.19405
+
+# Lowest chassis point above the contact plane, at (x=+0.000, y=+0.132) -- a
+# side rail near mid-length. The old box implied 0.084 m, 2.76x too optimistic,
+# and clearance is what decides whether the rover straddles a rock or bellies
+# out on it.
 #
 # Excludes vertices within 30 mm horizontally of an axle: 2984 of them (746 per
 # wheel, exactly) are hub and motor bosses reaching 0.008 m BELOW the contact
 # plane, 78 mm from the axle against the wheel's own 70 mm. Terrain there meets
 # the tyre first, so they do not bound straddling clearance.
+#
+# The collision box spans clearance..top rather than the full mesh bbox on
+# purpose: a box reaching the mesh minimum would dip 8 mm below the ground plane
+# and the rover would rest on its chassis instead of its wheels. An
+# axis-aligned box cannot represent this chassis exactly; this is the largest
+# one that neither under-covers laterally nor clips the ground.
 chassis_ground_clearance: 0.030
 
 # --- Mass ------------------------------------------------------------------
-# mass_total is CLAUDE.md section 0 and excludes the marker dispenser, which is
-# not yet mounted. mass_base and mass_wheel are the URDF inertial values and
-# currently sum to 1.8 + 4*0.14 = 2.36, which does NOT match mass_total.
-# Recorded rather than reconciled: making them agree changes sim dynamics, so it
-# is its own change with its own verification.
-mass_total: 3.0
-mass_base: 1.8
+# Three different numbers were in play, which is why this block is explicit
+# about which is which:
+#   3.000 kg  competition CEILING (mission_requirements.md: "3 kg maximum")
+#   2.725 kg  design estimate, master document -- the value to simulate
+#   2.450 kg  what the URDF actually summed to (1.8 + 4*0.14 + 0.08 + 0.01)
+#
+# The sim was 10.1% light. That is not cosmetic for this mission: slip is the
+# signature measurement, and a rover that is too light slips less, climbs
+# better, and generates more traction than the real one -- so a validation run
+# on the light model cannot validate the slip logic at all.
+#
+# mass_total is the authority. mass_base is DERIVED as the remainder, because
+# the chassis is the least-known component and the total is the constrained
+# quantity; letting the parts define the total is how they drifted apart.
+mass_total: 2.725
+
+# Not a design value -- a constraint. A test asserts mass_total stays under it.
+mass_limit: 3.0
+
+# Component estimates. Replace with weighed values once the rover is assembled.
 mass_wheel: 0.14
+mass_camera: 0.08
+mass_imu: 0.01
+
+# base_link inertia per kilogram, so it scales with the derived mass instead of
+# being a fixed triple that silently describes the old 1.8 kg chassis. Taken
+# from the original values divided by their 1.8 kg (0.018/0.022/0.030), which
+# preserves the deliberately non-uniform distribution they encoded -- they are
+# 1.55x/1.31x/1.18x a uniform box of the same dimensions, reflecting mass
+# carried near the perimeter.
+base_inertia_per_kg:
+  ixx: 0.0100000
+  iyy: 0.0122222
+  izz: 0.0166667
+
+# --- Terramechanics assumptions --------------------------------------------
+# Sinkage assumed when estimating static ground pressure on loose sand. A guess,
+# and the weakest input to that estimate; see docs/pending_measurements.md.
+assumed_sinkage: 0.005
 
 # --- Derivation policy constants ------------------------------------------
 # Not a dimension: the rule that turns wheel_radius into a step limit.
