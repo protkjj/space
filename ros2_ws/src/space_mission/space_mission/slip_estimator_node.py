@@ -41,7 +41,8 @@ class SlipEstimatorNode(Node):
             'actual_odom_topic': '/odom',
             'output_topic': '/slip/estimate',
             'diagnostics_topic': '/slip/diagnostics',
-            'wheel_radius': 0.112,
+            # Keep in sync with space_rover.urdf.xacro (CAD: 140 mm diameter).
+            'wheel_radius': 0.070,
             'left_wheel_joints': [
                 'left_front_wheel_joint', 'left_rear_wheel_joint',
             ],
