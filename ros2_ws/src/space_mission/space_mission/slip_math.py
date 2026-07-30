@@ -1,4 +1,5 @@
-"""Pure slip-estimation helpers (no ROS dependency, unit-testable).
+"""
+Pure slip-estimation helpers (no ROS dependency, unit-testable).
 
 Kept dependency-free like ``space_navigation.navigation_math`` so the slip
 arithmetic can be exercised in isolation.
@@ -8,7 +9,8 @@ import math
 
 
 def wheel_linear_speed(left_speeds, right_speeds, wheel_radius):
-    """Return the forward speed implied by the wheel angular velocities.
+    """
+    Return the forward speed implied by the wheel angular velocities.
 
     ``left_speeds`` / ``right_speeds`` are wheel joint angular velocities
     (rad/s). Skid-steer forward speed is the mean of the two side surface
@@ -27,7 +29,8 @@ def wheel_linear_speed(left_speeds, right_speeds, wheel_radius):
 
 
 def compute_slip(v_wheel, v_actual, min_wheel_speed):
-    """Return the slip ratio lambda, or ``None`` when speed is too low to judge.
+    """
+    Return the slip ratio lambda, or ``None`` when speed is too low to judge.
 
     ``lambda = (V_wheel - V_actual) / V_wheel`` (the Wong/Bekker slip ratio).
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Estimate wheel slip: encoder motion vs a wheel-independent velocity.
+"""
+Estimate wheel slip: encoder motion vs a wheel-independent velocity.
 
 This is the rover's signature measurement (mission doc section 1). Geometry
 alone cannot separate a safe 15 deg slope from a sinking one; only the slip a
@@ -25,9 +26,8 @@ from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Header
-
 from space_mission.slip_math import compute_slip, wheel_linear_speed
+from std_msgs.msg import Header
 
 
 class SlipEstimatorNode(Node):
