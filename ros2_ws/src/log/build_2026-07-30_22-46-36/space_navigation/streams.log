@@ -1,0 +1,27 @@
+[0.917s] Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/build --no-deps symlink_data
+[1.146s] running develop
+[1.292s] running egg_info
+[1.292s] creating space_navigation.egg-info
+[1.299s] writing space_navigation.egg-info/PKG-INFO
+[1.299s] writing dependency_links to space_navigation.egg-info/dependency_links.txt
+[1.299s] writing entry points to space_navigation.egg-info/entry_points.txt
+[1.299s] writing requirements to space_navigation.egg-info/requires.txt
+[1.299s] writing top-level names to space_navigation.egg-info/top_level.txt
+[1.299s] writing manifest file 'space_navigation.egg-info/SOURCES.txt'
+[1.327s] reading manifest file 'space_navigation.egg-info/SOURCES.txt'
+[1.327s] writing manifest file 'space_navigation.egg-info/SOURCES.txt'
+[1.343s] running build_ext
+[1.343s] Creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages/space-navigation.egg-link (link to .)
+[1.344s] Installing goal_navigator script to /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/space_navigation
+[1.344s] Installing send_goal script to /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/space_navigation
+[1.344s] 
+[1.344s] Installed /home/kj/Desktop/space/ros2_ws/src/build/space_navigation
+[1.344s] running symlink_data
+[1.345s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index
+[1.345s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index/resource_index
+[1.345s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index/resource_index/packages
+[1.345s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/resource/space_navigation -> /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index/resource_index/packages
+[1.345s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/package.xml -> /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation
+[1.345s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/config
+[1.345s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/config/goal_navigator.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/config
+[1.381s] Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/build --no-deps symlink_data

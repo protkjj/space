@@ -1,0 +1,63 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from space_msgs/msg/TerrainEstimate.msg
+// generated code does not contain a copyright notice
+
+#include "grid_map_msgs/msg/GridMap.idl"
+#include "std_msgs/msg/Header.idl"
+
+module space_msgs {
+  module msg {
+    module TerrainEstimate_Constants {
+      @verbatim (language="comment", text=
+        "--- Observation layer: terrain-intrinsic geometry -------------------------")
+      const string LAYER_SLOPE = "slope_rad";
+      const string LAYER_ROUGHNESS = "roughness_m";
+      const string LAYER_STEP = "step_height_m";
+      @verbatim (language="comment", text=
+        "--- Observation layer: what our small rover actually felt ----------------")
+      const string LAYER_SLIP_SMALL = "slip_small";
+      const string LAYER_SLIP_QUALITY = "slip_quality";
+      @verbatim (language="comment", text=
+        "Number of independent lambda measurements accumulated in each cell. A cell" "\n"        "crossed once and a cell crossed three times must be distinguishable, so that" "\n"        "confidence rises as field data accumulates instead of being a fixed guess.")
+      const string LAYER_SLIP_SAMPLES = "slip_samples";
+      @verbatim (language="comment", text=
+        "--- Estimation layer: soil proxy ----------------------------------------" "\n"        "A RANK, not a measurement. See soil_model_id below.")
+      const string LAYER_SOIL_DIFFICULTY = "soil_difficulty";
+      const string LAYER_SOIL_CONFIDENCE = "soil_confidence";
+    };
+    @verbatim (language="comment", text=
+      "The CANONICAL terrain record: observation layer + estimation layer." "\n"
+      "" "\n"
+      "CLAUDE.md's dual-rover transform layer makes this the thing we store and" "\n"
+      "transfer. S_small and S_medium are DERIVED from it by substituting a" "\n"
+      "RoverSpec, so they are never the record of truth. When the real medium-rover" "\n"
+      "specification arrives, this message is replayed and only the score is" "\n"
+      "recomputed -- no re-survey." "\n"
+      "" "\n"
+      "Nothing rover-specific may be added here. Slip is the one apparent" "\n"
+      "exception: lambda is a terrain x rover interaction, not a terrain constant," "\n"
+      "so it is named LAYER_SLIP_SMALL to keep that explicit. It is an OBSERVATION" "\n"
+      "made by our small rover, never a property the medium rover would reproduce.")
+    struct TerrainEstimate {
+      std_msgs::msg::Header header;
+
+      @verbatim (language="comment", text=
+        "Multi-layer grid. Layer names are contractual -- look layers up by the" "\n"
+        "constants below, never by index, because layer order is not guaranteed.")
+      grid_map_msgs::msg::GridMap grid;
+
+      @verbatim (language="comment", text=
+        "Unobserved cells carry NaN in every layer. Consumers must treat NaN as" "\n"
+        "\"no data\", distinct from a measured zero." "\n"
+        "--- Estimation provenance ------------------------------------------------" "\n"
+        "Which soil proxy produced the estimation layers. The first implementation is" "\n"
+        "a deliberate placeholder (CLAUDE.md 4: no terramechanics before field data)," "\n"
+        "so its output is only meaningful for RANKING cells against each other, never" "\n"
+        "as an absolute soil property. Recording the model identity here is what lets" "\n"
+        "a later, calibrated model be swapped in and old records re-derived.")
+      string soil_model_id;
+
+      string soil_model_version;
+    };
+  };
+};

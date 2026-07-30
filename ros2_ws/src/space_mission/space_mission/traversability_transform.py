@@ -130,10 +130,17 @@ class ScoreGrid:
     ``limiting_factor`` records which term dominated each cell so a low score
     is explainable instead of opaque; values match the ``LIMIT_*`` constants in
     ``space_msgs/TraversabilityScore``.
+
+    ``soil_measured`` is True only where the rover actually drove and produced a
+    slip sample. Elsewhere the score is GEOMETRY-ONLY -- still useful, and still
+    the mission's primary product per CLAUDE.md 4, but it carries none of the
+    information that only driving on the terrain can provide. A consumer that
+    treats the two as equivalent is claiming knowledge the rover does not have.
     """
 
     score: object
     limiting_factor: object
+    soil_measured: object = None
 
 
 #: Values written into ``ScoreGrid.limiting_factor``. Mirror the ``LIMIT_*``
@@ -220,17 +227,43 @@ def evaluate(terrain, spec, config=ScoringConfig(), gate=ObservationGate()):
         LIMIT_SOIL: (config.weight_soil, np.clip(soil, 0.0, 1.0)),
     }
 
-    total_weight = sum(weight for weight, _ in penalties.values())
-    if total_weight <= 0.0:
+    if sum(weight for weight, _ in penalties.values()) <= 0.0:
         raise ValueError('scoring weights must sum to a positive value')
 
-    # Normalise so adding a term later cannot silently rescale existing maps.
+    # Normalise PER CELL over the terms that cell actually has, rather than over
+    # all four unconditionally.
+    #
+    # The soil term only exists where the rover has driven, because lambda is
+    # measured by driving. Requiring it everywhere collapsed the map to the
+    # driven path: on a survey with 776 cells of geometry, only 8 had slip, so
+    # 768 cells with perfectly good slope, roughness and step data were
+    # discarded as "no data". That also contradicts CLAUDE.md 4, which puts
+    # geometry first and treats slip as what geometry cannot tell you -- an
+    # addition, not a precondition.
+    #
+    # So a cell with geometry but no slip gets a GEOMETRY-ONLY score, and
+    # `soil_measured` in the result records which cells those are. Renormalising
+    # rather than substituting zero matters: a zero soil penalty would read as
+    # "measured, and the soil is perfect".
+    available = {
+        key: np.isfinite(values) for key, (_, values) in penalties.items()
+    }
+    weight_sum = sum(
+        weight * available[key].astype(float)
+        for key, (weight, _) in penalties.items()
+    )
     weighted = {
-        key: (weight / total_weight) * values
+        key: np.where(
+            available[key],
+            weight * np.nan_to_num(values, nan=0.0)
+            / np.maximum(weight_sum, 1e-12),
+            0.0,
+        )
         for key, (weight, values) in penalties.items()
     }
 
     score = 1.0 - sum(weighted.values())
+    soil_measured = available[LIMIT_SOIL]
 
     keys = list(weighted)
     stacked = np.stack([weighted[key] for key in keys], axis=0)
@@ -256,9 +289,9 @@ def evaluate(terrain, spec, config=ScoringConfig(), gate=ObservationGate()):
     ).astype(np.uint8)
 
     # --- No data beats every other verdict --------------------------------
-    unknown = (
-        np.isnan(slope) | np.isnan(roughness) | np.isnan(step) | np.isnan(soil)
-    )
+    # Geometry is a precondition; soil is not. A cell with no geometry has not
+    # been observed at all.
+    unknown = np.isnan(slope) | np.isnan(roughness) | np.isnan(step)
     if gate.min_soil_confidence > 0.0:
         unknown = unknown | (
             np.isnan(soil_confidence)
@@ -267,7 +300,9 @@ def evaluate(terrain, spec, config=ScoringConfig(), gate=ObservationGate()):
     score = np.where(unknown, np.nan, np.clip(score, 0.0, 1.0))
     limiting = np.where(unknown, LIMIT_NO_DATA, limiting).astype(np.uint8)
 
-    return ScoreGrid(score=score, limiting_factor=limiting)
+    return ScoreGrid(
+        score=score, limiting_factor=limiting, soil_measured=soil_measured
+    )
 
 
 def evaluate_both(terrain, small_spec, medium_spec, config=ScoringConfig(),

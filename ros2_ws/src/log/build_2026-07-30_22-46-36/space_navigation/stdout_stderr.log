@@ -1,0 +1,25 @@
+running develop
+running egg_info
+creating space_navigation.egg-info
+writing space_navigation.egg-info/PKG-INFO
+writing dependency_links to space_navigation.egg-info/dependency_links.txt
+writing entry points to space_navigation.egg-info/entry_points.txt
+writing requirements to space_navigation.egg-info/requires.txt
+writing top-level names to space_navigation.egg-info/top_level.txt
+writing manifest file 'space_navigation.egg-info/SOURCES.txt'
+reading manifest file 'space_navigation.egg-info/SOURCES.txt'
+writing manifest file 'space_navigation.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages/space-navigation.egg-link (link to .)
+Installing goal_navigator script to /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/space_navigation
+Installing send_goal script to /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/space_navigation
+
+Installed /home/kj/Desktop/space/ros2_ws/src/build/space_navigation
+running symlink_data
+creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index
+creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index/resource_index
+creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index/resource_index/packages
+symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/resource/space_navigation -> /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/ament_index/resource_index/packages
+symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/package.xml -> /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation
+creating /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/config
+symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/config/goal_navigator.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/config

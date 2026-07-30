@@ -1,0 +1,77 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from space_msgs/msg/RoverSpec.msg
+// generated code does not contain a copyright notice
+
+
+module space_msgs {
+  module msg {
+    module RoverSpec_Constants {
+      const uint8 PROVENANCE_UNKNOWN = 0;
+      const uint8 PROVENANCE_MEASURED = 1;
+      const uint8 PROVENANCE_ASSUMED = 2;
+    };
+    @verbatim (language="comment", text=
+      "Physical specification of ONE rover -- the evaluation layer's only" "\n"
+      "rover-dependent input (CLAUDE.md: dual-rover transform layer)." "\n"
+      "" "\n"
+      "This type exists because rover limits kept leaking into \"tuning\" configs." "\n"
+      "space_perception's TraversabilityConfig carried step_max = 0.056 m, which" "\n"
+      "docs/traversability.md records as \"half the current 0.112 m wheel radius\" --" "\n"
+      "a rover property disguised as a threshold. When the CAD import changed the" "\n"
+      "wheel to 0.070 m, that value silently became 1.6x too permissive. Rover" "\n"
+      "limits belong here and are derived, never hand-copied." "\n"
+      "" "\n"
+      "Embedded in TraversabilityScore so a derived map always travels with the" "\n"
+      "assumptions it was computed under.")
+    struct RoverSpec {
+      @verbatim (language="comment", text=
+        "'small' | 'medium' | ...")
+      string rover_id;
+
+      float mass_kg;
+
+      float wheel_radius_m;
+
+      float wheel_width_m;
+
+      @verbatim (language="comment", text=
+        "static, mass / total contact patch")
+      float ground_pressure_kpa;
+
+      @verbatim (language="comment", text=
+        "MECHANICAL limit only: the steepest grade this vehicle can physically climb." "\n"
+        "Deliberately NOT the mission's hazard boundary and NOT a scoring saturation" "\n"
+        "point. Those are different physical quantities that happened to share this" "\n"
+        "name, which is why the codebase held three different numbers (20 deg, 30 deg," "\n"
+        "and an untested one) for what looked like one parameter. They are now split:" "\n"
+        "  this field                       -> mechanical capability (ramp test)" "\n"
+        "  VerdictThresholds.hazard_slope   -> CLAUDE.md 1.4 verdict boundary" "\n"
+        "  ScoringConfig.slope_penalty_saturation_rad -> evaluation tuning" "\n"
+        "They are related by policy, not by derivation, so none is computed from" "\n"
+        "another.")
+      float max_climb_angle_rad;
+
+      @verbatim (language="comment", text=
+        "widest footprint + clearance margin")
+      float min_passable_width_m;
+
+      @verbatim (language="comment", text=
+        "lowest chassis point to ground")
+      float ground_clearance_m;
+
+      boolean has_grousers;
+
+      @verbatim (language="comment", text=
+        "Where these numbers came from. MEASURED means our own CAD or scale; ASSUMED" "\n"
+        "means a rover we do not possess, so every score derived from it is" "\n"
+        "provisional. Consumers use this to decide what needs recomputing when the" "\n"
+        "real medium-rover numbers arrive -- that is the whole point of keeping the" "\n"
+        "observation and estimation layers as the canonical record.")
+      uint8 provenance;
+
+      @verbatim (language="comment", text=
+        "Free text: which drawing, datasheet, or guess each number traces back to.")
+      string provenance_note;
+    };
+  };
+};

@@ -1,0 +1,25 @@
+# Persistent terrain record.
+#
+# The extent is plain parameters, deliberately NOT read from arena CAD: deriving
+# it from a mesh would work in this arena and nowhere else, and the mission
+# environment has no CAD. Override per world.
+terrain_map:
+  ros__parameters:
+    use_sim_time: true
+    features_topic: /terrain/features
+    slip_topic: /slip
+    odom_topic: /odom
+    output_topic: /terrain/estimate
+    frame_id: odom
+    # Covers the ~4x5 m arenas with margin from any pose within them.
+    min_x: -2.5
+    max_x: 2.5
+    min_y: -3.0
+    max_y: 3.0
+    resolution: 0.05
+    publish_rate: 2.0
+    # Applied BEFORE the soil proxy: a low-confidence lambda that reaches the
+    # estimation layer corrupts it, and both derived maps come from that layer.
+    # PLACEHOLDER pending V3 in docs/pending.md.
+    min_slip_quality: 0.3
+    min_feature_confidence: 0.10

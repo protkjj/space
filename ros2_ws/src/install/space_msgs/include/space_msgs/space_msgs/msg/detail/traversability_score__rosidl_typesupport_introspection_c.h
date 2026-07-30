@@ -1,0 +1,1 @@
+/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_typesupport_introspection_c/space_msgs/msg/detail/traversability_score__rosidl_typesupport_introspection_c.h

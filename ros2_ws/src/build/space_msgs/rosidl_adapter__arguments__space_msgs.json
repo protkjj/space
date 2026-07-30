@@ -1,0 +1,9 @@
+{
+  "package_name": "space_msgs",
+  "non_idl_tuples": [
+    "/home/kj/Desktop/space/ros2_ws/src/space_msgs:msg/RoverSpec.msg",
+    "/home/kj/Desktop/space/ros2_ws/src/space_msgs:msg/SlipEstimate.msg",
+    "/home/kj/Desktop/space/ros2_ws/src/space_msgs:msg/TerrainEstimate.msg",
+    "/home/kj/Desktop/space/ros2_ws/src/space_msgs:msg/TraversabilityScore.msg"
+  ]
+}

@@ -167,17 +167,55 @@ def load_rover_spec(params):
     return spec.validate()
 
 
+#: Maps the dataclass' provenance strings onto the message enum. Kept here so
+#: the two representations cannot drift into disagreeing about what "assumed"
+#: means -- the whole point of the field is that a consumer can trust it.
+_PROVENANCE_TO_MSG = {
+    PROVENANCE_UNKNOWN: 0,
+    PROVENANCE_MEASURED: 1,
+    PROVENANCE_ASSUMED: 2,
+}
+_MSG_TO_PROVENANCE = {value: key for key, value in _PROVENANCE_TO_MSG.items()}
+
+
 def spec_to_msg(spec):
     """
     Convert a :class:`RoverSpec` into ``space_msgs/RoverSpec``.
 
     Lives beside the dataclass rather than in the node so the field mapping
-    has one home. The caller imports the message type; this module does not,
-    keeping it importable without a sourced workspace.
+    has one home. The message type is imported lazily, keeping this module
+    importable without a sourced workspace -- which is what lets the pure
+    evaluation layer be tested without a graph.
     """
-    raise NotImplementedError
+    from space_msgs.msg import RoverSpec as RoverSpecMsg
+
+    message = RoverSpecMsg()
+    message.rover_id = spec.rover_id
+    message.mass_kg = float(spec.mass_kg)
+    message.wheel_radius_m = float(spec.wheel_radius_m)
+    message.wheel_width_m = float(spec.wheel_width_m)
+    message.ground_pressure_kpa = float(spec.ground_pressure_kpa)
+    message.max_climb_angle_rad = float(spec.max_climb_angle_rad)
+    message.min_passable_width_m = float(spec.min_passable_width_m)
+    message.ground_clearance_m = float(spec.ground_clearance_m)
+    message.has_grousers = bool(spec.has_grousers)
+    message.provenance = _PROVENANCE_TO_MSG.get(spec.provenance, 0)
+    message.provenance_note = spec.provenance_note
+    return message
 
 
 def spec_from_msg(msg):
     """Convert a ``space_msgs/RoverSpec`` back into a :class:`RoverSpec`."""
-    raise NotImplementedError
+    return RoverSpec(
+        rover_id=msg.rover_id,
+        mass_kg=float(msg.mass_kg),
+        wheel_radius_m=float(msg.wheel_radius_m),
+        wheel_width_m=float(msg.wheel_width_m),
+        ground_pressure_kpa=float(msg.ground_pressure_kpa),
+        max_climb_angle_rad=float(msg.max_climb_angle_rad),
+        min_passable_width_m=float(msg.min_passable_width_m),
+        ground_clearance_m=float(msg.ground_clearance_m),
+        has_grousers=bool(msg.has_grousers),
+        provenance=_MSG_TO_PROVENANCE.get(msg.provenance, PROVENANCE_UNKNOWN),
+        provenance_note=msg.provenance_note,
+    ).validate()

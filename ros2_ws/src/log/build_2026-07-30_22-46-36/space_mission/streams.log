@@ -1,0 +1,33 @@
+[0.628s] Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_mission': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_mission/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_mission/build --no-deps symlink_data
+[0.877s] running develop
+[1.018s] running egg_info
+[1.018s] creating space_mission.egg-info
+[1.031s] writing space_mission.egg-info/PKG-INFO
+[1.031s] writing dependency_links to space_mission.egg-info/dependency_links.txt
+[1.031s] writing entry points to space_mission.egg-info/entry_points.txt
+[1.031s] writing requirements to space_mission.egg-info/requires.txt
+[1.031s] writing top-level names to space_mission.egg-info/top_level.txt
+[1.031s] writing manifest file 'space_mission.egg-info/SOURCES.txt'
+[1.057s] reading manifest file 'space_mission.egg-info/SOURCES.txt'
+[1.057s] writing manifest file 'space_mission.egg-info/SOURCES.txt'
+[1.072s] running build_ext
+[1.072s] Creating /home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages/space-mission.egg-link (link to .)
+[1.072s] Installing slip_estimator script to /home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/space_mission
+[1.072s] Installing terrain_map script to /home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/space_mission
+[1.073s] Installing traversability_fusion_node script to /home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/space_mission
+[1.073s] Installing traversability_transform script to /home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/space_mission
+[1.073s] 
+[1.073s] Installed /home/kj/Desktop/space/ros2_ws/src/build/space_mission
+[1.073s] running symlink_data
+[1.073s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/ament_index
+[1.074s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/ament_index/resource_index
+[1.074s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/ament_index/resource_index/packages
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/resource/space_mission -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/ament_index/resource_index/packages
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/package.xml -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission
+[1.074s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/config
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/config/slip.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/config
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/config/terrain_map.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/config
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/config/rover_spec_medium.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/config
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/config/mission.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/config
+[1.074s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_mission/config/rover_spec_small.yaml -> /home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/config
+[1.116s] Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_mission' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_mission/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_mission/build --no-deps symlink_data

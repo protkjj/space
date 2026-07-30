@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20260730-1346-Experimental"
+	Name="detop"
+	Generator="ctest-3.28.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="13.3.0"
+	OSName="Linux"
+	Hostname="detop"
+	OSRelease="7.0.0-28-generic"
+	OSVersion="#28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="25"
+	ModelID="97"
+	ProcessorCacheSize="1024"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="8191"
+	TotalPhysicalMemory="31182"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="5107.52"
+	>
+	<Testing>
+		<StartDateTime>Jul 30 22:46 KST</StartDateTime>
+		<StartTestTime>1785419212</StartTestTime>
+		<TestList>
+			<Test>./flake8</Test>
+			<Test>./pep257</Test>
+			<Test>./test_rover_geometry</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>flake8</Name>
+			<Path>.</Path>
+			<FullName>./flake8</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.314347</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+ - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml
+
+3 files checked
+No problems found
+
+Checked files:
+
+* ./space_description/rover_geometry.py
+* ./space_description/__init__.py
+* ./test/test_rover_geometry.py
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>flake8</Label>
+				<Label>linter</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>pep257</Name>
+			<Path>.</Path>
+			<FullName>./pep257</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.179087</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+ - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml
+checking ./space_description/__init__.py
+checking ./space_description/rover_geometry.py
+checking ./test/test_rover_geometry.py
+No problems found
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>linter</Label>
+				<Label>pep257</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>test_rover_geometry</Name>
+			<Path>.</Path>
+			<FullName>./test_rover_geometry</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--junit-prefix=space_description"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.583806</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--junit-prefix=space_description"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description':
+ - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml --junit-prefix=space_description
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: build/space_description/ament_cmake_pytest/test_rover_geometry/.cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 20 items
+
+../../space_description/test/test_rover_geometry.py .................... [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml -
+============================== 20 passed in 0.25s ==============================
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>pytest</Label>
+			</Labels>
+		</Test>
+		<EndDateTime>Jul 30 22:46 KST</EndDateTime>
+		<EndTestTime>1785419213</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

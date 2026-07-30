@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20260730-1346-Experimental"
+	Name="detop"
+	Generator="ctest-3.28.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="13.3.0"
+	OSName="Linux"
+	Hostname="detop"
+	OSRelease="7.0.0-28-generic"
+	OSVersion="#28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="25"
+	ModelID="97"
+	ProcessorCacheSize="1024"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="8191"
+	TotalPhysicalMemory="31182"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="5230.79"
+	>
+	<Testing>
+		<StartDateTime>Jul 30 22:46 KST</StartDateTime>
+		<StartTestTime>1785419213</StartTestTime>
+		<TestList>
+			<Test>./test_traversability_cost</Test>
+			<Test>./test_traversability_plugin</Test>
+			<Test>./test_rover_derived_thresholds</Test>
+			<Test>./test_terrain_features</Test>
+			<Test>./test_terrain_processing</Test>
+			<Test>./test_traversability</Test>
+			<Test>./flake8</Test>
+			<Test>./pep257</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>test_traversability_cost</Name>
+			<Path>.</Path>
+			<FullName>./test_traversability_cost</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_gtest/test_traversability_cost.txt" "--command" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_cost" "--gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0653382</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_gtest/test_traversability_cost.txt" "--command" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_cost" "--gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_cost --gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml
+Running main() from /opt/ros/jazzy/src/gtest_vendor/src/gtest_main.cc
+[==========] Running 24 tests from 4 test suites.
+[----------] Global test environment set-up.
+[----------] 9 tests from TraversabilityCost
+[ RUN      ] TraversabilityCost.PerfectScoreMapsToMinimum
+[       OK ] TraversabilityCost.PerfectScoreMapsToMinimum (0 ms)
+[ RUN      ] TraversabilityCost.ZeroScoreMapsToMaximum
+[       OK ] TraversabilityCost.ZeroScoreMapsToMaximum (0 ms)
+[ RUN      ] TraversabilityCost.IntermediateScoresAreMonotonic
+[       OK ] TraversabilityCost.IntermediateScoresAreMonotonic (0 ms)
+[ RUN      ] TraversabilityCost.ExponentShapesPenalty
+[       OK ] TraversabilityCost.ExponentShapesPenalty (0 ms)
+[ RUN      ] TraversabilityCost.ScoresAreClampedToBounds
+[       OK ] TraversabilityCost.ScoresAreClampedToBounds (0 ms)
+[ RUN      ] TraversabilityCost.RejectsNan
+[       OK ] TraversabilityCost.RejectsNan (0 ms)
+[ RUN      ] TraversabilityCost.RejectsNonPositiveExponent
+[       OK ] TraversabilityCost.RejectsNonPositiveExponent (0 ms)
+[ RUN      ] TraversabilityCost.RejectsReversedBounds
+[       OK ] TraversabilityCost.RejectsReversedBounds (0 ms)
+[ RUN      ] TraversabilityCost.RejectsObstacleCost
+[       OK ] TraversabilityCost.RejectsObstacleCost (0 ms)
+[----------] 9 tests from TraversabilityCost (0 ms total)
+
+[----------] 4 tests from TraversabilityValidity
+[ RUN      ] TraversabilityValidity.AcceptsFiniteValidScore
+[       OK ] TraversabilityValidity.AcceptsFiniteValidScore (0 ms)
+[ RUN      ] TraversabilityValidity.RejectsInvalidFlag
+[       OK ] TraversabilityValidity.RejectsInvalidFlag (0 ms)
+[ RUN      ] TraversabilityValidity.RejectsNan
+[       OK ] TraversabilityValidity.RejectsNan (0 ms)
+[ RUN      ] TraversabilityValidity.RejectsOutOfRange
+[       OK ] TraversabilityValidity.RejectsOutOfRange (0 ms)
+[----------] 4 tests from TraversabilityValidity (0 ms total)
+
+[----------] 5 tests from TerrainGrid
+[ RUN      ] TerrainGrid.MultiplePointsRetainMaximum
+[       OK ] TerrainGrid.MultiplePointsRetainMaximum (0 ms)
+[ RUN      ] TerrainGrid.ReplacementDoesNotAccumulate
+[       OK ] TerrainGrid.ReplacementDoesNotAccumulate (0 ms)
+[ RUN      ] TerrainGrid.ResizeStartsWithNoContribution
+[       OK ] TerrainGrid.ResizeStartsWithNoContribution (0 ms)
+[ RUN      ] TerrainGrid.OutOfBoundsPointHasNoEffect
+[       OK ] TerrainGrid.OutOfBoundsPointHasNoEffect (0 ms)
+[ RUN      ] TerrainGrid.DeterministicForInputOrder
+[       OK ] TerrainGrid.DeterministicForInputOrder (0 ms)
+[----------] 5 tests from TerrainGrid (0 ms total)
+
+[----------] 6 tests from TerrainCombination
+[ RUN      ] TerrainCombination.LethalMasterCostIsPreserved
+[       OK ] TerrainCombination.LethalMasterCostIsPreserved (0 ms)
+[ RUN      ] TerrainCombination.InflationCostIsNotReduced
+[       OK ] TerrainCombination.InflationCostIsNotReduced (0 ms)
+[ RUN      ] TerrainCombination.NoContributionDoesNotChangeMaster
+[       OK ] TerrainCombination.NoContributionDoesNotChangeMaster (0 ms)
+[ RUN      ] TerrainCombination.SoftCostRaisesLowerMasterCost
+[       OK ] TerrainCombination.SoftCostRaisesLowerMasterCost (0 ms)
+[ RUN      ] TerrainCombination.UnknownMasterCanReceiveTerrainCost
+[       OK ] TerrainCombination.UnknownMasterCanReceiveTerrainCost (0 ms)
+[ RUN      ] TerrainCombination.MismatchedGridsAreRejected
+[       OK ] TerrainCombination.MismatchedGridsAreRejected (0 ms)
+[----------] 6 tests from TerrainCombination (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 24 tests from 4 test suites ran. (0 ms total)
+[  PASSED  ] 24 tests.
+-- run_test.py: return code 0
+-- run_test.py: inject classname prefix into gtest result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml'
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>gtest</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>test_traversability_plugin</Name>
+			<Path>.</Path>
+			<FullName>./test_traversability_plugin</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_gtest/test_traversability_plugin.txt" "--command" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_plugin" "--gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.079176</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_gtest/test_traversability_plugin.txt" "--command" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_plugin" "--gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_plugin --gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml
+Running main() from /opt/ros/jazzy/src/gtest_vendor/src/gtest_main.cc
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from TraversabilityPlugin
+[ RUN      ] TraversabilityPlugin.IsDiscoverableAndConstructible
+[       OK ] TraversabilityPlugin.IsDiscoverableAndConstructible (20 ms)
+[----------] 1 test from TraversabilityPlugin (20 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (20 ms total)
+[  PASSED  ] 1 test.
+-- run_test.py: return code 0
+-- run_test.py: inject classname prefix into gtest result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml'
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>gtest</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>test_rover_derived_thresholds</Name>
+			<Path>.</Path>
+			<FullName>./test_rover_derived_thresholds</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_rover_derived_thresholds.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_rover_derived_thresholds.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_rover_derived_thresholds/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml" "--junit-prefix=space_perception"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.458918</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_rover_derived_thresholds.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_rover_derived_thresholds.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_rover_derived_thresholds/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml" "--junit-prefix=space_perception"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_rover_derived_thresholds.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_rover_derived_thresholds/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml --junit-prefix=space_perception
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_rover_derived_thresholds/.cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src/space_perception
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 3 items
+
+../../space_perception/test/test_rover_derived_thresholds.py ...         [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml -
+============================== 3 passed in 0.10s ===============================
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_rover_derived_thresholds.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>pytest</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>test_terrain_features</Name>
+			<Path>.</Path>
+			<FullName>./test_terrain_features</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_features.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_terrain_features.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_features/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml" "--junit-prefix=space_perception"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.534704</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_features.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_terrain_features.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_features/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml" "--junit-prefix=space_perception"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_terrain_features.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_features/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml --junit-prefix=space_perception
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_features/.cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src/space_perception
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 14 items
+
+../../space_perception/test/test_terrain_features.py ..............      [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml -
+============================== 14 passed in 0.20s ==============================
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_features.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>pytest</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>test_terrain_processing</Name>
+			<Path>.</Path>
+			<FullName>./test_terrain_processing</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_processing.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_terrain_processing.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_processing/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml" "--junit-prefix=space_perception"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.443194</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_processing.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_terrain_processing.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_processing/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml" "--junit-prefix=space_perception"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_terrain_processing.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_processing/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml --junit-prefix=space_perception
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_terrain_processing/.cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src/space_perception
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 12 items
+
+../../space_perception/test/test_terrain_processing.py ............      [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml -
+============================== 12 passed in 0.10s ==============================
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_terrain_processing.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>pytest</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>test_traversability</Name>
+			<Path>.</Path>
+			<FullName>./test_traversability</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_traversability.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_traversability.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_traversability/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml" "--junit-prefix=space_perception"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.523734</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_traversability.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_traversability.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_traversability/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml" "--junit-prefix=space_perception"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_perception/test/test_traversability.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_traversability/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml --junit-prefix=space_perception
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_pytest/test_traversability/.cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src/space_perception
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 33 items
+
+../../space_perception/test/test_traversability.py ..................... [ 63%]
+............                                                             [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml -
+============================== 33 passed in 0.18s ==============================
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>pytest</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>flake8</Name>
+			<Path>.</Path>
+			<FullName>./flake8</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/flake8.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/flake8.xunit.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.308839</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/flake8.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/flake8.xunit.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_perception':
+ - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/flake8.xunit.xml
+
+22 files checked
+No problems found
+
+Checked files:
+
+* ./setup.py
+* ./launch/terrain_perception.launch.py
+* ./space_perception/depth_overlay_node.py
+* ./space_perception/pointcloud_utils.py
+* ./space_perception/terrain_pointcloud_filter_node.py
+* ./space_perception/latest_data.py
+* ./space_perception/local_elevation_map_node.py
+* ./space_perception/traversability_calibration.py
+* ./space_perception/terrain_traversability_node.py
+* ./space_perception/__init__.py
+* ./space_perception/traversability.py
+* ./space_perception/terrain_feature_node.py
+* ./space_perception/terrain_features.py
+* ./space_perception/terrain_processing.py
+* ./test/test_flake8.py
+* ./test/test_import.py
+* ./test/test_terrain_processing.py
+* ./test/test_rover_derived_thresholds.py
+* ./test/__init__.py
+* ./test/test_pep257.py
+* ./test/test_terrain_features.py
+* ./test/test_traversability.py
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/flake8.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>flake8</Label>
+				<Label>linter</Label>
+			</Labels>
+		</Test>
+		<Test Status="passed">
+			<Name>pep257</Name>
+			<Path>.</Path>
+			<FullName>./pep257</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.214797</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml" "--package-name" "space_perception" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_perception':
+ - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml
+checking ./launch/terrain_perception.launch.py
+checking ./setup.py
+checking ./space_perception/__init__.py
+checking ./space_perception/depth_overlay_node.py
+checking ./space_perception/latest_data.py
+checking ./space_perception/local_elevation_map_node.py
+checking ./space_perception/pointcloud_utils.py
+checking ./space_perception/terrain_feature_node.py
+checking ./space_perception/terrain_features.py
+checking ./space_perception/terrain_pointcloud_filter_node.py
+checking ./space_perception/terrain_processing.py
+checking ./space_perception/terrain_traversability_node.py
+checking ./space_perception/traversability.py
+checking ./space_perception/traversability_calibration.py
+checking ./test/__init__.py
+checking ./test/test_flake8.py
+checking ./test/test_import.py
+checking ./test/test_pep257.py
+checking ./test/test_rover_derived_thresholds.py
+checking ./test/test_terrain_features.py
+checking ./test/test_terrain_processing.py
+checking ./test/test_traversability.py
+No problems found
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml'
+</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>linter</Label>
+				<Label>pep257</Label>
+			</Labels>
+		</Test>
+		<EndDateTime>Jul 30 22:46 KST</EndDateTime>
+		<EndTestTime>1785419216</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

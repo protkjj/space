@@ -309,6 +309,33 @@ def generate_launch_description():
                     {'use_sim_time': use_sim_time},
                 ],
             ),
+            # The persistent canonical record. Everything upstream is a rolling
+            # window that forgets after cell_timeout; this is what actually
+            # accumulates a map, and what the medium rover would be handed.
+            Node(
+                package='space_mission',
+                executable='terrain_map',
+                name='terrain_map',
+                output='screen',
+                parameters=[
+                    os.path.join(mission_share, 'config', 'terrain_map.yaml'),
+                    {'use_sim_time': use_sim_time},
+                ],
+            ),
+            # Pure function of that record: one map per rover spec.
+            Node(
+                package='space_mission',
+                executable='traversability_transform',
+                name='traversability_transform',
+                output='screen',
+                parameters=[
+                    os.path.join(
+                        mission_share, 'config', 'rover_spec_small.yaml'),
+                    os.path.join(
+                        mission_share, 'config', 'rover_spec_medium.yaml'),
+                    {'use_sim_time': use_sim_time},
+                ],
+            ),
             Node(
                 package='space_controller',
                 executable='command_safety_node',

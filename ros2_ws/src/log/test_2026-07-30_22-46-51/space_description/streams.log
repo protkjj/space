@@ -1,0 +1,84 @@
+[0.322s] Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description': CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_bringup:/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_controller:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface:/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process
+[0.330s] UpdateCTestConfiguration  from :/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+[0.330s] Parse Config file:/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+[0.330s]    Site: detop
+[0.330s]    Build name: (empty)
+[0.330s]  Add coverage exclude regular expressions.
+[0.331s] Create new tag: 20260730-1346 - Experimental
+[0.331s] UpdateCTestConfiguration  from :/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+[0.331s] Parse Config file:/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+[0.331s] Test project /home/kj/Desktop/space/ros2_ws/src/build/space_description
+[0.331s] Constructing a list of tests
+[0.331s] Done constructing a list of tests
+[0.331s] Updating test list for fixtures
+[0.331s] Added 0 tests to meet fixture requirements
+[0.331s] Checking test dependency graph...
+[0.331s] Checking test dependency graph end
+[0.331s] test 1
+[0.331s]     Start 1: flake8
+[0.331s] 
+[0.331s] 1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml"
+[0.331s] 1: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_description
+[0.331s] 1: Test timeout computed to be: 60
+[0.374s] 1: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+[0.374s] 1:  - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml
+[0.609s] 1: 
+[0.609s] 1: 3 files checked
+[0.609s] 1: No problems found
+[0.609s] 1: 
+[0.609s] 1: Checked files:
+[0.609s] 1: 
+[0.609s] 1: * ./space_description/rover_geometry.py
+[0.609s] 1: * ./space_description/__init__.py
+[0.609s] 1: * ./test/test_rover_geometry.py
+[0.638s] 1: -- run_test.py: return code 0
+[0.638s] 1: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml'
+[0.645s] 1/3 Test #1: flake8 ...........................   Passed    0.31 sec
+[0.645s] test 2
+[0.645s]     Start 2: pep257
+[0.645s] 
+[0.645s] 2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml"
+[0.645s] 2: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_description
+[0.645s] 2: Test timeout computed to be: 60
+[0.696s] 2: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+[0.696s] 2:  - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml
+[0.799s] 2: checking ./space_description/__init__.py
+[0.799s] 2: checking ./space_description/rover_geometry.py
+[0.799s] 2: checking ./test/test_rover_geometry.py
+[0.799s] 2: No problems found
+[0.817s] 2: -- run_test.py: return code 0
+[0.817s] 2: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml'
+[0.824s] 2/3 Test #2: pep257 ...........................   Passed    0.18 sec
+[0.824s] test 3
+[0.824s]     Start 3: test_rover_geometry
+[0.824s] 
+[0.824s] 3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--junit-prefix=space_description"
+[0.824s] 3: Working Directory: /home/kj/Desktop/space/ros2_ws/src/build/space_description
+[0.824s] 3: Test timeout computed to be: 60
+[0.866s] 3: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description':
+[0.867s] 3:  - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml --junit-prefix=space_description
+[1.099s] 3: ============================= test session starts ==============================
+[1.099s] 3: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[1.101s] 3: cachedir: build/space_description/ament_cmake_pytest/test_rover_geometry/.cache
+[1.101s] 3: rootdir: /home/kj/Desktop/space/ros2_ws/src
+[1.101s] 3: plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+[1.104s] 3: collected 20 items
+[1.104s] 3: 
+[1.346s] 3: ../../space_description/test/test_rover_geometry.py .................... [100%]
+[1.346s] 3: 
+[1.346s] 3: - generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml -
+[1.346s] 3: ============================== 20 passed in 0.25s ==============================
+[1.397s] 3: -- run_test.py: return code 0
+[1.397s] 3: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml'
+[1.408s] 3/3 Test #3: test_rover_geometry ..............   Passed    0.58 sec
+[1.408s] 
+[1.408s] 100% tests passed, 0 tests failed out of 3
+[1.408s] 
+[1.408s] Label Time Summary:
+[1.408s] flake8    =   0.31 sec*proc (1 test)
+[1.409s] linter    =   0.49 sec*proc (2 tests)
+[1.409s] pep257    =   0.18 sec*proc (1 test)
+[1.409s] pytest    =   0.58 sec*proc (1 test)
+[1.409s] 
+[1.409s] Total Test time (real) =   1.08 sec
+[1.413s] Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description' returned '0': CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_bringup:/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_controller:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface:/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process

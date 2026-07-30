@@ -323,3 +323,56 @@ def test_one_sided_wheel_data_yields_no_speed():
     assert wheel_linear_speed([], [1.0, 1.0], 0.07) is None
     assert wheel_linear_speed([], [], 0.07) is None
     assert wheel_linear_speed([1.0], [1.0], 0.07) == pytest.approx(0.07)
+
+
+def test_geometry_without_slip_is_still_scored():
+    """
+    A cell seen but not driven must get a geometry-only score, not NaN.
+
+    Requiring the soil term everywhere collapsed the map to the driven path: on a
+    776-cell survey only 8 cells had slip, so 768 cells with good slope,
+    roughness and step data were thrown away as "no data". It also contradicts
+    CLAUDE.md 4, which puts geometry first and treats slip as what geometry
+    cannot tell you -- an addition, not a precondition.
+    """
+    grid = _grid([0.10], [0.005], [0.008], [math.nan])
+    result = evaluate(grid, SMALL)
+
+    assert not math.isnan(result.score[0])
+    assert result.soil_measured is not None
+    assert not bool(result.soil_measured[0]), 'must be flagged geometry-only'
+
+
+def test_not_knowing_the_soil_costs_the_cell_something():
+    """
+    Absent soil must not read as "measured, and the soil is perfect".
+
+    Renormalising over the remaining terms means the geometry penalties carry
+    full weight, so an unmeasured cell scores slightly BELOW an otherwise
+    identical cell whose soil was measured and found perfect. That ordering is
+    the conservative direction: not having driven somewhere costs it a little,
+    rather than earning it a free pass.
+
+    Substituting a zero soil penalty instead would invert this and let
+    unmeasured ground outscore measured ground, which would reward not looking.
+    """
+    geometry_only = evaluate(_grid([0.10], [0.005], [0.008], [math.nan]), SMALL)
+    perfect_soil = evaluate(_grid([0.10], [0.005], [0.008], [0.0]), SMALL)
+    hard_soil = evaluate(_grid([0.10], [0.005], [0.008], [0.8]), SMALL)
+
+    assert perfect_soil.score[0] > geometry_only.score[0], (
+        'measured-and-good must beat unmeasured'
+    )
+    assert geometry_only.score[0] > hard_soil.score[0], (
+        'unmeasured must beat measured-and-bad'
+    )
+    # Only one of the two is flagged as actually carrying a slip measurement.
+    assert bool(perfect_soil.soil_measured[0])
+    assert not bool(geometry_only.soil_measured[0])
+
+
+def test_missing_geometry_is_still_no_data():
+    """Geometry remains a precondition: no geometry means the cell is unknown."""
+    result = evaluate(_grid([math.nan], [0.005], [0.008], [0.2]), SMALL)
+    assert math.isnan(result.score[0])
+    assert result.limiting_factor[0] == LIMIT_NO_DATA

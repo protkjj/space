@@ -1,0 +1,82 @@
+UpdateCTestConfiguration  from :/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+Parse Config file:/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+   Site: detop
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20260730-1346 - Experimental
+UpdateCTestConfiguration  from :/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+Parse Config file:/home/kj/Desktop/space/ros2_ws/src/build/space_description/CTestConfiguration.ini
+Test project /home/kj/Desktop/space/ros2_ws/src/build/space_description
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: flake8
+
+1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_flake8/flake8.txt" "--command" "/opt/ros/jazzy/bin/ament_flake8" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml"
+1: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_description
+1: Test timeout computed to be: 60
+1: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+1:  - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml
+1: 
+1: 3 files checked
+1: No problems found
+1: 
+1: Checked files:
+1: 
+1: * ./space_description/rover_geometry.py
+1: * ./space_description/__init__.py
+1: * ./test/test_rover_geometry.py
+1: -- run_test.py: return code 0
+1: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml'
+1/3 Test #1: flake8 ...........................   Passed    0.31 sec
+test 2
+    Start 2: pep257
+
+2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_pep257/pep257.txt" "--command" "/opt/ros/jazzy/bin/ament_pep257" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml"
+2: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_description
+2: Test timeout computed to be: 60
+2: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+2:  - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml
+2: checking ./space_description/__init__.py
+2: checking ./space_description/rover_geometry.py
+2: checking ./test/test_rover_geometry.py
+2: No problems found
+2: -- run_test.py: return code 0
+2: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml'
+2/3 Test #2: pep257 ...........................   Passed    0.18 sec
+test 3
+    Start 3: test_rover_geometry
+
+3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--package-name" "space_description" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py" "-o" "cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache" "--junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml" "--junit-prefix=space_description"
+3: Working Directory: /home/kj/Desktop/space/ros2_ws/src/build/space_description
+3: Test timeout computed to be: 60
+3: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description':
+3:  - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml --junit-prefix=space_description
+3: ============================= test session starts ==============================
+3: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+3: cachedir: build/space_description/ament_cmake_pytest/test_rover_geometry/.cache
+3: rootdir: /home/kj/Desktop/space/ros2_ws/src
+3: plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+3: collected 20 items
+3: 
+3: ../../space_description/test/test_rover_geometry.py .................... [100%]
+3: 
+3: - generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml -
+3: ============================== 20 passed in 0.25s ==============================
+3: -- run_test.py: return code 0
+3: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml'
+3/3 Test #3: test_rover_geometry ..............   Passed    0.58 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Label Time Summary:
+flake8    =   0.31 sec*proc (1 test)
+linter    =   0.49 sec*proc (2 tests)
+pep257    =   0.18 sec*proc (1 test)
+pytest    =   0.58 sec*proc (1 test)
+
+Total Test time (real) =   1.08 sec

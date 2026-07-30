@@ -1,0 +1,17 @@
+{
+  "package_name": "space_msgs",
+  "output_dir": "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_generator_type_description/space_msgs",
+  "idl_tuples": [
+    "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_adapter/space_msgs:msg/RoverSpec.idl",
+    "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_adapter/space_msgs:msg/SlipEstimate.idl",
+    "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_adapter/space_msgs:msg/TerrainEstimate.idl",
+    "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_adapter/space_msgs:msg/TraversabilityScore.idl"
+  ],
+  "include_paths": [
+    "builtin_interfaces:/opt/ros/jazzy/share/builtin_interfaces",
+    "grid_map_msgs:/opt/ros/jazzy/share/grid_map_msgs",
+    "std_msgs:/opt/ros/jazzy/share/std_msgs",
+    "geometry_msgs:/opt/ros/jazzy/share/geometry_msgs",
+    "service_msgs:/opt/ros/jazzy/share/service_msgs"
+  ]
+}

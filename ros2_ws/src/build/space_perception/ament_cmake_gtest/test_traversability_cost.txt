@@ -1,0 +1,74 @@
+-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_cost --gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml
+
+Running main() from /opt/ros/jazzy/src/gtest_vendor/src/gtest_main.cc
+[==========] Running 24 tests from 4 test suites.
+[----------] Global test environment set-up.
+[----------] 9 tests from TraversabilityCost
+[ RUN      ] TraversabilityCost.PerfectScoreMapsToMinimum
+[       OK ] TraversabilityCost.PerfectScoreMapsToMinimum (0 ms)
+[ RUN      ] TraversabilityCost.ZeroScoreMapsToMaximum
+[       OK ] TraversabilityCost.ZeroScoreMapsToMaximum (0 ms)
+[ RUN      ] TraversabilityCost.IntermediateScoresAreMonotonic
+[       OK ] TraversabilityCost.IntermediateScoresAreMonotonic (0 ms)
+[ RUN      ] TraversabilityCost.ExponentShapesPenalty
+[       OK ] TraversabilityCost.ExponentShapesPenalty (0 ms)
+[ RUN      ] TraversabilityCost.ScoresAreClampedToBounds
+[       OK ] TraversabilityCost.ScoresAreClampedToBounds (0 ms)
+[ RUN      ] TraversabilityCost.RejectsNan
+[       OK ] TraversabilityCost.RejectsNan (0 ms)
+[ RUN      ] TraversabilityCost.RejectsNonPositiveExponent
+[       OK ] TraversabilityCost.RejectsNonPositiveExponent (0 ms)
+[ RUN      ] TraversabilityCost.RejectsReversedBounds
+[       OK ] TraversabilityCost.RejectsReversedBounds (0 ms)
+[ RUN      ] TraversabilityCost.RejectsObstacleCost
+[       OK ] TraversabilityCost.RejectsObstacleCost (0 ms)
+[----------] 9 tests from TraversabilityCost (0 ms total)
+
+[----------] 4 tests from TraversabilityValidity
+[ RUN      ] TraversabilityValidity.AcceptsFiniteValidScore
+[       OK ] TraversabilityValidity.AcceptsFiniteValidScore (0 ms)
+[ RUN      ] TraversabilityValidity.RejectsInvalidFlag
+[       OK ] TraversabilityValidity.RejectsInvalidFlag (0 ms)
+[ RUN      ] TraversabilityValidity.RejectsNan
+[       OK ] TraversabilityValidity.RejectsNan (0 ms)
+[ RUN      ] TraversabilityValidity.RejectsOutOfRange
+[       OK ] TraversabilityValidity.RejectsOutOfRange (0 ms)
+[----------] 4 tests from TraversabilityValidity (0 ms total)
+
+[----------] 5 tests from TerrainGrid
+[ RUN      ] TerrainGrid.MultiplePointsRetainMaximum
+[       OK ] TerrainGrid.MultiplePointsRetainMaximum (0 ms)
+[ RUN      ] TerrainGrid.ReplacementDoesNotAccumulate
+[       OK ] TerrainGrid.ReplacementDoesNotAccumulate (0 ms)
+[ RUN      ] TerrainGrid.ResizeStartsWithNoContribution
+[       OK ] TerrainGrid.ResizeStartsWithNoContribution (0 ms)
+[ RUN      ] TerrainGrid.OutOfBoundsPointHasNoEffect
+[       OK ] TerrainGrid.OutOfBoundsPointHasNoEffect (0 ms)
+[ RUN      ] TerrainGrid.DeterministicForInputOrder
+[       OK ] TerrainGrid.DeterministicForInputOrder (0 ms)
+[----------] 5 tests from TerrainGrid (0 ms total)
+
+[----------] 6 tests from TerrainCombination
+[ RUN      ] TerrainCombination.LethalMasterCostIsPreserved
+[       OK ] TerrainCombination.LethalMasterCostIsPreserved (0 ms)
+[ RUN      ] TerrainCombination.InflationCostIsNotReduced
+[       OK ] TerrainCombination.InflationCostIsNotReduced (0 ms)
+[ RUN      ] TerrainCombination.NoContributionDoesNotChangeMaster
+[       OK ] TerrainCombination.NoContributionDoesNotChangeMaster (0 ms)
+[ RUN      ] TerrainCombination.SoftCostRaisesLowerMasterCost
+[       OK ] TerrainCombination.SoftCostRaisesLowerMasterCost (0 ms)
+[ RUN      ] TerrainCombination.UnknownMasterCanReceiveTerrainCost
+[       OK ] TerrainCombination.UnknownMasterCanReceiveTerrainCost (0 ms)
+[ RUN      ] TerrainCombination.MismatchedGridsAreRejected
+[       OK ] TerrainCombination.MismatchedGridsAreRejected (0 ms)
+[----------] 6 tests from TerrainCombination (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 24 tests from 4 test suites ran. (0 ms total)
+[  PASSED  ] 24 tests.
+
+
+-- run_test.py: return code 0
+-- run_test.py: inject classname prefix into gtest result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml'
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_cost.gtest.xml'

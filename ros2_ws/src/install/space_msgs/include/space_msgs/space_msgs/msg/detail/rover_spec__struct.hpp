@@ -1,0 +1,1 @@
+/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_generator_cpp/space_msgs/msg/detail/rover_spec__struct.hpp

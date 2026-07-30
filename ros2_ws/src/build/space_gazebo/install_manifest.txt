@@ -1,0 +1,1 @@
+/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib/space_gazebo/arena_marker_publisher

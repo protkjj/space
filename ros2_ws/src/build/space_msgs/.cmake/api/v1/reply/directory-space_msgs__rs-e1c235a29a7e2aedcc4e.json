@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "space_msgs__rs",
+		"source" : "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/space_msgs__rs"
+	}
+}

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/RoverKeyTeleop">
+    <file>RoverKeyTeleop.qml</file>
+  </qresource>
+</RCC>

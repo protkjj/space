@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/kj/Desktop/space/ros2_ws/src/build/space_mission/.pytest_cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src/space_mission
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 29 items
+
+test/test_flake8.py .                                                    [  3%]
+test/test_pep257.py .                                                    [  6%]
+test/test_slip_math.py .......                                           [ 31%]
+test/test_traversability_transform.py ....................               [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_mission/pytest.xml -
+============================== 29 passed in 0.44s ==============================

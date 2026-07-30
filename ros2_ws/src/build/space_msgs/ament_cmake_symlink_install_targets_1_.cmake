@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/rosidl_generator_py/space_msgs/space_msgs_s__rosidl_typesupport_introspection_c.so" "TARGETS" "space_msgs_s__rosidl_typesupport_introspection_c" "DESTINATION" "lib/python3.12/site-packages/space_msgs")

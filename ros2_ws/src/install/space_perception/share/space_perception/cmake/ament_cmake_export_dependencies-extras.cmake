@@ -1,0 +1,1 @@
+/home/kj/Desktop/space/ros2_ws/src/build/space_perception/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake

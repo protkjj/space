@@ -1,0 +1,4 @@
+source;share/space_perception/environment/ament_prefix_path.sh
+source;share/space_perception/environment/library_path.sh
+source;share/space_perception/environment/path.sh
+source;share/space_perception/environment/pythonpath.sh

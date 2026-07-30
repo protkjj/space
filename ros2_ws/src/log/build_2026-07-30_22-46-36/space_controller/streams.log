@@ -1,0 +1,24 @@
+[0.921s] Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_controller': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_controller/build --no-deps symlink_data
+[1.151s] running develop
+[1.295s] running egg_info
+[1.295s] creating space_controller.egg-info
+[1.302s] writing space_controller.egg-info/PKG-INFO
+[1.302s] writing dependency_links to space_controller.egg-info/dependency_links.txt
+[1.302s] writing entry points to space_controller.egg-info/entry_points.txt
+[1.302s] writing requirements to space_controller.egg-info/requires.txt
+[1.302s] writing top-level names to space_controller.egg-info/top_level.txt
+[1.302s] writing manifest file 'space_controller.egg-info/SOURCES.txt'
+[1.330s] reading manifest file 'space_controller.egg-info/SOURCES.txt'
+[1.330s] writing manifest file 'space_controller.egg-info/SOURCES.txt'
+[1.345s] running build_ext
+[1.345s] Creating /home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages/space-controller.egg-link (link to .)
+[1.345s] Installing command_safety_node script to /home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/space_controller
+[1.345s] 
+[1.345s] Installed /home/kj/Desktop/space/ros2_ws/src/build/space_controller
+[1.346s] running symlink_data
+[1.346s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/ament_index
+[1.346s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/ament_index/resource_index
+[1.346s] creating /home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/ament_index/resource_index/packages
+[1.346s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_controller/resource/space_controller -> /home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/ament_index/resource_index/packages
+[1.346s] symbolically linking /home/kj/Desktop/space/ros2_ws/src/build/space_controller/package.xml -> /home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller
+[1.392s] Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_controller' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_controller/build --no-deps symlink_data

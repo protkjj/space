@@ -1,0 +1,11 @@
+-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+ - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml
+
+checking ./space_description/__init__.py
+checking ./space_description/rover_geometry.py
+checking ./test/test_rover_geometry.py
+No problems found
+
+
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/pep257.xunit.xml'

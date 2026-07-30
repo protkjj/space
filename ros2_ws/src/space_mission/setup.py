@@ -38,6 +38,14 @@ setup(
                 'slip_estimator = '
                 'space_mission.slip_estimator_node:main'
             ),
+            (
+                'terrain_map = '
+                'space_mission.terrain_map_node:main'
+            ),
+            (
+                'traversability_transform = '
+                'space_mission.traversability_transform_node:main'
+            ),
         ],
     },
 )

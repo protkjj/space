@@ -1,0 +1,18 @@
+-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description':
+ - /usr/bin/python3 -u -m pytest /home/kj/Desktop/space/ros2_ws/src/space_description/test/test_rover_geometry.py -o cache_dir=/home/kj/Desktop/space/ros2_ws/src/build/space_description/ament_cmake_pytest/test_rover_geometry/.cache --junit-xml=/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml --junit-prefix=space_description
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: build/space_description/ament_cmake_pytest/test_rover_geometry/.cache
+rootdir: /home/kj/Desktop/space/ros2_ws/src
+plugins: ament-xmllint-0.17.5, launch-testing-3.4.10, ament-pep257-0.17.5, launch-testing-ros-0.26.11, ament-copyright-0.17.5, ament-lint-0.17.5, ament-flake8-0.17.5, cov-4.1.0, typeguard-4.1.5, colcon-core-0.20.1
+collected 20 items
+
+../../space_description/test/test_rover_geometry.py .................... [100%]
+
+- generated xml file: /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml -
+============================== 20 passed in 0.25s ==============================
+
+
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/test_rover_geometry.xunit.xml'

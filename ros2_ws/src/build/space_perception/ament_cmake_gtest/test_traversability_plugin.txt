@@ -1,0 +1,19 @@
+-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception':
+ - /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_traversability_plugin --gtest_output=xml:/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml
+
+Running main() from /opt/ros/jazzy/src/gtest_vendor/src/gtest_main.cc
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from TraversabilityPlugin
+[ RUN      ] TraversabilityPlugin.IsDiscoverableAndConstructible
+[       OK ] TraversabilityPlugin.IsDiscoverableAndConstructible (20 ms)
+[----------] 1 test from TraversabilityPlugin (20 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (20 ms total)
+[  PASSED  ] 1 test.
+
+
+-- run_test.py: return code 0
+-- run_test.py: inject classname prefix into gtest result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml'
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/test_traversability_plugin.gtest.xml'

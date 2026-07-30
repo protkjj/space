@@ -1,0 +1,16 @@
+-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_description':
+ - /opt/ros/jazzy/bin/ament_flake8 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml
+
+
+3 files checked
+No problems found
+
+Checked files:
+
+* ./space_description/rover_geometry.py
+* ./space_description/__init__.py
+* ./test/test_rover_geometry.py
+
+
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_description/test_results/space_description/flake8.xunit.xml'

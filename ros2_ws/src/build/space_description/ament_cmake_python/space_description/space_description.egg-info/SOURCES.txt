@@ -1,0 +1,7 @@
+setup.py
+space_description/__init__.py
+space_description/rover_geometry.py
+space_description.egg-info/PKG-INFO
+space_description.egg-info/SOURCES.txt
+space_description.egg-info/dependency_links.txt
+space_description.egg-info/top_level.txt

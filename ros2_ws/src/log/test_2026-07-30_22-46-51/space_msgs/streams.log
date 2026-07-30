@@ -1,0 +1,67 @@
+[0.299s] Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs': CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_bringup:/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_controller:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface:/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process
+[0.305s] UpdateCTestConfiguration  from :/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/CTestConfiguration.ini
+[0.305s] Parse Config file:/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/CTestConfiguration.ini
+[0.305s]    Site: detop
+[0.305s]    Build name: (empty)
+[0.305s]  Add coverage exclude regular expressions.
+[0.306s] Create new tag: 20260730-1346 - Experimental
+[0.306s] UpdateCTestConfiguration  from :/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/CTestConfiguration.ini
+[0.307s] Parse Config file:/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/CTestConfiguration.ini
+[0.307s] Test project /home/kj/Desktop/space/ros2_ws/src/build/space_msgs
+[0.307s] Constructing a list of tests
+[0.307s] Done constructing a list of tests
+[0.307s] Updating test list for fixtures
+[0.307s] Added 0 tests to meet fixture requirements
+[0.307s] Checking test dependency graph...
+[0.307s] Checking test dependency graph end
+[0.307s] test 1
+[0.307s]     Start 1: copyright
+[0.307s] 
+[0.307s] 1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/copyright.xunit.xml" "--package-name" "space_msgs" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/ament_copyright/copyright.txt" "--command" "/opt/ros/jazzy/bin/ament_copyright" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/copyright.xunit.xml"
+[0.307s] 1: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_msgs
+[0.307s] 1: Test timeout computed to be: 200
+[0.350s] 1: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_msgs':
+[0.350s] 1:  - /opt/ros/jazzy/bin/ament_copyright --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/copyright.xunit.xml
+[0.435s] 1: No repository roots and files found
+[0.435s] 1: No problems found, checked 0 files
+[0.447s] 1: -- run_test.py: return code 0
+[0.447s] 1: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/copyright.xunit.xml'
+[0.459s] 1/3 Test #1: copyright ........................   Passed    0.15 sec
+[0.459s] test 2
+[0.459s]     Start 2: lint_cmake
+[0.459s] 
+[0.459s] 2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/lint_cmake.xunit.xml" "--package-name" "space_msgs" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/ament_lint_cmake/lint_cmake.txt" "--command" "/opt/ros/jazzy/bin/ament_lint_cmake" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/lint_cmake.xunit.xml"
+[0.459s] 2: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_msgs
+[0.459s] 2: Test timeout computed to be: 60
+[0.502s] 2: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_msgs':
+[0.503s] 2:  - /opt/ros/jazzy/bin/ament_lint_cmake --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/lint_cmake.xunit.xml
+[0.571s] 2: 
+[0.571s] 2: No problems found
+[0.583s] 2: -- run_test.py: return code 0
+[0.583s] 2: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/lint_cmake.xunit.xml'
+[0.593s] 2/3 Test #2: lint_cmake .......................   Passed    0.13 sec
+[0.593s] test 3
+[0.593s]     Start 3: xmllint
+[0.593s] 
+[0.594s] 3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/xmllint.xunit.xml" "--package-name" "space_msgs" "--output-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/ament_xmllint/xmllint.txt" "--command" "/opt/ros/jazzy/bin/ament_xmllint" "--xunit-file" "/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/xmllint.xunit.xml"
+[0.594s] 3: Working Directory: /home/kj/Desktop/space/ros2_ws/src/space_msgs
+[0.594s] 3: Test timeout computed to be: 60
+[0.639s] 3: -- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_msgs':
+[0.639s] 3:  - /opt/ros/jazzy/bin/ament_xmllint --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/xmllint.xunit.xml
+[0.701s] 3: File 'package.xml' is valid
+[0.701s] 3: 
+[0.701s] 3: No problems found
+[0.710s] 3: -- run_test.py: return code 0
+[0.711s] 3: -- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/test_results/space_msgs/xmllint.xunit.xml'
+[0.721s] 3/3 Test #3: xmllint ..........................   Passed    0.13 sec
+[0.721s] 
+[0.722s] 100% tests passed, 0 tests failed out of 3
+[0.722s] 
+[0.722s] Label Time Summary:
+[0.722s] copyright     =   0.15 sec*proc (1 test)
+[0.722s] lint_cmake    =   0.13 sec*proc (1 test)
+[0.722s] linter        =   0.42 sec*proc (3 tests)
+[0.722s] xmllint       =   0.13 sec*proc (1 test)
+[0.722s] 
+[0.722s] Total Test time (real) =   0.42 sec
+[0.726s] Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs' returned '0': CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_bringup:/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_controller:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface:/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process

@@ -1,0 +1,71 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from space_msgs/msg/TraversabilityScore.msg
+// generated code does not contain a copyright notice
+
+#include "builtin_interfaces/msg/Time.idl"
+#include "grid_map_msgs/msg/GridMap.idl"
+#include "space_msgs/msg/RoverSpec.idl"
+#include "std_msgs/msg/Header.idl"
+
+module space_msgs {
+  module msg {
+    module TraversabilityScore_Constants {
+      @verbatim (language="comment", text=
+        "Traversability score, higher is better. NaN where the terrain record had no" "\n"        "data or the observation-quality gate rejected the cell.")
+      const string LAYER_SCORE = "score";
+      @verbatim (language="comment", text=
+        "Which term dominated the score, so a low value is explainable rather than an" "\n"        "opaque number. Values are LIMIT_* below.")
+      const string LAYER_LIMITING_FACTOR = "limiting_factor";
+      const uint8 LIMIT_NONE = 0;
+      const uint8 LIMIT_SLOPE = 1;
+      const uint8 LIMIT_ROUGHNESS = 2;
+      const uint8 LIMIT_STEP = 3;
+      const uint8 LIMIT_SOIL = 4;
+      const uint8 LIMIT_CLEARANCE = 5;
+      const uint8 LIMIT_WIDTH = 6;
+      const uint8 LIMIT_NO_DATA = 7;
+    };
+    @verbatim (language="comment", text=
+      "A DERIVED traversability map for one specific rover." "\n"
+      "" "\n"
+      "Published on /traversability/small and /traversability/medium. Both come from" "\n"
+      "the same evaluate() call with a different RoverSpec -- never from scaling one" "\n"
+      "into the other. CLAUDE.md is explicit that lambda is a terrain x rover" "\n"
+      "interaction: the same sand that slips our 3 kg rover 15% will slip a medium" "\n"
+      "rover differently because contact pressure, wheel diameter, mass, and grouser" "\n"
+      "shape all differ. Scaling S_small into S_medium is physically wrong.")
+    struct TraversabilityScore {
+      std_msgs::msg::Header header;
+
+      string rover_id;
+
+      @verbatim (language="comment", text=
+        "The exact specification this score was computed under, carried inline rather" "\n"
+        "than referenced. If rover_spec.provenance is PROVENANCE_ASSUMED, every cell" "\n"
+        "here is provisional and must be recomputed when real numbers land -- and this" "\n"
+        "field is how you find out which maps those are.")
+      space_msgs::msg::RoverSpec rover_spec;
+
+      @verbatim (language="comment", text=
+        "Layers keyed by the constants below.")
+      grid_map_msgs::msg::GridMap grid;
+
+      @verbatim (language="comment", text=
+        "--- Provenance, so a recompute can be targeted instead of global ---------" "\n"
+        "Stamp of the TerrainEstimate this was derived from.")
+      builtin_interfaces::msg::Time terrain_stamp;
+
+      @verbatim (language="comment", text=
+        "Copied from the source TerrainEstimate: a score is only as valid as the soil" "\n"
+        "model behind it.")
+      string soil_model_id;
+
+      string soil_model_version;
+
+      @verbatim (language="comment", text=
+        "Version of the evaluation function itself, separate from the soil model," "\n"
+        "because scoring weights and the soil proxy change independently.")
+      string evaluator_version;
+    };
+  };
+};

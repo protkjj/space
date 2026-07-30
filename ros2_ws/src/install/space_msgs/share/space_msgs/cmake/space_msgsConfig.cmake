@@ -1,0 +1,1 @@
+/home/kj/Desktop/space/ros2_ws/src/build/space_msgs/ament_cmake_core/space_msgsConfig.cmake

@@ -1,0 +1,8 @@
+msg/RoverSpec.idl
+msg/RoverSpec.msg
+msg/SlipEstimate.idl
+msg/SlipEstimate.msg
+msg/TerrainEstimate.idl
+msg/TerrainEstimate.msg
+msg/TraversabilityScore.idl
+msg/TraversabilityScore.msg

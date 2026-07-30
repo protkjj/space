@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite
+  name="space_perception.flake8"
+  tests="1"
+  errors="0"
+  failures="0"
+  time="0.163"
+>
+  <testcase
+    name="flake8"
+    classname="space_perception.flake8"/>
+  <system-out>Checked files:
+* ./setup.py
+* ./launch/terrain_perception.launch.py
+* ./space_perception/depth_overlay_node.py
+* ./space_perception/pointcloud_utils.py
+* ./space_perception/terrain_pointcloud_filter_node.py
+* ./space_perception/latest_data.py
+* ./space_perception/local_elevation_map_node.py
+* ./space_perception/traversability_calibration.py
+* ./space_perception/terrain_traversability_node.py
+* ./space_perception/__init__.py
+* ./space_perception/traversability.py
+* ./space_perception/terrain_feature_node.py
+* ./space_perception/terrain_features.py
+* ./space_perception/terrain_processing.py
+* ./test/test_flake8.py
+* ./test/test_import.py
+* ./test/test_terrain_processing.py
+* ./test/test_rover_derived_thresholds.py
+* ./test/__init__.py
+* ./test/test_pep257.py
+* ./test/test_terrain_features.py
+* ./test/test_traversability.py</system-out>
+</testsuite>

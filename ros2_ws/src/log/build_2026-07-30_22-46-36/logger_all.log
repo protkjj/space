@@ -1,0 +1,644 @@
+[0.069s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.069s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x71796f1b4bf0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x71796f1b4950>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x71796f1b4950>>, mixin_verb=('build',))
+[0.094s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.094s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.094s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.094s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.094s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.094s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.094s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/kj/Desktop/space/ros2_ws/src'
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.094s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.095s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.095s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extension 'ignore'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extension 'ignore_ament_install'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extensions ['colcon_pkg']
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extension 'colcon_pkg'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extensions ['colcon_meta']
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extension 'colcon_meta'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extensions ['ros']
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(space_ardupilot_interface) by extension 'ros'
+[0.112s] DEBUG:colcon.colcon_core.package_identification:Package 'space_ardupilot_interface' with type 'ros.ament_python' and name 'space_ardupilot_interface'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extension 'ignore'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extension 'ignore_ament_install'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extensions ['colcon_pkg']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extension 'colcon_pkg'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extensions ['colcon_meta']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extension 'colcon_meta'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extensions ['ros']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(space_bringup) by extension 'ros'
+[0.113s] DEBUG:colcon.colcon_core.package_identification:Package 'space_bringup' with type 'ros.ament_python' and name 'space_bringup'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extension 'ignore'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extension 'ignore_ament_install'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extensions ['colcon_pkg']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extension 'colcon_pkg'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extensions ['colcon_meta']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extension 'colcon_meta'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extensions ['ros']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_controller) by extension 'ros'
+[0.113s] DEBUG:colcon.colcon_core.package_identification:Package 'space_controller' with type 'ros.ament_python' and name 'space_controller'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extensions ['ignore', 'ignore_ament_install']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extension 'ignore'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extension 'ignore_ament_install'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extensions ['colcon_pkg']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extension 'colcon_pkg'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extensions ['colcon_meta']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extension 'colcon_meta'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extensions ['ros']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_description) by extension 'ros'
+[0.114s] DEBUG:colcon.colcon_core.package_identification:Package 'space_description' with type 'ros.ament_cmake' and name 'space_description'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extension 'ignore'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extension 'ignore_ament_install'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extensions ['colcon_pkg']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extension 'colcon_pkg'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extensions ['colcon_meta']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extension 'colcon_meta'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extensions ['ros']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(space_gazebo) by extension 'ros'
+[0.115s] DEBUG:colcon.colcon_core.package_identification:Package 'space_gazebo' with type 'ros.ament_cmake' and name 'space_gazebo'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extensions ['ignore', 'ignore_ament_install']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extension 'ignore'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extension 'ignore_ament_install'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extensions ['colcon_pkg']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extension 'colcon_pkg'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extensions ['colcon_meta']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extension 'colcon_meta'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extensions ['ros']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_mission) by extension 'ros'
+[0.115s] DEBUG:colcon.colcon_core.package_identification:Package 'space_mission' with type 'ros.ament_python' and name 'space_mission'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extension 'ignore'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extension 'ignore_ament_install'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extensions ['colcon_pkg']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extension 'colcon_pkg'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extensions ['colcon_meta']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extension 'colcon_meta'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extensions ['ros']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(space_msgs) by extension 'ros'
+[0.116s] DEBUG:colcon.colcon_core.package_identification:Package 'space_msgs' with type 'ros.ament_cmake' and name 'space_msgs'
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extension 'ignore'
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extension 'ignore_ament_install'
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extensions ['colcon_pkg']
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extension 'colcon_pkg'
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extensions ['colcon_meta']
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extension 'colcon_meta'
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extensions ['ros']
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_navigation) by extension 'ros'
+[0.116s] DEBUG:colcon.colcon_core.package_identification:Package 'space_navigation' with type 'ros.ament_python' and name 'space_navigation'
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extensions ['ignore', 'ignore_ament_install']
+[0.116s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extension 'ignore'
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extension 'ignore_ament_install'
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extensions ['colcon_pkg']
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extension 'colcon_pkg'
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extensions ['colcon_meta']
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extension 'colcon_meta'
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extensions ['ros']
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(space_perception) by extension 'ros'
+[0.117s] DEBUG:colcon.colcon_core.package_identification:Package 'space_perception' with type 'ros.ament_cmake' and name 'space_perception'
+[0.117s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.117s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.117s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.117s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.117s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.132s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.132s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.134s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 425 installed packages in /opt/ros/jazzy
+[0.134s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'cmake_args' from command line to 'None'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'cmake_target' from command line to 'None'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'cmake_clean_cache' from command line to 'False'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'cmake_clean_first' from command line to 'False'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'cmake_force_configure' from command line to 'False'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'ament_cmake_args' from command line to 'None'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'catkin_cmake_args' from command line to 'None'
+[0.167s] Level 5:colcon.colcon_core.verb:set package 'space_ardupilot_interface' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.167s] DEBUG:colcon.colcon_core.verb:Building package 'space_ardupilot_interface' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_ardupilot_interface', 'symlink_install': True, 'test_result_base': None}
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'cmake_target' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.168s] DEBUG:colcon.colcon_core.verb:Building package 'space_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_controller', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_controller', 'symlink_install': True, 'test_result_base': None}
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'cmake_target' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.168s] DEBUG:colcon.colcon_core.verb:Building package 'space_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_description', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_description', 'symlink_install': True, 'test_result_base': None}
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'cmake_target' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.168s] DEBUG:colcon.colcon_core.verb:Building package 'space_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_msgs', 'symlink_install': True, 'test_result_base': None}
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'cmake_target' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'cmake_clean_first' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'cmake_force_configure' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'ament_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_navigation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.168s] DEBUG:colcon.colcon_core.verb:Building package 'space_navigation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_navigation', 'symlink_install': True, 'test_result_base': None}
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'cmake_target' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'cmake_clean_first' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'cmake_force_configure' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'ament_cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_gazebo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.169s] DEBUG:colcon.colcon_core.verb:Building package 'space_gazebo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_gazebo', 'symlink_install': True, 'test_result_base': None}
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'cmake_target' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'cmake_clean_cache' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'cmake_clean_first' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'cmake_force_configure' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'ament_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'catkin_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_mission' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.169s] DEBUG:colcon.colcon_core.verb:Building package 'space_mission' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_mission', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_mission', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_mission', 'symlink_install': True, 'test_result_base': None}
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'cmake_target' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'cmake_clean_cache' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'cmake_clean_first' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'cmake_force_configure' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'ament_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'catkin_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_perception' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.169s] DEBUG:colcon.colcon_core.verb:Building package 'space_perception' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_perception', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_perception', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_perception', 'symlink_install': True, 'test_result_base': None}
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'cmake_target' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'space_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.169s] DEBUG:colcon.colcon_core.verb:Building package 'space_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kj/Desktop/space/ros2_ws/src/build/space_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup', 'merge_install': False, 'path': '/home/kj/Desktop/space/ros2_ws/src/space_bringup', 'symlink_install': True, 'test_result_base': None}
+[0.169s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.170s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.170s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_description' with build type 'ament_cmake'
+[0.170s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/kj/Desktop/space/ros2_ws/src/space_description'
+[0.171s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.171s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.171s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.174s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_msgs' with build type 'ament_cmake'
+[0.174s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/kj/Desktop/space/ros2_ws/src/space_msgs'
+[0.174s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.174s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.176s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_controller' with build type 'ament_python'
+[0.176s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_controller', 'ament_prefix_path')
+[0.176s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/hook/ament_prefix_path.ps1'
+[0.177s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/hook/ament_prefix_path.dsv'
+[0.177s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/hook/ament_prefix_path.sh'
+[0.177s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.177s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.179s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_navigation' with build type 'ament_python'
+[0.179s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_navigation', 'ament_prefix_path')
+[0.179s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/hook/ament_prefix_path.ps1'
+[0.180s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/hook/ament_prefix_path.dsv'
+[0.180s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/hook/ament_prefix_path.sh'
+[0.180s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.180s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.182s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_ardupilot_interface' with build type 'ament_python'
+[0.182s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_ardupilot_interface', 'ament_prefix_path')
+[0.183s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/hook/ament_prefix_path.ps1'
+[0.183s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/hook/ament_prefix_path.dsv'
+[0.183s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/hook/ament_prefix_path.sh'
+[0.183s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.183s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.188s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_description
+[0.191s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_msgs -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs
+[0.359s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/kj/Desktop/space/ros2_ws/src/space_controller'
+[0.359s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.359s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.507s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/kj/Desktop/space/ros2_ws/src/space_navigation'
+[0.507s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.507s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.657s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/kj/Desktop/space/ros2_ws/src/space_ardupilot_interface'
+[0.657s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.657s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.096s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/build --no-deps symlink_data
+[1.098s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_controller': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_controller/build --no-deps symlink_data
+[1.113s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/build --no-deps symlink_data
+[1.160s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_description
+[1.161s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_description -- -j16 -l16
+[1.461s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_description -- -j16 -l16
+[1.471s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_description
+[1.559s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_navigation', 'pythonpath_develop')
+[1.560s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/share/space_navigation/hook/pythonpath_develop.ps1'
+[1.560s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_navigation/build --no-deps symlink_data
+[1.560s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/share/space_navigation/hook/pythonpath_develop.dsv'
+[1.560s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_navigation/share/space_navigation/hook/pythonpath_develop.sh'
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation' for CMake module files
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation' for CMake config files
+[1.563s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib'
+[1.563s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/bin'
+[1.563s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/pkgconfig/space_navigation.pc'
+[1.563s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages'
+[1.563s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_navigation', 'pythonpath')
+[1.563s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/hook/pythonpath.ps1'
+[1.564s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/hook/pythonpath.dsv'
+[1.564s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/hook/pythonpath.sh'
+[1.564s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/bin'
+[1.564s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_navigation)
+[1.564s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/package.ps1'
+[1.565s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/package.dsv'
+[1.565s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/package.sh'
+[1.566s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/package.bash'
+[1.566s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/space_navigation/package.zsh'
+[1.566s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/share/colcon-core/packages/space_navigation)
+[1.567s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_controller', 'pythonpath_develop')
+[1.567s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_controller/share/space_controller/hook/pythonpath_develop.ps1'
+[1.568s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/build/space_controller/share/space_controller/hook/pythonpath_develop.dsv'
+[1.569s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_controller' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_controller/build --no-deps symlink_data
+[1.569s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_controller/share/space_controller/hook/pythonpath_develop.sh'
+[1.569s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller' for CMake module files
+[1.569s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller' for CMake config files
+[1.570s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib'
+[1.570s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/bin'
+[1.570s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/pkgconfig/space_controller.pc'
+[1.570s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages'
+[1.570s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_controller', 'pythonpath')
+[1.570s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/hook/pythonpath.ps1'
+[1.570s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/hook/pythonpath.dsv'
+[1.571s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/hook/pythonpath.sh'
+[1.571s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/bin'
+[1.571s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_controller)
+[1.571s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/package.ps1'
+[1.571s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/package.dsv'
+[1.572s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/package.sh'
+[1.572s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/package.bash'
+[1.572s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/space_controller/package.zsh'
+[1.572s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_controller/share/colcon-core/packages/space_controller)
+[1.614s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_ardupilot_interface', 'pythonpath_develop')
+[1.614s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/share/space_ardupilot_interface/hook/pythonpath_develop.ps1'
+[1.614s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/build --no-deps symlink_data
+[1.615s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/share/space_ardupilot_interface/hook/pythonpath_develop.dsv'
+[1.615s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_ardupilot_interface/share/space_ardupilot_interface/hook/pythonpath_develop.sh'
+[1.615s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface' for CMake module files
+[1.615s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface' for CMake config files
+[1.616s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib'
+[1.616s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/bin'
+[1.616s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/pkgconfig/space_ardupilot_interface.pc'
+[1.616s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/lib/python3.12/site-packages'
+[1.616s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_ardupilot_interface', 'pythonpath')
+[1.616s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/hook/pythonpath.ps1'
+[1.616s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/hook/pythonpath.dsv'
+[1.616s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/hook/pythonpath.sh'
+[1.617s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/bin'
+[1.617s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_ardupilot_interface)
+[1.617s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/package.ps1'
+[1.617s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/package.dsv'
+[1.618s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/package.sh'
+[1.618s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/package.bash'
+[1.618s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/space_ardupilot_interface/package.zsh'
+[1.618s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_ardupilot_interface/share/colcon-core/packages/space_ardupilot_interface)
+[1.782s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_description)
+[1.782s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description' for CMake module files
+[1.783s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_description
+[1.783s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description' for CMake config files
+[1.783s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_description', 'cmake_prefix_path')
+[1.783s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/cmake_prefix_path.ps1'
+[1.784s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/cmake_prefix_path.dsv'
+[1.784s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/cmake_prefix_path.sh'
+[1.784s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib'
+[1.784s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/bin'
+[1.784s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/pkgconfig/space_description.pc'
+[1.784s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages'
+[1.784s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_description', 'pythonpath')
+[1.784s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/pythonpath.ps1'
+[1.785s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/pythonpath.dsv'
+[1.785s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/pythonpath.sh'
+[1.785s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/bin'
+[1.785s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.ps1'
+[1.786s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.dsv'
+[1.786s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.sh'
+[1.786s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.bash'
+[1.786s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.zsh'
+[1.786s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/colcon-core/packages/space_description)
+[1.787s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_description)
+[1.787s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description' for CMake module files
+[1.787s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description' for CMake config files
+[1.787s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_description', 'cmake_prefix_path')
+[1.787s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/cmake_prefix_path.ps1'
+[1.788s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/cmake_prefix_path.dsv'
+[1.788s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/cmake_prefix_path.sh'
+[1.788s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib'
+[1.788s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/bin'
+[1.788s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/pkgconfig/space_description.pc'
+[1.788s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages'
+[1.788s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_description', 'pythonpath')
+[1.788s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/pythonpath.ps1'
+[1.789s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/pythonpath.dsv'
+[1.789s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/hook/pythonpath.sh'
+[1.789s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_description/bin'
+[1.789s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.ps1'
+[1.790s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.dsv'
+[1.790s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.sh'
+[1.790s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.bash'
+[1.790s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/space_description/package.zsh'
+[1.790s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_description/share/colcon-core/packages/space_description)
+[1.791s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_gazebo' with build type 'ament_cmake'
+[1.791s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/kj/Desktop/space/ros2_ws/src/space_gazebo'
+[1.791s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.791s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.795s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_perception' with build type 'ament_cmake'
+[1.795s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/kj/Desktop/space/ros2_ws/src/space_perception'
+[1.795s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.795s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.800s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_gazebo -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo
+[1.801s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_perception -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_perception
+[2.903s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_gazebo -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo
+[2.903s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_gazebo -- -j16 -l16
+[3.005s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_msgs -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs
+[3.006s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_msgs -- -j16 -l16
+[4.956s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/kj/Desktop/space/ros2_ws/src/space_perception -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/kj/Desktop/space/ros2_ws/src/install/space_perception
+[4.957s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_perception -- -j16 -l16
+[6.456s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_gazebo -- -j16 -l16
+[6.456s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_gazebo
+[6.814s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_gazebo)
+[6.815s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo' for CMake module files
+[6.815s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_gazebo' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_gazebo
+[6.816s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo' for CMake config files
+[6.816s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_gazebo', 'cmake_prefix_path')
+[6.816s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/cmake_prefix_path.ps1'
+[6.816s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/cmake_prefix_path.dsv'
+[6.817s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/cmake_prefix_path.sh'
+[6.817s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib'
+[6.817s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_gazebo', 'ld_library_path_lib')
+[6.817s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/ld_library_path_lib.ps1'
+[6.818s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/ld_library_path_lib.dsv'
+[6.818s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/ld_library_path_lib.sh'
+[6.818s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/bin'
+[6.818s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib/pkgconfig/space_gazebo.pc'
+[6.818s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib/python3.12/site-packages'
+[6.818s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/bin'
+[6.818s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.ps1'
+[6.819s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.dsv'
+[6.820s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.sh'
+[6.820s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.bash'
+[6.820s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.zsh'
+[6.820s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/colcon-core/packages/space_gazebo)
+[6.820s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_gazebo)
+[6.821s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo' for CMake module files
+[6.821s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo' for CMake config files
+[6.821s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_gazebo', 'cmake_prefix_path')
+[6.821s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/cmake_prefix_path.ps1'
+[6.822s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/cmake_prefix_path.dsv'
+[6.822s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/cmake_prefix_path.sh'
+[6.822s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib'
+[6.822s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_gazebo', 'ld_library_path_lib')
+[6.822s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/ld_library_path_lib.ps1'
+[6.823s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/ld_library_path_lib.dsv'
+[6.823s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/hook/ld_library_path_lib.sh'
+[6.823s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/bin'
+[6.823s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib/pkgconfig/space_gazebo.pc'
+[6.823s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib/python3.12/site-packages'
+[6.823s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/bin'
+[6.823s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.ps1'
+[6.824s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.dsv'
+[6.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.sh'
+[6.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.bash'
+[6.825s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/space_gazebo/package.zsh'
+[6.825s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/share/colcon-core/packages/space_gazebo)
+[7.295s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_msgs -- -j16 -l16
+[7.295s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_msgs
+[8.444s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_msgs)
+[8.445s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs' for CMake module files
+[8.445s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_msgs
+[8.445s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs' for CMake config files
+[8.446s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_msgs', 'cmake_prefix_path')
+[8.446s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/cmake_prefix_path.ps1'
+[8.446s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/cmake_prefix_path.dsv'
+[8.446s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/cmake_prefix_path.sh'
+[8.447s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib'
+[8.447s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_msgs', 'ld_library_path_lib')
+[8.447s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/ld_library_path_lib.ps1'
+[8.447s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/ld_library_path_lib.dsv'
+[8.447s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/ld_library_path_lib.sh'
+[8.448s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/bin'
+[8.448s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/pkgconfig/space_msgs.pc'
+[8.448s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages'
+[8.448s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_msgs', 'pythonpath')
+[8.448s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/pythonpath.ps1'
+[8.448s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/pythonpath.dsv'
+[8.448s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/pythonpath.sh'
+[8.449s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/bin'
+[8.449s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.ps1'
+[8.449s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.dsv'
+[8.450s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.sh'
+[8.450s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.bash'
+[8.450s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.zsh'
+[8.450s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/colcon-core/packages/space_msgs)
+[8.451s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_msgs)
+[8.451s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs' for CMake module files
+[8.451s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs' for CMake config files
+[8.451s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_msgs', 'cmake_prefix_path')
+[8.451s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/cmake_prefix_path.ps1'
+[8.452s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/cmake_prefix_path.dsv'
+[8.452s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/cmake_prefix_path.sh'
+[8.452s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib'
+[8.452s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_msgs', 'ld_library_path_lib')
+[8.452s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/ld_library_path_lib.ps1'
+[8.452s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/ld_library_path_lib.dsv'
+[8.453s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/ld_library_path_lib.sh'
+[8.453s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/bin'
+[8.453s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/pkgconfig/space_msgs.pc'
+[8.453s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages'
+[8.453s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_msgs', 'pythonpath')
+[8.453s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/pythonpath.ps1'
+[8.453s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/pythonpath.dsv'
+[8.453s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/hook/pythonpath.sh'
+[8.454s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/bin'
+[8.454s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.ps1'
+[8.454s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.dsv'
+[8.454s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.sh'
+[8.455s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.bash'
+[8.455s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/space_msgs/package.zsh'
+[8.455s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/share/colcon-core/packages/space_msgs)
+[8.455s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_mission' with build type 'ament_python'
+[8.455s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_mission', 'ament_prefix_path')
+[8.455s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/hook/ament_prefix_path.ps1'
+[8.456s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/hook/ament_prefix_path.dsv'
+[8.456s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/hook/ament_prefix_path.sh'
+[8.456s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[8.456s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[8.613s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/kj/Desktop/space/ros2_ws/src/space_mission'
+[8.613s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[8.613s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[9.083s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_mission': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_mission/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_mission/build --no-deps symlink_data
+[9.569s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_mission', 'pythonpath_develop')
+[9.570s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_mission/share/space_mission/hook/pythonpath_develop.ps1'
+[9.570s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/build/space_mission/share/space_mission/hook/pythonpath_develop.dsv'
+[9.571s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_mission/share/space_mission/hook/pythonpath_develop.sh'
+[9.571s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission' for CMake module files
+[9.571s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission' for CMake config files
+[9.572s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_mission' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_mission/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_mission/build --no-deps symlink_data
+[9.573s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib'
+[9.573s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/bin'
+[9.573s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/pkgconfig/space_mission.pc'
+[9.573s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages'
+[9.573s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_mission', 'pythonpath')
+[9.573s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/hook/pythonpath.ps1'
+[9.573s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/hook/pythonpath.dsv'
+[9.573s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/hook/pythonpath.sh'
+[9.574s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/bin'
+[9.574s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_mission)
+[9.574s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/package.ps1'
+[9.574s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/package.dsv'
+[9.575s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/package.sh'
+[9.575s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/package.bash'
+[9.575s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/space_mission/package.zsh'
+[9.575s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_mission/share/colcon-core/packages/space_mission)
+[13.265s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/kj/Desktop/space/ros2_ws/src/build/space_perception -- -j16 -l16
+[13.266s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_perception
+[13.727s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_perception)
+[13.727s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception' for CMake module files
+[13.728s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_perception' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/kj/Desktop/space/ros2_ws/src/build/space_perception
+[13.728s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception' for CMake config files
+[13.728s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_perception', 'cmake_prefix_path')
+[13.729s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/cmake_prefix_path.ps1'
+[13.729s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/cmake_prefix_path.dsv'
+[13.729s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/cmake_prefix_path.sh'
+[13.730s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib'
+[13.730s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_perception', 'ld_library_path_lib')
+[13.730s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/ld_library_path_lib.ps1'
+[13.730s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/ld_library_path_lib.dsv'
+[13.730s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/ld_library_path_lib.sh'
+[13.730s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/bin'
+[13.730s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/pkgconfig/space_perception.pc'
+[13.731s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages'
+[13.731s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_perception', 'pythonpath')
+[13.731s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/pythonpath.ps1'
+[13.731s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/pythonpath.dsv'
+[13.732s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/pythonpath.sh'
+[13.732s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/bin'
+[13.732s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.ps1'
+[13.733s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.dsv'
+[13.733s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.sh'
+[13.733s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.bash'
+[13.733s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.zsh'
+[13.733s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/colcon-core/packages/space_perception)
+[13.734s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_perception)
+[13.734s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception' for CMake module files
+[13.734s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception' for CMake config files
+[13.734s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_perception', 'cmake_prefix_path')
+[13.734s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/cmake_prefix_path.ps1'
+[13.735s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/cmake_prefix_path.dsv'
+[13.735s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/cmake_prefix_path.sh'
+[13.735s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib'
+[13.735s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_perception', 'ld_library_path_lib')
+[13.735s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/ld_library_path_lib.ps1'
+[13.735s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/ld_library_path_lib.dsv'
+[13.735s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/ld_library_path_lib.sh'
+[13.736s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/bin'
+[13.736s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/pkgconfig/space_perception.pc'
+[13.736s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages'
+[13.736s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_perception', 'pythonpath')
+[13.736s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/pythonpath.ps1'
+[13.736s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/pythonpath.dsv'
+[13.736s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/hook/pythonpath.sh'
+[13.737s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/bin'
+[13.737s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.ps1'
+[13.737s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.dsv'
+[13.737s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.sh'
+[13.737s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.bash'
+[13.738s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/space_perception/package.zsh'
+[13.738s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_perception/share/colcon-core/packages/space_perception)
+[13.738s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/kj/Desktop/space/ros2_ws/src/space_bringup' with build type 'ament_python'
+[13.738s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_bringup', 'ament_prefix_path')
+[13.738s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/hook/ament_prefix_path.ps1'
+[13.739s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/hook/ament_prefix_path.dsv'
+[13.739s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/hook/ament_prefix_path.sh'
+[13.739s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[13.739s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[13.892s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/kj/Desktop/space/ros2_ws/src/space_bringup'
+[13.892s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[13.892s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[14.306s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/kj/Desktop/space/ros2_ws/src/build/space_bringup': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:/home/kj/Desktop/space/ros2_ws/src/install/space_controller:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_controller:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_bringup/build --no-deps symlink_data
+[14.748s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_bringup', 'pythonpath_develop')
+[14.749s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_bringup/share/space_bringup/hook/pythonpath_develop.ps1'
+[14.749s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/kj/Desktop/space/ros2_ws/src/build/space_bringup' returned '0': AMENT_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:/home/kj/Desktop/space/ros2_ws/src/install/space_controller:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_perception:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs:/home/kj/Desktop/space/ros2_ws/src/install/space_description:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_gazebo/lib:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kj/Desktop/space/ros2_ws/src/build/space_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_perception/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_mission:/home/kj/Desktop/space/ros2_ws/src/install/space_mission/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_navigation:/home/kj/Desktop/space/ros2_ws/src/install/space_navigation/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_msgs/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/install/space_description/lib/python3.12/site-packages:/home/kj/Desktop/space/ros2_ws/src/build/space_controller:/home/kj/Desktop/space/ros2_ws/src/install/space_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/kj/Desktop/space/ros2_ws/src/build/space_bringup/build --no-deps symlink_data
+[14.749s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/build/space_bringup/share/space_bringup/hook/pythonpath_develop.dsv'
+[14.749s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/build/space_bringup/share/space_bringup/hook/pythonpath_develop.sh'
+[14.750s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup' for CMake module files
+[14.750s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup' for CMake config files
+[14.750s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib'
+[14.750s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/bin'
+[14.750s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/pkgconfig/space_bringup.pc'
+[14.751s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/lib/python3.12/site-packages'
+[14.751s] Level 1:colcon.colcon_core.shell:create_environment_hook('space_bringup', 'pythonpath')
+[14.751s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/hook/pythonpath.ps1'
+[14.751s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/hook/pythonpath.dsv'
+[14.751s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/hook/pythonpath.sh'
+[14.751s] Level 1:colcon.colcon_core.environment:checking '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/bin'
+[14.751s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(space_bringup)
+[14.752s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/package.ps1'
+[14.752s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/package.dsv'
+[14.752s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/package.sh'
+[14.752s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/package.bash'
+[14.753s] INFO:colcon.colcon_core.shell:Creating package script '/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/space_bringup/package.zsh'
+[14.753s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/kj/Desktop/space/ros2_ws/src/install/space_bringup/share/colcon-core/packages/space_bringup)
+[14.753s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[14.753s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[14.753s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[14.753s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[14.757s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[14.757s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[14.757s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[14.765s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[14.766s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/kj/Desktop/space/ros2_ws/src/install/local_setup.ps1'
+[14.766s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/kj/Desktop/space/ros2_ws/src/install/_local_setup_util_ps1.py'
+[14.767s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/kj/Desktop/space/ros2_ws/src/install/setup.ps1'
+[14.767s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/kj/Desktop/space/ros2_ws/src/install/local_setup.sh'
+[14.768s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/kj/Desktop/space/ros2_ws/src/install/_local_setup_util_sh.py'
+[14.768s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/kj/Desktop/space/ros2_ws/src/install/setup.sh'
+[14.769s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/kj/Desktop/space/ros2_ws/src/install/local_setup.bash'
+[14.769s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/kj/Desktop/space/ros2_ws/src/install/setup.bash'
+[14.770s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/kj/Desktop/space/ros2_ws/src/install/local_setup.zsh'
+[14.770s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/kj/Desktop/space/ros2_ws/src/install/setup.zsh'

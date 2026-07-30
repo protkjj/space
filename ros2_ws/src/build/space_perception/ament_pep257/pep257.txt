@@ -1,0 +1,30 @@
+-- run_test.py: invoking following command in '/home/kj/Desktop/space/ros2_ws/src/space_perception':
+ - /opt/ros/jazzy/bin/ament_pep257 --xunit-file /home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml
+
+checking ./launch/terrain_perception.launch.py
+checking ./setup.py
+checking ./space_perception/__init__.py
+checking ./space_perception/depth_overlay_node.py
+checking ./space_perception/latest_data.py
+checking ./space_perception/local_elevation_map_node.py
+checking ./space_perception/pointcloud_utils.py
+checking ./space_perception/terrain_feature_node.py
+checking ./space_perception/terrain_features.py
+checking ./space_perception/terrain_pointcloud_filter_node.py
+checking ./space_perception/terrain_processing.py
+checking ./space_perception/terrain_traversability_node.py
+checking ./space_perception/traversability.py
+checking ./space_perception/traversability_calibration.py
+checking ./test/__init__.py
+checking ./test/test_flake8.py
+checking ./test/test_import.py
+checking ./test/test_pep257.py
+checking ./test/test_rover_derived_thresholds.py
+checking ./test/test_terrain_features.py
+checking ./test/test_terrain_processing.py
+checking ./test/test_traversability.py
+No problems found
+
+
+-- run_test.py: return code 0
+-- run_test.py: verify result file '/home/kj/Desktop/space/ros2_ws/src/build/space_perception/test_results/space_perception/pep257.xunit.xml'
