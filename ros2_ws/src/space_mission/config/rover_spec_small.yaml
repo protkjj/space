@@ -51,10 +51,23 @@ traversability_transform:
         # translating.
         min_passable_width_m: 0.300
 
-        # base_footprint -> base_link is wheel_radius - wheel_z = 0.134 m; the
-        # chassis box is 0.10 m tall centred on base_link, so its underside
-        # sits 0.084 m above ground.
-        ground_clearance_m: 0.084
+        # MEASURED from the CAD mesh, not from the collision primitive.
+        #
+        # The collision box (0.32 x 0.26 x 0.10 centred on base_link, which sits
+        # wheel_radius - wheel_z = 0.134 m up) implies 0.084 m of clearance. The
+        # real chassis does not: sweeping every vertex of
+        # meshes/rover/rover_prototype.stl into the ground frame, the lowest
+        # chassis point is 0.03045 m up, at (x=+0.000, y=+0.132) -- a side rail
+        # near mid-length. Using the box value would claim 2.76x the clearance
+        # the vehicle actually has, and clearance is what decides whether it can
+        # straddle a rock instead of bellying out on it.
+        #
+        # Vertices within 30 mm horizontally of a wheel axle are excluded: 2984
+        # of them (746 per wheel, exactly) form the hub/motor bosses and reach
+        # 0.008 m BELOW the contact plane, being 78 mm from the axle against the
+        # wheel's own 70 mm. Terrain there is met by the tyre first, so they do
+        # not bound straddling clearance.
+        ground_clearance_m: 0.030
 
         # UNCONFIRMED. The CAD wheels read as smooth in the STL; confirm
         # against the physical Pololu 37D wheel before trusting any
@@ -69,8 +82,11 @@ traversability_transform:
           MEASURED (5 fields): wheel_radius_m and wheel_width_m from
           meshes/rover/left_front_wheel.stl, 140.000 x 40.000 mm, matching
           space_rover.urdf.xacro after the 51b34ac CAD import;
-          min_passable_width_m and ground_clearance_m computed from that same
-          xacro; mass_kg from CLAUDE.md section 0.
+          ground_clearance_m from a full vertex sweep of
+          meshes/rover/rover_prototype.stl, lowest chassis point 0.03045 m
+          (NOT the 0.084 m the collision box implies);
+          min_passable_width_m computed from the xacro wheel positions;
+          mass_kg from CLAUDE.md section 0.
           .
           NOT CONFIRMED (3 fields, distrust these):
           (1) max_climb_angle_rad -- conservative placeholder, no ramp test has
