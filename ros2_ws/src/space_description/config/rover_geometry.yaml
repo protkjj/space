@@ -1,0 +1,89 @@
+# THE single source of truth for the rover's physical dimensions.
+#
+# Read this file; do not re-type its numbers. space_rover.urdf.xacro loads it
+# with xacro.load_yaml, and the bringup launch derives every rover-dependent
+# threshold from it (nav2 footprint, perception step limit, mission RoverSpec).
+#
+# WHY THIS FILE EXISTS
+# --------------------
+# One CAD import (51b34ac, wheel radius 0.112 -> 0.070 m) invalidated four
+# values scattered across four packages, and every one of them failed silently
+# because the arithmetic downstream still succeeded:
+#   space_mission/config/slip.yaml       wheel_radius 0.112 -> slip 1.6x high
+#   space_mission slip_estimator_node.py same default, same effect
+#   space_perception TraversabilityConfig step_max 0.056 = half the OLD radius
+#   space_bringup nav2_params.yaml        footprints sized to the old chassis
+# Copying a CAD number into a config is what created each one. So: measured
+# primitives live here, and anything computable from them is COMPUTED at load
+# time, never stored.
+#
+# It lives in space_description because that package owns the rover's
+# simulator-independent physical description and depends on nothing. Putting it
+# in space_mission -- the literal reading of "the RoverSpec YAML is the source"
+# -- would make space_description depend on the mission layer to build its own
+# URDF, inverting the dependency direction. Same single source, sane layering.
+#
+# EDITING RULES
+# -------------
+# 1. Add a value here only if it was MEASURED. If it can be computed from
+#    something already here, it belongs in the derivation code, not this file.
+# 2. Record how each number was obtained, precisely enough to re-measure it.
+# 3. On the next CAD change, edit only this file and re-run the workspace tests.
+
+# --- Wheel, measured from meshes/rover/left_front_wheel.stl ----------------
+# Bounding box 140.000 mm across x 40.000 mm wide -> r = 0.070, w = 0.040.
+wheel_radius: 0.070
+wheel_width: 0.040
+
+# --- Axle centres in base_link, from the CAD assembly ----------------------
+# Asymmetric on purpose: the axles are not centred on the chassis. Their
+# midpoint (0.00875) is why the mesh visual carries that same x offset.
+front_wheel_x: 0.08375
+rear_wheel_x: -0.06625
+wheel_y: 0.11650
+wheel_z: -0.06400
+
+# --- Chassis collision primitive ------------------------------------------
+# NOT the CAD outline. A vertex sweep of rover_prototype.stl gives the real
+# body as x -0.15375..+0.15146, y +/-0.13650, z -0.14200..+0.06005 in
+# base_link. This box is 15 mm longer and 13 mm narrower than that. It is kept
+# as-is because it is what Gazebo actually collides with, and changing collision
+# geometry changes sim physics -- a separate decision from this wiring. Anything
+# that must not intersect the rover (nav2 footprint) has to cover the box AND
+# the wheels, so the derivation takes the union rather than either alone.
+base_length: 0.32
+base_width: 0.26
+base_height: 0.10
+
+# --- Chassis clearance, measured from the mesh -----------------------------
+# Lowest chassis point is 0.03045 m above the contact plane, at
+# (x=+0.000, y=+0.132). The collision box would imply 0.084 m -- 2.76x too
+# optimistic, and clearance is what decides whether the rover straddles a rock
+# or bellies out on it. Not derivable from the primitives above, so measured.
+#
+# Excludes vertices within 30 mm horizontally of an axle: 2984 of them (746 per
+# wheel, exactly) are hub and motor bosses reaching 0.008 m BELOW the contact
+# plane, 78 mm from the axle against the wheel's own 70 mm. Terrain there meets
+# the tyre first, so they do not bound straddling clearance.
+chassis_ground_clearance: 0.030
+
+# --- Mass ------------------------------------------------------------------
+# mass_total is CLAUDE.md section 0 and excludes the marker dispenser, which is
+# not yet mounted. mass_base and mass_wheel are the URDF inertial values and
+# currently sum to 1.8 + 4*0.14 = 2.36, which does NOT match mass_total.
+# Recorded rather than reconciled: making them agree changes sim dynamics, so it
+# is its own change with its own verification.
+mass_total: 3.0
+mass_base: 1.8
+mass_wheel: 0.14
+
+# --- Derivation policy constants ------------------------------------------
+# Not a dimension: the rule that turns wheel_radius into a step limit.
+# docs/traversability.md fixed it at half the wheel radius; anchoring the ratio
+# here keeps the rule visible while the radius it multiplies stays single-source.
+step_limit_per_wheel_radius: 0.5
+
+# Lateral margin added to the rover's own width to get the narrowest gap it
+# should be planned through. Skid-steer yaws while translating, so it sweeps
+# wider than its static outline.
+passable_width_margin: 0.027

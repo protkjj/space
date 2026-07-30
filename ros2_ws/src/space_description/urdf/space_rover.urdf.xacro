@@ -17,16 +17,27 @@
   <xacro:property name="rover_mesh_xyz" value="$(arg rover_mesh_xyz)"/>
   <xacro:property name="rover_mesh_rpy" value="$(arg rover_mesh_rpy)"/>
 
-  <xacro:property name="base_length" value="0.32"/>
-  <xacro:property name="base_width" value="0.26"/>
-  <xacro:property name="base_height" value="0.10"/>
-  <!-- Dimensions and axle centers measured from the complete CAD STL. -->
-  <xacro:property name="wheel_radius" value="0.070"/>
-  <xacro:property name="wheel_width" value="0.040"/>
-  <xacro:property name="front_wheel_x" value="0.08375"/>
-  <xacro:property name="rear_wheel_x" value="-0.06625"/>
-  <xacro:property name="wheel_y" value="0.11650"/>
-  <xacro:property name="wheel_z" value="-0.06400"/>
+  <!--
+    Dimensions come from config/rover_geometry.yaml, the single source of truth,
+    and are NOT written here. The last CAD import silently invalidated four
+    values across four packages because each had its own copy of the wheel
+    radius; this file consumes the source instead of duplicating it. To change a
+    dimension, edit that YAML.
+  -->
+  <xacro:property
+    name="geom"
+    value="${xacro.load_yaml('$(find space_description)/config/rover_geometry.yaml')}"/>
+  <xacro:property name="base_length" value="${geom['base_length']}"/>
+  <xacro:property name="base_width" value="${geom['base_width']}"/>
+  <xacro:property name="base_height" value="${geom['base_height']}"/>
+  <xacro:property name="wheel_radius" value="${geom['wheel_radius']}"/>
+  <xacro:property name="wheel_width" value="${geom['wheel_width']}"/>
+  <xacro:property name="front_wheel_x" value="${geom['front_wheel_x']}"/>
+  <xacro:property name="rear_wheel_x" value="${geom['rear_wheel_x']}"/>
+  <xacro:property name="wheel_y" value="${geom['wheel_y']}"/>
+  <xacro:property name="wheel_z" value="${geom['wheel_z']}"/>
+  <xacro:property name="mass_base" value="${geom['mass_base']}"/>
+  <xacro:property name="mass_wheel" value="${geom['mass_wheel']}"/>
 
   <material name="chassis_dark"><color rgba="0.10 0.12 0.14 1.0"/></material>
   <material name="wheel_gray"><color rgba="0.35 0.38 0.40 1.0"/></material>
@@ -62,7 +73,7 @@
       <geometry><box size="${base_length} ${base_width} ${base_height}"/></geometry>
     </collision>
     <inertial>
-      <mass value="1.8"/>
+      <mass value="${mass_base}"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="0.018" ixy="0" ixz="0" iyy="0.022" iyz="0" izz="0.030"/>
     </inertial>
@@ -95,7 +106,7 @@
         <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
       </collision>
       <inertial>
-        <mass value="0.14"/>
+        <mass value="${mass_wheel}"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <inertia ixx="0.00045" ixy="0" ixz="0" iyy="0.00045" iyz="0" izz="0.00045"/>
       </inertial>
