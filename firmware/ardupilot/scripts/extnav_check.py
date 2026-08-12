@@ -237,6 +237,13 @@ def main():
         print('  Set them and reboot before reading anything below as a '
               'transport result.')
 
+    # VISO_TYPE is @RebootRequired. AP_VisualOdom is initialised once at boot,
+    # so setting it and not rebooting leaves the driver null and every
+    # transform is discarded without a word. A run that reports the parameter
+    # as correct can still be measuring a vehicle that cannot receive.
+    print('\n  Note: VISO_TYPE takes effect only after a reboot. If it was')
+    print('  just changed, reboot before trusting a "no aiding" result.')
+
     print('\nwaiting for /ap/time ...')
     deadline = time.time() + 20
     while time.time() < deadline and node.ap_time is None:

@@ -37,10 +37,15 @@ sit on the command path. See the drivetrain boundary in
 [`../../docs/architecture.md`](../../docs/architecture.md). Nothing about the
 control exclusions above changes: ArduPilot remains the only writer.
 
-The RoboClaw firmware reported on the current units is `4.4.9`. Whether that
-version answers the status and encoder read commands this needs has not been
-verified against a real unit yet, and must not be assumed from the version
-number alone.
+The RoboClaw firmware reported on the current units is `4.4.9`. The BasicMicro
+manual revision 6.0 documents command 73, Read All Status, as available on
+firmware 4.3.0 and newer, and its reply carries both encoder counts and
+measured speeds for M1 and M2 in a single 74-byte response. That is everything
+wheel odometry needs from one poll rather than several.
+
+This is read from the manual, not yet from a unit. It has not been confirmed
+against the actual controllers, and the reply length and field layout must be
+checked against a live response before any parser is trusted.
 
 ## Required bench-validation checklist
 

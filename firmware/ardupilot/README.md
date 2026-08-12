@@ -259,6 +259,21 @@ Feeding requirements, all of which mattered:
 - frame ids exactly `odom` and `base_link`; the comparison is a `strcmp`, so
   a namespace prefix is silently ignored
 - send `SET_GPS_GLOBAL_ORIGIN` once so the EKF has an origin
+- **reboot after setting `VISO_TYPE`.** It is `@RebootRequired`, and
+  `AP_VisualOdom` is initialised once at boot, so without a reboot the driver
+  is null and every transform is discarded without a message. A parameter
+  readback showing the right value does not mean the vehicle can receive.
+
+### Serial link, inbound direction, measured on hardware
+
+The outbound direction of the Pixhawk 6X serial link is saturated, so the
+obvious worry was that inbound transforms would be squeezed the same way and
+miss the 20 ms spacing the EKF requires. They are not: feeding at a 20 Hz
+target delivered 750 transforms in 40 s, about 18.75 Hz.
+
+That matters because it is the difference between the indoor plan working on
+hardware and only working in simulation. The two directions had to be measured
+separately; the outbound figures say nothing about this one.
 
 **Judge this by `EKF3 IMU0 is using external nav data`**, not by pre-arm.
 That message is when aiding actually starts. Pre-arm success is later and
