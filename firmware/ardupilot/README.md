@@ -55,15 +55,35 @@ overlay, so there is nothing validated to export yet.
 - Rover mode numbers used by the adapter (`MANUAL=0`, `HOLD=4`, `GUIDED=15`)
   were read from `Rover/mode.h` at this exact revision.
 
+### ArduPilot-authoritative motion, SITL built-in model
+
+Demonstrated once, end to end, driving only `/cmd_vel_safe`:
+
+| Step | Result |
+| --- | --- |
+| `/ap/prearm_check` | `success=True`, `Vehicle is Armable` |
+| `/ap/mode_switch` to `15` | `status=True`, `curr_mode=15` |
+| `/ap/arm_motors` arm | `result=True` |
+| Drive `0.5 m/s` for 10 s | displaced 5.246 m, mean 0.403 m/s |
+| Commands ceased | 0.045 m further motion in the next 1.0 s |
+| `/ap/arm_motors` disarm | `result=True` |
+
+Position was read from ArduPilot's own `/ap/pose/filtered`, so the motion
+originated from ArduPilot's actuator output rather than from ROS driving the
+simulator directly.
+
+This used SITL's built-in `--model rover` physics. **No Gazebo was attached**,
+so this does not yet satisfy the Gazebo half of the Milestone A chain.
+
 ### Not validated
 
 None of the following has been demonstrated and none may be described as
 working:
 
-- ArduPilot-authoritative rover **motion**. The vehicle was never armed and
-  never placed in GUIDED, so no actuator output was produced.
 - The ArduPilot Gazebo plugin. It builds against Gazebo Harmonic but has not
-  been run with SITL.
+  been run with SITL, so no rover has moved in Gazebo.
+- Stop latency as a *specified* limit. A single 0.045 m residual over 1.0 s was
+  observed; no bound has been established or repeated.
 - Any TF ownership chain, odometry publisher ownership, or sensor stream.
 - Measured stop latency for stale, HOLD, EMERGENCY, or communication loss.
 - Automated launch tests.

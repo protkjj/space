@@ -133,15 +133,23 @@ Demonstrated:
   commands whose QoS matches the AP_DDS subscription measured on that build.
 - Stale commands and autopilot silence both produce zero commands.
 - The AP_DDS command, state, and service interfaces exist in the ROS graph.
+- ArduPilot-authoritative movement, driving only `/cmd_vel_safe`: pre-arm
+  check, GUIDED entry, arming, 5.2 m of travel, stopping when commands cease,
+  and disarming. Position was read from ArduPilot's own `/ap/pose/filtered`,
+  so the motion came from ArduPilot's actuator output rather than from ROS
+  driving the simulator.
+
+That run used SITL's built-in rover model with no Gazebo attached, so the
+Gazebo half of the chain above is still unproven.
 
 Not demonstrated, and not to be described as working:
 
-- ArduPilot-authoritative rover movement. Nothing has been armed and no mode
-  has been changed, so no actuator output has been produced.
-- ArduPilot Gazebo plugin integration, TF ownership, odometry ownership, and
-  sensor streams.
-- Measured stop latencies and automated launch tests.
-- Any Pixhawk 6X hardware behaviour.
+- ArduPilot Gazebo plugin integration. No rover has moved in Gazebo.
+- TF ownership, odometry ownership, and sensor streams.
+- Stop latency as a specified, repeated limit, and automated launch tests.
+- Any Pixhawk 6X hardware behaviour. The board checked so far reports no
+  `DDS_ENABLE` parameter, so its flashed firmware contains no AP_DDS and the
+  hardware transport question is still open.
 
 ### Autopilot state is not an estimator input
 
