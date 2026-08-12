@@ -1,16 +1,27 @@
 # ArduPilot version pinning
-# See README.md for provenance requirements
+# See README.md for provenance and the validation record.
+#
+# SITL and hardware are pinned separately on purpose. ArduPilot documents
+# Simulation-on-Hardware as still changing, so a SITL pin must not be assumed
+# to apply to a hardware or HILS build.
 
 [SITL]
-tag: Rover-4.6.3
-commit: 3fc7011a7d3dc047cbb17d8bd98ee94577d144c6
-status: selected, pending validation
-validated: false
+tag: Rover-4.7.0
+commit: 1511f27194f1dcc3728270883047bdf022b3fd53
+status: selected to match the firmware flashed on the target board
+validated: no
+# Re-pinned from Rover-4.6.3 once the Pixhawk 6X was found to be running
+# 4.7.0. The DDS interface measurements in README.md were taken on 4.6.3 and
+# have NOT yet been repeated on this revision.
+#
+# Toolchain note: ArduPilot 4.7 and later require the v4.7.0 branch of
+# Micro-XRCE-DDS-Gen. The v4.5.1 branch is for pre-4.7 only.
 
 [HILS / Hardware]
-# Simulation-on-Hardware may require master branch per ArduPilot docs
-# Do not use SITL pin for HILS without separate validation
 tag: UNPINNED
 commit: UNPINNED
-status: pending hardware integration
-validated: false
+status: board reports firmware 4.7.0, but the flashed build contains no
+        AP_DDS (no DDS_ENABLE parameter). A build configured with
+        --enable-dds is required before the /ap/* interface can be used on
+        hardware. No such build has been produced or flashed.
+validated: no
