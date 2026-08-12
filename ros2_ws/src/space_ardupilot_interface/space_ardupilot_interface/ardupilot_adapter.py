@@ -161,6 +161,11 @@ class AdapterPolicy:
         self.command_state = CommandState.NEVER_COMMANDED
         self.link_state = LinkState.NEVER_SEEN
 
+        # Whether the most recent accepted command asked for motion at all.
+        # A zero command is a stop, not an intent to drive, and upstream
+        # safety publishes zeros continuously while held or stopped.
+        self.command_is_motion = False
+
         # Reported vehicle state. None means the build does not publish it,
         # which is not the same as knowing the vehicle is disarmed.
         self.armed: Optional[bool] = None
@@ -178,6 +183,7 @@ class AdapterPolicy:
         self._angular_z = angular_z
         self._last_command_ns = now_ns
         self.command_state = CommandState.FRESH
+        self.command_is_motion = linear_x != 0.0 or angular_z != 0.0
         return True
 
     def note_vehicle_state(
@@ -409,6 +415,7 @@ class ArduPilotAdapter(Node):
         self._prep_step = PrepStep.IDLE
         self._pending_future = None
         self._pending_step = None
+        self._pending_since_ns = 0
         self._next_prep_ns = 0
         self._prep_retry_ns = _positive_seconds(
             'service_timeout_sec', self._service_timeout_sec
@@ -464,22 +471,45 @@ class ArduPilotAdapter(Node):
 
     def _begin(self, step, client, request) -> None:
         """Start one step of the arming sequence, if its service is up."""
-        if client is None or not client.service_is_ready():
+        if client is None:
+            return
+        if not client.service_is_ready():
+            # Throttled so a wrong service name is visible rather than
+            # looking like the sequence simply never starting.
+            self.get_logger().warn(
+                f'Waiting for the {step.value} service', throttle_duration_sec=5.0
+            )
             return
         self._pending_step = step
         self._pending_future = client.call_async(request)
+        self._pending_since_ns = self._now_ns()
 
     def _collect(self) -> None:
         """Apply the result of a completed step, or time it out."""
         future = self._pending_future
-        if future is None or not future.done():
+        if future is None:
+            return
+
+        now_ns = self._now_ns()
+        if not future.done():
+            # Without this the sequence stalls forever if the autopilot dies
+            # mid-call: the future never completes, and every later pass
+            # returns early because a call is still outstanding.
+            if now_ns - self._pending_since_ns > self._prep_retry_ns:
+                self.get_logger().warn(
+                    f'{self._pending_step.value} did not respond in '
+                    f'{self._service_timeout_sec:.1f}s; retrying'
+                )
+                future.cancel()
+                self._pending_future = None
+                self._pending_step = None
+                self._next_prep_ns = now_ns + self._prep_retry_ns
             return
 
         step = self._pending_step
         self._pending_future = None
         self._pending_step = None
         result = future.result()
-        now_ns = self._now_ns()
 
         if result is None:
             self.get_logger().warn(f'{step.value}: no response')
@@ -551,7 +581,14 @@ class ArduPilotAdapter(Node):
                 self._prep_step = PrepStep.IDLE
             return
 
-        if self._policy.command_state != CommandState.FRESH:
+        # Arm only on an actual request to move. `space_controller` publishes
+        # zero commands continuously while the rover is held, stopped, or in
+        # EMERGENCY, and those are as fresh as any other message. Gating on
+        # freshness alone would arm the vehicle while an operator is holding
+        # it stopped, which is a real change of state even though the wheels
+        # would not turn.
+        if not (self._policy.command_state == CommandState.FRESH
+                and self._policy.command_is_motion):
             return
         now_ns = self._now_ns()
         if now_ns < self._next_prep_ns:

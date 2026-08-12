@@ -146,9 +146,15 @@ void TraversabilityLayer::matchSize()
 bool TraversabilityLayer::validateSchema(
   const sensor_msgs::msg::PointCloud2 & message) const
 {
-  if (message.point_step == 0U ||
-    message.data.size() < static_cast<std::size_t>(message.row_step) * message.height)
-  {
+  // Bound the buffer the way it is actually read. The point loop indexes
+  // width * height points at point_step each, so checking row_step * height
+  // does not cover it: a message with row_step 0 passes this check and then
+  // reads past the end of data.
+  const auto required_bytes =
+    static_cast<std::size_t>(message.width) *
+    static_cast<std::size_t>(message.height) *
+    static_cast<std::size_t>(message.point_step);
+  if (message.point_step == 0U || message.data.size() < required_bytes) {
     return false;
   }
   for (const auto & required : REQUIRED_FIELDS) {

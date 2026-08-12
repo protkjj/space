@@ -103,6 +103,29 @@ def test_periodic_zero_while_stale():
 
 
 @pytest.mark.parametrize('mode', [DriveMode.HOLD, DriveMode.EMERGENCY])
+def test_driving_commands_are_rejected_in_non_driving_modes(mode):
+    # This is what the node exists for: in a stopping mode a driving command
+    # must not reach the backend, however fresh or well-formed it is.
+    policy = make_policy()
+    policy.change_mode(mode, 0)
+    decision = policy.accept_command(0.3, 0.4, SECOND)
+    assert not decision.publish
+    assert decision.linear_x == 0.0
+    assert decision.angular_z == 0.0
+
+
+@pytest.mark.parametrize('mode', [DriveMode.HOLD, DriveMode.EMERGENCY])
+def test_rejected_command_does_not_refresh_the_watchdog(mode):
+    # A command that was refused must not look like activity, or a stream of
+    # rejected commands would hold the stop-publication timer off.
+    policy = make_policy()
+    policy.change_mode(mode, 0)
+    policy.accept_command(0.3, 0.0, SECOND)
+    assert policy.state != SafetyState.NORMAL
+    assert policy.evaluate_watchdog(SECOND + int(0.3 * SECOND)).publish_stop
+
+
+@pytest.mark.parametrize('mode', [DriveMode.HOLD, DriveMode.EMERGENCY])
 def test_periodic_zero_while_non_driving_mode_remains_active(mode):
     policy = make_policy()
     transition = policy.change_mode(mode, 10)

@@ -222,6 +222,33 @@ def test_lost_link_is_reported_as_a_blocker():
     assert 'autopilot link lost' in policy.command_blockers()
 
 
+def test_zero_command_is_not_an_intent_to_move():
+    policy = make_policy()
+    # space_controller publishes zero commands continuously while the rover
+    # is held, stopped, or in EMERGENCY. Those are fresh, but they are stops.
+    assert policy.accept_command(0.0, 0.0, SECOND)
+    assert policy.command_state == CommandState.FRESH
+    assert not policy.command_is_motion
+
+
+@pytest.mark.parametrize(
+    'linear_x,angular_z',
+    [(0.3, 0.0), (0.0, 0.4), (-0.2, 0.0), (0.0, -0.5)],
+)
+def test_non_zero_command_is_an_intent_to_move(linear_x, angular_z):
+    policy = make_policy()
+    assert policy.accept_command(linear_x, angular_z, SECOND)
+    assert policy.command_is_motion
+
+
+def test_motion_intent_clears_when_a_stop_follows():
+    policy = make_policy()
+    policy.accept_command(0.3, 0.0, SECOND)
+    assert policy.command_is_motion
+    policy.accept_command(0.0, 0.0, 2 * SECOND)
+    assert not policy.command_is_motion
+
+
 def test_status_fields_persist_across_partial_updates():
     policy = make_policy()
     policy.note_vehicle_state(
