@@ -15,15 +15,22 @@ space_ardupilot_adapter:
     # subscribed by the ArduPilot DDS client.
     output_topic: /ap/cmd_vel
 
-    # Preferred vehicle-state source. measured on Rover-4.7.0:
-    # ardupilot_msgs/msg/Status, carrying armed, mode, external_control and
-    # failsafe, and no pose at all. Used when ardupilot_msgs provides Status.
+    # Liveness heartbeat. measured: builtin_interfaces/msg/Time, RELIABLE.
+    # This is separate from the state topic on purpose. On a Pixhawk 6X over
+    # USB serial, /ap/status was measured at 0 Hz while /ap/time kept arriving
+    # at about 64 Hz. Using the state topic for liveness would make the node
+    # declare the link lost on hardware and stop the rover permanently.
+    liveness_topic: /ap/time
+
+    # Vehicle state. measured on Rover-4.7.0: ardupilot_msgs/msg/Status,
+    # RELIABLE, carrying armed, mode, external_control and failsafe, and no
+    # pose at all. Arrival also refreshes liveness when it does come through.
     status_topic: /ap/status
 
     # Fallback for builds older than ArduPilot 4.7, which publish no status
     # topic. Used as a liveness heartbeat only: the node keeps the arrival
     # time and discards the contents. See ardupilot_adapter.py.
-    # measured: geometry_msgs/msg/PoseStamped.
+    # measured: geometry_msgs/msg/PoseStamped, BEST_EFFORT.
     vehicle_state_topic: /ap/pose/filtered
 
     # measured: these three services exist on the pinned build.

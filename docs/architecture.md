@@ -173,11 +173,22 @@ like it did.
 
 With the timestamp corrected and the odometry moving, pre-arm passed once
 (`Vehicle is Armable`) and then did not repeat. That single pass shows the EKF
-**can** accept external navigation without GPS; the lack of repeats shows the
-synthetic feed used was not good enough to rely on. GPS-denied operation is
-therefore neither demonstrated nor ruled out, and no claim should be made for
-either the DDS-only or a MAVLink-assisted indoor path until a real estimate
-from the camera and IMU exists. Measurements are in
+**can** accept external navigation without GPS. The non-reproducibility is a
+timing problem: samples must land inside the EKF's fusion horizon, and AP_DDS
+performs no jitter correction, so whether a run succeeds depends on an offset
+nothing controls. `/ap/clock`, which that approach stamps from, was also
+measured at 0 Hz on the Pixhawk 6X over serial, so it cannot be reproduced on
+the target hardware as written.
+
+Wheel odometry sidesteps that class of problem entirely, because ArduPilot
+stamps encoder data on its own clock. The rover already has encoders. It is
+a velocity source only (`EK3_SRC1_VELXY = 7` with `EK3_SRC1_POSXY = 0`), so
+it dead-reckons a relative position rather than an absolute one, which the
+existing `odom`-anchored navigation stack is already built around.
+
+GPS-denied operation remains neither demonstrated nor ruled out, and no claim
+should be made for any indoor path until one is shown to hold steadily enough
+to arm and drive. Measurements are in
 [`../firmware/ardupilot/README.md`](../firmware/ardupilot/README.md).
 
 ### Autopilot state is not an estimator input

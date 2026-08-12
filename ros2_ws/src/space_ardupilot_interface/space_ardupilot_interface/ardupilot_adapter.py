@@ -35,6 +35,7 @@ from enum import Enum, IntEnum
 import math
 from typing import Optional
 
+from builtin_interfaces.msg import Time as TimeMsg
 from geometry_msgs.msg import PoseStamped, Twist, TwistStamped
 import rclpy
 from rclpy.node import Node
@@ -292,6 +293,7 @@ class ArduPilotAdapter(Node):
 
         self.declare_parameter('input_topic', '/cmd_vel_safe')
         self.declare_parameter('output_topic', '/ap/cmd_vel')
+        self.declare_parameter('liveness_topic', '/ap/time')
         self.declare_parameter('status_topic', '/ap/status')
         self.declare_parameter('vehicle_state_topic', '/ap/pose/filtered')
         self.declare_parameter('arm_service', '/ap/arm_motors')
@@ -310,6 +312,9 @@ class ArduPilotAdapter(Node):
         )
         self._output_topic = _non_empty(
             'output_topic', self.get_parameter('output_topic').value
+        )
+        self._liveness_topic = _non_empty(
+            'liveness_topic', self.get_parameter('liveness_topic').value
         )
         self._status_topic = _non_empty(
             'status_topic', self.get_parameter('status_topic').value
@@ -366,17 +371,29 @@ class ArduPilotAdapter(Node):
         self.create_subscription(
             Twist, self._input_topic, self._on_command, 10
         )
-        # Prefer the status topic, which reports arm state and mode and
-        # carries no pose. Builds older than ArduPilot 4.7 do not publish it,
-        # so fall back to a pose topic used purely as a liveness heartbeat.
-        # Status is subscribed RELIABLE to match its publisher: an arm-state
-        # or failsafe transition is exactly the message that must not be
-        # dropped, and the topic publishes at only 2 Hz when nothing changes.
+        # Liveness and vehicle state come from different topics on purpose.
+        #
+        # /ap/status carries arm state and mode, but it was measured at 0 Hz
+        # on a Pixhawk 6X over the USB serial transport while /ap/time kept
+        # arriving at ~64 Hz, even though both are published on the same XRCE
+        # reliable stream. Using /ap/status for liveness would therefore make
+        # the adapter declare the link lost on hardware and publish stop
+        # commands forever, which never appears in SITL because DDS over UDP
+        # delivers everything.
+        #
+        # So: liveness from a topic that is known to keep flowing, state from
+        # /ap/status when it arrives. Either refreshes liveness; only status
+        # supplies arm state and mode.
+        self.create_subscription(
+            TimeMsg, self._liveness_topic, self._on_liveness, reliable_qos
+        )
+        self._state_source = f'{self._liveness_topic} (liveness)'
+
         if STATUS_MSG_AVAILABLE:
             self.create_subscription(
                 Status, self._status_topic, self._on_status, reliable_qos
             )
-            self._state_source = self._status_topic
+            self._state_source += f', {self._status_topic} (state)'
         else:
             self.create_subscription(
                 PoseStamped,
@@ -384,7 +401,7 @@ class ArduPilotAdapter(Node):
                 self._on_vehicle_state,
                 best_effort_qos,
             )
-            self._state_source = f'{self._state_topic} (liveness only)'
+            self._state_source += f', {self._state_topic} (liveness only)'
 
         self._arm_client = None
         self._mode_client = None
@@ -562,6 +579,17 @@ class ArduPilotAdapter(Node):
             self.get_logger().warn(
                 'Rejected command with non-finite velocity component'
             )
+
+    def _on_liveness(self, message) -> None:
+        """
+        Note that the autopilot is alive.
+
+        Contents are discarded; only arrival matters. This is the topic that
+        keeps flowing on the serial transport when the state topic does not.
+        """
+        del message
+        if self._policy.note_vehicle_state(self._now_ns()):
+            self.get_logger().info('Autopilot link recovered')
 
     def _on_status(self, message) -> None:
         """Record arm state, mode, and external-control state."""

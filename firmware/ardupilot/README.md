@@ -167,21 +167,50 @@ Repeating with correctly stamped, moving odometry changed the result:
 | 3 | `Vehicle is Not Armable` | refused |
 
 Pre-arm passing even once matters: it means the EKF **can** accept external
-navigation as a position source with no GPS. It is not reproducible with the
-odometry used here, which was synthetic — constant velocity along one axis,
-no rotation, and reported with zero position and angle error.
+navigation as a position source with no GPS.
+
+**The non-reproducibility is timing, not data content.** An earlier revision of
+this record guessed that ArduPilot rejects a static or constant-velocity feed.
+That guess has no basis in the code: `AP_VisualOdom_Backend::healthy()` only
+checks that something arrived within 300 ms, and nothing inspects the motion.
+The actual gates a sample must pass are:
+
+| Stage | Where | Drops the sample when |
+| --- | --- | --- |
+| Frame filter | `AP_DDS_External_Odom.cpp` | frame is not exactly `odom` to `base_link` |
+| EKF buffer write | `AP_NavEKF3_Measurements.cpp` | under 20 ms since the last sample, by sender stamp, or states not initialised |
+| Fusion recall | `AP_NavEKF3_PosVelFusion.cpp` | the stamp misses the fusion horizon, which trails the present by the EKF delay |
+| Aiding start | `AP_NavEKF3_Control.cpp` | source is not EXTNAV, or tilt alignment is incomplete |
+
+Stamping from `/ap/clock` and extrapolating locally leaves a per-run offset
+between when the clock was sampled and when ArduPilot receives the transform.
+`AP_DDS_External_Odom.cpp` carries a TODO acknowledging it performs no jitter
+correction, so nothing absorbs that offset. Whether a run lands inside the
+fusion horizon is therefore luck, which is exactly the "passes once, then
+does not" behaviour observed.
+
+**Watch for `EKF3 IMU0 is using external nav data`.** That message, emitted
+from `AP_NavEKF3_Control.cpp`, is the point at which aiding actually starts.
+Pre-arm success is a weaker and later signal; if that message never appears,
+aiding never began. It was not captured during these runs.
+
+**`/ap/clock` does not reach the companion computer over serial.** It was
+measured at 0 Hz on the Pixhawk 6X while `/ap/time` arrived at about 64 Hz,
+so the clock-stamping approach used here cannot be reproduced on hardware as
+written.
 
 So the honest state is: **GPS-denied operation is neither demonstrated nor
-ruled out.** The frame names are right (`odom` to `base_link`, compared
-exactly), the transport works, `AP_VisualOdom` is compiled into both the SITL
-and Pixhawk 6X builds, and the estimate has been accepted at least once. What
-has not been shown is that it holds steadily enough to arm and drive. Settling
-it requires a real estimate from the camera and IMU, not a synthetic one, and
-that work has not started.
+ruled out**, and the approach tested has a known timing weakness plus a
+transport problem on the target hardware.
 
-Also worth carrying forward: a frozen transform and a moving one are different
-signals to ArduPilot's visual-odometry handling. Do not test this path with a
-placeholder that never changes.
+Wheel odometry avoids that whole class of problem, because ArduPilot stamps
+encoder data on its own clock and none of the buffer or recall races apply.
+Note that `EK3_SRC1_POSXY = 7` is **invalid** — `AP_NavEKF_Source` rejects it
+and pre-arm reports `Check EK3_SRC1_POSXY`. Wheel encoders are a velocity
+source only, so the configuration is `EK3_SRC1_VELXY = 7` with
+`EK3_SRC1_POSXY = 0`, which dead-reckons position and gives a relative
+estimate. `EK3_SRC1_POSZ = 1` is not implicated in any of this; height and
+horizontal sources are independent.
 
 ### Hardware bring-up, Pixhawk 6X over USB serial
 
