@@ -23,11 +23,27 @@ validated: command path only
 # Micro-XRCE-DDS-Gen. The v4.5.1 branch is for pre-4.7 only, and mixing them
 # fails during IDL generation rather than at configure time.
 
-[HILS / Hardware]
+[Hardware]
+tag: Rover-4.7.0
+commit: 1511f27194f1dcc3728270883047bdf022b3fd53
+status: built from the SITL pin with --enable-DDS and flashed to the board
+validated: DDS interface only
+# The board originally ran a stock 4.7.0 build with no AP_DDS, so it had no
+# DDS_ENABLE parameter. A Pixhawk6X build was produced from the pinned commit
+# and flashed. board_id 53 matched the bootloader's reported ID.
+#
+# Confirmed on the board after flashing: the XRCE agent attaches over the
+# second USB CDC interface (SERIAL8/OTG2, protocol 45) and the same 18 /ap/*
+# topics as SITL appear in the ROS graph, with the adapter publishing to
+# /ap/cmd_vel and AP_DDS subscribing.
+#
+# Not confirmed: arming, any motion, and any drivetrain behaviour. Arming is
+# blocked by first-time vehicle commissioning, not by this build. See
+# README.md for the exact pre-arm messages the board reported.
+
+[HILS]
 tag: UNPINNED
 commit: UNPINNED
-status: board reports firmware 4.7.0, but the flashed build contains no
-        AP_DDS (no DDS_ENABLE parameter). A build configured with
-        --enable-dds is required before the /ap/* interface can be used on
-        hardware. No such build has been produced or flashed.
+status: Simulation-on-Hardware not attempted; ArduPilot documents it as still
+        changing, so it is pinned separately from both of the above
 validated: no

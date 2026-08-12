@@ -6,16 +6,18 @@ configuration exports, and reproducible export/validation procedures.
 
 ## Current status
 
-[`version.txt`](version.txt) pins a **SITL** target only:
+[`version.txt`](version.txt) pins three targets separately:
 
 | Target | Value | Validated |
 | --- | --- | --- |
-| SITL | `Rover-4.7.0` @ `1511f27194f1dcc3728270883047bdf022b3fd53` | command path only, see below |
-| HILS / hardware | `UNPINNED` | no |
+| SITL | `Rover-4.7.0` @ `1511f271` | command path and motion, see below |
+| Hardware | `Rover-4.7.0` @ `1511f271`, built `--enable-DDS` | DDS interface only |
+| HILS | `UNPINNED` | not attempted |
 
-The SITL and hardware pins are deliberately separate. ArduPilot documents
-Simulation-on-Hardware as still changing, so the SITL pin must not be assumed
-to apply to a hardware or HILS build.
+SITL and hardware currently run the same commit, but they stay separately
+pinned: the hardware image is a local build rather than a release binary, and
+ArduPilot documents Simulation-on-Hardware as still changing, so neither pin
+should be assumed to carry over to the others.
 
 No Pixhawk or SITL `.param` export exists. Do not create a parameter file by
 copying assumed defaults or inventing values. Rover SITL was started from
