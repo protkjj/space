@@ -10,7 +10,7 @@ configuration exports, and reproducible export/validation procedures.
 
 | Target | Value | Validated |
 | --- | --- | --- |
-| SITL | `Rover-4.6.3` @ `3fc7011a7d3dc047cbb17d8bd98ee94577d144c6` | partially, see below |
+| SITL | `Rover-4.7.0` @ `1511f27194f1dcc3728270883047bdf022b3fd53` | command path only, see below |
 | HILS / hardware | `UNPINNED` | no |
 
 The SITL and hardware pins are deliberately separate. ArduPilot documents
@@ -101,6 +101,44 @@ upstream commands cease is therefore about 0.7 m at 0.5 m/s.
 position quantisation makes the instantaneous-speed tail noisy enough that the
 exact stop instant is uncertain. It must be repeated, on the pinned revision,
 before any bound is claimed.
+
+### GPS-denied arming, measured on Rover-4.7.0 SITL
+
+The indoor arena has no GPS, so this was tested rather than assumed. GPS was
+disabled (`SIM_GPS1_ENABLE=0`, `GPS1_TYPE=0`), EKF sources were set to external
+navigation (`EK3_SRC1_POSXY=6`, `EK3_SRC1_VELXY=6`, `EK3_SRC1_YAW=6`,
+`VISO_TYPE=1`), and the vehicle was restarted.
+
+| Attempt | Result |
+| --- | --- |
+| Mode switch to GUIDED | **accepted**, `curr_mode=15` |
+| `/ap/prearm_check` | `Vehicle is Not Armable` |
+| Arm, no external odometry | refused, `Arm: AHRS: waiting for home` |
+| Arm, `/ap/tf` fed 20 s | refused, `Arm: AHRS: waiting for home` |
+| `SET_GPS_GLOBAL_ORIGIN` | accepted, `EKF3 IMU0 origin set` |
+| Arm after origin set | refused, `Arm: AHRS: waiting for home` |
+| `MAV_CMD_DO_SET_HOME` | accepted, `Set HOME to -35.36326 149.1652` |
+| Arm after home set | **still refused** |
+
+Two things this establishes:
+
+- **Entering GUIDED proves nothing.** The mode switch succeeded in every case,
+  including cases where the vehicle could not arm and could not move. Any test
+  that stops at mode entry will report success for a rover that cannot drive.
+- Setting the EKF origin and home is **not sufficient** for GPS-denied arming
+  on this build, contrary to what a reading of the origin-setting workaround
+  would suggest.
+
+What this does **not** establish: that GPS-denied operation is impossible. The
+external odometry fed on `/ap/tf` during this test was a static transform with
+a fixed translation. A real visual-inertial estimate moves and updates, and
+ArduPilot's visual-odometry health checks may reject a static feed that a live
+one would satisfy. The cause of the refusal was not isolated: it is not known
+whether the transforms reached `AP_VisualOdom`, nor whether the EKF ever
+accepted external navigation as a position source.
+
+Deciding between the DDS-only architecture and a MAVLink/MAVROS path indoors
+requires repeating this with a real odometry source, not with this placeholder.
 
 ### Pixhawk 6X firmware build
 

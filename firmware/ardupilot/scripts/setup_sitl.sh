@@ -107,10 +107,15 @@ fi
 
 # ------------------------------------------------------------------- XRCE agent
 
+# The executable name depends on how the agent was installed. The snap
+# publishes `micro-xrce-dds-agent`; other packagings publish `MicroXRCEAgent`.
+# Both were observed across this project's machines, so check for either.
 if command -v MicroXRCEAgent >/dev/null 2>&1; then
-    ok "MicroXRCEAgent found"
+    ok "XRCE agent found as MicroXRCEAgent"
+elif command -v micro-xrce-dds-agent >/dev/null 2>&1; then
+    ok "XRCE agent found as micro-xrce-dds-agent (snap)"
 else
-    fail "MicroXRCEAgent not on PATH"
+    fail "no XRCE agent on PATH (MicroXRCEAgent or micro-xrce-dds-agent)"
     echo "      sudo snap install micro-xrce-dds-agent --edge"
 fi
 

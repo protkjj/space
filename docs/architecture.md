@@ -151,6 +151,25 @@ Not demonstrated, and not to be described as working:
   `DDS_ENABLE` parameter, so its flashed firmware contains no AP_DDS and the
   hardware transport question is still open.
 
+### GPS-denied operation is unresolved
+
+The competition arena is indoors. Rover SITL at the pinned revision, with GPS
+disabled and EKF sources set to external navigation, **refused to arm**:
+`Arm: AHRS: waiting for home`. Setting the EKF origin with
+`SET_GPS_GLOBAL_ORIGIN` and setting home with `MAV_CMD_DO_SET_HOME` both
+succeeded and neither changed the refusal.
+
+Mode entry is not evidence here. GUIDED was accepted in every one of those
+attempts, including the ones where the vehicle could not arm and did not move.
+
+The external odometry used in that test was a static placeholder transform, so
+the refusal is not yet attributable. It may be the vehicle rejecting
+GPS-denied arming, or it may be the visual-odometry health check correctly
+rejecting a feed that never moves. Until a real estimate is available from the
+camera and IMU, the indoor architecture is undecided, and no claim should be
+made that either the DDS-only or a MAVLink-assisted path works indoors.
+Measurements are in [`../firmware/ardupilot/README.md`](../firmware/ardupilot/README.md).
+
 ### Autopilot state is not an estimator input
 
 The adapter subscribes to ArduPilot state only to detect communication loss and
