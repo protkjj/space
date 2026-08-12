@@ -85,7 +85,73 @@ def parse_args():
                         default=DEFAULT_ADDRESS)
     parser.add_argument('--seconds', type=float, default=8.0,
                         help='how long to stream encoder counts')
+    parser.add_argument('--cpr', action='store_true',
+                        help='measure counts per revolution instead')
     return parser.parse_args()
+
+
+def measure_cpr(port, address):
+    """
+    Measure counts per output revolution against a hand-turned wheel.
+
+    Every distance, speed and slip figure scales with this number, and so far
+    it has only been taken from a datasheet. Turning several revolutions and
+    dividing keeps the error from marking the start and stop position small:
+    at five turns a quarter-turn of misalignment is a 5% error, at one turn it
+    is 25%.
+    """
+    def counts():
+        request, reply = exchange(
+            port, CMD_GET_ENCODERS, address,
+            expected_reply_length(CMD_GET_ENCODERS) - 2)
+        return parse_encoders(request, reply)
+
+    print('\n--- counts per revolution ---')
+    print('  Mark the wheel and the chassis so the same alignment can be')
+    print('  found again. Turn whole revolutions only.')
+
+    start = counts()
+    if start is None:
+        print('  no verified reply; cannot measure')
+        return 1
+    print(f'\n  start: {start[0]} and {start[1]}')
+    input('  Align the mark, then press Enter to begin')
+    start = counts()
+
+    input('  Turn the wheel, stop at the same alignment, then press Enter')
+    end = counts()
+    if end is None:
+        print('  no verified reply; cannot measure')
+        return 1
+
+    try:
+        turns = float(input('  How many whole revolutions? '))
+    except ValueError:
+        print('  not a number')
+        return 1
+    if turns <= 0:
+        print('  revolutions must be greater than zero')
+        return 1
+
+    print(f'\n  end: {end[0]} and {end[1]}')
+    for index, label in ((0, 'encoder 1'), (1, 'encoder 2')):
+        delta = end[index] - start[index]
+        if delta == 0:
+            print(f'  {label}: did not move')
+            continue
+        measured = abs(delta) / turns
+        direction = 'forward' if delta > 0 else 'BACKWARD'
+        error = 100.0 * (measured - 6400.0) / 6400.0
+        print(f'  {label}: {delta:+d} counts over {turns:g} turns '
+              f'= {measured:.0f} per revolution, {error:+.1f}% against 6400, '
+              f'counting {direction}')
+
+    print('\n  If this differs from 6400 by more than a couple of percent,')
+    print('  the datasheet figure is wrong for this build and every distance')
+    print('  and speed derived from it is off by the same proportion.')
+    print('  If a wheel counts BACKWARD when turned forward, that side needs')
+    print('  its sign inverted before the odometry is believed.')
+    return 0
 
 
 def exchange(port, command, address, payload_bytes):
@@ -213,6 +279,8 @@ def main():
             print('\nNo reply to the simplest read. Nothing below will work.')
             print('Check the device, the baud rate, and the address.')
             return 1
+        if args.cpr:
+            return measure_cpr(port, args.address)
         good, bad = probe_encoders(port, args.address, args.seconds)
         probe_speeds(port, args.address)
         probe_status(port, args.address)
