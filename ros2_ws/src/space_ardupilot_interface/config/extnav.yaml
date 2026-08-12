@@ -1,0 +1,59 @@
+# External navigation publisher.
+#
+# Turns wheel-encoder counts into the odom -> base_link transform ArduPilot
+# consumes on /ap/tf, which is what lets the rover navigate with no GPS.
+#
+# Values marked "measured" come from the built rover or from a live autopilot;
+# see firmware/ardupilot/README.md for the measurements and for why each of
+# the timing constraints below exists.
+
+space_extnav_publisher:
+  ros__parameters:
+    # Encoder counts as [left, right]. Published by whatever reads the motor
+    # controller; the reader is deliberately a separate node so that a failure
+    # to read degrades the estimate and never the ability to stop.
+    counts_topic: /wheel_counts
+
+    # measured: ArduPilot's own time base. /ap/clock carries the same time but
+    # was measured at 0 Hz over the serial link, so it cannot be the source.
+    time_topic: /ap/time
+
+    tf_topic: /ap/tf
+    odom_topic: /wheel_odom
+
+    # AP_DDS compares these with strcmp, so anything else, including a
+    # namespace prefix, is ignored in silence. The node refuses to start if
+    # they are changed.
+    odom_frame: odom
+    base_frame: base_link
+
+    # measured from the built rover, not from CAD. The radius scales every
+    # distance and the track width scales every turn.
+    wheel_radius_m: 0.060
+    track_width_m: 0.225
+
+    # 64 CPR at the motor through 100:1 gearing.
+    counts_per_revolution: 6400.0
+
+    # Faster than the drivetrain can turn means a dropped or corrupted packet,
+    # not motion. unvalidated: set from the motor's no-load speed, not
+    # measured on the rover.
+    max_wheel_speed_mps: 1.0
+
+    # measured: 20 Hz was carried by the serial link inbound at about
+    # 18.75 Hz, with no samples lost to the spacing rule.
+    publish_rate_hz: 20.0
+
+    # Stamp slightly behind the autopilot's clock so samples land behind the
+    # EKF's fusion horizon rather than ahead of it. unvalidated as an optimum;
+    # this value worked, a sweep of others was not conclusive.
+    stamp_lag_sec: 0.05
+
+    # measured: the EKF discards samples closer together than this, judged on
+    # the sender's stamp.
+    min_stamp_gap_sec: 0.020
+
+    # Stop feeding rather than repeat a frozen pose. A repeated pose tells the
+    # EKF the rover is stationary, which is a claim; stopping is an absence of
+    # one, and ArduPilot reports it as VisOdom not healthy.
+    counts_timeout_sec: 0.5

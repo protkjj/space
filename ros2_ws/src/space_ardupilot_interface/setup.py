@@ -26,6 +26,7 @@ setup(
     entry_points={
         'console_scripts': [
             'ardupilot_adapter = space_ardupilot_interface.ardupilot_adapter:main',
+            'extnav_publisher = space_ardupilot_interface.extnav_publisher:main',
         ],
     },
 )
