@@ -37,15 +37,34 @@ sit on the command path. See the drivetrain boundary in
 [`../../docs/architecture.md`](../../docs/architecture.md). Nothing about the
 control exclusions above changes: ArduPilot remains the only writer.
 
-The RoboClaw firmware reported on the current units is `4.4.9`. The BasicMicro
-manual revision 6.0 documents command 73, Read All Status, as available on
-firmware 4.3.0 and newer, and its reply carries both encoder counts and
-measured speeds for M1 and M2 in a single 74-byte response. That is everything
-wheel odometry needs from one poll rather than several.
+### Reading encoders
 
-This is read from the manual, not yet from a unit. It has not been confirmed
-against the actual controllers, and the reply length and field layout must be
-checked against a live response before any parser is trusted.
+The firmware reported on the current units is `4.4.9`.
+
+**Wheel odometry needs command 78, `GETENCODERS`, and nothing else.** The
+request is two bytes and the reply is ten: two 32-bit counts and a CRC16. That
+command appears in every manual revision and in both the legacy and current
+libraries, so there is no version risk attached to it.
+
+Command 73, `Read All Status`, is a bandwidth optimisation rather than a
+capability. The manual says so directly, immediately after its specification:
+it consolidates data otherwise available from the individual status commands,
+including the encoders from 78. Its reply is 58 bytes, 56 of payload plus a
+CRC16. Using it saves round trips when several values are wanted at once; it
+contributes no data that 78 and its siblings do not already provide.
+
+An earlier note here said 73 was the command wheel odometry depended on, and
+gave its reply as 74 bytes. Both were wrong. The path does not hinge on 73
+being present.
+
+BasicMicro's own ROS 2 driver calls `GetStatus(73)` in a hardware test and
+states its validation hardware as "USB Roboclaw 2x15a v4.4.2 or newer", which
+covers these units, so 73 is very likely available as well.
+
+None of this has been confirmed against a unit. Reply lengths and field
+layouts must be checked against a live response before any parser is trusted,
+because a misread count does not fail loudly — it produces a plausible pose
+that is quietly wrong.
 
 ## Required bench-validation checklist
 

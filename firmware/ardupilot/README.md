@@ -264,16 +264,41 @@ Feeding requirements, all of which mattered:
   is null and every transform is discarded without a message. A parameter
   readback showing the right value does not mean the vehicle can receive.
 
-### Serial link, inbound direction, measured on hardware
+### GPS-denied external navigation, confirmed on the Pixhawk 6X
 
-The outbound direction of the Pixhawk 6X serial link is saturated, so the
-obvious worry was that inbound transforms would be squeezed the same way and
-miss the 20 ms spacing the EKF requires. They are not: feeding at a 20 Hz
-target delivered 750 transforms in 40 s, about 18.75 Hz.
+Everything above was SITL. Repeating it on the board:
 
-That matters because it is the difference between the indoor plan working on
-hardware and only working in simulation. The two directions had to be measured
-separately; the outbound figures say nothing about this one.
+```text
+transforms published : 1136 over 60 s   (18.9 Hz against a 20 Hz target)
+skipped for spacing  : 0
+/ap/time received    : 5093             (85 Hz)
+aiding started       : yes
+aiding stopped again : no
+
+EKF3 IMU0 is using external nav data
+EKF3 IMU1 is using external nav data
+Set HOME to -35.36326 149.1652 at 584.10m
+```
+
+Both EKF cores attached and held for the full minute without dropping, and
+`AHRS: waiting for home` no longer appears. The serial link carries external
+odometry inbound: not one sample was lost to the 20 ms spacing rule, even
+though the same link is saturated in the outbound direction with `/ap/clock`
+and `/ap/status` at 0 Hz. The two directions had to be measured separately;
+the outbound figures said nothing about this one.
+
+Arming is still refused, but only by vehicle commissioning: safety switch,
+accelerometer calibration, compass calibration, and battery health. Nothing
+remaining points at the software path.
+
+**`PreArm: VisOdom: out of memory` is a misleading message.** It appeared
+throughout the failed attempts while free memory was 542 KB, which is ample
+for an object of this size. `AP_VisualOdom.cpp` asserts that a null backend
+must mean an allocation failure, but the backend is equally null when
+`init()` ran while `VISO_TYPE` was still 0. Since `VISO_TYPE` is
+`@RebootRequired` and `init()` runs once at boot, setting it and not
+rebooting produces exactly that state. Read this message as "no backend",
+not as "no memory".
 
 **Judge this by `EKF3 IMU0 is using external nav data`**, not by pre-arm.
 That message is when aiding actually starts. Pre-arm success is later and
