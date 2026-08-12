@@ -80,11 +80,23 @@ def parse_args():
 
 
 class Autopilot:
-    """MAVLink side channel. Refuses to run blind."""
+    """
+    MAVLink side channel. Refuses to run blind.
+
+    Exactly one thread reads the connection. pymavlink is not thread safe,
+    and an earlier version had a status-text reader and a parameter reader
+    both calling recv_match on the same link: the reader thread consumed the
+    PARAM_VALUE replies, so every parameter read returned None and the check
+    reported correctly-set parameters as missing. Reading from two places
+    also produced spurious "device reports readiness to read but returned no
+    data" failures. The reader now dispatches to both consumers instead.
+    """
 
     def __init__(self, endpoint, baud):
-        """Open the link and start collecting status text."""
+        """Open the link and start the single reader."""
         self.texts = []
+        self.params = {}
+        self._lock = threading.Lock()
         if endpoint.startswith(('udp:', 'tcp:')):
             self.conn = mavutil.mavlink_connection(endpoint, source_system=231)
         else:
@@ -101,31 +113,40 @@ class Autopilot:
     def _pump(self):
         while True:
             msg = self.conn.recv_match(
-                type='STATUSTEXT', blocking=True, timeout=0.5)
-            if msg is not None:
-                self.texts.append((time.time(), msg.text))
+                type=['STATUSTEXT', 'PARAM_VALUE'], blocking=True, timeout=0.5)
+            if msg is None:
+                continue
+            if msg.get_type() == 'STATUSTEXT':
+                with self._lock:
+                    self.texts.append((time.time(), msg.text))
                 print(f'    AP: {msg.text}', flush=True)
+            else:
+                name = msg.param_id
+                if isinstance(name, bytes):
+                    name = name.decode('ascii', 'replace')
+                with self._lock:
+                    self.params[name.strip('\x00')] = msg.param_value
 
     def since(self, when):
         """Return status text received at or after a given time."""
-        return [text for stamp, text in self.texts if stamp >= when]
+        with self._lock:
+            return [text for stamp, text in self.texts if stamp >= when]
 
     def get_param(self, name, timeout=4.0):
-        """Read one parameter, returning None if it never arrives."""
-        self.conn.mav.param_request_read_send(
-            self.conn.target_system, self.conn.target_component,
-            name.encode(), -1)
+        """Request one parameter and wait for the reader to deliver it."""
+        with self._lock:
+            self.params.pop(name, None)
         deadline = time.time() + timeout
         while time.time() < deadline:
-            msg = self.conn.recv_match(
-                type='PARAM_VALUE', blocking=True, timeout=0.5)
-            if msg is None:
-                continue
-            param_id = msg.param_id
-            if isinstance(param_id, bytes):
-                param_id = param_id.decode()
-            if param_id.strip('\x00') == name:
-                return msg.param_value
+            self.conn.mav.param_request_read_send(
+                self.conn.target_system, self.conn.target_component,
+                name.encode(), -1)
+            waited = time.time() + 1.0
+            while time.time() < waited:
+                with self._lock:
+                    if name in self.params:
+                        return self.params[name]
+                time.sleep(0.02)
         return None
 
     def set_origin(self):
