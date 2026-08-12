@@ -153,22 +153,32 @@ Not demonstrated, and not to be described as working:
 
 ### GPS-denied operation is unresolved
 
-The competition arena is indoors. Rover SITL at the pinned revision, with GPS
-disabled and EKF sources set to external navigation, **refused to arm**:
-`Arm: AHRS: waiting for home`. Setting the EKF origin with
-`SET_GPS_GLOBAL_ORIGIN` and setting home with `MAV_CMD_DO_SET_HOME` both
-succeeded and neither changed the refusal.
+The competition arena is indoors, so this was tested rather than assumed. On
+Rover SITL at the pinned revision, with GPS disabled and EKF sources set to
+external navigation, the vehicle would not arm: `Arm: AHRS: waiting for home`.
+Setting the EKF origin and home explicitly did not change that.
 
-Mode entry is not evidence here. GUIDED was accepted in every one of those
-attempts, including the ones where the vehicle could not arm and did not move.
+Two things came out of chasing it, both worth keeping.
 
-The external odometry used in that test was a static placeholder transform, so
-the refusal is not yet attributable. It may be the vehicle rejecting
-GPS-denied arming, or it may be the visual-odometry health check correctly
-rejecting a feed that never moves. Until a real estimate is available from the
-camera and IMU, the indoor architecture is undecided, and no claim should be
-made that either the DDS-only or a MAVLink-assisted path works indoors.
-Measurements are in [`../firmware/ardupilot/README.md`](../firmware/ardupilot/README.md).
+**Mode entry is not evidence.** GUIDED was accepted in every attempt,
+including ones where the vehicle could not arm and did not move. A test that
+stops at mode entry will report success for a rover that cannot drive.
+
+**External odometry must be stamped in ArduPilot's clock.** AP_DDS converts
+the `/ap/tf` stamp into `uint32` milliseconds, so a ROS wall-clock stamp
+overflows and the autopilot receives a garbage time. ArduPilot publishes its
+own time base on `/ap/clock`; anything feeding `/ap/tf` must use it. The first
+round of testing did not, which is why its refusal proved less than it looked
+like it did.
+
+With the timestamp corrected and the odometry moving, pre-arm passed once
+(`Vehicle is Armable`) and then did not repeat. That single pass shows the EKF
+**can** accept external navigation without GPS; the lack of repeats shows the
+synthetic feed used was not good enough to rely on. GPS-denied operation is
+therefore neither demonstrated nor ruled out, and no claim should be made for
+either the DDS-only or a MAVLink-assisted indoor path until a real estimate
+from the camera and IMU exists. Measurements are in
+[`../firmware/ardupilot/README.md`](../firmware/ardupilot/README.md).
 
 ### Autopilot state is not an estimator input
 

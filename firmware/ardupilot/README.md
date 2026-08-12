@@ -144,16 +144,44 @@ Two things this establishes:
   on this build, contrary to what a reading of the origin-setting workaround
   would suggest.
 
-What this does **not** establish: that GPS-denied operation is impossible. The
-external odometry fed on `/ap/tf` during this test was a static transform with
-a fixed translation. A real visual-inertial estimate moves and updates, and
-ArduPilot's visual-odometry health checks may reject a static feed that a live
-one would satisfy. The cause of the refusal was not isolated: it is not known
-whether the transforms reached `AP_VisualOdom`, nor whether the EKF ever
-accepted external navigation as a position source.
+**That first round used a broken timestamp, so its refusal proves less than it
+appears to.** `AP_DDS_External_Odom.cpp` converts the transform's stamp with:
 
-Deciding between the DDS-only architecture and a MAVLink/MAVROS path indoors
-requires repeating this with a real odometry source, not with this placeholder.
+```cpp
+const uint32_t time_ms {static_cast<uint32_t>(remote_time_us * 1E-3)};
+```
+
+A ROS wall-clock stamp is about 1.8e15 microseconds, so `time_ms` is about
+1.8e12 and overflows `uint32_t`. The autopilot received a garbage timestamp,
+which is reason enough to reject a measurement whether or not GPS-denied
+arming is otherwise possible. **External odometry on `/ap/tf` must be stamped
+in ArduPilot's own time base**, which it publishes on `/ap/clock`. On the
+pinned build that clock read ~18 s against a wall clock of ~1.79e9 s.
+
+Repeating with correctly stamped, moving odometry changed the result:
+
+| Run | `/ap/prearm_check` | Arm |
+| --- | --- | --- |
+| 1 | **`Vehicle is Armable`** | refused |
+| 2 | `Vehicle is Not Armable` | refused |
+| 3 | `Vehicle is Not Armable` | refused |
+
+Pre-arm passing even once matters: it means the EKF **can** accept external
+navigation as a position source with no GPS. It is not reproducible with the
+odometry used here, which was synthetic — constant velocity along one axis,
+no rotation, and reported with zero position and angle error.
+
+So the honest state is: **GPS-denied operation is neither demonstrated nor
+ruled out.** The frame names are right (`odom` to `base_link`, compared
+exactly), the transport works, `AP_VisualOdom` is compiled into both the SITL
+and Pixhawk 6X builds, and the estimate has been accepted at least once. What
+has not been shown is that it holds steadily enough to arm and drive. Settling
+it requires a real estimate from the camera and IMU, not a synthetic one, and
+that work has not started.
+
+Also worth carrying forward: a frozen transform and a moving one are different
+signals to ArduPilot's visual-odometry handling. Do not test this path with a
+placeholder that never changes.
 
 ### Hardware bring-up, Pixhawk 6X over USB serial
 
