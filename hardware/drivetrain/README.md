@@ -61,10 +61,43 @@ BasicMicro's own ROS 2 driver calls `GetStatus(73)` in a hardware test and
 states its validation hardware as "USB Roboclaw 2x15a v4.4.2 or newer", which
 covers these units, so 73 is very likely available as well.
 
-None of this has been confirmed against a unit. Reply lengths and field
-layouts must be checked against a live response before any parser is trusted,
-because a misread count does not fail loudly — it produces a plausible pose
-that is quietly wrong.
+### Confirmed against a controller
+
+Measured on one unit reporting `USB Roboclaw 2x15A v4.4.9`:
+
+| Check | Result |
+| --- | --- |
+| Command 78 framing and CRC | 1228 replies, 0 rejected |
+| Command 79, speeds | verified |
+| Command 73 reply length | **58 bytes**, CRC over 56 of payload verified |
+| Command 73 carries the encoders | `0x9152` and `0x9df2` in its reply matched the counts command 78 returned at the same moment |
+| M1 and M2 independence | turning one wheel moved only that encoder |
+| Count direction | both count up when the wheel turns forward, so neither side needs its sign inverted |
+
+The rover's own parser was used for this rather than a copy, so the check
+validates the code that will run.
+
+### Counts per revolution
+
+Datasheet: 64 CPR at the motor through 100:1 gearing, so 6400 per output
+revolution. Measured by hand against an alignment mark: **6554 over ten
+revolutions, 2.4% above the datasheet**.
+
+That difference is inside the precision of the method. A quarter turn of
+misalignment over ten revolutions is 2.5%, so the residual is consistent with
+stopping slightly past the mark rather than with the datasheet being wrong.
+**6400 is kept**, and the measurement is recorded rather than the figure being
+silently adjusted to match one hand-turned trial.
+
+An earlier attempt without a mark gave 5288 or 6610 per revolution depending
+on whether the operator had turned four revolutions or five, which is why the
+mark matters: over one revolution a quarter turn of error is 25%.
+
+The value worth confirming later is not this one on its own but the product of
+radius and counts, since that is what converts counts into distance. Rolling
+the assembled rover a measured three metres and comparing against the reported
+odometry tests both at once, and should be done before the odometry is relied
+on for navigation.
 
 ## Required bench-validation checklist
 
