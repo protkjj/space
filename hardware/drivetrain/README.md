@@ -11,7 +11,16 @@ Jetson ROS 2
 ```
 
 The mechanical baseline is a four-wheel skid-steer rover using encoder-equipped
-brushed DC gearmotors, with each side grouped onto one RoboClaw motor channel.
+brushed DC gearmotors. There are two RoboClaw 2x15A controllers, one per side,
+and each drives that side's two wheels on its own channel, so every wheel has
+an independent channel and an independent encoder.
+
+An earlier version of this section said the two motors on a side shared one
+channel. That was wrong, and it disagreed with both `docs/architecture.md`,
+which has always specified two controllers, and with `roboclaw_reader`, which
+opens one link per side and averages the two encoders each controller reports.
+The four-channel arrangement is the one the code implements.
+
 The target rover mass is 2.5 kg and the preliminary target speed range is
 0.1–0.3 m/s. Final motor and controller selection still depends on measured
 terrain and load data.
@@ -99,6 +108,35 @@ the assembled rover a measured three metres and comparing against the reported
 odometry tests both at once, and should be done before the odometry is relied
 on for navigation.
 
+## Output assignment
+
+Skid steer needs two distinct commands, a left throttle and a right throttle,
+however many wheels there are. ArduPilot allows several outputs to carry the
+same function, so four channels are driven from four outputs rather than by
+splitting two signals in the wiring:
+
+| Output | `SERVO*_FUNCTION` | Goes to |
+| --- | --- | --- |
+| MAIN 1 | 73, `ThrottleLeft` | left controller, S1 |
+| MAIN 2 | 73, `ThrottleLeft` | left controller, S2 |
+| MAIN 3 | 74, `ThrottleRight` | right controller, S1 |
+| MAIN 4 | 74, `ThrottleRight` | right controller, S2 |
+
+The function numbers are read from `SRV_Channel.h:117-118` at the pinned
+revision `1511f271`, so they match the firmware actually flashed rather than
+whatever a wiki page says about some other version.
+
+Signal and ground are connected; **the +5V pin is not**. Both controllers and
+the autopilot already have their own supplies, so joining the 5V lines would
+tie two regulators together for no benefit. Ground is connected even though
+the two are already common through the battery, because the power ground
+carries motor current and the voltage it drops moves the reference the PWM
+signal is measured against.
+
+This assignment is **not yet validated**. Nothing here has been confirmed
+against the vehicle: it records what is to be set and why, and the checklist
+below is what would establish that it works.
+
 ## Required bench-validation checklist
 
 - [ ] Confirm Pixhawk output and RoboClaw input electrical-signal compatibility
@@ -113,8 +151,10 @@ on for navigation.
   response before operating the rover off the bench.
 - [ ] Measure continuous and transient motor current and verify controller,
   wiring, connector, and power-system capacity.
-- [ ] Test two-motors-per-channel starting, stall, turning, and terrain loading,
+- [ ] Test starting, stall, turning, and terrain loading on all four channels,
   including skid-steer pivot turns.
+- [ ] Confirm RoboClaw mixing is disabled on both controllers, so that only
+  ArduPilot mixes.
 
 Each completed item should record the hardware identifiers, ArduPilot firmware
 version, configuration-export reference, test date, operator, method,
