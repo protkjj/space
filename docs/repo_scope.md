@@ -48,7 +48,8 @@ to `space_gazebo`.
 - operational ArduPilot DDS command/state adapter
 - ArduPilot Rover SITL and ArduPilot Gazebo plugin integration
 - validated Pixhawk or SITL parameter exports
-- Jetson-side RoboClaw packet-serial control
+- Jetson-side RoboClaw packet-serial control (read-only encoder telemetry is
+  permitted separately; see the drivetrain boundary in `architecture.md`)
 - invented serial endpoints, IP addresses, frame IDs, DDS rates, or firmware
   settings
 - marker mechanism, `DeployMarker` action, or marker hardware transport choice

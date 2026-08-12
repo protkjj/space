@@ -233,14 +233,29 @@ not say which field is at fault; read them all back rather than assuming the
 three obvious ones are the whole set. `EK3_SRC2_*` and `EK3_SRC3_*` were all
 `None` here and were not implicated.
 
+**`EK3_SRC1_VELXY = 6` receives no data over DDS.** `AP_DDS_External_Odom`
+delivers pose only — it contains no velocity handling at all — and the
+external-navigation velocity path, `writeExtNavVelData`, is reached only from
+the MAVLink `VISION_SPEED_ESTIMATE` and Intel T265 backends. The arming check
+passes because it only verifies that the subsystem named by the source is
+enabled, which `VISO_TYPE` satisfies, so this is silent. Horizontal velocity
+is therefore dead-reckoned between position updates. Setting it to `6` is
+harmless but decorative on a `/ap/tf`-only setup; `7` (wheel encoder) is the
+value with real data behind it once encoders are available.
+
 Feeding requirements, all of which mattered:
 
 - stamp from `/ap/time`, which is ArduPilot's own time base
 - stamp slightly in the past, not the future
 - advance the stamp by at least 20 ms between samples, or the EKF drops them
-- keep feeding continuously, including while the arming services are called;
-  aiding stops when the feed does, and `EKF3 IMU0 stopped aiding` is the
-  message that says so
+- keep feeding continuously, including while the arming services are called.
+  Aiding stops after roughly five seconds without a fused sample, and
+  `EKF3 IMU0 stopped aiding` is the message that says so.
+- **do not jump the reported position.** The DDS path hardcodes
+  `reset_counter` to 0, so there is no way to tell the EKF that an estimate
+  discontinuity was intentional. A restarted VIO or script that resumes from a
+  different origin looks like a physically impossible movement. Resume from
+  where the previous estimate left off, or expect the fusion to reject it.
 - frame ids exactly `odom` and `base_link`; the comparison is a `strcmp`, so
   a namespace prefix is silently ignored
 - send `SET_GPS_GLOBAL_ORIGIN` once so the EKF has an origin

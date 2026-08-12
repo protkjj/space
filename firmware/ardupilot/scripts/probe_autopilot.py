@@ -60,6 +60,26 @@ USB_DEVICE_PATTERNS = (
 )
 
 
+def decode_custom_version(raw) -> str:
+    """
+    Return the firmware's git hash as text.
+
+    ArduPilot puts the hash in this field as ASCII characters, not as packed
+    bytes, so hex-encoding it turns a readable `1511f271` into `31353131...`
+    and makes it useless for comparing against the pin in version.txt. Fall
+    back to hex only if the contents are not printable.
+    """
+    if not raw:
+        return ''
+    data = bytes(byte & 0xFF for byte in raw).rstrip(b'\x00')
+    if not data:
+        return ''
+    text = data.decode('ascii', 'replace').strip()
+    if text and all(character.isprintable() for character in text):
+        return text
+    return ''.join(f'{byte:02x}' for byte in data)
+
+
 def autodetect() -> str:
     """Return a single USB autopilot device or exit with what was found."""
     candidates = sorted(
@@ -127,12 +147,11 @@ def report_version(master) -> None:
         'flight_sw_version: '
         f'{(raw >> 24) & 0xFF}.{(raw >> 16) & 0xFF}.{(raw >> 8) & 0xFF}'
     )
-    commit = getattr(message, 'flight_custom_version', None)
+    commit = decode_custom_version(
+        getattr(message, 'flight_custom_version', None)
+    )
     if commit:
-        print(
-            'flight_custom_version: '
-            + ''.join(f'{byte:02x}' for byte in commit)
-        )
+        print(f'flight_custom_version: {commit}')
     print(f'board vendor/product: {message.vendor_id}/{message.product_id}')
 
 

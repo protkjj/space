@@ -223,8 +223,24 @@ Jetson ROS 2
 ```
 
 The Jetson does not command RoboClaw directly in the Phase 1 or baseline target
-architecture. No ROS node should open a RoboClaw serial connection or generate
-motor PWM.
+architecture. **No ROS node may write to RoboClaw or generate motor PWM.**
+Motion authority belongs to ArduPilot, and a second writer would mean two
+controllers driving the same motors with no arbitration between them.
+
+Reading is a different question and is permitted, under conditions. The
+encoders are wired to the RoboClaws rather than to the Pixhawk, so wheel
+odometry is only obtainable by reading them over the RoboClaw's USB link. A
+node that does so:
+
+- must open the link read-only and must never issue a motion, configuration,
+  or write command, including at startup or shutdown
+- must not be on the command path, so a failure to read degrades the estimate
+  and never the ability to stop
+- must publish odometry and diagnostics only
+
+This exception exists so wheel odometry can be built. It does not reopen the
+drivetrain-control question: RC/PWM from the Pixhawk remains the only path
+that moves the motors.
 
 The Phase 1 hardware launch is for description and interface validation only.
 It must emit a clear startup warning that the ArduPilot hardware adapter is

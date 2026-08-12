@@ -23,11 +23,24 @@ capacity, or a safe response to signal loss.
 
 Phase 1 deliberately does not include:
 
-- a Jetson-side RoboClaw packet-serial driver
+- a Jetson-side RoboClaw packet-serial **control** driver
 - a direct ROS-to-RoboClaw control path
 - serial device configuration
 - PWM ranges, neutral values, or output-channel assignments
 - assumed current ratings or failsafe behavior
+
+Read-only encoder telemetry is a separate, permitted case. The encoders are
+wired to the RoboClaws rather than to the Pixhawk, so wheel odometry can only
+be obtained by reading them over the RoboClaw link. A node doing so must be
+read-only, must never issue a motion or configuration command, and must not
+sit on the command path. See the drivetrain boundary in
+[`../../docs/architecture.md`](../../docs/architecture.md). Nothing about the
+control exclusions above changes: ArduPilot remains the only writer.
+
+The RoboClaw firmware reported on the current units is `4.4.9`. Whether that
+version answers the status and encoder read commands this needs has not been
+verified against a real unit yet, and must not be assumed from the version
+number alone.
 
 ## Required bench-validation checklist
 

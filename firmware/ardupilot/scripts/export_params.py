@@ -88,9 +88,17 @@ def identity(conn):
     info['firmware'] = (
         f'{(raw >> 24) & 0xFF}.{(raw >> 16) & 0xFF}.{(raw >> 8) & 0xFF}'
     )
-    commit = getattr(msg, 'flight_custom_version', None)
-    if commit:
-        info['commit'] = ''.join(f'{byte:02x}' for byte in commit)
+    # ArduPilot stores the git hash here as ASCII characters, not packed
+    # bytes, so hex-encoding it would produce something that cannot be
+    # compared against the pin in version.txt.
+    raw = getattr(msg, 'flight_custom_version', None)
+    if raw:
+        data = bytes(byte & 0xFF for byte in raw).rstrip(b'\x00')
+        text = data.decode('ascii', 'replace').strip()
+        if text and all(character.isprintable() for character in text):
+            info['commit'] = text
+        else:
+            info['commit'] = ''.join(f'{byte:02x}' for byte in data)
     info['board'] = f'vendor {msg.vendor_id} product {msg.product_id}'
     return info
 
