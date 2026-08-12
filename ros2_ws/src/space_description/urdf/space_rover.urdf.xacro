@@ -20,18 +20,21 @@
   <xacro:property name="base_length" value="0.32"/>
   <xacro:property name="base_width" value="0.26"/>
   <xacro:property name="base_height" value="0.10"/>
-  <!-- Axle centers measured from the complete CAD STL.
-       wheel_radius is NOT from that CAD: the wheels were changed from 140 mm
-       to 120 mm diameter on the physical rover, so it is set from the build
-       rather than the model. The visual mesh still shows the 140 mm wheels.
-       wheel_y is still the CAD value and disagrees with a tape measurement of
-       the physical track width; it has not been reconciled yet. Anything that
-       converts wheel counts to distance must use these values, not the CAD. -->
+  <!-- Wheel geometry is measured from the built rover, not from the CAD.
+       The wheels were changed from 140 mm to 120 mm diameter, and the
+       measured track width is 225 mm against the CAD's 233 mm. Both values
+       below are the measured ones, because everything that converts wheel
+       counts into distance and heading depends on them: the radius scales
+       distance, and the track width scales every turn. The visual mesh still
+       shows the older 140 mm wheels.
+       Longitudinal axle positions are still CAD values and are not used by
+       the odometry maths. -->
   <xacro:property name="wheel_radius" value="0.060"/>
   <xacro:property name="wheel_width" value="0.040"/>
   <xacro:property name="front_wheel_x" value="0.08375"/>
   <xacro:property name="rear_wheel_x" value="-0.06625"/>
-  <xacro:property name="wheel_y" value="0.11650"/>
+  <!-- Half the measured 225 mm track width, centre to centre. -->
+  <xacro:property name="wheel_y" value="0.11250"/>
   <xacro:property name="wheel_z" value="-0.06400"/>
 
   <material name="chassis_dark"><color rgba="0.10 0.12 0.14 1.0"/></material>
