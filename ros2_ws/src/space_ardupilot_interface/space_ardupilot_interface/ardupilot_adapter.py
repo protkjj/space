@@ -83,6 +83,16 @@ class LinkState(Enum):
     LOST = 'lost'
 
 
+class PrepStep(Enum):
+    """Progress through the pre-arm, mode, and arming sequence."""
+
+    IDLE = 'idle'
+    PREARM = 'prearm'
+    MODE = 'mode'
+    ARM = 'arm'
+    READY = 'ready'
+
+
 class CommandState(Enum):
     """Freshness of the upstream command stream."""
 
@@ -379,7 +389,13 @@ class ArduPilotAdapter(Node):
         self._arm_client = None
         self._mode_client = None
         self._prearm_client = None
-        self._vehicle_prepared = False
+        self._prep_step = PrepStep.IDLE
+        self._pending_future = None
+        self._pending_step = None
+        self._next_prep_ns = 0
+        self._prep_retry_ns = _positive_seconds(
+            'service_timeout_sec', self._service_timeout_sec
+        )
         if self._manage_vehicle:
             self._create_service_clients()
 
@@ -393,8 +409,14 @@ class ArduPilotAdapter(Node):
             f'{publish_rate_hz:.1f} Hz)'
         )
         self.get_logger().info(f'Vehicle state from {self._state_source}')
-        if not self._manage_vehicle:
+        if self._manage_vehicle:
             self.get_logger().warn(
+                'manage_vehicle is true: this node will run pre-arm checks, '
+                f'switch to mode {self._target_mode}, and ARM the vehicle '
+                'once a fresh command arrives.'
+            )
+        else:
+            self.get_logger().info(
                 'manage_vehicle is false: this node will not arm the vehicle '
                 'or change its mode. ArduPilot will ignore velocity commands '
                 'unless it is already armed and in the target mode.'
@@ -422,6 +444,114 @@ class ArduPilotAdapter(Node):
         self._prearm_client = self.create_client(
             Trigger, str(self.get_parameter('prearm_service').value)
         )
+
+    def _begin(self, step, client, request) -> None:
+        """Start one step of the arming sequence, if its service is up."""
+        if client is None or not client.service_is_ready():
+            return
+        self._pending_step = step
+        self._pending_future = client.call_async(request)
+
+    def _collect(self) -> None:
+        """Apply the result of a completed step, or time it out."""
+        future = self._pending_future
+        if future is None or not future.done():
+            return
+
+        step = self._pending_step
+        self._pending_future = None
+        self._pending_step = None
+        result = future.result()
+        now_ns = self._now_ns()
+
+        if result is None:
+            self.get_logger().warn(f'{step.value}: no response')
+            self._next_prep_ns = now_ns + self._prep_retry_ns
+            return
+
+        if step == PrepStep.PREARM:
+            if result.success:
+                self.get_logger().info(f'Pre-arm passed: {result.message}')
+                self._prep_step = PrepStep.MODE
+            else:
+                # Retry rather than fail: pre-arm commonly clears on its own
+                # once the vehicle settles, and the message says why.
+                self.get_logger().warn(f'Pre-arm: {result.message}')
+                self._next_prep_ns = now_ns + self._prep_retry_ns
+        elif step == PrepStep.MODE:
+            if result.status:
+                self.get_logger().info(f'Mode is now {result.curr_mode}')
+                self._prep_step = PrepStep.ARM
+            else:
+                self.get_logger().warn(
+                    f'Mode switch refused; vehicle is in {result.curr_mode}'
+                )
+                self._next_prep_ns = now_ns + self._prep_retry_ns
+        elif step == PrepStep.ARM:
+            if result.result:
+                self.get_logger().info('Vehicle armed')
+                self._prep_step = PrepStep.READY
+            else:
+                # ArduPilot also returns false when already armed, so trust
+                # the reported state rather than this result alone.
+                if self._policy.armed:
+                    self.get_logger().info('Vehicle reports already armed')
+                    self._prep_step = PrepStep.READY
+                else:
+                    self.get_logger().warn(
+                        'Arming refused; see the autopilot pre-arm messages'
+                    )
+                    self._next_prep_ns = now_ns + self._prep_retry_ns
+
+    def _advance_vehicle_prep(self) -> None:
+        """
+        Drive the pre-arm, mode, and arming sequence.
+
+        Only runs while there is a fresh upstream command. Arming a vehicle
+        that nobody is currently commanding is not something this node should
+        do on its own, and it would arm on startup rather than on intent.
+        """
+        if not self._manage_vehicle or self._arm_client is None:
+            return
+
+        self._collect()
+        if self._pending_future is not None:
+            return
+
+        # If the vehicle disarms or leaves the target mode underneath us, for
+        # example because a pilot took over on the RC switch, restart the
+        # sequence rather than assuming the earlier success still holds.
+        if self._prep_step == PrepStep.READY:
+            left_mode = (
+                self._policy.mode is not None
+                and self._policy.mode != self._target_mode
+            )
+            if self._policy.armed is False or left_mode:
+                self.get_logger().warn(
+                    'Vehicle left the armed target state; re-running the '
+                    'arming sequence'
+                )
+                self._prep_step = PrepStep.IDLE
+            return
+
+        if self._policy.command_state != CommandState.FRESH:
+            return
+        now_ns = self._now_ns()
+        if now_ns < self._next_prep_ns:
+            return
+
+        if self._prep_step == PrepStep.IDLE:
+            self._prep_step = PrepStep.PREARM
+
+        if self._prep_step == PrepStep.PREARM:
+            self._begin(PrepStep.PREARM, self._prearm_client,
+                        Trigger.Request())
+        elif self._prep_step == PrepStep.MODE:
+            self._begin(PrepStep.MODE, self._mode_client,
+                        ModeSwitch.Request(mode=self._target_mode))
+        elif self._prep_step == PrepStep.ARM:
+            self._begin(PrepStep.ARM, self._arm_client,
+                        ArmMotors.Request(arm=True))
 
     def _on_command(self, message: Twist) -> None:
         """Accept an upstream backend-neutral command."""
@@ -477,6 +607,7 @@ class ArduPilotAdapter(Node):
                 self.get_logger().warn(f'Publishing stop: {decision.reason}')
 
         self._report_blockers()
+        self._advance_vehicle_prep()
 
         if not decision.publish:
             return

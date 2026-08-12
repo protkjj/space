@@ -51,11 +51,26 @@ measured from the pinned build or unvalidated.
 | `command_timeout_sec` | `0.5` | Upstream staleness limit |
 | `link_timeout_sec` | `3.0` | Autopilot silence limit |
 | `publish_rate_hz` | `10.0` | Command publication rate |
-| `manage_vehicle` | `false` | Allow arming and mode changes |
+| `manage_vehicle` | `false` | Run pre-arm, mode switch, and arming |
 | `target_mode` | `15` | Rover GUIDED, from `Rover/mode.h` |
 
-`manage_vehicle` defaults to `false` because enabling it lets the node change
-the state of a real vehicle. Arming must be an explicit choice.
+`manage_vehicle` defaults to `false` because enabling it lets the node arm a
+real vehicle. Arming must be an explicit choice.
+
+When it is enabled the node runs pre-arm check, then mode switch, then arming,
+in that order, retrying a failed step after `service_timeout_sec`. It starts
+only once a fresh command has arrived on the input topic: arming a vehicle
+nobody is currently commanding is not something this node should decide on its
+own, and starting on node startup would arm on launch rather than on intent.
+If the vehicle later disarms or leaves the target mode, for example because a
+pilot took over on the RC switch, the sequence restarts rather than assuming
+the earlier success still holds.
+
+Verified against a live Rover SITL: the node did not arm on startup, ran
+pre-arm, switched to mode 15, retried three refusals while the estimate
+settled, armed, and then drove 2.9 m in 8 s from `/cmd_vel_safe` alone. That
+sequencing lives in the ROS node rather than in the testable policy class, so
+it is covered by that live run rather than by unit tests.
 
 ## One-way state barrier
 
