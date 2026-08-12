@@ -15,8 +15,14 @@ space_ardupilot_adapter:
     # subscribed by the ArduPilot DDS client.
     output_topic: /ap/cmd_vel
 
-    # Liveness source only. The node keeps the arrival time and discards the
-    # contents; see the one-way state barrier in ardupilot_adapter.py.
+    # Preferred vehicle-state source. measured on Rover-4.7.0:
+    # ardupilot_msgs/msg/Status, carrying armed, mode, external_control and
+    # failsafe, and no pose at all. Used when ardupilot_msgs provides Status.
+    status_topic: /ap/status
+
+    # Fallback for builds older than ArduPilot 4.7, which publish no status
+    # topic. Used as a liveness heartbeat only: the node keeps the arrival
+    # time and discards the contents. See ardupilot_adapter.py.
     # measured: geometry_msgs/msg/PoseStamped.
     vehicle_state_topic: /ap/pose/filtered
 

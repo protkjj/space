@@ -72,19 +72,26 @@ fi
 
 # -------------------------------------------------------------- microxrceddsgen
 #
-# Required to build with --enable-dds. Needs a JRE newer than 8; Gradle fails
-# with "class file version 55.0" against Java 8. Pre-4.7 ArduPilot pairs with
-# the v4.5.1 branch of Micro-XRCE-DDS-Gen.
+# Required to build with DDS. Needs a JRE newer than 8; Gradle fails with
+# "class file version 55.0" against Java 8. The branch must match the ArduPilot
+# release: v4.7.0 for 4.7 and later, v4.5.1 for earlier ones.
+#
+# Note the flag spelling differs between tools: waf accepts --enable-dds and
+# --enable-DDS, but sim_vehicle.py in 4.7 only accepts --enable-DDS.
 
 if command -v microxrceddsgen >/dev/null 2>&1; then
     ok "microxrceddsgen found"
 else
-    fail "microxrceddsgen not on PATH (required for --enable-dds)"
-    echo "      git clone --recurse-submodules --branch v4.5.1 \\"
-    echo "        https://github.com/ardupilot/Micro-XRCE-DDS-Gen.git ~/Micro-XRCE-DDS-Gen"
-    echo "      cd ~/Micro-XRCE-DDS-Gen && ./gradlew assemble"
-    echo "      export PATH=\$PATH:\$HOME/Micro-XRCE-DDS-Gen/scripts"
-    echo "      (needs a JRE > 8: sudo update-alternatives --config java)"
+    fail "microxrceddsgen not on PATH (required to build with DDS)"
+    echo "      ArduPilot 4.7 and later need the v4.7.0 branch; v4.5.1 is for"
+    echo "      earlier releases only. Building the wrong branch fails late,"
+    echo "      during IDL generation, not at configure time."
+    echo "      git clone --recurse-submodules --branch v4.7.0 \\"
+    echo "        https://github.com/ardupilot/Micro-XRCE-DDS-Gen.git \\"
+    echo "        ~/Micro-XRCE-DDS-Gen-4.7"
+    echo "      cd ~/Micro-XRCE-DDS-Gen-4.7 && ./gradlew assemble"
+    echo "      export PATH=\$PATH:\$HOME/Micro-XRCE-DDS-Gen-4.7/scripts"
+    echo "      (needs a JRE newer than 8: sudo update-alternatives --config java)"
 fi
 
 # -------------------------------------------------------------------- SITL build
@@ -95,7 +102,7 @@ if [[ -x "$SITL_BIN" ]]; then
 else
     fail "SITL binary not built: $SITL_BIN"
     echo "      cd $ARDUPILOT_DIR"
-    echo "      ./waf configure --board sitl --enable-dds && ./waf rover"
+    echo "      ./waf configure --board sitl --enable-DDS && ./waf rover"
 fi
 
 # ------------------------------------------------------------------- XRCE agent
@@ -188,4 +195,4 @@ echo "  MicroXRCEAgent udp4 -p 2019"
 echo
 echo "Starting Rover SITL (${SITL_TAG})..."
 cd "$ARDUPILOT_DIR"
-exec sim_vehicle.py -v Rover --enable-dds --console --map
+exec sim_vehicle.py -v Rover --enable-DDS --console --map

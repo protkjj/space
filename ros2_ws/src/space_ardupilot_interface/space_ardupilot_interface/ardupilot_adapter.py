@@ -17,14 +17,17 @@ Responsibilities assigned to this package by ``docs/architecture.md``:
 
 One-way state barrier
 ---------------------
-The adapter subscribes to an ArduPilot state topic purely to detect
-communication loss. It deliberately stores only the *arrival time* of those
-messages and never their contents, so ArduPilot's own filtered estimate cannot
-be fed back into any Jetson-side estimator. Re-using the autopilot's estimate
-as an input to the estimator that feeds the autopilot would double-count the
-same information and shrink the fused covariance without shrinking the true
-error. That failure is silent, so the barrier is structural here rather than
-a comment: the pose value is never retained.
+Vehicle state is consumed only for safety decisions: liveness, arm state, and
+mode. No autopilot *estimate* is retained. This matters because a companion
+computer that sends odometry to the autopilot must not feed the autopilot's
+own fused estimate back into the estimator producing that odometry. Doing so
+counts the same information twice, shrinking the fused covariance while the
+true error stays put, so the system grows confident exactly as it drifts. That
+failure is silent, so the boundary is kept structural rather than by comment.
+
+On builds that publish ``ardupilot_msgs/msg/Status`` the adapter uses it, which
+carries no pose at all. On builds without it, the adapter falls back to a pose
+topic and keeps only the arrival time, never the value.
 """
 
 from dataclasses import dataclass
@@ -45,6 +48,14 @@ except ImportError:  # pragma: no cover - depends on external workspace
     ArmMotors = None
     ModeSwitch = None
     ARDUPILOT_MSGS_AVAILABLE = False
+
+try:
+    # Added in ArduPilot 4.7; absent on earlier builds.
+    from ardupilot_msgs.msg import Status
+    STATUS_MSG_AVAILABLE = True
+except ImportError:  # pragma: no cover - depends on the pinned firmware
+    Status = None
+    STATUS_MSG_AVAILABLE = False
 
 
 NANOSECONDS_PER_SECOND = 1_000_000_000
@@ -139,6 +150,12 @@ class AdapterPolicy:
         self.command_state = CommandState.NEVER_COMMANDED
         self.link_state = LinkState.NEVER_SEEN
 
+        # Reported vehicle state. None means the build does not publish it,
+        # which is not the same as knowing the vehicle is disarmed.
+        self.armed: Optional[bool] = None
+        self.mode: Optional[int] = None
+        self.external_control: Optional[bool] = None
+
     def accept_command(
         self, linear_x: float, angular_z: float, now_ns: int
     ) -> bool:
@@ -152,17 +169,62 @@ class AdapterPolicy:
         self.command_state = CommandState.FRESH
         return True
 
-    def note_vehicle_state(self, now_ns: int) -> bool:
+    def note_vehicle_state(
+        self,
+        now_ns: int,
+        *,
+        armed: Optional[bool] = None,
+        mode: Optional[int] = None,
+        external_control: Optional[bool] = None,
+    ) -> bool:
         """
-        Record that the autopilot was heard from.
+        Record that the autopilot was heard from, and what it reported.
 
-        Only the arrival time is kept; see the one-way state barrier described
-        in the module docstring. Returns True if this recovered a lost link.
+        Only safety-relevant state is kept: liveness, arm state, and mode. No
+        autopilot estimate is retained; see the one-way state barrier in the
+        module docstring. Returns True if this recovered a lost link.
         """
         recovered = self.link_state == LinkState.LOST
         self._last_state_ns = now_ns
         self.link_state = LinkState.ALIVE
+        if armed is not None:
+            self.armed = armed
+        if mode is not None:
+            self.mode = mode
+        if external_control is not None:
+            self.external_control = external_control
         return recovered
+
+    def command_blockers(self, expected_mode: Optional[int] = None) -> list:
+        """
+        Return reported reasons a command would not move the vehicle.
+
+        Reports only what the autopilot actually said. Unknown state is
+        reported as unknown rather than assumed healthy, so a build that
+        publishes no status never looks like a vehicle that is ready.
+        """
+        blockers = []
+        if self.link_state == LinkState.NEVER_SEEN:
+            blockers.append('no vehicle state received yet')
+        elif self.link_state == LinkState.LOST:
+            blockers.append('autopilot link lost')
+        elif self.armed is None:
+            # Heard from the vehicle, but this build reports no arm state.
+            # Unknown must not read as ready.
+            blockers.append('vehicle state not reported by this build')
+        if self.armed is False:
+            blockers.append('vehicle disarmed')
+        if self.external_control is False:
+            blockers.append('external control disabled on the autopilot')
+        if (
+            expected_mode is not None
+            and self.mode is not None
+            and self.mode != expected_mode
+        ):
+            blockers.append(
+                f'mode is {self.mode}, expected {expected_mode}'
+            )
+        return blockers
 
     def _rewind_if_clock_jumped(self, now_ns: int) -> None:
         """Handle simulated time jumping backwards on a world reset."""
@@ -220,6 +282,7 @@ class ArduPilotAdapter(Node):
 
         self.declare_parameter('input_topic', '/cmd_vel_safe')
         self.declare_parameter('output_topic', '/ap/cmd_vel')
+        self.declare_parameter('status_topic', '/ap/status')
         self.declare_parameter('vehicle_state_topic', '/ap/pose/filtered')
         self.declare_parameter('arm_service', '/ap/arm_motors')
         self.declare_parameter('mode_service', '/ap/mode_switch')
@@ -237,6 +300,9 @@ class ArduPilotAdapter(Node):
         )
         self._output_topic = _non_empty(
             'output_topic', self.get_parameter('output_topic').value
+        )
+        self._status_topic = _non_empty(
+            'status_topic', self.get_parameter('status_topic').value
         )
         self._state_topic = _non_empty(
             'vehicle_state_topic',
@@ -282,12 +348,22 @@ class ArduPilotAdapter(Node):
         self.create_subscription(
             Twist, self._input_topic, self._on_command, 10
         )
-        self.create_subscription(
-            PoseStamped,
-            self._state_topic,
-            self._on_vehicle_state,
-            autopilot_qos,
-        )
+        # Prefer the status topic, which reports arm state and mode and
+        # carries no pose. Builds older than ArduPilot 4.7 do not publish it,
+        # so fall back to a pose topic used purely as a liveness heartbeat.
+        if STATUS_MSG_AVAILABLE:
+            self.create_subscription(
+                Status, self._status_topic, self._on_status, autopilot_qos
+            )
+            self._state_source = self._status_topic
+        else:
+            self.create_subscription(
+                PoseStamped,
+                self._state_topic,
+                self._on_vehicle_state,
+                autopilot_qos,
+            )
+            self._state_source = f'{self._state_topic} (liveness only)'
 
         self._arm_client = None
         self._mode_client = None
@@ -297,6 +373,7 @@ class ArduPilotAdapter(Node):
             self._create_service_clients()
 
         self._last_reason = ''
+        self._last_blockers = None
         self.create_timer(1.0 / publish_rate_hz, self._on_publish_timer)
 
         self.get_logger().info(
@@ -304,6 +381,7 @@ class ArduPilotAdapter(Node):
             f'{self._output_topic} (frame_id={self._frame_id}, '
             f'{publish_rate_hz:.1f} Hz)'
         )
+        self.get_logger().info(f'Vehicle state from {self._state_source}')
         if not self._manage_vehicle:
             self.get_logger().warn(
                 'manage_vehicle is false: this node will not arm the vehicle '
@@ -344,16 +422,39 @@ class ArduPilotAdapter(Node):
                 'Rejected command with non-finite velocity component'
             )
 
+    def _on_status(self, message) -> None:
+        """Record arm state, mode, and external-control state."""
+        if self._policy.note_vehicle_state(
+            self._now_ns(),
+            armed=bool(message.armed),
+            mode=int(message.mode),
+            external_control=bool(message.external_control),
+        ):
+            self.get_logger().info('Autopilot link recovered')
+
     def _on_vehicle_state(self, message: PoseStamped) -> None:
         """
         Note that the autopilot is alive.
 
-        The message contents are intentionally discarded. See the one-way
-        state barrier in the module docstring.
+        Used only on builds that publish no status topic. The message contents
+        are discarded; see the one-way state barrier in the module docstring.
         """
         del message
         if self._policy.note_vehicle_state(self._now_ns()):
             self.get_logger().info('Autopilot link recovered')
+
+    def _report_blockers(self) -> None:
+        """Log, on change, why a command would not move the vehicle."""
+        blockers = self._policy.command_blockers(self._target_mode)
+        if blockers == self._last_blockers:
+            return
+        self._last_blockers = blockers
+        if blockers:
+            self.get_logger().warn(
+                'Commands will not move the vehicle: ' + '; '.join(blockers)
+            )
+        else:
+            self.get_logger().info('Vehicle reports it can accept commands')
 
     def _on_publish_timer(self) -> None:
         """Publish the current command, or a stop, at the configured rate."""
@@ -363,6 +464,8 @@ class ArduPilotAdapter(Node):
             self._last_reason = decision.reason
             if decision.is_stop:
                 self.get_logger().warn(f'Publishing stop: {decision.reason}')
+
+        self._report_blockers()
 
         if not decision.publish:
             return

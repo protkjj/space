@@ -161,3 +161,74 @@ def test_rover_mode_numbers_match_pinned_firmware():
     assert int(RoverMode.MANUAL) == 0
     assert int(RoverMode.HOLD) == 4
     assert int(RoverMode.GUIDED) == 15
+
+
+def test_nothing_received_yet_is_not_reported_as_ready():
+    policy = make_policy()
+    # Before any vehicle state arrives, readiness is unknown, not true.
+    blockers = policy.command_blockers()
+    assert blockers, 'silence must not read as a ready vehicle'
+    assert any('received yet' in reason for reason in blockers)
+
+
+def test_build_without_arm_state_is_not_reported_as_ready():
+    policy = make_policy()
+    policy.note_vehicle_state(SECOND)
+    # Heard from, but this build reports no arm state. Unknown is not ready.
+    assert policy.armed is None
+    assert policy.external_control is None
+    blockers = policy.command_blockers()
+    assert any('not reported' in reason for reason in blockers)
+
+
+def test_disarmed_vehicle_is_reported_as_a_blocker():
+    policy = make_policy()
+    policy.note_vehicle_state(SECOND, armed=False, external_control=True)
+    assert 'vehicle disarmed' in policy.command_blockers()
+
+
+def test_external_control_disabled_is_reported():
+    policy = make_policy()
+    policy.note_vehicle_state(SECOND, armed=True, external_control=False)
+    blockers = policy.command_blockers()
+    assert any('external control' in reason for reason in blockers)
+
+
+def test_wrong_mode_is_reported_against_the_expected_mode():
+    policy = make_policy()
+    policy.note_vehicle_state(
+        SECOND, armed=True, mode=int(RoverMode.MANUAL), external_control=True
+    )
+    blockers = policy.command_blockers(int(RoverMode.GUIDED))
+    assert any('expected 15' in reason for reason in blockers)
+
+    policy.note_vehicle_state(SECOND, mode=int(RoverMode.GUIDED))
+    assert policy.command_blockers(int(RoverMode.GUIDED)) == []
+
+
+def test_ready_vehicle_reports_no_blockers():
+    policy = make_policy()
+    policy.note_vehicle_state(
+        SECOND, armed=True, mode=int(RoverMode.GUIDED), external_control=True
+    )
+    assert policy.command_blockers(int(RoverMode.GUIDED)) == []
+
+
+def test_lost_link_is_reported_as_a_blocker():
+    policy = make_policy(link_timeout_sec=1.0)
+    policy.note_vehicle_state(0, armed=True, external_control=True)
+    policy.accept_command(0.3, 0.0, 5 * SECOND)
+    policy.evaluate(5 * SECOND)
+    assert 'autopilot link lost' in policy.command_blockers()
+
+
+def test_status_fields_persist_across_partial_updates():
+    policy = make_policy()
+    policy.note_vehicle_state(
+        SECOND, armed=True, mode=int(RoverMode.GUIDED), external_control=True
+    )
+    # A later heartbeat carrying no fields must not erase what was reported.
+    policy.note_vehicle_state(2 * SECOND)
+    assert policy.armed is True
+    assert policy.mode == int(RoverMode.GUIDED)
+    assert policy.external_control is True
