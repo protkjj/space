@@ -9,13 +9,19 @@
 tag: Rover-4.7.0
 commit: 1511f27194f1dcc3728270883047bdf022b3fd53
 status: selected to match the firmware flashed on the target board
-validated: no
+validated: command path only
 # Re-pinned from Rover-4.6.3 once the Pixhawk 6X was found to be running
-# 4.7.0. The DDS interface measurements in README.md were taken on 4.6.3 and
-# have NOT yet been repeated on this revision.
+# 4.7.0, then re-measured on this revision rather than carrying the 4.6.3
+# results over. See README.md for what was and was not confirmed.
+#
+# Confirmed here: DDS interface present, mode switch to GUIDED, arming,
+# ArduPilot-authoritative motion, disarming.
+# Not confirmed here: Gazebo plugin, TF and odometry ownership, sensor
+# streams, stop latency as a specified limit, GPS-denied operation.
 #
 # Toolchain note: ArduPilot 4.7 and later require the v4.7.0 branch of
-# Micro-XRCE-DDS-Gen. The v4.5.1 branch is for pre-4.7 only.
+# Micro-XRCE-DDS-Gen. The v4.5.1 branch is for pre-4.7 only, and mixing them
+# fails during IDL generation rather than at configure time.
 
 [HILS / Hardware]
 tag: UNPINNED

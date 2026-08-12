@@ -25,20 +25,31 @@ overlay, so there is nothing validated to export yet.
 ## SITL DDS validation record
 
 - **Date:** 2026-08-12
-- **Firmware:** `Rover-4.6.3` @ `3fc7011a7d3dc047cbb17d8bd98ee94577d144c6`
+- **Firmware:** `Rover-4.7.0` @ `1511f27194f1dcc3728270883047bdf022b3fd53`
 - **Target:** Rover SITL (`--model rover`), no Gazebo attached
-- **Build:** `./waf configure --board sitl --enable-dds && ./waf rover`
+- **Build:** `./waf configure --board sitl --enable-DDS && ./waf rover`
+- **Toolchain:** Micro-XRCE-DDS-Gen branch `v4.7.0`
 - **Transport:** `MicroXRCEAgent udp4 -p 2019`
 - **Host:** Ubuntu 24.04, ROS 2 Jazzy
 - **Operator:** repository maintainer
 
+An earlier round of the same measurements was taken on `Rover-4.6.3`. Where
+4.7.0 differs, the 4.7.0 figure is the one recorded here; the pin moved to
+match the firmware actually flashed on the board.
+
 ### Measured and confirmed
 
-- The build exposes 15 `/ap/*` topics and 6 `/ap/*` services.
+- The build exposes 18 `/ap/*` topics, up from 15 on 4.6.3. The additions are
+  `/ap/status`, `/ap/rc` and `/ap/goal_lla`.
+- `/ap/status` is `ardupilot_msgs/msg/Status` and reports `vehicle_type`,
+  `armed`, `mode`, `flying`, `external_control` and `failsafe`. It carries no
+  pose, which is why the adapter prefers it as its vehicle-state source.
 - `/ap/cmd_vel` is `geometry_msgs/msg/TwistStamped` with one AP_DDS
-  subscription, QoS `BEST_EFFORT` / `VOLATILE`.
-- `/ap/tf` is `tf2_msgs/msg/TFMessage` and is **subscribed** by AP_DDS, so an
-  external-odometry input path exists in this build. Whether a transform
+  subscription, QoS `BEST_EFFORT` / `VOLATILE` (measured on 4.6.3; on 4.7.0 the
+  compatibility is demonstrated rather than re-measured, since commands
+  published with that QoS moved the vehicle).
+- `/ap/tf` is `tf2_msgs/msg/TFMessage` and is **subscribed** by AP_DDS on both
+  revisions, so an external-odometry input path exists. Whether a transform
   published there is actually consumed by the EKF was **not** tested.
 - `/ap/pose/filtered` and `/ap/twist/filtered` publish with
   `header.frame_id = base_link`.
@@ -48,25 +59,24 @@ overlay, so there is nothing validated to export yet.
   `/ap/mode_switch` (`ardupilot_msgs/srv/ModeSwitch`), `/ap/prearm_check`
   (`std_srvs/srv/Trigger`), `/ap/experimental/takeoff`, plus parameter
   services.
-- Every `/ap/*` endpoint measured is `BEST_EFFORT` except `/ap/clock`, which is
-  `RELIABLE`.
+- Every `/ap/*` endpoint measured on 4.6.3 is `BEST_EFFORT` except `/ap/clock`,
+  which is `RELIABLE`.
 - `space_ardupilot_interface` republished `/cmd_vel_safe` onto `/ap/cmd_vel` as
-  stamped `base_link` commands at 10 Hz against this live build.
+  stamped `base_link` commands at 10 Hz against both live builds.
 - Rover mode numbers used by the adapter (`MANUAL=0`, `HOLD=4`, `GUIDED=15`)
-  were read from `Rover/mode.h` at this exact revision.
+  were read from `Rover/mode.h` at the pinned revision.
 
 ### ArduPilot-authoritative motion, SITL built-in model
 
-Demonstrated once, end to end, driving only `/cmd_vel_safe`:
+Demonstrated end to end on both revisions, driving only `/cmd_vel_safe`:
 
-| Step | Result |
-| --- | --- |
-| `/ap/prearm_check` | `success=True`, `Vehicle is Armable` |
-| `/ap/mode_switch` to `15` | `status=True`, `curr_mode=15` |
-| `/ap/arm_motors` arm | `result=True` |
-| Drive `0.5 m/s` for 10 s | displaced 5.246 m, mean 0.403 m/s |
-| Commands ceased | 0.045 m further motion in the next 1.0 s |
-| `/ap/arm_motors` disarm | `result=True` |
+| Step | Rover-4.6.3 | Rover-4.7.0 |
+| --- | --- | --- |
+| `/ap/prearm_check` | `Vehicle is Armable` | not repeated |
+| `/ap/mode_switch` to `15` | `curr_mode=15` | `curr_mode=15` |
+| `/ap/arm_motors` arm | `result=True` | `result=True` |
+| Drive `0.5 m/s` for 10 s | 5.246 m | 5.527 m |
+| `/ap/arm_motors` disarm | `result=True` | `result=True` |
 
 Position was read from ArduPilot's own `/ap/pose/filtered`, so the motion
 originated from ArduPilot's actuator output rather than from ROS driving the
@@ -74,6 +84,37 @@ simulator directly.
 
 This used SITL's built-in `--model rover` physics. **No Gazebo was attached**,
 so this does not yet satisfy the Gazebo half of the Milestone A chain.
+
+### Speed and stopping, measured on Rover-4.6.3 only
+
+Averaged over a whole run the rover reached 0.403 m/s against a 0.5 m/s
+command, which reads as a 20% shortfall. Measuring the steady-state portion
+alone gives 0.521 m/s, within 4.3% of the command, so the shortfall is the
+acceleration ramp rather than controller error or missing tuning.
+
+Stopping was attributed rather than assumed. The adapter's stale watchdog
+published zero 0.44 s after the last upstream command, ahead of ArduPilot's own
+command hold-off, and roughly 0.24 m of travel followed. Total travel after
+upstream commands cease is therefore about 0.7 m at 0.5 m/s.
+
+**This is not a specified limit.** It is one run, and `/ap/pose/filtered`
+position quantisation makes the instantaneous-speed tail noisy enough that the
+exact stop instant is uncertain. It must be repeated, on the pinned revision,
+before any bound is claimed.
+
+### Pixhawk 6X firmware build
+
+A hardware build was produced but **not yet flashed or run**:
+
+- `Rover-4.7.0` @ `1511f271`, `./waf configure --board Pixhawk6X --enable-DDS`
+- toolchain `gcc-arm-none-eabi-10-2020-q4-major` (the system GCC 13 fails the
+  ChibiOS build on `-Werror=address`)
+- `board_id 53`, matching the `PX4 FMU V6X` bootloader ID reported by the
+  connected board
+- image 1,583,284 B against 1,966,080 B of reported flash
+- AP_DDS presence checked in the ELF rather than assumed
+
+Nothing about its on-board behaviour is validated.
 
 ### Not validated
 
