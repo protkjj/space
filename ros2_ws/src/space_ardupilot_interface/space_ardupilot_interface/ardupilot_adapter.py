@@ -333,17 +333,25 @@ class ArduPilotAdapter(Node):
             start_time_ns=self._now_ns(),
         )
 
-        # QoS measured from the live AP_DDS subscription on /ap/cmd_vel at the
-        # pinned firmware revision: BEST_EFFORT reliability, VOLATILE
-        # durability. A RELIABLE publisher would not match that subscription.
-        autopilot_qos = QoSProfile(
+        # AP_DDS does not use one QoS for everything. Measured on the pinned
+        # revision, on SITL and on a Pixhawk 6X over serial: /ap/cmd_vel,
+        # /ap/pose/filtered, /ap/twist/filtered, /ap/tf, /ap/rc and /ap/navsat
+        # are BEST_EFFORT, while /ap/status and /ap/clock are RELIABLE.
+        # Assuming BEST_EFFORT everywhere is what made `ros2 topic echo
+        # --qos-reliability best_effort /ap/status` appear to hang on hardware.
+        best_effort_qos = QoSProfile(
             reliability=ReliabilityPolicy.BEST_EFFORT,
             durability=DurabilityPolicy.VOLATILE,
             depth=1,
         )
+        reliable_qos = QoSProfile(
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.VOLATILE,
+            depth=10,
+        )
 
         self._command_publisher = self.create_publisher(
-            TwistStamped, self._output_topic, autopilot_qos
+            TwistStamped, self._output_topic, best_effort_qos
         )
         self.create_subscription(
             Twist, self._input_topic, self._on_command, 10
@@ -351,9 +359,12 @@ class ArduPilotAdapter(Node):
         # Prefer the status topic, which reports arm state and mode and
         # carries no pose. Builds older than ArduPilot 4.7 do not publish it,
         # so fall back to a pose topic used purely as a liveness heartbeat.
+        # Status is subscribed RELIABLE to match its publisher: an arm-state
+        # or failsafe transition is exactly the message that must not be
+        # dropped, and the topic publishes at only 2 Hz when nothing changes.
         if STATUS_MSG_AVAILABLE:
             self.create_subscription(
-                Status, self._status_topic, self._on_status, autopilot_qos
+                Status, self._status_topic, self._on_status, reliable_qos
             )
             self._state_source = self._status_topic
         else:
@@ -361,7 +372,7 @@ class ArduPilotAdapter(Node):
                 PoseStamped,
                 self._state_topic,
                 self._on_vehicle_state,
-                autopilot_qos,
+                best_effort_qos,
             )
             self._state_source = f'{self._state_topic} (liveness only)'
 

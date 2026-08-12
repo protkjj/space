@@ -59,8 +59,21 @@ match the firmware actually flashed on the board.
   `/ap/mode_switch` (`ardupilot_msgs/srv/ModeSwitch`), `/ap/prearm_check`
   (`std_srvs/srv/Trigger`), `/ap/experimental/takeoff`, plus parameter
   services.
-- Every `/ap/*` endpoint measured on 4.6.3 is `BEST_EFFORT` except `/ap/clock`,
-  which is `RELIABLE`.
+- AP_DDS does **not** use one QoS for every topic. Measured per topic on
+  4.7.0, identically on SITL and on the Pixhawk 6X over serial:
+
+  | Reliability | Topics |
+  | --- | --- |
+  | `BEST_EFFORT` | `/ap/cmd_vel`, `/ap/pose/filtered`, `/ap/twist/filtered`, `/ap/tf`, `/ap/rc`, `/ap/navsat` |
+  | `RELIABLE` | `/ap/status`, `/ap/clock` |
+
+  This matters in practice: subscribing to `/ap/status` with an explicit
+  `--qos-reliability best_effort` on hardware produced no output and looked
+  like a dead topic. Check the publisher's QoS per topic rather than assuming
+  one profile for the namespace.
+- `/ap/status` publishes on change, and otherwise at 2 Hz
+  (`AP_DDS_DELAY_STATUS_TOPIC_MS` is 100 ms and the periodic path fires after
+  five intervals), so it is usable as a liveness signal.
 - `space_ardupilot_interface` republished `/cmd_vel_safe` onto `/ap/cmd_vel` as
   stamped `base_link` commands at 10 Hz against both live builds.
 - Rover mode numbers used by the adapter (`MANUAL=0`, `HOLD=4`, `GUIDED=15`)
@@ -139,6 +152,57 @@ accepted external navigation as a position source.
 
 Deciding between the DDS-only architecture and a MAVLink/MAVROS path indoors
 requires repeating this with a real odometry source, not with this placeholder.
+
+### Hardware bring-up, Pixhawk 6X over USB serial
+
+Measured on the actual board after flashing the DDS build described below.
+
+**The DDS interface is live on hardware.** The XRCE agent attached to the
+second USB CDC interface and the board created its topics, publishers and
+service repliers. `ros2 topic list` showed the same 18 `/ap/*` topics as SITL,
+so the interface the adapter was written against exists on the real vehicle.
+
+Transport and port mapping, from `Pixhawk6X/hwdef.dat`:
+
+```text
+SERIAL_ORDER OTG1 UART7 UART5 USART1 UART8 USART2 UART4 USART3 OTG2
+  index        0     1     2      3     4      5     6      7     8
+```
+
+`SERIAL0` is OTG1 and `SERIAL8` is OTG2, so one USB cable exposes two serial
+interfaces. Setting `SERIAL8_PROTOCOL=45` puts DDS on the second interface and
+leaves MAVLink on the first, which keeps a ground station usable while the
+companion computer speaks DDS. On the host these appear as two `ttyACM`
+devices, distinguishable by their `if00` and `if02` `/dev/serial/by-id` names.
+
+**BEST_EFFORT topics are dropped on the serial transport.** With RC connected,
+`/ap/rc` publishes every loop and `ros2 topic echo` on it returned nothing for
+seconds at a time, while the same RC data read over MAVLink on the other
+interface was continuous and complete (`rssi=255`, all 8 channels tracking
+stick movement). `/ap/status`, being RELIABLE, kept arriving throughout. This
+does not appear in SITL, where DDS runs over UDP with bandwidth to spare.
+Treat BEST_EFFORT `/ap/*` topics as lossy over serial, and do not diagnose a
+silent BEST_EFFORT topic as a dead subsystem without checking a RELIABLE one.
+
+**Arming is blocked by vehicle commissioning, not by the software path.** The
+board reported, verbatim:
+
+```text
+Arm: Hardware safety switch
+Arm: 3D Accel calibration needed
+Arm: Compass not calibrated
+Arm: AHRS: waiting for home
+Arm: Battery 1 unhealthy
+```
+
+All five are standard first-time setup: the safety switch, accelerometer and
+compass calibration, a position estimate, and a connected battery. None of them
+implicates the DDS interface or the adapter. RC was bound and healthy over
+MAVLink at the time, and `RC3_MIN`/`RC3_MAX` were still at defaults, so radio
+calibration has not been performed either.
+
+No arming, no motion, and no drivetrain behaviour has been demonstrated on
+hardware.
 
 ### Pixhawk 6X firmware build
 
