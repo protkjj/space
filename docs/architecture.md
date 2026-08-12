@@ -116,10 +116,45 @@ ROS 2 motion source
   → rover actuators in Gazebo
 ```
 
-The future adapter is responsible for command timestamps, frame selection and
+The adapter is responsible for command timestamps, frame selection and
 validation, ArduPilot mode and pre-arm/arming management, vehicle-state
-monitoring, and communication-loss detection. Phase 1 implements none of those
-behaviors and must not claim ArduPilot-authoritative movement.
+monitoring, and communication-loss detection.
+
+### Milestone A progress
+
+The command leg of that chain is implemented and was exercised against a live
+Rover SITL at the firmware revision pinned in `firmware/ardupilot/version.txt`.
+The measurements behind each claim are recorded in
+[`../firmware/ardupilot/README.md`](../firmware/ardupilot/README.md).
+
+Demonstrated:
+
+- `/cmd_vel_safe` is republished on `/ap/cmd_vel` as stamped, `base_link`
+  commands whose QoS matches the AP_DDS subscription measured on that build.
+- Stale commands and autopilot silence both produce zero commands.
+- The AP_DDS command, state, and service interfaces exist in the ROS graph.
+
+Not demonstrated, and not to be described as working:
+
+- ArduPilot-authoritative rover movement. Nothing has been armed and no mode
+  has been changed, so no actuator output has been produced.
+- ArduPilot Gazebo plugin integration, TF ownership, odometry ownership, and
+  sensor streams.
+- Measured stop latencies and automated launch tests.
+- Any Pixhawk 6X hardware behaviour.
+
+### Autopilot state is not an estimator input
+
+The adapter subscribes to ArduPilot state only to detect communication loss and
+discards the message contents.
+
+When a companion-computer estimate is sent to the autopilot, the estimator
+producing it must not consume the autopilot's own fused estimate. Doing so
+counts the same information twice: the fused covariance shrinks while the true
+error does not, so the system reports rising confidence while drifting. The
+failure is silent, which is why the boundary is enforced structurally in the
+adapter rather than by convention. Autopilot state may drive low-level safety
+reactions such as rollover or failsafe handling, never estimator input.
 
 ## Real drivetrain boundary
 

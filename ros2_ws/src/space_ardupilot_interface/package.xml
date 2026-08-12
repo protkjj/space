@@ -3,9 +3,15 @@
 <package format="3">
   <name>space_ardupilot_interface</name>
   <version>0.1.0</version>
-  <description>Buildable scaffold for the future ArduPilot Rover ROS 2 adapter.</description>
+  <description>ArduPilot Rover ROS 2 adapter for velocity command translation.</description>
   <maintainer email="todo@example.com">space team</maintainer>
   <license>MIT</license>
+
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_srvs</depend>
+
+  <exec_depend>ros2launch</exec_depend>
 
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>

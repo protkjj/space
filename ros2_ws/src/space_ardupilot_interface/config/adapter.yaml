@@ -1,0 +1,50 @@
+# ArduPilot adapter configuration.
+#
+# Every value the node uses is declared here as a ROS parameter; the node
+# hardcodes none of them. Values marked "measured" were read from a live
+# Rover SITL at the firmware revision pinned in
+# firmware/ardupilot/version.txt. Values marked "unvalidated" are defaults
+# that have not yet been exercised against that build.
+
+space_ardupilot_adapter:
+  ros__parameters:
+    # Backend-neutral input from space_controller.
+    input_topic: /cmd_vel_safe
+
+    # AP_DDS command topic. measured: geometry_msgs/msg/TwistStamped,
+    # subscribed by the ArduPilot DDS client.
+    output_topic: /ap/cmd_vel
+
+    # Liveness source only. The node keeps the arrival time and discards the
+    # contents; see the one-way state barrier in ardupilot_adapter.py.
+    # measured: geometry_msgs/msg/PoseStamped.
+    vehicle_state_topic: /ap/pose/filtered
+
+    # measured: these three services exist on the pinned build.
+    arm_service: /ap/arm_motors
+    mode_service: /ap/mode_switch
+    prearm_service: /ap/prearm_check
+
+    # measured: ArduPilot publishes pose and twist with frame_id base_link.
+    frame_id: base_link
+
+    # unvalidated: chosen to match space_controller's command_timeout_sec.
+    command_timeout_sec: 0.5
+
+    # unvalidated. ArduPilot stops a GUIDED velocity target that is not
+    # refreshed; the exact hold-off for this build has not been measured, so
+    # this is a conservative detection window rather than a validated limit.
+    link_timeout_sec: 3.0
+
+    # unvalidated: must stay well above the autopilot's command hold-off.
+    publish_rate_hz: 10.0
+
+    service_timeout_sec: 5.0
+
+    # Arming and mode switching are OFF by default. Turning this on lets the
+    # node change the state of a real vehicle, so it must be an explicit
+    # choice rather than a default.
+    manage_vehicle: false
+
+    # Rover GUIDED. Value read from Rover/mode.h at the pinned revision.
+    target_mode: 15
