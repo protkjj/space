@@ -199,18 +199,71 @@ measured at 0 Hz on the Pixhawk 6X while `/ap/time` arrived at about 64 Hz,
 so the clock-stamping approach used here cannot be reproduced on hardware as
 written.
 
-So the honest state is: **GPS-denied operation is neither demonstrated nor
-ruled out**, and the approach tested has a known timing weakness plus a
-transport problem on the target hardware.
+### GPS-denied arming and driving, demonstrated on SITL
 
-Wheel odometry avoids that whole class of problem, because ArduPilot stamps
-encoder data on its own clock and none of the buffer or recall races apply.
+With the timestamp and the source configuration both corrected, the rover
+armed and drove with no GPS at all:
+
+```text
+EKF3 IMU0 is using external nav data
+EKF3 IMU0 initial pos NED = -1.6,0.1,0.0 (m)
+prearm_check : success=True, 'Vehicle is Armable'
+mode_switch  : curr_mode=15
+arm          : result=True
+Throttle armed
+travelled 0.623 m
+```
+
+The configuration that works:
+
+| Parameter | Value | Why |
+| --- | --- | --- |
+| `EK3_SRC1_POSXY` | `6` | external navigation |
+| `EK3_SRC1_VELXY` | `6` | external navigation |
+| `EK3_SRC1_YAW` | `6` | external navigation |
+| `EK3_SRC1_VELZ` | `0` | **must be cleared**; see below |
+| `EK3_SRC1_POSZ` | `1` | barometer, unrelated to the horizontal problem |
+| `VISO_TYPE` | `1` | instantiates `AP_VisualOdom` so the DDS handler has somewhere to deliver |
+
+**`EK3_SRC1_VELZ` is the one that is easy to miss.** It defaults to GPS, and
+`AP_NavEKF_Source::pre_arm_check` scans every field of every source set, so a
+single leftover GPS source blocks arming with `AHRS: EK3 sources require GPS`
+no matter how well the horizontal sources are configured. That message does
+not say which field is at fault; read them all back rather than assuming the
+three obvious ones are the whole set. `EK3_SRC2_*` and `EK3_SRC3_*` were all
+`None` here and were not implicated.
+
+Feeding requirements, all of which mattered:
+
+- stamp from `/ap/time`, which is ArduPilot's own time base
+- stamp slightly in the past, not the future
+- advance the stamp by at least 20 ms between samples, or the EKF drops them
+- keep feeding continuously, including while the arming services are called;
+  aiding stops when the feed does, and `EKF3 IMU0 stopped aiding` is the
+  message that says so
+- frame ids exactly `odom` and `base_link`; the comparison is a `strcmp`, so
+  a namespace prefix is silently ignored
+- send `SET_GPS_GLOBAL_ORIGIN` once so the EKF has an origin
+
+**Judge this by `EKF3 IMU0 is using external nav data`**, not by pre-arm.
+That message is when aiding actually starts. Pre-arm success is later and
+weaker, and an earlier round of this testing reported "no aiding" for every
+configuration purely because its status channel had failed to connect and
+every check therefore returned false.
+
+What this does **not** show: that a real odometry source works. The estimate
+fed here was synthetic and reported 0.05 m/s while the vehicle was commanded
+at 0.4 m/s, so the vehicle drove while believing it had barely moved. Arming
+and driving are demonstrated; positional accuracy is not, and cannot be until
+the estimate comes from real sensors. It is also SITL only — nothing here has
+been repeated on the Pixhawk 6X.
+
+Wheel odometry remains attractive as an alternative, because ArduPilot stamps
+encoder data on its own clock and none of the buffer or recall timing applies.
 Note that `EK3_SRC1_POSXY = 7` is **invalid** — `AP_NavEKF_Source` rejects it
 and pre-arm reports `Check EK3_SRC1_POSXY`. Wheel encoders are a velocity
-source only, so the configuration is `EK3_SRC1_VELXY = 7` with
-`EK3_SRC1_POSXY = 0`, which dead-reckons position and gives a relative
-estimate. `EK3_SRC1_POSZ = 1` is not implicated in any of this; height and
-horizontal sources are independent.
+source only, so that configuration is `EK3_SRC1_VELXY = 7` with
+`EK3_SRC1_POSXY = 0`, which dead-reckons a relative position.
 
 ### Hardware bring-up, Pixhawk 6X over USB serial
 

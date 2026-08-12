@@ -171,25 +171,31 @@ own time base on `/ap/clock`; anything feeding `/ap/tf` must use it. The first
 round of testing did not, which is why its refusal proved less than it looked
 like it did.
 
-With the timestamp corrected and the odometry moving, pre-arm passed once
-(`Vehicle is Armable`) and then did not repeat. That single pass shows the EKF
-**can** accept external navigation without GPS. The non-reproducibility is a
-timing problem: samples must land inside the EKF's fusion horizon, and AP_DDS
-performs no jitter correction, so whether a run succeeds depends on an offset
-nothing controls. `/ap/clock`, which that approach stamps from, was also
-measured at 0 Hz on the Pixhawk 6X over serial, so it cannot be reproduced on
-the target hardware as written.
+With the timestamp corrected, the feed continuous, and every EKF source
+cleared of GPS, the rover **armed and drove with no GPS at all** on SITL. The
+detail that blocked it longest was `EK3_SRC1_VELZ`, which defaults to GPS and
+is checked alongside the horizontal sources, so configuring only `POSXY`,
+`VELXY` and `YAW` still fails with `AHRS: EK3 sources require GPS`.
 
-Wheel odometry sidesteps that class of problem entirely, because ArduPilot
-stamps encoder data on its own clock. The rover already has encoders. It is
-a velocity source only (`EK3_SRC1_VELXY = 7` with `EK3_SRC1_POSXY = 0`), so
-it dead-reckons a relative position rather than an absolute one, which the
-existing `odom`-anchored navigation stack is already built around.
-
-GPS-denied operation remains neither demonstrated nor ruled out, and no claim
-should be made for any indoor path until one is shown to hold steadily enough
-to arm and drive. Measurements are in
+The mechanism is therefore settled: ArduRover does not require GPS, and the
+DDS `/ap/tf` path is sufficient to supply position. The full configuration and
+feeding requirements are in
 [`../firmware/ardupilot/README.md`](../firmware/ardupilot/README.md).
+
+**What remains is the odometry itself.** The estimate used in that test was
+synthetic and did not match the vehicle's real motion: it reported 0.05 m/s
+while the rover was commanded at 0.4 m/s, so the vehicle drove while believing
+it had barely moved. Nothing about positional accuracy is demonstrated, and no
+real source exists yet — neither the camera-and-IMU path nor wheel odometry
+has been built. The result was also SITL only.
+
+Wheel odometry is the shorter path of the two. ArduPilot stamps encoder data
+on its own clock, so none of the timestamp and fusion-horizon problems above
+apply, and the rover already has encoders. It is a velocity source only
+(`EK3_SRC1_VELXY = 7` with `EK3_SRC1_POSXY = 0`), giving a relative estimate,
+which is what the existing `odom`-anchored navigation stack is built around.
+It requires the RoboClaw telemetry boundary described below to be settled
+first.
 
 ### Autopilot state is not an estimator input
 
